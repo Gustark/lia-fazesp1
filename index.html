@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LIA | Assistente Virtual da FAZESP</title>
+<style>
+:root{font-family:Inter,Segoe UI,Arial,sans-serif;color:#e8f3ff;background:#070d1d}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 50% 25%,#133866 0%,#0b1935 35%,#070d1d 78%)}button,input,textarea{font:inherit}button{background:#0ea5e9;color:white;border:0;border-radius:12px;padding:12px 16px;font-weight:700;cursor:pointer}button:hover{filter:brightness(1.15)}button.secondary{background:#253755}button:disabled{opacity:.5;cursor:not-allowed}.shell{display:grid;grid-template-columns:minmax(340px,1fr) 385px;min-height:100vh}.stage{display:flex;flex-direction:column;justify-content:space-between;align-items:center;padding:28px;min-height:100vh;position:relative}.top{width:100%;display:flex;justify-content:space-between;align-items:center;gap:12px}.eyebrow{color:#6ee7f9;font-size:.9rem;letter-spacing:.16em;font-weight:750}.brand{font-size:clamp(20px,2.5vw,34px);font-weight:800}.tag{padding:10px 14px;border:1px solid #245077;border-radius:999px;color:#bfeaff;background:#0b2743}.center{text-align:center;width:100%}.robot{position:relative;display:grid;place-items:center;width:min(390px,65vw);height:min(360px,38vh);margin:14px auto 10px;filter:drop-shadow(0 0 45px #0891b244)}.face{width:76%;height:85%;border:5px solid #2ccce9;border-radius:35%;background:linear-gradient(160deg,#0a223a,#030b19);box-shadow:inset 0 0 38px #04c6ee22,0 0 26px #02c8f050;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:42px;animation:float 3.2s ease-in-out infinite}.antenna{position:absolute;top:0;left:50%;width:7px;height:22px;background:#35d5f4;transform:translate(-50%,-85%);border-radius:10px}.antenna:before{content:"";position:absolute;top:-13px;left:-7px;border-radius:50%;width:21px;height:21px;background:#4ee7ff;box-shadow:0 0 20px #4ee7ff}.eyes{display:flex;gap:66px}.eye{width:35px;height:46px;border-radius:50%;background:#68edff;box-shadow:0 0 25px #26d9ff;animation:blink 6s infinite}.mouth{width:86px;height:20px;border-bottom:6px solid #68edff;border-radius:0 0 60px 60px;transition:height .1s}.speaking .mouth{border:5px solid #68edff;background:#13a9c666;border-radius:50%;animation:talk .22s ease-in-out infinite alternate}.listening .face{border-color:#7cf8bb;box-shadow:0 0 42px #16d9a76b}.listening .eye{background:#92ffcb}.halo{position:absolute;border:2px solid #17d5f722;border-radius:50%;width:98%;height:100%;transform:scale(1.18)}.listening .halo{animation:pulse 1.5s infinite}.status{font-size:clamp(18px,2vw,27px);font-weight:750}.hint{margin-top:10px;color:#92b8d5}.subtitle{margin:24px auto 10px;width:min(900px,100%);padding:24px;background:#102542ba;border:1px solid #285475;border-radius:20px;text-align:center;min-height:110px;display:grid;place-items:center;font-size:clamp(20px,2.4vw,34px);line-height:1.35;font-weight:650}.foot{font-size:12px;color:#668bb0}.admin{border-left:1px solid #1d3f5f;background:#0a1529;max-height:100vh;overflow:auto;padding:20px}.admin h2{margin:5px 0 16px}.admin h3{margin:20px 0 8px}.admin p{color:#aac1d8;line-height:1.5;font-size:13px}.actions{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}.actions button{flex:1}.field{display:block;font-size:13px;color:#b6d9ed;margin:10px 0 5px}input,textarea{width:100%;padding:12px;border-radius:10px;border:1px solid #37607e;background:#0a1d36;color:white;outline:none}textarea{resize:vertical}.qa{background:#132541;border:1px solid #274463;border-radius:12px;margin:10px 0;padding:12px}.qa strong{color:#d9f7ff}.qa small{color:#91aec7;display:block;margin:7px 0}.qa button{padding:7px 10px;font-size:12px}.message{color:#a9edfb;font-size:12px;min-height:20px}.tv .shell{display:block}.tv .admin{display:none}.tv .stage{min-height:100vh}.tv .robot{height:42vh;width:min(490px,60vw)}.tv .subtitle{min-height:130px}.tv .brand{font-size:clamp(28px,3vw,46px)}.tv .status{font-size:clamp(25px,3vw,38px)}@keyframes blink{0%,44%,48%,100%{transform:scaleY(1)}46%{transform:scaleY(.1)}}@keyframes float{50%{transform:translateY(-9px)}}@keyframes talk{from{height:13px;width:65px}to{height:37px;width:83px}}@keyframes pulse{50%{transform:scale(1.32);opacity:.2}}@media(max-width:930px){.shell{display:block}.admin{border-left:0;border-top:1px solid #274463;max-height:unset}.stage{min-height:680px}.robot{height:260px;width:310px}}
+
+/* Identidade visual FAZESP — versão laranja */
+:root{--orange:#fa7716;--amber:#ffae35;--ink:#0f182a;--muted:#a9b6c9;--line:#344057;color:#fff6ec;background:#0f1420}
+body{background:radial-gradient(ellipse at 47% 42%,#492913 0%,#191b27 46%,#101522 86%);color:#fff7ef}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:radial-gradient(#ffae3516 1px, transparent 1px);background-size:26px 26px;mask-image:linear-gradient(90deg,transparent,#000 48%,transparent);opacity:.65}
+button{background:linear-gradient(125deg,#fb7916,#eb5b0a);box-shadow:0 5px 18px #ee6b152a;color:#fff;border-radius:12px;transition:filter .15s,transform .15s}button:hover{transform:translateY(-1px);filter:brightness(1.1)}button.secondary{background:#252b39;border:1px solid #414557;box-shadow:none}
+.shell{grid-template-columns:minmax(400px,1fr) 370px}.stage{padding:34px clamp(26px,4vw,64px) 25px;overflow:hidden}.stage:before{content:"";position:absolute;width:64vw;height:64vw;border:1px solid #f88a1420;border-radius:50%;top:52%;left:50%;transform:translate(-50%,-50%);pointer-events:none}.stage:after{content:"";position:absolute;width:46vw;height:46vw;border:1px solid #f88a1420;border-radius:50%;top:52%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+.top,.center,.stage>.bottom{position:relative;z-index:1}.top{align-items:flex-start}.identity{display:flex;align-items:center;gap:18px}.logo-card{display:flex;align-items:center;justify-content:center;background:#fff;border-radius:12px;padding:7px 11px;box-shadow:0 10px 35px #0004}.logo-card img{width:170px;height:auto;display:block}.identity-copy{border-left:1px solid #fba34a60;padding-left:16px}.eyebrow{color:#ffae65;font-size:.74rem;letter-spacing:.19em}.brand{font-size:clamp(20px,2vw,30px);letter-spacing:-.035em;margin-top:4px}.tag{font-size:12px;color:#ffc48f;background:#311f1a;border:1px solid #b05d2e66;white-space:nowrap}.tag:before{content:"";display:inline-block;width:7px;height:7px;background:#ff9d43;border-radius:50%;margin-right:9px;box-shadow:0 0 10px #ff9d43}
+.center{padding-top:12px}.robot{width:min(410px,62vw);height:min(355px,42vh);filter:drop-shadow(0 0 45px #ff761a33)}.face{border-color:#fa8527;background:linear-gradient(150deg,#332118,#131622 65%);border-radius:36% 36% 38% 38%;box-shadow:inset 0 0 45px #f9771420,0 0 24px #f8751666,0 0 90px #e4641920}.eyes{gap:65px}.eye{background:#ffb04d;box-shadow:0 0 28px #ff8619}.mouth{border-bottom-color:#ffad50}.speaking .mouth{border-color:#ffb04d;background:#fb8c2940}.antenna{background:#fb921e}.antenna:before{background:#ffbd58;box-shadow:0 0 22px #ff9b2a}.halo{border-color:#ff8e2529}.listening .face{border-color:#ffc05b;box-shadow:0 0 50px #ff981a75}.listening .eye{background:#ffe0a2}.status{font-weight:800;letter-spacing:-.03em}.hint{color:#d5a784;font-size:14px}.subtitle{background:#201f2bd9;border:1px solid #8b5c3d80;box-shadow:0 12px 45px #06070955;border-radius:18px;padding:22px;color:#fff7ef;font-size:clamp(19px,2.2vw,30px)}.foot{color:#8f91a0;text-align:center;margin-top:10px;letter-spacing:.02em}.bottom{width:100%}
+.admin{background:#151a27;border-left:1px solid #413326;padding:24px 22px}.admin h2{font-size:22px;letter-spacing:-.03em}.admin h3{color:#ffba7a}.admin p{color:#adb6c8}.admin-header{display:flex;align-items:center;gap:12px;margin-bottom:9px}.admin-symbol{background:#452819;border:1px solid #935021;padding:10px;border-radius:12px;color:#ffac61;font-size:22px}.admin-header h2{margin:0}.admin .actions{margin:13px 0}.field{color:#f6c7a5;font-weight:650}input,textarea{background:#101521;border:1px solid #414252;color:#fff6ed}input:focus,textarea:focus{border-color:#ff9a46;box-shadow:0 0 0 3px #ff88251f}.qa{background:#222430;border-color:#59412f}.qa strong{color:#ffbd82}.qa small{color:#b3b4c5}.message{color:#ffbf8d}
+.tv .robot{height:46vh;width:min(525px,62vw)}.tv .stage{padding:4vh 6vw}.tv .subtitle{max-width:1020px}.tv .brand{font-size:clamp(28px,3vw,42px)}.tv .logo-card img{width:220px}
+@media(max-width:1180px){.shell{grid-template-columns:minmax(350px,1fr) 330px}.identity{gap:10px}.logo-card img{width:125px}.identity-copy{padding-left:10px}.stage{padding:25px 24px}}
+@media(max-width:930px){.shell{display:block}.admin{border-left:0;border-top:1px solid #58402a;max-height:unset}.stage{min-height:670px}.robot{width:300px;height:280px}.top{flex-wrap:wrap;gap:12px}.identity-copy .brand{font-size:22px}}
+@media(max-width:480px){.logo-card img{width:115px}.identity-copy{padding-left:9px}.eyebrow{font-size:10px;letter-spacing:.08em}.identity-copy .brand{font-size:17px}.tag{font-size:10px}.stage{padding:22px 15px}.subtitle{font-size:19px;padding:16px}.foot{font-size:10px}}
+
+
+/* LIA FAZESP — renovação visual V3 */
+:root{--lia:#ff8a20;--lia-soft:#ffb45c;--dark:#10131d;--surface:#191e2b;--text:#fff9f4;color-scheme:dark}
+body{background:radial-gradient(ellipse at 46% 30%,#302522 0%,#161b27 45%,#10141f 90%);font-family:'Segoe UI Variable','Segoe UI',Arial,sans-serif}
+body:before{background-image:radial-gradient(#fca44f1b 1px,transparent 1px);background-size:23px 23px;mask-image:linear-gradient(to bottom, #000, transparent 92%)}
+.shell{grid-template-columns:minmax(420px,1fr) 390px}
+.stage{padding:34px clamp(28px,5vw,76px) 25px;isolation:isolate}
+.stage:before{width:600px;height:600px;max-width:70vw;max-height:70vw;border:1px solid #ffad4230;top:46%;box-shadow:0 0 0 72px #ff912007,0 0 0 145px #ff912007}
+.stage:after{width:290px;height:290px;max-width:40vw;max-height:40vw;border:1px dashed #ffbd573e;top:46%;animation:spin 70s linear infinite}
+.top{align-items:center}
+.identity{gap:19px}.logo-card{background:#fff;padding:12px 14px;border-radius:14px;box-shadow:0 10px 36px #0005}.logo-card img{width:181px;min-width:0}
+.identity-copy{border-left:2px solid #fb852a;padding-left:18px}.eyebrow{font-size:11px;color:#ffb976;letter-spacing:.20em}.brand{font-size:clamp(24px,2.6vw,34px);margin:4px 0;font-weight:850}.brand-sub{color:#b8adac;font-size:12px;letter-spacing:.04em}
+.tag{border-color:#7b5038;background:#30231f;color:#ffce9c;font-weight:600;padding:12px 16px}
+.center{padding-top:2px}.robot{height:min(375px,42vh);width:min(430px,65vw);margin:8px auto 12px;filter:drop-shadow(0 22px 55px #d55c1633)}
+.robot:before{content:'';position:absolute;width:95%;height:24%;background:#f4771012;filter:blur(40px);border-radius:50%;bottom:0}
+.face{height:83%;width:75%;border:5px solid #ff9b3e;border-radius:37% 37% 42% 42%;background:linear-gradient(145deg,#393039,#171d2b 49%,#0b1120);box-shadow:inset 0 0 0 9px #ffac2110,inset 0 0 45px #ff93200b,0 0 0 7px #ff89200c,0 0 55px #e769174c;gap:34px;z-index:1}
+.face:after{content:'';position:absolute;inset:16px;border:1px solid #f9a44c14;border-radius:36%;pointer-events:none}
+.eye{width:39px;height:51px;border-radius:48%;background:linear-gradient(135deg,#fff2bb,#ffa129 65%);box-shadow:0 0 28px #ff8926,0 0 56px #f57a172b;animation:blink 7s infinite}
+.eyes{gap:68px}.mouth{width:84px;border-bottom-width:7px;border-bottom-color:#ffd28a;filter:drop-shadow(0 0 10px #fb9225)}
+.antenna{background:#f49c36;height:29px}.antenna:before{background:#ffce73}
+.cheeks{position:absolute;top:61%;width:76%;display:flex;justify-content:space-between}.cheeks span{width:30px;height:12px;border-radius:50%;background:#ff8e292c;filter:blur(5px)}
+.halo{border:1px solid #fd9d2c40;width:92%;height:100%}.orbit{position:absolute;border:1px dashed #d8792b35;border-radius:50%;width:110%;height:110%}.orbit-two{width:128%;height:128%;border-style:solid;border-color:#f47e1112}
+.hello-label{display:inline-block;border:1px solid #885337;background:#38251d90;padding:8px 13px;border-radius:999px;color:#ffa554;font-size:11px;font-weight:800;letter-spacing:.22em;margin-bottom:12px}
+.status{font-size:clamp(25px,2.9vw,40px);letter-spacing:-.045em}.hint{font-size:15px;color:#c7ae9f}
+.bottom{position:relative;z-index:1;width:100%;max-width:960px}.subtitle-label{letter-spacing:.22em;font-size:11px;font-weight:800;color:#ffa855;margin:0 0 9px 5px}.subtitle{margin:0;min-height:105px;background:linear-gradient(145deg,#2c2931eb,#1b202eeb);border:1px solid #9260448f;padding:21px 29px;box-shadow:0 12px 46px #0005,inset 0 1px #ffffff09;color:#fffaf5;font-size:clamp(20px,2.3vw,32px)}.foot{padding-top:16px;color:#9a8c89}
+.admin{padding:30px 25px;border-left:1px solid #523a2d;background:linear-gradient(#202330,#151923);scrollbar-color:#855134 #151923}.admin-header{margin-bottom:18px}.admin-header h2{font-size:24px}.admin-symbol{background:#f2881a22;border-color:#f7963944}.admin h3{border-top:1px solid #ffffff12;padding-top:22px;margin-top:23px}.admin p{color:#b9b1b1}.actions{gap:9px}.actions button{min-width:120px}.admin button{padding:12px 14px}button{background:linear-gradient(110deg,#ff902c,#f16b12);box-shadow:0 7px 23px #f5791c2a}.qa{background:#242936;border:1px solid #554439;border-radius:15px;padding:14px}.qa small{line-height:1.5}.field{margin-top:15px}input,textarea{border-radius:11px;background:#141925;border:1px solid #594838}.message{line-height:1.45}
+.tv .stage{padding:4vh 6vw}.tv .robot{width:min(560px,58vw);height:48vh}.tv .stage:before{max-width:65vw;max-height:65vw}.tv .subtitle{max-width:1020px}.tv .logo-card img{width:220px}.tv .brand{font-size:clamp(32px,3.6vw,52px)}.tv .status{font-size:clamp(34px,3.6vw,52px)}.tv .subtitle{font-size:clamp(25px,2.7vw,40px)}
+@keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+@media(max-width:1080px){.shell{grid-template-columns:minmax(330px,1fr) 340px}.logo-card img{width:145px}.identity{gap:10px}.identity-copy{padding-left:10px}.stage{padding:26px 22px}.brand{font-size:23px}}
+@media(max-width:930px){.shell{display:block}.stage{min-height:690px}.admin{max-height:none}.robot{width:min(350px,75vw);height:300px}.stage:before{width:470px;height:470px}}
+@media(max-width:520px){.top{gap:12px}.logo-card{padding:8px}.logo-card img{width:116px}.identity-copy{padding-left:9px}.brand{font-size:19px}.brand-sub{font-size:10px}.tag{font-size:10px;padding:7px 9px}.stage{padding:18px 13px;min-height:620px}.subtitle{padding:16px;font-size:21px}}
+@media(prefers-reduced-motion:reduce){.face,.eye,.stage:after{animation:none}}
+
+
+/* Controle retrátil do painel — notebook */
+.panel-toggle{position:fixed;top:18px;right:18px;z-index:50;display:flex;align-items:center;gap:9px;background:#f47b1b;color:#fff;border:1px solid #ffb46a;box-shadow:0 8px 30px #0007;padding:12px 16px;border-radius:14px;min-height:46px}
+.panel-toggle:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.panel-hidden .shell{grid-template-columns:minmax(0,1fr)!important}
+.panel-hidden .admin{display:none!important}
+.panel-hidden .stage{width:100%;min-height:100vh}
+.tv .panel-toggle{display:none!important}
+@media(max-width:930px){.panel-hidden .shell{display:block}}
+@media(max-width:560px){.panel-toggle{top:auto;bottom:16px;right:16px;padding:11px 13px;font-size:13px}}
+
+/* Logomarca sem corte e cabeçalho flexível */
+.identity{min-width:0;flex-wrap:wrap}.identity-copy{min-width:0;overflow-wrap:anywhere}
+.top{flex-wrap:wrap}.logo-card{flex:0 0 auto;max-width:100%;overflow:hidden}
+.logo-card img{width:180px;max-width:100%;height:auto;object-fit:contain}
+@media(max-width:1200px){.top{align-items:flex-start}.identity{gap:12px}.logo-card img{width:150px}}
+/* Configuração de voz */
+#voiceSelect{background:#141a27;color:#fff;border:1px solid #8b5c3d;border-radius:10px;padding:12px;width:100%}
+.voice-tip{color:#ccaa91;font-size:12px;line-height:1.5;margin:5px 0}
+.identity{min-width:0;max-width:100%;flex-wrap:wrap}.logo-card{box-sizing:border-box;overflow:hidden;max-width:min(100%,245px)}.logo-card img{object-fit:contain;max-width:100%;height:auto}.top{min-width:0} @media(max-width:680px){.identity-copy{min-width:160px}.identity{gap:12px}}
+</style>
+</head>
+<body>
+<button type="button" id="togglePanel" class="panel-toggle" aria-controls="adminPanel" aria-expanded="true" title="Ocultar painel de controle">☰ <span id="togglePanelText">Ocultar painel</span></button>
+<div class="shell">
+<main class="stage">
+ <header class="top"><div class="identity"><div class="logo-card"><img src="data:image/png;base64,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" alt="FAZESP — Escola Fazendária do Estado de São Paulo"></div><div class="identity-copy"><div class="eyebrow">ASSISTENTE VIRTUAL</div><div class="brand" id="brand">Olá, eu sou a LIA!</div><div class="brand-sub">Assistente Virtual da FAZESP</div></div></div><span class="tag" id="mode">Pronta para conversar</span></header>
+ <section class="center"><div class="robot" id="robot"><div class="halo"></div><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="face"><div class="antenna"></div><div class="eyes"><div class="eye"></div><div class="eye"></div></div><div class="mouth"></div><div class="cheeks"><span></span><span></span></div></div></div><div class="hello-label">INTELIGÊNCIA QUE APROXIMA</div><div class="status" id="status">Aguardando sua pergunta</div><div class="hint" id="hint">Estou pronta para ajudar você</div></section>
+ <div class="bottom"><div class="subtitle" id="subtitle" aria-live="polite">Olá! Pode fazer sua pergunta.</div><div class="foot">FAZESP · Escola Fazendária do Estado de São Paulo · Assistente experimental</div></div>
+</main>
+<aside class="admin" id="adminPanel"><div class="admin-header"><span class="admin-symbol">⚙</span><h2>Painel de controle</h2></div><p>Conecte a TV por HDMI, abra a tela da TV em uma segunda janela e arraste-a para o monitor da TV. O microfone fica nesta janela do notebook.</p>
+ <div class="actions"><button id="openTv">Abrir tela da TV</button><button id="start" class="secondary">🎙️ Ativar escuta contínua</button><button id="stop" class="secondary">Parar</button></div>
+ <div class="message" id="msg"></div>
+ <label class="field" for="question">Testar uma pergunta digitada</label><input id="question" placeholder="Ex.: Qual é o horário do evento?"><div class="actions"><button id="ask">Responder pergunta</button><button id="reset" class="secondary">Limpar tela</button></div>
+ <label class="field" for="name">Nome do assistente</label><input id="name" placeholder="LIA"><div class="actions"><button id="saveName" class="secondary">Salvar nome</button><button id="testVoice" class="secondary">Testar voz</button></div>
+ <label class="field" for="voiceSelect">Voz da LIA (feminina · português do Brasil)</label><select id="voiceSelect" aria-label="Selecionar voz da LIA"><option value="">Buscando vozes do Windows...</option></select><p class="voice-tip" id="voiceNotice">A disponibilidade de vozes femininas depende das vozes instaladas no Windows e do navegador.</p>
+ <h3>Respostas cadastradas</h3><p>Uma pergunta por linha. Escreva variações para ajudar o sistema a reconhecer a mesma intenção.</p>
+ <label class="field" for="triggers">Perguntas alternativas</label><textarea id="triggers" rows="3" placeholder="Qual é o horário?&#10;Quando começa?"></textarea>
+ <label class="field" for="answer">Resposta que a LIA deve falar</label><textarea id="answer" rows="3" placeholder="O evento começa às nove horas."></textarea>
+ <div class="actions"><button id="save">Adicionar resposta</button><button id="cancel" class="secondary">Cancelar edição</button></div><div id="items"></div>
+ <div class="actions"><button id="export" class="secondary">Exportar respostas</button><button id="importBtn" class="secondary">Importar JSON</button><input type="file" id="import" accept="application/json,.json" hidden></div>
+ <p><strong>Atenção:</strong> o reconhecimento de voz do Chrome/Edge pode utilizar serviços online do navegador; por isso, o reconhecimento por microfone pode depender de internet. Para usar no GitHub Pages, acesse o endereço HTTPS publicado, permita o microfone para o site (não apenas desta vez) e não abra o HTML como arquivo file://. O navegador pode interromper a captura por segurança; o sistema tentará reconectar. As respostas são locais e ficam salvas neste navegador.</p>
+</aside>
+</div>
+<script>
+'use strict';
+const $=id=>document.getElementById(id);
+const tv=new URLSearchParams(location.search).has('tv');if(tv)document.body.classList.add('tv');
+const togglePanel=$('togglePanel');
+function setPanelHidden(hidden){
+ document.body.classList.toggle('panel-hidden',hidden);
+ togglePanel.setAttribute('aria-expanded',String(!hidden));
+ togglePanel.setAttribute('aria-label',hidden?'Mostrar painel de controle':'Ocultar painel de controle');
+ togglePanel.title=hidden?'Mostrar painel de controle':'Ocultar painel de controle';
+ $('togglePanelText').textContent=hidden?'Mostrar painel':'Ocultar painel';
+ try{localStorage.setItem('lia.panelHidden',hidden?'1':'0')}catch{}
+}
+if(!tv){
+ let initiallyHidden=false;
+ try{initiallyHidden=localStorage.getItem('lia.panelHidden')==='1'}catch{}
+ setPanelHidden(initiallyHidden);
+ togglePanel.addEventListener('click',()=>setPanelHidden(!document.body.classList.contains('panel-hidden')));
+}
+
+const DEFAULTS=[
+ {q:['olá','oi','bom dia','boa tarde','boa noite'],a:'Olá! Eu sou a LIA, sua assistente virtual. Como posso ajudar?'},
+ {q:['qual é seu nome','como você se chama','quem é você'],a:'Meu nome é LIA. Sou uma assistente virtual criada para responder perguntas cadastradas.'},
+ {q:['o que você faz','como funciona','como você funciona'],a:'Eu escuto perguntas pelo microfone do notebook e respondo com informações cadastradas pela equipe.'},
+ {q:['qual é o horário do evento','que horas começa o evento','quando começa o evento'],a:'O horário ainda não foi cadastrado. Peça à organização para atualizar esta resposta.'},
+ {q:['onde fica o banheiro','onde é o banheiro'],a:'Consulte a equipe de recepção para saber onde fica o banheiro mais próximo.'},
+ {q:['obrigado','obrigada','muito obrigado'],a:'Por nada! Estou aqui para ajudar.'}
+];
+let entries,assistantName,recognition=null,listening=false,editing=-1,utterance=null,staleRestart=false;
+let recognitionActive=false,recognitionStarting=false,answerPending=false,restartTimer=null,retryDelay=450;
+try{entries=JSON.parse(localStorage.getItem('lia.entries'))||DEFAULTS}catch{entries=DEFAULTS}
+entries=validate(entries)||DEFAULTS;assistantName=localStorage.getItem('lia.name')||'LIA';
+const channel='BroadcastChannel' in window?new BroadcastChannel('lia_assistente_v1'):null;
+function send(data){const msg={...data,t:Date.now()};if(channel)channel.postMessage(msg);try{localStorage.setItem('lia.sync',JSON.stringify(msg))}catch{}}
+function screen(state,status,subtitle){$('robot').classList.remove('speaking','listening');if(state==='speaking'||state==='listening')$('robot').classList.add(state);$('status').textContent=status;$('subtitle').textContent=subtitle;$('mode').textContent=state==='speaking'?'Respondendo':state==='listening'?'Ouvindo':'Pronta para conversar'}
+function show(state,status,subtitle){screen(state,status,subtitle);send({kind:'screen',state,status,subtitle})}
+function rename(name){assistantName=name;$('brand').textContent='Olá, eu sou '+name+'!';if(!tv)send({kind:'name',name})}
+function incoming(data){if(!data)return;if(data.kind==='screen')screen(data.state,data.status,data.subtitle);if(data.kind==='ready'&&!tv){send({kind:'screen',state:$('robot').classList.contains('speaking')?'speaking':$('robot').classList.contains('listening')?'listening':'idle',status:$('status').textContent,subtitle:$('subtitle').textContent});send({kind:'name',name:assistantName})}if(data.kind==='name'){$('brand').textContent='Olá, eu sou '+data.name+'!';assistantName=data.name}}
+if(channel)channel.onmessage=e=>incoming(e.data);window.addEventListener('storage',e=>{if(e.key==='lia.sync'){try{incoming(JSON.parse(e.newValue))}catch{}}});
+rename(assistantName);
+if(tv){send({kind:'ready'});window.addEventListener('click',()=>{document.documentElement.requestFullscreen?.().catch(()=>{})},{once:true})}
+function normalize(s){return String(s).toLocaleLowerCase('pt-BR').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim()}
+function tokens(s){return normalize(s).split(' ').filter(w=>w.length>2&&!['voce','qual','para','como','esse','essa','aqui','sobre','pode','quero'].includes(w))}
+function score(question,trigger){const a=normalize(question),b=normalize(trigger);if(!a||!b)return 0;if(a===b)return 100;if(a.includes(b)&&b.length>=8)return 87;if(b.includes(a)&&a.length>=8)return 82;const x=tokens(a),y=tokens(b);if(!x.length||!y.length)return 0;const common=x.filter(t=>y.includes(t)).length;return 70*common/Math.max(x.length,y.length)}
+function findAnswer(query){let best={score:0,answer:null};for(const e of entries)for(const q of e.q){const s=score(query,q);if(s>best.score)best={score:s,answer:e.a}}return best.score>=58?best.answer:null}
+const femininePatterns=/maria|francisca|heloisa|hel[oô]isa|luciana|fernanda|leticia|vit[oó]ria|vitoria|camila|brenda|female|feminina|mulher|woman|thalia|thalita|giovana|marcela|isabela|google portugu[eê]s do brasil/i;
+const masculinePatterns=/daniel|antonio|ant[oô]nio|ricardo|felipe|male|masculina|homem|man|paulo/i;
+function availablePtVoices(){return speechSynthesis.getVoices().filter(v=>/^pt(-|$)/i.test(v.lang))}
+function voiceScore(v){let score=/^pt-BR$/i.test(v.lang)?100:25;if(femininePatterns.test(v.name))score+=60;if(masculinePatterns.test(v.name))score-=100;return score}
+function refreshVoices(){if(tv||!('speechSynthesis' in window))return;const sel=$('voiceSelect');if(!sel)return;const vv=availablePtVoices().sort((a,b)=>voiceScore(b)-voiceScore(a));const remembered=localStorage.getItem('lia.voice')||'';sel.replaceChildren();if(!vv.length){sel.add(new Option('Nenhuma voz em português disponível',''));$('voiceNotice').textContent='Instale uma voz de português (Brasil) em Configurações > Hora e idioma > Fala / Vozes do Windows.';return}for(const v of vv)sel.add(new Option(v.name+' · '+v.lang,v.voiceURI));const chosen=vv.find(v=>v.voiceURI===remembered)||vv.find(v=>femininePatterns.test(v.name)&&!masculinePatterns.test(v.name))||vv[0];sel.value=chosen.voiceURI;if(!remembered)localStorage.setItem('lia.voice',chosen.voiceURI);$('voiceNotice').textContent=femininePatterns.test(chosen.name)?'Voz feminina selecionada. Clique em Testar voz para ouvir.':'Não foi possível identificar automaticamente uma voz feminina. Selecione uma voz feminina no menu ou instale uma voz no Windows.';}
+function queueRestart(ms=450){
+ clearTimeout(restartTimer);
+ if(!listening||answerPending||utterance||(window.speechSynthesis?.speaking||false)||recognitionActive||recognitionStarting)return;
+ restartTimer=setTimeout(()=>startRecognition(),ms);
+}
+function say(text){
+ answerPending=true;
+ clearTimeout(restartTimer);
+ if(recognitionActive||recognitionStarting){try{recognition.stop()}catch{}}
+ if(!('speechSynthesis' in window)){
+  answerPending=false;show('idle','Resposta exibida',text);queueRestart();return;
+ }
+ speechSynthesis.cancel();
+ const u=new SpeechSynthesisUtterance(text);utterance=u;
+ u.lang='pt-BR';u.rate=.96;u.pitch=1.06;
+ const voices=availablePtVoices();const preferred=localStorage.getItem('lia.voice');
+ u.voice=voices.find(v=>v.voiceURI===preferred)||voices.sort((a,b)=>voiceScore(b)-voiceScore(a))[0]||null;
+ u.onstart=()=>show('speaking','Respondendo...',text);
+ const finished=()=>{
+  if(utterance!==u)return;
+  utterance=null;answerPending=false;
+  show(listening?'listening':'idle',listening?'Preparando nova pergunta...':'Aguardando sua pergunta',text);
+  queueRestart(650);
+ };
+ u.onend=finished;u.onerror=finished;
+ speechSynthesis.speak(u);
+}
+function processQuestion(q){q=q.trim();if(!q)return;show('idle','Pergunta recebida',q);const answer=findAnswer(q)||'Desculpe, ainda não tenho uma resposta cadastrada para essa pergunta. Por favor, consulte a equipe responsável.';say(answer)}
+function startRecognition(){
+ if(!recognition||!listening||recognitionActive||recognitionStarting||answerPending||utterance||(window.speechSynthesis?.speaking||false))return;
+ clearTimeout(restartTimer);
+ try{recognitionStarting=true;recognition.start()}
+ catch(e){recognitionStarting=false;retryDelay=Math.min(retryDelay*1.6,4000);$('msg').textContent='Reconhecimento temporariamente indisponível: '+e.message;queueRestart(retryDelay)}
+}
+function setupRecognition(){
+ const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+ if(!SR){$('msg').textContent='Reconhecimento indisponível. Use Chrome ou Edge atualizado.';return false}
+ recognition=new SR();recognition.lang='pt-BR';recognition.continuous=true;recognition.interimResults=true;
+ recognition.onstart=()=>{recognitionStarting=false;recognitionActive=true;retryDelay=450;show('listening','Estou ouvindo...','Pode fazer sua pergunta')};
+ recognition.onresult=e=>{
+  if(answerPending)return;
+  let preview='',latestFinal='';
+  for(let i=e.resultIndex;i<e.results.length;i++){
+   const transcript=e.results[i][0].transcript;
+   if(e.results[i].isFinal)latestFinal=transcript;
+   else preview+=transcript+' ';
+  }
+  if(preview.trim())show('listening','Estou ouvindo...',preview.trim());
+  if(latestFinal.trim()){
+   answerPending=true;
+   // Interrompe o reconhecimento enquanto a LIA fala para evitar eco.
+   try{recognition.stop()}catch{}
+   processQuestion(latestFinal);
+  }
+ };
+ recognition.onerror=e=>{
+  recognitionStarting=false;
+  const permanent=['not-allowed','service-not-allowed','audio-capture','language-not-supported'];
+  if(permanent.includes(e.error)){
+   listening=false;clearTimeout(restartTimer);
+   $('msg').textContent='Microfone ou serviço bloqueado ('+e.error+'). Permita o microfone para este endereço HTTPS nas configurações do navegador.';
+  }else if(e.error==='network'){
+   retryDelay=Math.min(retryDelay*2,12000);
+   $('msg').textContent='Falha de rede no reconhecimento de voz. Tentando recuperar automaticamente.';
+  }
+ };
+ recognition.onend=()=>{
+  recognitionActive=false;recognitionStarting=false;
+  // Alguns navegadores encerram a sessão sozinhos: reinício automático enquanto ativo.
+  if(listening&&!answerPending&&!utterance&&!(window.speechSynthesis?.speaking||false))queueRestart(retryDelay);
+ };
+ return true;
+}
+if(!tv){if(location.protocol==='file:'){const banner=document.createElement('div');banner.style.cssText='background:#4b240f;color:#ffddb6;border:1px solid #e87c2a;border-radius:12px;padding:12px;margin:10px 0;font-size:14px';banner.textContent='⚠ Para usar a escuta contínua, publique o index.html no GitHub Pages e abra o endereço HTTPS; arquivos locais podem solicitar permissão repetidamente.';document.querySelector('.admin')?.prepend(banner);}refreshVoices();speechSynthesis.onvoiceschanged=refreshVoices;$('voiceSelect').onchange=()=>{localStorage.setItem('lia.voice',$('voiceSelect').value);$('voiceNotice').textContent='Voz escolhida. Clique em Testar voz para ouvir.'};setupRecognition();$('start').onclick=()=>{if(location.protocol==='file:'){$('msg').textContent='Abra o endereço HTTPS publicado no GitHub Pages e autorize o microfone para este site.';alert('Para habilitar o microfone com permissão persistente, publique este index.html no GitHub Pages e abra o endereço HTTPS.');return;}if(!recognition){setupRecognition();if(!recognition)return}listening=true;retryDelay=450;$('msg').textContent='Escuta contínua ligada. A LIA volta a ouvir após responder. Conceda a permissão permanente do microfone ao endereço HTTPS publicado.';startRecognition()};$('stop').onclick=()=>{listening=false;answerPending=false;recognitionStarting=false;clearTimeout(restartTimer);recognition?.abort();window.speechSynthesis?.cancel();utterance=null;show('idle','Microfone parado','Clique em Iniciar microfone no notebook')};$('ask').onclick=()=>processQuestion($('question').value);$('question').addEventListener('keydown',e=>{if(e.key==='Enter')processQuestion($('question').value)});$('reset').onclick=()=>{window.speechSynthesis?.cancel();show('idle','Aguardando sua pergunta','Olá! Pode fazer sua pergunta.')};$('openTv').onclick=()=>{const w=window.open(location.origin+location.pathname+'?tv=1','lia_tv');if(!w)$('msg').textContent='O navegador bloqueou a janela. Permita pop-ups ou abra o endereço com ?tv=1 em outra aba.'};$('name').value=assistantName;$('saveName').onclick=()=>{const name=$('name').value.trim().slice(0,35);if(!name)return;localStorage.setItem('lia.name',name);rename(name)};$('testVoice').onclick=()=>say('Olá! Meu nome é '+assistantName+'. Estou pronta para responder perguntas.');
+function saveEntries(){localStorage.setItem('lia.entries',JSON.stringify(entries));render()}
+function render(){const host=$('items');host.replaceChildren();entries.forEach((e,i)=>{const box=document.createElement('div');box.className='qa';const heading=document.createElement('strong');heading.textContent=e.q[0];const small=document.createElement('small');small.textContent=e.a;const edit=document.createElement('button');edit.textContent='Editar';edit.className='secondary';edit.onclick=()=>{$('triggers').value=e.q.join('\n');$('answer').value=e.a;editing=i;$('save').textContent='Salvar alteração';$('triggers').focus()};const del=document.createElement('button');del.textContent='Excluir';del.className='secondary';del.style.marginLeft='8px';del.onclick=()=>{if(confirm('Excluir esta resposta?')){entries.splice(i,1);saveEntries()}};box.append(heading,small,edit,del);host.append(box)})}
+function cancelEdit(){editing=-1;$('triggers').value='';$('answer').value='';$('save').textContent='Adicionar resposta'}
+$('cancel').onclick=cancelEdit;$('save').onclick=()=>{const q=$('triggers').value.split('\n').map(s=>s.trim()).filter(Boolean),a=$('answer').value.trim();if(!q.length||!a){$('msg').textContent='Preencha pelo menos uma pergunta e uma resposta.';return}if(editing>=0)entries[editing]={q,a};else entries.push({q,a});saveEntries();cancelEdit();$('msg').textContent='Resposta salva neste navegador.'};$('export').onclick=()=>{const blob=new Blob([JSON.stringify(entries,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='respostas-lia.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};$('importBtn').onclick=()=>$('import').click();$('import').onchange=async e=>{const file=e.target.files?.[0];if(!file)return;try{const result=validate(JSON.parse(await file.text()));if(!result)throw Error('Formato inválido');if(confirm('Substituir todas as respostas atuais pelas do arquivo?')){entries=result;saveEntries();$('msg').textContent='Importação concluída.'}}catch(err){$('msg').textContent='Falha ao importar: '+err.message}e.target.value=''};render()}
+function validate(v){if(!Array.isArray(v)||!v.every(e=>e&&Array.isArray(e.q)&&e.q.length&&e.q.every(s=>typeof s==='string'&&s.trim())&&typeof e.a==='string'&&e.a.trim()))return null;return v}
+</script>
+</body>
+</html>
