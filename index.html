@@ -292,6 +292,107 @@ body::after{
 }
 @media(prefers-reduced-motion:reduce){body::before,body::after,.stage::before{animation:none!important}}
 
+
+/* LIA 2.3 — interface refinada, sugestão lateral e crachá */
+body{background:radial-gradient(circle at 50% 16%, #1b1d31 0%, #0b0d19 45%, #06070f 100%)!important;}
+body::before,body::after{opacity:1!important}
+body::before{
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255,135,34,.18) 0 12%, rgba(255,135,34,.08) 20%, rgba(255,135,34,0) 42%),
+    conic-gradient(from 0deg at 50% 50%, rgba(255,137,32,0) 0deg, rgba(255,137,32,.14) 36deg, rgba(255,137,32,0) 78deg, rgba(255,137,32,.03) 124deg, rgba(255,137,32,.15) 182deg, rgba(255,137,32,0) 226deg, rgba(255,137,32,.10) 286deg, rgba(255,137,32,0) 360deg)!important;
+  filter:blur(34px)!important;
+  animation:liaBgSpinStrong 20s linear infinite!important;
+}
+body::after{
+  background:
+    linear-gradient(100deg, rgba(255,145,45,0) 0%, rgba(255,145,45,.12) 25%, rgba(255,145,45,0) 50%),
+    linear-gradient(280deg, rgba(255,121,28,0) 8%, rgba(255,121,28,.10) 38%, rgba(255,121,28,0) 62%)!important;
+  background-size:170% 170%, 180% 180%!important;
+  filter:blur(18px)!important;
+  animation:liaBgSweepStrong 9s ease-in-out infinite alternate!important;
+}
+@keyframes liaBgSpinStrong{from{transform:rotate(0deg) scale(1)}to{transform:rotate(360deg) scale(1.08)}}
+@keyframes liaBgSweepStrong{0%{transform:translate3d(-9%,0,0) scale(1)}50%{transform:translate3d(9%,-4%,0) scale(1.08)}100%{transform:translate3d(-2%,4%,0) scale(1.03)}}
+.stage::before{
+  width:min(78vh,78vw)!important;height:min(78vh,78vw)!important;top:53%!important;
+  background:
+    radial-gradient(circle, rgba(255,132,33,.20) 0%, rgba(255,132,33,.12) 18%, rgba(255,132,33,.05) 35%, rgba(255,132,33,0) 66%)!important;
+  filter:blur(2px)!important;
+}
+.stage::after{
+  content:"";position:absolute;left:50%;top:53%;transform:translate(-50%,-50%);width:min(64vh,64vw);height:min(64vh,64vw);border-radius:50%;pointer-events:none;z-index:0;
+  background:
+   repeating-radial-gradient(circle, rgba(255,149,57,.12) 0 1px, rgba(255,149,57,0) 1px 28px),
+   radial-gradient(circle, rgba(255,147,48,.08) 0 30%, rgba(255,147,48,0) 70%);
+  mask-image:radial-gradient(circle, rgba(0,0,0,.95) 0 62%, rgba(0,0,0,0) 85%);
+  opacity:.95;
+  animation:liaRings 16s linear infinite;
+}
+@keyframes liaRings{from{transform:translate(-50%,-50%) rotate(0deg)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+.top{margin-bottom:6px!important}
+.identity{gap:22px!important}
+.identity-copy .brand{font-size:clamp(56px,5.1vw,84px)!important;line-height:.92!important}
+.identity-copy .brand-sub{font-size:15px!important;color:#d5d7df!important}
+.eyebrow{font-size:.78rem!important;letter-spacing:.18em!important}
+.center{max-width:1200px!important}
+.robot{width:min(470px,62vw)!important;height:min(420px,52vh)!important;margin:4px auto 6px!important}
+.robot:before{background:#f4771020!important;filter:blur(50px)!important}
+.face{box-shadow:inset 0 0 45px #f9771422, 0 0 34px #f8751682, 0 0 140px #e4641930!important}
+.halo{border-color:#ff9e3440!important}
+.orbit{border-color:#ff8d2238!important}
+.orbit-two{border-color:#ff8a191f!important}
+.status{font-size:clamp(34px,3.2vw,52px)!important;max-width:1000px!important;position:relative;z-index:2}
+.hello-label{position:relative;z-index:2}
+.bottom{max-width:1040px!important}
+.subtitle{background:linear-gradient(180deg, rgba(35,33,44,.92), rgba(26,25,33,.94))!important;border:1px solid rgba(245,136,54,.22)!important;box-shadow:0 18px 60px rgba(0,0,0,.35)!important;border-radius:22px!important}
+.center .tag{position:relative;z-index:2}
+
+/* sugestão ao lado do robô */
+.question-suggestion{
+  width:min(360px,28vw)!important;
+  right:auto!important;
+  left:calc(50% - min(470px,34vw) - clamp(16px,3vw,44px))!important;
+  bottom:auto!important;
+  top:52%!important;
+  transform:translate(-100%,-50%) scale(.96)!important;
+  z-index:18!important;
+}
+.question-suggestion.visible{transform:translate(-100%,-50%) scale(1)!important}
+.question-suggestion .q-label{font-size:10px!important}
+.question-suggestion .q-text{font-size:clamp(18px,1.6vw,28px)!important;line-height:1.18!important}
+
+/* painel direção no lado oposto */
+.lia-direction{left:calc(50% + min(260px, 22vw))!important;top:48%!important;transform:translateY(-50%) translateX(0)!important}
+@keyframes liaDirectionIn{from{opacity:0;transform:translateY(-50%) translateX(14px)}to{opacity:1;transform:translateY(-50%) translateX(0)}}
+
+/* crachá no robô */
+.lia-badge{position:absolute;right:8%;bottom:8%;width:118px;min-height:70px;padding:14px 10px 10px;border-radius:14px;background:linear-gradient(180deg,#fffdfa,#f1ece7);border:1px solid rgba(245,134,48,.45);box-shadow:0 12px 28px rgba(0,0,0,.30),0 0 14px rgba(255,139,44,.18);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:3;transform:rotate(4deg)}
+.lia-badge .badge-top{position:absolute;left:10px;right:10px;top:7px;height:4px;border-radius:999px;background:#f27a21}
+.lia-badge .badge-name{font-size:15px;font-weight:900;letter-spacing:.06em;color:#15233f;margin-top:3px}
+.lia-badge .badge-role{font-size:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#a95b1d;margin-top:4px;text-align:center;line-height:1.2}
+
+@media(max-width:1200px){
+  .question-suggestion{left:calc(50% - min(420px,33vw) - 18px)!important;width:min(320px,26vw)!important}
+  .identity-copy .brand{font-size:clamp(48px,4.7vw,72px)!important}
+}
+@media(max-width:980px){
+  .identity{gap:12px!important;flex-wrap:wrap!important}
+  .identity-copy{align-items:center!important;text-align:center!important}
+  .question-suggestion{left:18px!important;top:auto!important;bottom:165px!important;transform:translate(0,16px) scale(.96)!important;width:min(330px,44vw)!important}
+  .question-suggestion.visible{transform:translate(0,0) scale(1)!important}
+  .lia-direction{left:auto!important;right:14px!important;top:45%!important}
+}
+@media(max-width:620px){
+  .identity-copy .brand{font-size:42px!important}
+  .status{font-size:clamp(26px,7.2vw,40px)!important}
+  .question-suggestion{left:50%!important;right:auto!important;top:auto!important;bottom:120px!important;width:min(320px,90vw)!important;transform:translate(-50%,16px) scale(.96)!important}
+  .question-suggestion.visible{transform:translate(-50%,0) scale(1)!important}
+  .lia-badge{width:92px;min-height:56px;padding:11px 8px 8px;right:6%;bottom:7%}
+  .lia-badge .badge-name{font-size:12px}
+  .lia-badge .badge-role{font-size:7px}
+}
+@media(prefers-reduced-motion:reduce){.stage::after,.question-suggestion,.question-suggestion.visible{animation:none!important}}
+
 </style>
 </head>
 <body>
@@ -299,7 +400,7 @@ body::after{
 <div class="shell">
 <main class="stage">
  <header class="top"><div class="identity"><div class="logo-card"><img src="data:image/png;base64,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" alt="FAZESP — Escola Fazendária do Estado de São Paulo"></div><div class="identity-copy"><div class="eyebrow">ASSISTENTE VIRTUAL DA FAZESP</div><div class="brand" id="brand">LIA<span class="brand-accent">.</span></div><div class="brand-sub" id="liaGreeting">Sua assistente virtual.</div></div></div></header>
- <section class="center"><div class="robot" id="robot"><div class="halo"></div><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="face"><div class="antenna"></div><div class="eyes"><div class="eye"></div><div class="eye"></div></div><div class="mouth"></div><div class="cheeks"><span></span><span></span></div></div></div><div class="hello-label">INTELIGÊNCIA QUE APROXIMA</div><div class="status" id="status">Aguardando sua pergunta</div><span class="tag" id="mode">Pronta para conversar</span></section>
+ <section class="center"><div class="robot" id="robot"><div class="halo"></div><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="face"><div class="antenna"></div><div class="eyes"><div class="eye"></div><div class="eye"></div></div><div class="mouth"></div><div class="cheeks"><span></span><span></span></div></div><div class="lia-badge" aria-label="Crachá FAZESP"><span class="badge-top"></span><span class="badge-name">FAZESP</span><span class="badge-role">Assistente virtual</span></div></div><div class="hello-label">INTELIGÊNCIA QUE APROXIMA</div><div class="status" id="status">Aguardando sua pergunta</div><span class="tag" id="mode">Pronta para conversar</span></section>
  <aside class="lia-direction" id="liaDirection" aria-live="polite" aria-label="Orientação de caminho"><div class="dir-heading">DIREÇÃO</div><div class="dir-icon" id="liaDirectionIcon">→</div><div class="dir-label" id="liaDirectionLabel"></div><div class="dir-step" id="liaDirectionStep"></div></aside>
  <aside class="question-suggestion" id="questionSuggestion" aria-label="Exemplo de pergunta"><button class="q-close" id="hideSuggestion" type="button" title="Ocultar sugestão" aria-label="Ocultar sugestão">×</button><div class="q-label">VOCÊ PODE PERGUNTAR</div><div class="q-text" id="questionSuggestionText"></div></aside>
  <div class="bottom"><div class="subtitle" id="subtitle" aria-live="polite">Como posso ajudar você?</div><div class="foot">FAZESP · Escola Fazendária</div><div class="lia-credits">Criado por Gustavo Hugo e Gladstom Alves</div></div>
