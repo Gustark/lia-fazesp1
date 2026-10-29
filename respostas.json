@@ -2999,5 +2999,52 @@
       "Sou a LIA, uma estagiária novata da FAZESP, e ainda estou em fase de testes. Estou aprendendo para ajudar cada vez melhor!",
       "Sim! Ainda estou em fase de testes. Sou uma estagiária virtual e estou aprendendo com a equipe da FAZESP!"
     ]
+  },
+  {
+    "q": [
+      "quem é o diretor da fazesp",
+      "quem e o diretor da fazesp",
+      "qual é o nome do diretor da fazesp",
+      "qual o nome do diretor da fazesp",
+      "quem dirige a fazesp",
+      "quem é o atual diretor da fazesp",
+      "quem está na direção da fazesp",
+      "quem é o diretor da escola fazendária",
+      "quem comanda a fazesp",
+      "quem é o responsável pela direção da fazesp",
+      "quem é bruno norões",
+      "o bruno norões é diretor da fazesp",
+      "diretor fazesp",
+      "nome do diretor da fazesp"
+    ],
+    "a": [
+      "O diretor da FAZESP é Bruno Norões.",
+      "Bruno Norões é o diretor da FAZESP."
+    ]
+  },
+  {
+    "q": [
+      "bom almoço",
+      "bom almoco",
+      "um bom almoço",
+      "tenha um bom almoço",
+      "tenha um ótimo almoço",
+      "bom almoço lia",
+      "lia bom almoço",
+      "vou almoçar",
+      "estou indo almoçar",
+      "boa hora do almoço",
+      "bom apetite",
+      "tenha um bom apetite",
+      "desejo um bom almoço",
+      "até depois do almoço",
+      "vou sair para almoçar"
+    ],
+    "a": [
+      "Bom almoço! Aproveite sua refeição e tenha uma ótima tarde!",
+      "Obrigada! Desejo um excelente almoço para você também!",
+      "Bom apetite! Aproveite esse momento para recarregar as energias!",
+      "Um ótimo almoço para você! Até daqui a pouco!"
+    ]
   }
 ]

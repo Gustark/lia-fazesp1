@@ -614,7 +614,7 @@ body{overflow-x:hidden}
  <div class="message" id="msg"></div>
  <div class="actions"><button id="testVoice" class="secondary">Testar voz</button></div>
  <label class="field" for="voiceSelect">Voz da LIA (feminina · português do Brasil)</label><select id="voiceSelect" aria-label="Selecionar voz da LIA"><option value="">Buscando vozes do Windows...</option></select><p class="voice-tip" id="voiceNotice">A disponibilidade de vozes femininas depende das vozes instaladas no Windows e do navegador.</p>
- <h3>Base de conhecimento</h3><p>As perguntas e respostas são carregadas do arquivo <code>respostas.json</code> publicado junto com a página. Para atualizar o conteúdo, edite esse arquivo no GitHub.</p><div class="message" id="knowledgeStatus" role="status"></div><h3>Perguntas sem resposta</h3><p>Registradas somente neste navegador, sem gravar áudio. Exporte para revisar e depois inclua as novas respostas no arquivo <code>respostas.json</code>.</p>
+ <h3>Base de conhecimento</h3><p>As perguntas e respostas são carregadas do arquivo <code>respostas.json</code> publicado junto com a página. Para atualizar o conteúdo, edite esse arquivo no GitHub.</p><div class="message" id="knowledgeStatus" role="status"></div><h3>Perguntas sem resposta</h3><p>Registradas temporariamente nesta página, sem gravar áudio. O histórico é apagado ao recarregar a página. Exporte antes de atualizar e depois inclua as novas respostas no arquivo <code>respostas.json</code>.</p>
  <div class="actions"><button type="button" id="exportUnknown" class="secondary">⬇ Exportar perguntas (.json)</button><button type="button" id="clearUnknown" class="secondary">Limpar histórico</button></div>
  <div class="message" id="unknownInfo" aria-live="polite">Nenhuma pergunta registrada.</div>
  <p><strong>Atenção:</strong> o reconhecimento de voz do Chrome/Edge pode utilizar serviços online do navegador; por isso, o reconhecimento por microfone pode depender de internet. Para usar no GitHub Pages, acesse o endereço HTTPS publicado, permita o microfone para o site (não apenas desta vez) e não abra o HTML como arquivo file://. O navegador pode interromper a captura por segurança; o sistema tentará reconectar. As respostas são carregadas do arquivo respostas.json hospedado com a página.</p>
@@ -646,8 +646,8 @@ let recognitionStartAt=0,voiceStartedAt=0,voiceSafetyTimer=null;
 
 let suggestionIndex=-1,suggestionTimer=null,suggestionDismissed=false,latestState='idle';
 function suggestionQuestions(){
- // Usa a primeira variação cadastrada por resposta, ignorando saudações isoladas.
- return entries.map(e=>(e.q||[]).find(q=>q.trim().length>=12)).filter(Boolean).slice(0,60);
+ // Três sugestões fixas e simples, independentemente da ordem do JSON.
+ return ['Onde fica o Pequeno Auditório?', 'O que você é?', 'Bom dia!', 'O que é a FAZESP?', 'Conte uma piada?', 'Quem pode fazer os cursos da FAZESP?'];
 }
 function updateSuggestion(){
  const box=$('questionSuggestion');if(!box)return;
@@ -847,18 +847,19 @@ function say(text,direction=null){
  // Recuperação: algumas vozes do Windows não enviam onend/onerror.
  voiceSafetyTimer=setTimeout(()=>{if(utterance===u){try{speechSynthesis.cancel()}catch{}finished()}},Math.max(13000,Math.min(55000,Math.ceil(text.length/12)*1000)));
 }
-const UNKNOWN_KEY='lia.perguntasSemResposta.v1';
+const UNKNOWN_MAX=15;
+const unknownRecords=[]; // Memória temporária: reinicia ao atualizar a página.
 const UNKNOWN_REPLY='Desculpe, ainda não aprendi sobre essa informação. A LIA é uma estagiária novata da FAZESP e ainda está em fase de testes. Por isso, algumas informações podem estar em aprendizado.';
-function readUnknown(){try{const v=JSON.parse(localStorage.getItem(UNKNOWN_KEY)||'[]');return Array.isArray(v)?v:[]}catch{return []}}
-function updateUnknownInfo(){const el=$('unknownInfo');if(el){const a=readUnknown();el.textContent=a.length?`${a.length} pergunta(s) diferente(s) sem resposta, neste navegador.`:'Nenhuma pergunta sem resposta registrada neste navegador.'}}
+function readUnknown(){return unknownRecords.slice()}
+function updateUnknownInfo(){const el=$('unknownInfo');if(el){el.textContent=unknownRecords.length?'Perguntas sem resposta registradas nesta sessão. Você pode exportá-las antes de atualizar a página.':'Nenhuma pergunta sem resposta registrada nesta sessão.'}}
 function trackUnknown(question){
  if(tv)return;
  const cleaned=String(question).trim().replace(/\s+/g,' ').slice(0,350);
  const key=normalize(cleaned);if(!key||key.length<4)return;
- const records=readUnknown();const found=records.find(item=>item.chave===key);
- if(found){found.vezes++;found.ultimaOcorrencia=new Date().toISOString()}
+ const records=unknownRecords;const found=records.find(item=>item.chave===key);
+ if(found){found.vezes++;found.ultimaOcorrencia=new Date().toISOString();const idx=records.indexOf(found);records.splice(idx,1);records.push(found)}
  else{records.push({pergunta:cleaned,chave:key,vezes:1,primeiraOcorrencia:new Date().toISOString(),ultimaOcorrencia:new Date().toISOString()})}
- try{localStorage.setItem(UNKNOWN_KEY,JSON.stringify(records.slice(-500)))}catch{}
+ while(records.length>UNKNOWN_MAX)records.shift();
  updateUnknownInfo();
 }
 function exportUnknown(){
@@ -934,7 +935,7 @@ if(!tv)setInterval(()=>{
   queueRestart(250);
  }
 },1800);
-if(!tv){if(location.protocol==='file:'){const banner=document.createElement('div');banner.style.cssText='background:#4b240f;color:#ffddb6;border:1px solid #e87c2a;border-radius:12px;padding:12px;margin:10px 0;font-size:14px';banner.textContent='⚠ Para usar a escuta contínua, publique o index.html no GitHub Pages e abra o endereço HTTPS; arquivos locais podem solicitar permissão repetidamente.';document.querySelector('.admin')?.prepend(banner);}refreshVoices();speechSynthesis.onvoiceschanged=refreshVoices;$('voiceSelect').onchange=()=>{localStorage.setItem('lia.voice',$('voiceSelect').value);$('voiceNotice').textContent='Voz escolhida. Clique em Testar voz para ouvir.'};setupRecognition();$('start').onclick=()=>{if(location.protocol==='file:'){$('msg').textContent='Abra o endereço HTTPS publicado no GitHub Pages e autorize o microfone para este site.';alert('Para habilitar o microfone com permissão persistente, publique este index.html no GitHub Pages e abra o endereço HTTPS.');return;}if(!recognition){setupRecognition();if(!recognition)return}listening=true;retryDelay=450;$('msg').textContent='Escuta contínua ligada. A LIA volta a ouvir após responder. Conceda a permissão permanente do microfone ao endereço HTTPS publicado.';startRecognition()};$('stop').onclick=()=>{clearDirection();listening=false;answerPending=false;recognitionStarting=false;clearTimeout(restartTimer);clearTimeout(voiceSafetyTimer);recognition?.abort();window.speechSynthesis?.cancel();utterance=null;show('idle','Microfone parado','Clique em Iniciar microfone no notebook')};$('openTv').onclick=()=>{const w=window.open(location.origin+location.pathname+'?tv=1','lia_tv');if(!w)$('msg').textContent='O navegador bloqueou a janela. Permita pop-ups ou abra o endereço com ?tv=1 em outra aba.'};$('testVoice').onclick=()=>say('Olá! Meu nome é '+assistantName+'. Estou pronta para responder perguntas.');$('exportUnknown').onclick=exportUnknown;$('clearUnknown').onclick=()=>{if(confirm('Apagar o histórico de perguntas sem resposta deste navegador? Esta ação não pode ser desfeita.')){localStorage.removeItem(UNKNOWN_KEY);updateUnknownInfo()}};updateUnknownInfo();
+if(!tv){if(location.protocol==='file:'){const banner=document.createElement('div');banner.style.cssText='background:#4b240f;color:#ffddb6;border:1px solid #e87c2a;border-radius:12px;padding:12px;margin:10px 0;font-size:14px';banner.textContent='⚠ Para usar a escuta contínua, publique o index.html no GitHub Pages e abra o endereço HTTPS; arquivos locais podem solicitar permissão repetidamente.';document.querySelector('.admin')?.prepend(banner);}refreshVoices();speechSynthesis.onvoiceschanged=refreshVoices;$('voiceSelect').onchange=()=>{localStorage.setItem('lia.voice',$('voiceSelect').value);$('voiceNotice').textContent='Voz escolhida. Clique em Testar voz para ouvir.'};setupRecognition();$('start').onclick=()=>{if(location.protocol==='file:'){$('msg').textContent='Abra o endereço HTTPS publicado no GitHub Pages e autorize o microfone para este site.';alert('Para habilitar o microfone com permissão persistente, publique este index.html no GitHub Pages e abra o endereço HTTPS.');return;}if(!recognition){setupRecognition();if(!recognition)return}listening=true;retryDelay=450;$('msg').textContent='Escuta contínua ligada. A LIA volta a ouvir após responder. Conceda a permissão permanente do microfone ao endereço HTTPS publicado.';startRecognition()};$('stop').onclick=()=>{clearDirection();listening=false;answerPending=false;recognitionStarting=false;clearTimeout(restartTimer);clearTimeout(voiceSafetyTimer);recognition?.abort();window.speechSynthesis?.cancel();utterance=null;show('idle','Microfone parado','Clique em Iniciar microfone no notebook')};$('openTv').onclick=()=>{const w=window.open(location.origin+location.pathname+'?tv=1','lia_tv');if(!w)$('msg').textContent='O navegador bloqueou a janela. Permita pop-ups ou abra o endereço com ?tv=1 em outra aba.'};$('testVoice').onclick=()=>say('Olá! Meu nome é '+assistantName+'. Estou pronta para responder perguntas.');$('exportUnknown').onclick=exportUnknown;$('clearUnknown').onclick=()=>{if(confirm('Apagar o histórico de perguntas sem resposta deste navegador? Esta ação não pode ser desfeita.')){unknownRecords.length=0;updateUnknownInfo()}};updateUnknownInfo();
 }
 function validate(v){if(!Array.isArray(v)||!v.every(e=>e&&Array.isArray(e.q)&&e.q.length&&e.q.every(s=>typeof s==='string'&&s.trim())&&((typeof e.a==='string'&&e.a.trim())||(Array.isArray(e.a)&&e.a.length>0&&e.a.every(a=>typeof a==='string'&&a.trim())))))return null;return v}
 </script>
