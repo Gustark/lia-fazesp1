@@ -280,13 +280,6 @@
   },
   {
     "q": [
-      "onde fica o banheiro",
-      "onde é o banheiro"
-    ],
-    "a": "Consulte a equipe de recepção para saber onde fica o banheiro mais próximo."
-  },
-  {
-    "q": [
       "obrigado",
       "obrigada",
       "muito obrigado"
@@ -619,5 +612,295 @@
       "diga de novo lia"
     ],
     "a": "Claro! Pode fazer a pergunta novamente que vou tentar responder."
+  },
+  {
+    "q": [
+      "onde fica o banheiro masculino",
+      "onde é o banheiro masculino",
+      "onde fica o sanitário masculino",
+      "onde fica o toalete masculino"
+    ],
+    "a": "O banheiro masculino fica na área atrás dos elevadores. Siga pelo corredor à sua direita e contorne o conjunto dos elevadores até encontrar a entrada.",
+    "direcao": {
+      "local": "Banheiro masculino",
+      "passos": [
+        "right",
+        "turn-right"
+      ]
+    }
+  },
+  {
+    "q": [
+      "onde fica o banheiro feminino",
+      "onde é o banheiro feminino",
+      "onde fica o sanitário feminino",
+      "onde fica o toalete feminino"
+    ],
+    "a": "O banheiro feminino fica na área atrás dos elevadores. Siga pelo corredor à sua esquerda e contorne o conjunto dos elevadores até encontrar a entrada.",
+    "direcao": {
+      "local": "Banheiro feminino",
+      "passos": [
+        "left",
+        "turn-left"
+      ]
+    }
+  },
+  {
+    "q": [
+      "onde fica a escada de emergência da ala sé",
+      "onde fica a escada da ala sé",
+      "escada de emergência ala sé"
+    ],
+    "a": "A escada de emergência da Ala Sé fica no corredor à sua esquerda, na região atrás dos elevadores. Siga à esquerda e contorne a área dos elevadores.",
+    "direcao": {
+      "local": "Escada de emergência · Ala Sé",
+      "passos": [
+        "left",
+        "turn-left"
+      ]
+    }
+  },
+  {
+    "q": [
+      "onde fica a escada de emergência da ala dom pedro",
+      "onde fica a escada da ala dom pedro",
+      "escada de emergência ala dom pedro"
+    ],
+    "a": "A escada de emergência da Ala Dom Pedro fica no corredor à sua direita, na região atrás dos elevadores. Siga à direita e contorne a área dos elevadores.",
+    "direcao": {
+      "local": "Escada de emergência · Ala Dom Pedro",
+      "passos": [
+        "right",
+        "turn-right"
+      ]
+    }
+  },
+  {
+    "q": [
+      "onde fica a escada de emergência",
+      "onde ficam as escadas de emergência"
+    ],
+    "a": "Existem escadas de emergência nas duas alas. A da Ala Sé fica à sua esquerda e a da Ala Dom Pedro à sua direita, na região atrás dos elevadores.",
+    "direcao": {
+      "local": "Escadas de emergência",
+      "passos": [
+        "both",
+        "turn-both"
+      ]
+    }
+  },
+  {
+    "q": [
+      "onde fica o grande auditório",
+      "onde é o grande auditório",
+      "como chegar ao grande auditório",
+      "onde fica o ga"
+    ],
+    "a": "Grande Auditório fica na Ala Dom Pedro. Siga pelo corredor à sua direita.",
+    "direcao": {
+      "local": "Grande Auditório",
+      "passos": [
+        "right"
+      ]
+    }
+  },
+  {
+    "q": [
+      "onde fica a sala vip",
+      "onde fica a sala vip do grande auditório"
+    ],
+    "a": "Sala VIP do Grande Auditório fica na Ala Dom Pedro. Siga pelo corredor à sua direita.",
+    "direcao": {
+      "local": "Sala VIP do Grande Auditório",
+      "passos": [
+        "right"
+      ]
+    }
+  },
+  {
+    "q": [
+      "onde fica suporte a cursos",
+      "onde fica divisão de suporte a cursos",
+      "onde fica dsc"
+    ],
+    "a": "Suporte a Cursos fica na Ala Dom Pedro. Siga pelo corredor à sua direita.",
+    "direcao": {
+      "local": "Suporte a Cursos",
+      "passos": [
+        "right"
+      ]
+    }
+  },
+  {
+    "q": [
+      "onde fica a sala dos técnicos",
+      "onde é a sala dos técnicos"
+    ],
+    "a": "Sala dos Técnicos fica na Ala Dom Pedro. Siga pelo corredor à sua direita.",
+    "direcao": {
+      "local": "Sala dos Técnicos",
+      "passos": [
+        "right"
+      ]
+    }
+  },
+  {
+    "q": [
+      "onde fica o pequeno auditório",
+      "como chegar no pequeno auditório"
+    ],
+    "a": "Pequeno Auditório fica na Ala Sé. Siga pelo corredor à sua esquerda.",
+    "direcao": {
+      "local": "Pequeno Auditório",
+      "passos": [
+        "left"
+      ]
+    }
+  },
+  {
+    "q": [
+      "onde fica a recepção",
+      "onde fica a recepção da fazesp"
+    ],
+    "a": "Recepção FAZESP fica na Ala Sé. Siga pelo corredor à sua esquerda.",
+    "direcao": {
+      "local": "Recepção FAZESP",
+      "passos": [
+        "left"
+      ]
+    }
+  },
+  {
+    "q": [
+      "onde fica o estúdio",
+      "onde é o estúdio da fazesp"
+    ],
+    "a": "Estúdio fica na Ala Sé. Siga pelo corredor à sua esquerda.",
+    "direcao": {
+      "local": "Estúdio",
+      "passos": [
+        "left"
+      ]
+    }
+  },
+  {
+    "q": [
+      "onde fica o plenário",
+      "como chegar ao plenário"
+    ],
+    "a": "Plenário fica na Ala Sé. Siga pelo corredor à sua esquerda.",
+    "direcao": {
+      "local": "Plenário",
+      "passos": [
+        "left"
+      ]
+    }
+  },
+  {
+    "q": [
+      "onde fica o gabinete"
+    ],
+    "a": "Gabinete fica na Ala Sé. Siga pelo corredor à sua esquerda.",
+    "direcao": {
+      "local": "Gabinete",
+      "passos": [
+        "left"
+      ]
+    }
+  },
+  {
+    "q": [
+      "onde fica a sala 171",
+      "como chegar na sala 171"
+    ],
+    "a": "Sala 171 fica na Ala Sé. Siga pelo corredor à sua esquerda.",
+    "direcao": {
+      "local": "Sala 171",
+      "passos": [
+        "left"
+      ]
+    }
+  },
+  {
+    "q": [
+      "onde fica a sala 178",
+      "como chegar na sala 178"
+    ],
+    "a": "Sala 178 fica na Ala Sé. Siga pelo corredor à sua esquerda.",
+    "direcao": {
+      "local": "Sala 178",
+      "passos": [
+        "left"
+      ]
+    }
+  },
+  {
+    "q": [
+      "onde fica o coworking",
+      "onde fica o coworking da fazesp"
+    ],
+    "a": "Coworking FAZESP fica na Ala Sé. Siga pelo corredor à sua esquerda.",
+    "direcao": {
+      "local": "Coworking FAZESP",
+      "passos": [
+        "left"
+      ]
+    }
+  },
+  {
+    "q": [
+      "onde fica a sala dos coordenadores e diretores",
+      "onde ficam os coordenadores e diretores"
+    ],
+    "a": "Coordenadores e Diretores fica na Ala Sé. Siga pelo corredor à sua esquerda.",
+    "direcao": {
+      "local": "Coordenadores e Diretores",
+      "passos": [
+        "left"
+      ]
+    }
+  },
+  {
+    "q": [
+      "onde fica a biblioteca",
+      "onde é a biblioteca"
+    ],
+    "a": "A biblioteca fica logo atrás de mim, no corredor central.",
+    "direcao": {
+      "local": "Biblioteca",
+      "passos": [
+        "center"
+      ]
+    }
+  },
+  {
+    "q": [
+      "onde fica a copa",
+      "como chegar à copa"
+    ],
+    "a": "A copa fica na área atrás dos elevadores. Você pode contornar os elevadores pelo corredor à sua esquerda ou à sua direita.",
+    "direcao": {
+      "local": "Copa",
+      "passos": [
+        "both",
+        "turn-both"
+      ]
+    }
+  },
+  {
+    "q": [
+      "onde fica o banheiro",
+      "onde ficam os banheiros",
+      "onde ficam os sanitários",
+      "preciso ir ao banheiro"
+    ],
+    "a": "Os sanitários ficam na área atrás dos elevadores. Você pode seguir pelo corredor à sua esquerda ou à sua direita e contornar os elevadores para acessar essa área.",
+    "direcao": {
+      "local": "Sanitários",
+      "passos": [
+        "both",
+        "turn-both"
+      ]
+    }
   }
 ]
