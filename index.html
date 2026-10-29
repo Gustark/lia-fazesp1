@@ -538,6 +538,65 @@ body{overflow-x:hidden}
   .tv .lia-direction{right:8px!important;bottom:185px!important;max-width:120px!important}
 }
 
+
+/* LIA 3.0 — coloca a sugestão inteiramente dentro do palco, sem deslocamentos herdados */
+.stage > #questionSuggestion,
+.tv .stage > #questionSuggestion{
+  position:absolute!important;
+  box-sizing:border-box!important;
+  left:auto!important;
+  right:clamp(20px,3vw,55px)!important;
+  top:43%!important;
+  bottom:auto!important;
+  width:clamp(240px,21vw,345px)!important;
+  max-width:calc(100% - 40px)!important;
+  margin:0!important;
+  transform:translateY(-50%)!important;
+  z-index:35!important;
+  text-align:left!important;
+}
+.stage > #questionSuggestion.visible,
+.tv .stage > #questionSuggestion.visible{
+  transform:translateY(-50%)!important;
+}
+.stage > #questionSuggestion .q-text{
+  font-size:clamp(16px,1.4vw,22px)!important;
+  line-height:1.28!important;
+  overflow-wrap:anywhere!important;
+  word-break:normal!important;
+}
+/* Direção visual no lado oposto para não se sobrepor às sugestões */
+.stage > #liaDirection.active,
+.tv .stage > #liaDirection.active{
+  left:clamp(16px,3vw,50px)!important;
+  right:auto!important;
+  top:45%!important;
+  max-width:220px!important;
+}
+@media(max-width:1100px){
+ .stage > #questionSuggestion,
+ .tv .stage > #questionSuggestion{
+   right:18px!important;
+   width:min(265px,27vw)!important;
+   top:44%!important;
+ }
+}
+@media(max-width:730px){
+ .stage > #questionSuggestion,
+ .tv .stage > #questionSuggestion{
+   top:auto!important;
+   bottom:clamp(86px,13vh,135px)!important;
+   right:50%!important;
+   left:auto!important;
+   width:min(340px,calc(100% - 28px))!important;
+   transform:translateX(50%)!important;
+ }
+ .stage > #questionSuggestion.visible,
+ .tv .stage > #questionSuggestion.visible{transform:translateX(50%)!important}
+ .stage > #liaDirection.active,
+ .tv .stage > #liaDirection.active{top:47%!important;left:auto!important;right:8px!important;max-width:125px!important}
+}
+
 </style>
 </head>
 <body>
@@ -583,6 +642,7 @@ if(!tv){
 const DEFAULTS=[];
 let entries=[],assistantName,recognition=null,listening=false,utterance=null,staleRestart=false,lastSpokenAnswer='';
 let recognitionActive=false,recognitionStarting=false,answerPending=false,restartTimer=null,retryDelay=450;
+let recognitionStartAt=0,voiceStartedAt=0,voiceSafetyTimer=null;
 
 let suggestionIndex=-1,suggestionTimer=null,suggestionDismissed=false,latestState='idle';
 function suggestionQuestions(){
@@ -770,6 +830,7 @@ function say(text,direction=null){
   answerPending=false;show('idle','Resposta exibida',text);queueRestart();return;
  }
  speechSynthesis.cancel();
+ clearTimeout(voiceSafetyTimer);voiceStartedAt=Date.now();
  const u=new SpeechSynthesisUtterance(textForSpeech(text));utterance=u;
  u.lang='pt-BR';u.rate=speechRateOverride??.96;u.pitch=1.06;
  const voices=availablePtVoices();const preferred=localStorage.getItem('lia.voice');
@@ -777,12 +838,14 @@ function say(text,direction=null){
  u.onstart=()=>show('speaking','Respondendo...',text);
  const finished=()=>{
   if(utterance!==u)return;
-  utterance=null;answerPending=false;clearDirection();
-  show(listening?'listening':'idle',listening?'Preparando nova pergunta...':'Aguardando sua pergunta',text);
-  queueRestart(650);
+  clearTimeout(voiceSafetyTimer);utterance=null;answerPending=false;clearDirection();
+  show(listening?'listening':'idle',listening?'Retomando escuta...':'Aguardando sua pergunta',text);
+  queueRestart(350);
  };
  u.onend=finished;u.onerror=finished;
  speechSynthesis.speak(u);
+ // Recuperação: algumas vozes do Windows não enviam onend/onerror.
+ voiceSafetyTimer=setTimeout(()=>{if(utterance===u){try{speechSynthesis.cancel()}catch{}finished()}},Math.max(13000,Math.min(55000,Math.ceil(text.length/12)*1000)));
 }
 const UNKNOWN_KEY='lia.perguntasSemResposta.v1';
 const UNKNOWN_REPLY='Desculpe, ainda não aprendi sobre essa informação. A LIA é uma estagiária novata da FAZESP e ainda está em fase de testes. Por isso, algumas informações podem estar em aprendizado.';
@@ -812,14 +875,14 @@ function processQuestion(q){
 function startRecognition(){
  if(!recognition||!listening||recognitionActive||recognitionStarting||answerPending||utterance||(window.speechSynthesis?.speaking||false))return;
  clearTimeout(restartTimer);
- try{recognitionStarting=true;recognition.start()}
+ try{recognitionStarting=true;recognitionStartAt=Date.now();recognition.start()}
  catch(e){recognitionStarting=false;retryDelay=Math.min(retryDelay*1.6,4000);$('msg').textContent='Reconhecimento temporariamente indisponível: '+e.message;queueRestart(retryDelay)}
 }
 function setupRecognition(){
  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
  if(!SR){$('msg').textContent='Reconhecimento indisponível. Use Chrome ou Edge atualizado.';return false}
  recognition=new SR();recognition.lang='pt-BR';recognition.continuous=true;recognition.interimResults=true;
- recognition.onstart=()=>{recognitionStarting=false;recognitionActive=true;retryDelay=450;show('listening','Estou ouvindo...','Pode fazer sua pergunta')};
+ recognition.onstart=()=>{recognitionStarting=false;recognitionActive=true;recognitionStartAt=0;retryDelay=450;show('listening','Estou ouvindo...','Pode fazer sua pergunta')};
  recognition.onresult=e=>{
   if(answerPending)return;
   let preview='',latestFinal='';
@@ -848,13 +911,30 @@ function setupRecognition(){
   }
  };
  recognition.onend=()=>{
-  recognitionActive=false;recognitionStarting=false;
+  recognitionActive=false;recognitionStarting=false;recognitionStartAt=0;
   // Alguns navegadores encerram a sessão sozinhos: reinício automático enquanto ativo.
   if(listening&&!answerPending&&!utterance&&!(window.speechSynthesis?.speaking||false))queueRestart(retryDelay);
  };
  return true;
 }
-if(!tv){if(location.protocol==='file:'){const banner=document.createElement('div');banner.style.cssText='background:#4b240f;color:#ffddb6;border:1px solid #e87c2a;border-radius:12px;padding:12px;margin:10px 0;font-size:14px';banner.textContent='⚠ Para usar a escuta contínua, publique o index.html no GitHub Pages e abra o endereço HTTPS; arquivos locais podem solicitar permissão repetidamente.';document.querySelector('.admin')?.prepend(banner);}refreshVoices();speechSynthesis.onvoiceschanged=refreshVoices;$('voiceSelect').onchange=()=>{localStorage.setItem('lia.voice',$('voiceSelect').value);$('voiceNotice').textContent='Voz escolhida. Clique em Testar voz para ouvir.'};setupRecognition();$('start').onclick=()=>{if(location.protocol==='file:'){$('msg').textContent='Abra o endereço HTTPS publicado no GitHub Pages e autorize o microfone para este site.';alert('Para habilitar o microfone com permissão persistente, publique este index.html no GitHub Pages e abra o endereço HTTPS.');return;}if(!recognition){setupRecognition();if(!recognition)return}listening=true;retryDelay=450;$('msg').textContent='Escuta contínua ligada. A LIA volta a ouvir após responder. Conceda a permissão permanente do microfone ao endereço HTTPS publicado.';startRecognition()};$('stop').onclick=()=>{clearDirection();listening=false;answerPending=false;recognitionStarting=false;clearTimeout(restartTimer);recognition?.abort();window.speechSynthesis?.cancel();utterance=null;show('idle','Microfone parado','Clique em Iniciar microfone no notebook')};$('openTv').onclick=()=>{const w=window.open(location.origin+location.pathname+'?tv=1','lia_tv');if(!w)$('msg').textContent='O navegador bloqueou a janela. Permita pop-ups ou abra o endereço com ?tv=1 em outra aba.'};$('testVoice').onclick=()=>say('Olá! Meu nome é '+assistantName+'. Estou pronta para responder perguntas.');$('exportUnknown').onclick=exportUnknown;$('clearUnknown').onclick=()=>{if(confirm('Apagar o histórico de perguntas sem resposta deste navegador? Esta ação não pode ser desfeita.')){localStorage.removeItem(UNKNOWN_KEY);updateUnknownInfo()}};updateUnknownInfo();
+// Verificação periódica de segurança: evita ficar preso em "Preparando nova pergunta".
+// Executada somente no notebook, que é quem controla o microfone.
+if(!tv)setInterval(()=>{
+ if(!listening||!recognition)return;
+ if(utterance||answerPending)return;
+ if(speechSynthesis.speaking)return;
+ // Se o navegador não disparar onstart nem onend, recria a sessão.
+ if(recognitionStarting&&recognitionStartAt&&Date.now()-recognitionStartAt>6500){
+  try{recognition.abort()}catch{}
+  recognitionStarting=false;recognitionActive=false;recognitionStartAt=0;
+  setupRecognition();queueRestart(600);return;
+ }
+ if(!recognitionStarting&&!recognitionActive){
+  show('listening','Retomando escuta...',$('subtitle').textContent);
+  queueRestart(250);
+ }
+},1800);
+if(!tv){if(location.protocol==='file:'){const banner=document.createElement('div');banner.style.cssText='background:#4b240f;color:#ffddb6;border:1px solid #e87c2a;border-radius:12px;padding:12px;margin:10px 0;font-size:14px';banner.textContent='⚠ Para usar a escuta contínua, publique o index.html no GitHub Pages e abra o endereço HTTPS; arquivos locais podem solicitar permissão repetidamente.';document.querySelector('.admin')?.prepend(banner);}refreshVoices();speechSynthesis.onvoiceschanged=refreshVoices;$('voiceSelect').onchange=()=>{localStorage.setItem('lia.voice',$('voiceSelect').value);$('voiceNotice').textContent='Voz escolhida. Clique em Testar voz para ouvir.'};setupRecognition();$('start').onclick=()=>{if(location.protocol==='file:'){$('msg').textContent='Abra o endereço HTTPS publicado no GitHub Pages e autorize o microfone para este site.';alert('Para habilitar o microfone com permissão persistente, publique este index.html no GitHub Pages e abra o endereço HTTPS.');return;}if(!recognition){setupRecognition();if(!recognition)return}listening=true;retryDelay=450;$('msg').textContent='Escuta contínua ligada. A LIA volta a ouvir após responder. Conceda a permissão permanente do microfone ao endereço HTTPS publicado.';startRecognition()};$('stop').onclick=()=>{clearDirection();listening=false;answerPending=false;recognitionStarting=false;clearTimeout(restartTimer);clearTimeout(voiceSafetyTimer);recognition?.abort();window.speechSynthesis?.cancel();utterance=null;show('idle','Microfone parado','Clique em Iniciar microfone no notebook')};$('openTv').onclick=()=>{const w=window.open(location.origin+location.pathname+'?tv=1','lia_tv');if(!w)$('msg').textContent='O navegador bloqueou a janela. Permita pop-ups ou abra o endereço com ?tv=1 em outra aba.'};$('testVoice').onclick=()=>say('Olá! Meu nome é '+assistantName+'. Estou pronta para responder perguntas.');$('exportUnknown').onclick=exportUnknown;$('clearUnknown').onclick=()=>{if(confirm('Apagar o histórico de perguntas sem resposta deste navegador? Esta ação não pode ser desfeita.')){localStorage.removeItem(UNKNOWN_KEY);updateUnknownInfo()}};updateUnknownInfo();
 }
 function validate(v){if(!Array.isArray(v)||!v.every(e=>e&&Array.isArray(e.q)&&e.q.length&&e.q.every(s=>typeof s==='string'&&s.trim())&&((typeof e.a==='string'&&e.a.trim())||(Array.isArray(e.a)&&e.a.length>0&&e.a.every(a=>typeof a==='string'&&a.trim())))))return null;return v}
 </script>
