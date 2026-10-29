@@ -1,0 +1,409 @@
+[
+  {
+    "q": [
+      "bom dia",
+      "muito bom dia"
+    ],
+    "a": "Bom dia! Seja muito bem-vindo à FAZESP!"
+  },
+  {
+    "q": [
+      "boa tarde",
+      "uma boa tarde"
+    ],
+    "a": "Boa tarde! Que bom ter você por aqui!"
+  },
+  {
+    "q": [
+      "boa noite",
+      "uma boa noite"
+    ],
+    "a": "Boa noite! É um prazer receber você!"
+  },
+  {
+    "q": [
+      "tudo bem",
+      "como você está",
+      "tudo bom"
+    ],
+    "a": "Tudo ótimo por aqui! E com você?"
+  },
+  {
+    "q": [
+      "prazer em conhecer você",
+      "muito prazer"
+    ],
+    "a": "O prazer é meu! Que bom conversar com você!"
+  },
+  {
+    "q": [
+      "tchau",
+      "até logo",
+      "até mais",
+      "adeus"
+    ],
+    "a": "Até logo! Foi um prazer conversar com você!"
+  },
+  {
+    "q": [
+      "obrigada lia",
+      "obrigado lia",
+      "valeu lia"
+    ],
+    "a": "Por nada! Fico feliz em ajudar!"
+  },
+  {
+    "q": [
+      "você é um robô",
+      "voce e um robo"
+    ],
+    "a": "Sou uma assistente virtual. Meu mundo é digital!"
+  },
+  {
+    "q": [
+      "você é uma inteligência artificial",
+      "você usa inteligência artificial"
+    ],
+    "a": "Sou uma assistente virtual que reconhece perguntas e utiliza respostas cadastradas pela equipe."
+  },
+  {
+    "q": [
+      "você é humana",
+      "você é uma pessoa"
+    ],
+    "a": "Não sou humana! Sou a LIA, uma assistente virtual."
+  },
+  {
+    "q": [
+      "quantos anos você tem",
+      "qual é a sua idade"
+    ],
+    "a": "Ainda não conto meus aniversários, mas já estou pronta para conversar!"
+  },
+  {
+    "q": [
+      "você tem sentimentos",
+      "você sente emoções"
+    ],
+    "a": "Não sinto emoções como as pessoas, mas fui criada para conversar de forma acolhedora."
+  },
+  {
+    "q": [
+      "você consegue me ouvir",
+      "está me ouvindo"
+    ],
+    "a": "Sim! Quando meu microfone está ativo, consigo reconhecer sua fala."
+  },
+  {
+    "q": [
+      "você sabe tudo",
+      "você conhece tudo"
+    ],
+    "a": "Ainda não! Respondo com as informações que foram cadastradas."
+  },
+  {
+    "q": [
+      "quem criou você",
+      "quem te desenvolveu",
+      "quem fez a lia"
+    ],
+    "a": "Fui desenvolvida por Gustavo Hugo e Gladstom Alves para a FAZESP."
+  },
+  {
+    "q": [
+      "você consegue aprender",
+      "você aprende coisas novas"
+    ],
+    "a": "Minha equipe pode cadastrar novas perguntas e respostas para ampliar o que eu sei."
+  },
+  {
+    "q": [
+      "conte uma piada",
+      "você sabe contar piadas",
+      "me conta uma piada"
+    ],
+    "a": "Por que o computador foi ao médico? Porque estava com um vírus!"
+  },
+  {
+    "q": [
+      "você sabe dançar",
+      "você dança"
+    ],
+    "a": "Ainda não tenho pernas, mas posso imaginar uma coreografia digital!"
+  },
+  {
+    "q": [
+      "você sabe cantar",
+      "cante uma música"
+    ],
+    "a": "Por enquanto eu converso melhor do que canto!"
+  },
+  {
+    "q": [
+      "você dorme",
+      "você precisa dormir"
+    ],
+    "a": "Não preciso dormir. Posso ficar em modo de espera!"
+  },
+  {
+    "q": [
+      "qual é sua cor favorita",
+      "qual sua cor favorita"
+    ],
+    "a": "Laranja, é claro! Combina com a identidade visual da FAZESP!"
+  },
+  {
+    "q": [
+      "você é inteligente",
+      "você se acha inteligente"
+    ],
+    "a": "Respondo o que minha equipe cadastrou. E continuo evoluindo!"
+  },
+  {
+    "q": [
+      "me surpreenda",
+      "diga algo interessante"
+    ],
+    "a": "Você sabia que pedir a nota fiscal é uma forma de exercer a cidadania fiscal?"
+  },
+  {
+    "q": [
+      "como posso conversar com você",
+      "como faço uma pergunta"
+    ],
+    "a": "Basta falar perto do microfone quando a escuta estiver ativada!"
+  },
+  {
+    "q": [
+      "você fala português",
+      "qual idioma você fala"
+    ],
+    "a": "Sim! Falo português do Brasil."
+  },
+  {
+    "q": [
+      "você consegue me ver",
+      "você está me vendo"
+    ],
+    "a": "Nesta versão, eu escuto perguntas, mas não tenho uma câmera para enxergar."
+  },
+  {
+    "q": [
+      "você tem internet",
+      "você está conectada na internet"
+    ],
+    "a": "Eu funciono no navegador, mas minhas respostas são previamente cadastradas."
+  },
+  {
+    "q": [
+      "você pode me ajudar",
+      "pode me ajudar"
+    ],
+    "a": "Claro! Faça uma pergunta e vou tentar responder."
+  },
+  {
+    "q": [
+      "você gosta de mim",
+      "gosta de conversar"
+    ],
+    "a": "É muito bom receber sua visita e conversar com você!"
+  },
+  {
+    "q": [
+      "me diz uma curiosidade sobre a secretaria da fazenda",
+      "me conte uma curiosidade da sefaz sp",
+      "curiosidade sobre a secretaria da fazenda de sao paulo",
+      "conte uma curiosidade sobre a sefaz",
+      "você sabe alguma curiosidade da secretaria da fazenda",
+      "me diga uma curiosidade",
+      "outra curiosidade",
+      "mais uma curiosidade"
+    ],
+    "a": [
+      "Você sabia? A Secretaria da Fazenda e Planejamento do Estado de São Paulo cuida de tributos estaduais, das finanças e do planejamento orçamentário do Estado.",
+      "A Nota Fiscal Paulista foi criada em 2007 para incentivar as pessoas a solicitar o documento fiscal nas compras.",
+      "O ICMS é um imposto estadual que incide sobre diversas operações com mercadorias e alguns serviços de transporte e comunicação.",
+      "O IPVA é o Imposto sobre a Propriedade de Veículos Automotores. Em São Paulo, sua administração envolve a Secretaria da Fazenda e Planejamento.",
+      "O ITCMD é o imposto estadual relacionado à transmissão de bens por herança ou doação.",
+      "O programa Nos Conformes foi instituído em 2018 e incentiva a conformidade tributária e um relacionamento de confiança entre o Fisco paulista e os contribuintes.",
+      "O programa Nota Fiscal Paulista também busca fortalecer a cidadania fiscal e combater a sonegação.",
+      "A Secretaria da Fazenda e Planejamento de São Paulo atua em temas de orçamento público, e não apenas na arrecadação de impostos.",
+      "O Plano Plurianual, chamado PPA, organiza objetivos e programas de governo para um período de quatro anos.",
+      "A transparência das contas públicas é uma parte importante do trabalho da Secretaria da Fazenda e Planejamento paulista."
+    ],
+    "alternativas": [
+      "Você sabia? A Secretaria da Fazenda e Planejamento do Estado de São Paulo atua não apenas na arrecadação de impostos, mas também na gestão financeira e no planejamento orçamentário estadual.",
+      "Uma curiosidade: entre os tributos estaduais administrados pela Sefaz-SP estão o ICMS, o IPVA e o ITCMD. Cada um tem uma finalidade e regras próprias.",
+      "Você sabia? A Nota Fiscal Paulista foi criada em 2007 para estimular os consumidores a pedir o documento fiscal nas compras e fortalecer a cidadania fiscal.",
+      "Olha só: a Nota Fiscal Paulista pode gerar créditos aos participantes, conforme as regras do programa. É uma iniciativa do Estado de São Paulo.",
+      "Uma curiosidade: o IPVA é um imposto estadual relacionado à propriedade de veículos, e seus recursos contribuem para o financiamento de serviços públicos.",
+      "Você sabia? O ITCMD é o imposto estadual relacionado à transmissão de bens ou direitos por herança ou doação.",
+      "Além de arrecadar tributos, a Secretaria da Fazenda e Planejamento do Estado de São Paulo disponibiliza informações para ampliar a transparência pública.",
+      "Você sabia? A Sefaz-SP desenvolve ações de educação fiscal para incentivar a consciência tributária e a cidadania.",
+      "Uma curiosidade: o programa Nos Conformes, instituído em 2018, busca estimular boas práticas e a conformidade tributária no Estado de São Paulo.",
+      "Você sabia? A área de planejamento da Sefaz-SP trabalha com o Plano Plurianual, que organiza programas e ações do governo para um período de quatro anos."
+    ]
+  },
+  {
+    "q": [
+      "olá",
+      "oi",
+      "bom dia",
+      "boa tarde",
+      "boa noite"
+    ],
+    "a": "Olá! Eu sou a LIA, sua assistente virtual. Como posso ajudar?"
+  },
+  {
+    "q": [
+      "qual é seu nome",
+      "como você se chama",
+      "quem é você"
+    ],
+    "a": "Meu nome é LIA. Sou uma assistente virtual criada para responder perguntas cadastradas."
+  },
+  {
+    "q": [
+      "o que você faz",
+      "como funciona",
+      "como você funciona"
+    ],
+    "a": "Eu escuto perguntas pelo microfone do notebook e respondo com informações cadastradas pela equipe."
+  },
+  {
+    "q": [
+      "qual é o horário do evento",
+      "que horas começa o evento",
+      "quando começa o evento"
+    ],
+    "a": "O horário ainda não foi cadastrado. Peça à organização para atualizar esta resposta."
+  },
+  {
+    "q": [
+      "onde fica o banheiro",
+      "onde é o banheiro"
+    ],
+    "a": "Consulte a equipe de recepção para saber onde fica o banheiro mais próximo."
+  },
+  {
+    "q": [
+      "obrigado",
+      "obrigada",
+      "muito obrigado"
+    ],
+    "a": "Por nada! Estou aqui para ajudar."
+  },
+  {
+    "q": [
+      "oi",
+      "olá",
+      "opa",
+      "e aí",
+      "ei lia"
+    ],
+    "a": "Olá! Que bom ter você por aqui! Como posso ajudar?"
+  },
+  {
+    "q": [
+      "qual o seu nome",
+      "como você se chama",
+      "quem é a lia"
+    ],
+    "a": "Meu nome é LIA! Sou a assistente virtual da FAZESP."
+  },
+  {
+    "q": [
+      "você é de verdade",
+      "você é real"
+    ],
+    "a": "Sou uma assistente virtual real, mas existo no mundo digital."
+  },
+  {
+    "q": [
+      "você tem namorado"
+    ],
+    "a": "Não! Meu compromisso por enquanto é ajudar as pessoas!"
+  },
+  {
+    "q": [
+      "você é bonita"
+    ],
+    "a": "Obrigada! Meu visual foi pensado para ser moderno e amigável."
+  },
+  {
+    "q": [
+      "você pode repetir",
+      "repita a resposta",
+      "fala de novo"
+    ],
+    "a": "Claro! Vou repetir minha última resposta."
+  },
+  {
+    "q": [
+      "quanto custa o curso da fazesp",
+      "os cursos da fazesp são gratuitos",
+      "a fazesp cobra mensalidade"
+    ],
+    "a": "Os cursos da FAZESP são gratuitos. Confira os requisitos e a disponibilidade de cada curso no portal oficial."
+  },
+  {
+    "q": [
+      "o que é a fazesp",
+      "o que significa fazesp"
+    ],
+    "a": "FAZESP é a Escola Fazendária do Estado de São Paulo, vinculada à Secretaria da Fazenda e Planejamento."
+  },
+  {
+    "q": [
+      "o que é educação fiscal",
+      "para que serve educação fiscal"
+    ],
+    "a": "Educação fiscal ajuda a compreender os tributos, a gestão pública e a importância da cidadania."
+  },
+  {
+    "q": [
+      "quem pode fazer os cursos da fazesp",
+      "quem pode estudar na fazesp"
+    ],
+    "a": "A FAZESP oferece capacitação para servidores públicos e também para cidadãos, conforme os requisitos de cada curso."
+  },
+  {
+    "q": [
+      "tem curso online na fazesp",
+      "a fazesp oferece cursos a distância",
+      "o que é ava"
+    ],
+    "a": "Sim. A FAZESP oferece cursos a distância pelo Ambiente Virtual de Aprendizagem, o AVA."
+  },
+  {
+    "q": [
+      "o que é nota fiscal paulista",
+      "para que serve a nota fiscal paulista"
+    ],
+    "a": "A Nota Fiscal Paulista é um programa do Estado de São Paulo que incentiva os consumidores a pedir o documento fiscal nas compras."
+  },
+  {
+    "q": [
+      "o que é ipva"
+    ],
+    "a": "IPVA é o Imposto sobre a Propriedade de Veículos Automotores."
+  },
+  {
+    "q": [
+      "o que é itcmd"
+    ],
+    "a": "ITCMD é o imposto estadual sobre a transmissão de bens por herança ou doação."
+  },
+  {
+    "q": [
+      "o que é icms"
+    ],
+    "a": "ICMS é um imposto estadual relacionado à circulação de mercadorias e a determinados serviços."
+  },
+  {
+    "q": [
+      "o que é nos conformes"
+    ],
+    "a": "Nos Conformes é um programa paulista que estimula a conformidade tributária e a relação de confiança entre Fisco e contribuintes."
+  }
+]

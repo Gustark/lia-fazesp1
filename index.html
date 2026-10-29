@@ -186,15 +186,10 @@ body{background:#101116!important;color:#f7f5f2!important}
 <aside class="admin" id="adminPanel"><div class="admin-header"><span class="admin-symbol">⚙</span><h2>Painel de controle</h2></div><p>Conecte a TV por HDMI, abra a tela da TV em uma segunda janela e arraste-a para o monitor da TV. O microfone fica nesta janela do notebook.</p>
  <div class="actions"><button id="openTv">Abrir tela da TV</button><button id="start" class="secondary">🎙️ Ativar escuta contínua</button><button id="stop" class="secondary">Parar</button></div>
  <div class="message" id="msg"></div>
- <label class="field" for="question">Testar uma pergunta digitada</label><input id="question" placeholder="Ex.: Qual é o horário do evento?"><div class="actions"><button id="ask">Responder pergunta</button><button id="reset" class="secondary">Limpar tela</button></div>
  <label class="field" for="name">Nome do assistente</label><input id="name" placeholder="LIA"><div class="actions"><button id="saveName" class="secondary">Salvar nome</button><button id="testVoice" class="secondary">Testar voz</button></div>
  <label class="field" for="voiceSelect">Voz da LIA (feminina · português do Brasil)</label><select id="voiceSelect" aria-label="Selecionar voz da LIA"><option value="">Buscando vozes do Windows...</option></select><p class="voice-tip" id="voiceNotice">A disponibilidade de vozes femininas depende das vozes instaladas no Windows e do navegador.</p>
- <h3>Respostas cadastradas</h3><p>Uma pergunta por linha. Escreva variações para ajudar o sistema a reconhecer a mesma intenção.</p>
- <label class="field" for="triggers">Perguntas alternativas</label><textarea id="triggers" rows="3" placeholder="Qual é o horário?&#10;Quando começa?"></textarea>
- <label class="field" for="answer">Resposta que a LIA deve falar</label><textarea id="answer" rows="3" placeholder="O evento começa às nove horas."></textarea>
- <div class="actions"><button id="save">Adicionar resposta</button><button id="cancel" class="secondary">Cancelar edição</button></div><div id="items"></div>
- <div class="actions"><button id="export" class="secondary">Exportar respostas</button><button id="importBtn" class="secondary">Importar JSON</button><input type="file" id="import" accept="application/json,.json" hidden></div>
- <p><strong>Atenção:</strong> o reconhecimento de voz do Chrome/Edge pode utilizar serviços online do navegador; por isso, o reconhecimento por microfone pode depender de internet. Para usar no GitHub Pages, acesse o endereço HTTPS publicado, permita o microfone para o site (não apenas desta vez) e não abra o HTML como arquivo file://. O navegador pode interromper a captura por segurança; o sistema tentará reconectar. As respostas são locais e ficam salvas neste navegador.</p>
+ <h3>Base de conhecimento</h3><p>As perguntas e respostas são carregadas do arquivo <code>respostas.json</code> publicado junto com a página. Para atualizar o conteúdo, edite esse arquivo no GitHub.</p><div class="message" id="knowledgeStatus" role="status"></div>
+ <p><strong>Atenção:</strong> o reconhecimento de voz do Chrome/Edge pode utilizar serviços online do navegador; por isso, o reconhecimento por microfone pode depender de internet. Para usar no GitHub Pages, acesse o endereço HTTPS publicado, permita o microfone para o site (não apenas desta vez) e não abra o HTML como arquivo file://. O navegador pode interromper a captura por segurança; o sistema tentará reconectar. As respostas são carregadas do arquivo respostas.json hospedado com a página.</p>
 </aside>
 </div>
 <script>
@@ -216,15 +211,8 @@ if(!tv){
  togglePanel.addEventListener('click',()=>setPanelHidden(!document.body.classList.contains('panel-hidden')));
 }
 
-const DEFAULTS=[
- {q:['olá','oi','bom dia','boa tarde','boa noite'],a:'Olá! Eu sou a LIA, sua assistente virtual. Como posso ajudar?'},
- {q:['qual é seu nome','como você se chama','quem é você'],a:'Meu nome é LIA. Sou uma assistente virtual criada para responder perguntas cadastradas.'},
- {q:['o que você faz','como funciona','como você funciona'],a:'Eu escuto perguntas pelo microfone do notebook e respondo com informações cadastradas pela equipe.'},
- {q:['qual é o horário do evento','que horas começa o evento','quando começa o evento'],a:'O horário ainda não foi cadastrado. Peça à organização para atualizar esta resposta.'},
- {q:['onde fica o banheiro','onde é o banheiro'],a:'Consulte a equipe de recepção para saber onde fica o banheiro mais próximo.'},
- {q:['obrigado','obrigada','muito obrigado'],a:'Por nada! Estou aqui para ajudar.'}
-];
-let entries,assistantName,recognition=null,listening=false,editing=-1,utterance=null,staleRestart=false;
+const DEFAULTS=[];
+let entries=[],assistantName,recognition=null,listening=false,utterance=null,staleRestart=false,lastSpokenAnswer='';
 let recognitionActive=false,recognitionStarting=false,answerPending=false,restartTimer=null,retryDelay=450;
 
 let suggestionIndex=-1,suggestionTimer=null,suggestionDismissed=false,latestState='idle';
@@ -245,8 +233,7 @@ $('hideSuggestion').addEventListener('click',()=>{suggestionDismissed=true;$('qu
 // Alternância tranquila, sem apagar ou modificar a legenda.
 suggestionTimer=setInterval(updateSuggestion,4000);
 
-try{entries=JSON.parse(localStorage.getItem('lia.entries'))||DEFAULTS}catch{entries=DEFAULTS}
-entries=validate(entries)||DEFAULTS;assistantName=localStorage.getItem('lia.name')||'LIA';
+assistantName=localStorage.getItem('lia.name')||'LIA';
 const channel='BroadcastChannel' in window?new BroadcastChannel('lia_assistente_v1'):null;
 function send(data){const msg={...data,t:Date.now()};if(channel)channel.postMessage(msg);try{localStorage.setItem('lia.sync',JSON.stringify(msg))}catch{}}
 function screen(state,status,subtitle){latestState=state;const tip=$('questionSuggestion');if(tip){tip.classList.toggle('visible',state==='idle'&&!suggestionDismissed&&!!$('questionSuggestionText').textContent)}$('robot').classList.remove('speaking','listening');if(state==='speaking'||state==='listening')$('robot').classList.add(state);$('status').textContent=status;$('subtitle').textContent=subtitle;$('mode').textContent=state==='speaking'?'Respondendo':state==='listening'?'Ouvindo':'Pronta para conversar'}
@@ -254,12 +241,40 @@ function show(state,status,subtitle){screen(state,status,subtitle);send({kind:'s
 function rename(name){assistantName=name;$('liaGreeting').textContent='Olá, eu sou a '+name+'! Estou aqui para ajudar.';if(!tv)send({kind:'name',name})}
 function incoming(data){if(!data)return;if(data.kind==='screen')screen(data.state,data.status,data.subtitle);if(data.kind==='ready'&&!tv){send({kind:'screen',state:$('robot').classList.contains('speaking')?'speaking':$('robot').classList.contains('listening')?'listening':'idle',status:$('status').textContent,subtitle:$('subtitle').textContent});send({kind:'name',name:assistantName});send({kind:'suggestions',entries})}if(data.kind==='suggestions'){const v=validate(data.entries);if(v){entries=v;refreshSuggestions()}}if(data.kind==='name'){$('liaGreeting').textContent='Sua assistente virtual.';assistantName=data.name}}
 if(channel)channel.onmessage=e=>incoming(e.data);window.addEventListener('storage',e=>{if(e.key==='lia.sync'){try{incoming(JSON.parse(e.newValue))}catch{}}});
-rename(assistantName);refreshSuggestions();
+rename(assistantName);refreshSuggestions();loadKnowledge();
 if(tv){send({kind:'ready'});window.addEventListener('click',()=>{document.documentElement.requestFullscreen?.().catch(()=>{})},{once:true})}
 function normalize(s){return String(s).toLocaleLowerCase('pt-BR').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim()}
 function tokens(s){return normalize(s).split(' ').filter(w=>w.length>2&&!['voce','qual','para','como','esse','essa','aqui','sobre','pode','quero'].includes(w))}
 function score(question,trigger){const a=normalize(question),b=normalize(trigger);if(!a||!b)return 0;if(a===b)return 100;if(a.includes(b)&&b.length>=8)return 87;if(b.includes(a)&&a.length>=8)return 82;const x=tokens(a),y=tokens(b);if(!x.length||!y.length)return 0;const common=x.filter(t=>y.includes(t)).length;return 70*common/Math.max(x.length,y.length)}
-function findAnswer(query){let best={score:0,answer:null};for(const e of entries)for(const q of e.q){const s=score(query,q);if(s>best.score)best={score:s,answer:e.a}}return best.score>=58?best.answer:null}
+let lastTrivia=-1;
+function findAnswer(query){
+ const norm=normalize(query);
+ if(['repita a resposta','repete','fala de novo','pode repetir','repita'].some(v=>norm===v)&&lastSpokenAnswer)return lastSpokenAnswer;
+ let best={score:0,entry:null};
+ for(const e of entries)for(const q of e.q){const s=score(query,q);if(s>best.score)best={score:s,entry:e}}
+ if(best.score<58||!best.entry)return null;
+ const a=best.entry.a;
+ if(!Array.isArray(a))return a;
+ if(!a.length)return null;
+ let i=Math.floor(Math.random()*a.length);
+ if(a.length>1&&i===lastTrivia)i=(i+1)%a.length;
+ lastTrivia=i;return a[i];
+}
+async function loadKnowledge(){
+ try{
+  const response=await fetch('./respostas.json',{cache:'no-store'});
+  if(!response.ok)throw Error('HTTP '+response.status);
+  const json=await response.json();
+  const valid=validate(json);
+  if(!valid)throw Error('O formato do JSON é inválido');
+  entries=valid;refreshSuggestions();send({kind:'suggestions',entries});
+  if($('knowledgeStatus'))$('knowledgeStatus').textContent=entries.length+' grupos de respostas carregados do JSON.';
+ }catch(e){
+  entries=[];if($('knowledgeStatus'))$('knowledgeStatus').textContent='Não foi possível carregar respostas.json: '+e.message;
+  if(!tv)$('msg').textContent='Base não carregada. Publique respostas.json ao lado do index.html.';
+ }
+}
+
 const femininePatterns=/maria|francisca|heloisa|hel[oô]isa|luciana|fernanda|leticia|vit[oó]ria|vitoria|camila|brenda|female|feminina|mulher|woman|thalia|thalita|giovana|marcela|isabela|google portugu[eê]s do brasil/i;
 const masculinePatterns=/daniel|antonio|ant[oô]nio|ricardo|felipe|male|masculina|homem|man|paulo/i;
 function availablePtVoices(){return speechSynthesis.getVoices().filter(v=>/^pt(-|$)/i.test(v.lang))}
@@ -271,6 +286,7 @@ function queueRestart(ms=450){
  restartTimer=setTimeout(()=>startRecognition(),ms);
 }
 function say(text){
+ lastSpokenAnswer=text;
  answerPending=true;
  clearTimeout(restartTimer);
  if(recognitionActive||recognitionStarting){try{recognition.stop()}catch{}}
@@ -338,12 +354,9 @@ function setupRecognition(){
  };
  return true;
 }
-if(!tv){if(location.protocol==='file:'){const banner=document.createElement('div');banner.style.cssText='background:#4b240f;color:#ffddb6;border:1px solid #e87c2a;border-radius:12px;padding:12px;margin:10px 0;font-size:14px';banner.textContent='⚠ Para usar a escuta contínua, publique o index.html no GitHub Pages e abra o endereço HTTPS; arquivos locais podem solicitar permissão repetidamente.';document.querySelector('.admin')?.prepend(banner);}refreshVoices();speechSynthesis.onvoiceschanged=refreshVoices;$('voiceSelect').onchange=()=>{localStorage.setItem('lia.voice',$('voiceSelect').value);$('voiceNotice').textContent='Voz escolhida. Clique em Testar voz para ouvir.'};setupRecognition();$('start').onclick=()=>{if(location.protocol==='file:'){$('msg').textContent='Abra o endereço HTTPS publicado no GitHub Pages e autorize o microfone para este site.';alert('Para habilitar o microfone com permissão persistente, publique este index.html no GitHub Pages e abra o endereço HTTPS.');return;}if(!recognition){setupRecognition();if(!recognition)return}listening=true;retryDelay=450;$('msg').textContent='Escuta contínua ligada. A LIA volta a ouvir após responder. Conceda a permissão permanente do microfone ao endereço HTTPS publicado.';startRecognition()};$('stop').onclick=()=>{listening=false;answerPending=false;recognitionStarting=false;clearTimeout(restartTimer);recognition?.abort();window.speechSynthesis?.cancel();utterance=null;show('idle','Microfone parado','Clique em Iniciar microfone no notebook')};$('ask').onclick=()=>processQuestion($('question').value);$('question').addEventListener('keydown',e=>{if(e.key==='Enter')processQuestion($('question').value)});$('reset').onclick=()=>{window.speechSynthesis?.cancel();show('idle','Aguardando sua pergunta','Como posso ajudar você?')};$('openTv').onclick=()=>{const w=window.open(location.origin+location.pathname+'?tv=1','lia_tv');if(!w)$('msg').textContent='O navegador bloqueou a janela. Permita pop-ups ou abra o endereço com ?tv=1 em outra aba.'};$('name').value=assistantName;$('saveName').onclick=()=>{const name=$('name').value.trim().slice(0,35);if(!name)return;localStorage.setItem('lia.name',name);rename(name)};$('testVoice').onclick=()=>say('Olá! Meu nome é '+assistantName+'. Estou pronta para responder perguntas.');
-function saveEntries(){localStorage.setItem('lia.entries',JSON.stringify(entries));render();refreshSuggestions();send({kind:'suggestions',entries})}
-function render(){const host=$('items');host.replaceChildren();entries.forEach((e,i)=>{const box=document.createElement('div');box.className='qa';const heading=document.createElement('strong');heading.textContent=e.q[0];const small=document.createElement('small');small.textContent=e.a;const edit=document.createElement('button');edit.textContent='Editar';edit.className='secondary';edit.onclick=()=>{$('triggers').value=e.q.join('\n');$('answer').value=e.a;editing=i;$('save').textContent='Salvar alteração';$('triggers').focus()};const del=document.createElement('button');del.textContent='Excluir';del.className='secondary';del.style.marginLeft='8px';del.onclick=()=>{if(confirm('Excluir esta resposta?')){entries.splice(i,1);saveEntries()}};box.append(heading,small,edit,del);host.append(box)})}
-function cancelEdit(){editing=-1;$('triggers').value='';$('answer').value='';$('save').textContent='Adicionar resposta'}
-$('cancel').onclick=cancelEdit;$('save').onclick=()=>{const q=$('triggers').value.split('\n').map(s=>s.trim()).filter(Boolean),a=$('answer').value.trim();if(!q.length||!a){$('msg').textContent='Preencha pelo menos uma pergunta e uma resposta.';return}if(editing>=0)entries[editing]={q,a};else entries.push({q,a});saveEntries();cancelEdit();$('msg').textContent='Resposta salva neste navegador.'};$('export').onclick=()=>{const blob=new Blob([JSON.stringify(entries,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='respostas-lia.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};$('importBtn').onclick=()=>$('import').click();$('import').onchange=async e=>{const file=e.target.files?.[0];if(!file)return;try{const result=validate(JSON.parse(await file.text()));if(!result)throw Error('Formato inválido');if(confirm('Substituir todas as respostas atuais pelas do arquivo?')){entries=result;saveEntries();$('msg').textContent='Importação concluída.'}}catch(err){$('msg').textContent='Falha ao importar: '+err.message}e.target.value=''};render()}
-function validate(v){if(!Array.isArray(v)||!v.every(e=>e&&Array.isArray(e.q)&&e.q.length&&e.q.every(s=>typeof s==='string'&&s.trim())&&typeof e.a==='string'&&e.a.trim()))return null;return v}
+if(!tv){if(location.protocol==='file:'){const banner=document.createElement('div');banner.style.cssText='background:#4b240f;color:#ffddb6;border:1px solid #e87c2a;border-radius:12px;padding:12px;margin:10px 0;font-size:14px';banner.textContent='⚠ Para usar a escuta contínua, publique o index.html no GitHub Pages e abra o endereço HTTPS; arquivos locais podem solicitar permissão repetidamente.';document.querySelector('.admin')?.prepend(banner);}refreshVoices();speechSynthesis.onvoiceschanged=refreshVoices;$('voiceSelect').onchange=()=>{localStorage.setItem('lia.voice',$('voiceSelect').value);$('voiceNotice').textContent='Voz escolhida. Clique em Testar voz para ouvir.'};setupRecognition();$('start').onclick=()=>{if(location.protocol==='file:'){$('msg').textContent='Abra o endereço HTTPS publicado no GitHub Pages e autorize o microfone para este site.';alert('Para habilitar o microfone com permissão persistente, publique este index.html no GitHub Pages e abra o endereço HTTPS.');return;}if(!recognition){setupRecognition();if(!recognition)return}listening=true;retryDelay=450;$('msg').textContent='Escuta contínua ligada. A LIA volta a ouvir após responder. Conceda a permissão permanente do microfone ao endereço HTTPS publicado.';startRecognition()};$('stop').onclick=()=>{listening=false;answerPending=false;recognitionStarting=false;clearTimeout(restartTimer);recognition?.abort();window.speechSynthesis?.cancel();utterance=null;show('idle','Microfone parado','Clique em Iniciar microfone no notebook')};$('openTv').onclick=()=>{const w=window.open(location.origin+location.pathname+'?tv=1','lia_tv');if(!w)$('msg').textContent='O navegador bloqueou a janela. Permita pop-ups ou abra o endereço com ?tv=1 em outra aba.'};$('name').value=assistantName;$('saveName').onclick=()=>{const name=$('name').value.trim().slice(0,35);if(!name)return;localStorage.setItem('lia.name',name);rename(name)};$('testVoice').onclick=()=>say('Olá! Meu nome é '+assistantName+'. Estou pronta para responder perguntas.');
+}
+function validate(v){if(!Array.isArray(v)||!v.every(e=>e&&Array.isArray(e.q)&&e.q.length&&e.q.every(s=>typeof s==='string'&&s.trim())&&((typeof e.a==='string'&&e.a.trim())||(Array.isArray(e.a)&&e.a.length>0&&e.a.every(a=>typeof a==='string'&&a.trim())))))return null;return v}
 </script>
 </body>
 </html>
