@@ -185,6 +185,12 @@ body{background:#101116!important;color:#f7f5f2!important}
 @media(max-width:820px){.lia-direction{left:auto;right:10px;top:49%;min-width:125px;max-width:155px;padding:10px}.lia-direction .dir-icon{font-size:65px}.lia-direction .dir-label{font-size:13px}}
 @media(max-width:510px){.lia-direction{right:7px;top:43%;min-width:110px;max-width:125px;padding:8px}.lia-direction .dir-icon{font-size:52px}.lia-direction .dir-step{font-size:10px}}
 @media(prefers-reduced-motion:reduce){.lia-direction .dir-icon,.lia-direction.active{animation:none}}
+
+/* LIA 2.0: microexpressões discretas, sem modificar o desenho original */
+.robot.confused .eye{animation:liaDoubt 1.15s ease-in-out 2}
+.robot.happy .eye{animation:liaHappy .8s ease-in-out 2}
+@keyframes liaDoubt{50%{transform:scaleY(.65) rotate(7deg)}}
+@keyframes liaHappy{50%{transform:scaleY(.70)}}
 </style>
 </head>
 <body>
@@ -239,7 +245,7 @@ function suggestionQuestions(){
 function updateSuggestion(){
  const box=$('questionSuggestion');if(!box)return;
  const items=suggestionQuestions();
- if(suggestionDismissed||latestState==='speaking'||latestState==='listening'||!items.length){box.classList.remove('visible');return}
+ if(suggestionDismissed||!items.length){box.classList.remove('visible');return}
  suggestionIndex=(suggestionIndex+1)%items.length;
  $('questionSuggestionText').textContent=items[suggestionIndex].replace(/^[a-záàâãéêíóôõúç]/i,c=>c.toLocaleUpperCase('pt-BR'))+( /[?!]$/.test(items[suggestionIndex])?'':'?');
  box.classList.add('visible');
@@ -270,7 +276,7 @@ function drawDirection(dir,step=0){
 }
 function clearDirection(broadcast=true){clearTimeout(directionTimer);currentDirection=null;$('liaDirection').classList.remove('active');if(broadcast&&!tv)send({kind:'direction',direction:null})}
 
-function screen(state,status,subtitle){latestState=state;const tip=$('questionSuggestion');if(tip){tip.classList.toggle('visible',state==='idle'&&!suggestionDismissed&&!!$('questionSuggestionText').textContent)}$('robot').classList.remove('speaking','listening');if(state==='speaking'||state==='listening')$('robot').classList.add(state);$('status').textContent=status;$('subtitle').textContent=subtitle;$('mode').textContent=state==='speaking'?'Respondendo':state==='listening'?'Ouvindo':'Pronta para conversar'}
+function screen(state,status,subtitle){latestState=state;const tip=$('questionSuggestion');if(tip){tip.classList.toggle('visible',!suggestionDismissed&&!!$('questionSuggestionText').textContent)}$('robot').classList.remove('speaking','listening');if(state==='speaking'||state==='listening')$('robot').classList.add(state);$('status').textContent=status;$('subtitle').textContent=subtitle;$('mode').textContent=state==='speaking'?'Respondendo':state==='listening'?'Ouvindo':'Pronta para conversar'}
 function show(state,status,subtitle){screen(state,status,subtitle);send({kind:'screen',state,status,subtitle})}
 function rename(){assistantName='LIA';$('liaGreeting').textContent='Sua assistente virtual.';if(!tv)send({kind:'name',name:'LIA'})}
 function incoming(data){if(!data)return;if(data.kind==='screen')screen(data.state,data.status,data.subtitle);if(data.kind==='ready'&&!tv){send({kind:'screen',state:$('robot').classList.contains('speaking')?'speaking':$('robot').classList.contains('listening')?'listening':'idle',status:$('status').textContent,subtitle:$('subtitle').textContent});send({kind:'name',name:assistantName});send({kind:'suggestions',entries});send({kind:'direction',direction:currentDirection,step:directionStep})}if(data.kind==='suggestions'){const v=validate(data.entries);if(v){entries=v;refreshSuggestions()}}if(data.kind==='direction')drawDirection(data.direction,data.step||0);if(data.kind==='name'){$('liaGreeting').textContent='Sua assistente virtual.';assistantName='LIA'}}
@@ -301,19 +307,86 @@ function score(question,trigger){
  return Math.max(0,result);
 }
 let lastTrivia=-1;
-function findAnswer(query){
- const norm=normalize(query);
- if(['repita a resposta','repete','fala de novo','pode repetir','repita'].some(v=>norm===v)&&lastSpokenAnswer)return {text:lastSpokenAnswer,direction:null};
- let best={score:0,entry:null};
- for(const e of entries)for(const q of e.q){const s=score(query,q);if(s>best.score)best={score:s,entry:e}}
- if(best.score<58||!best.entry)return null;
- const a=best.entry.a;
- if(!Array.isArray(a))return {text:a,direction:best.entry.direcao||null};
- if(!a.length)return null;
- let i=Math.floor(Math.random()*a.length);
- if(a.length>1&&i===lastTrivia)i=(i+1)%a.length;
- lastTrivia=i;return {text:a[i],direction:best.entry.direcao||null};
+let lastResponseIndexByGroup=new Map(), lastConversation=null, speechRateOverride=null, lastIntent=null, pendingClarification=null;
+const STOPWORDS=new Set(['lia','por','favor','me','diz','meu','minha','poderia','pode','voce','você']);
+function cleanCommand(s){return normalize(s).split(' ').filter(w=>!STOPWORDS.has(w)).join(' ')}
+function textForSpeech(text){return String(text).replace(/\bFAZESP\b/gi,'FÁZESP')}
+function rememberConversation(text,direction,entry){
+ if(!entry)return;
+ const str=(entry.q||[]).join(' ').toLowerCase();
+ let topic=null;
+ if(/audit[oó]rio/.test(str))topic='auditorio';
+ else if(/banheiro|sanit[aá]rio/.test(str))topic='banheiro';
+ else if(/sala|171|178/.test(str))topic='sala';
+ lastConversation={text,direction,topic,time:Date.now()};
 }
+function contextualQuestion(q){
+ const n=cleanCommand(q);
+ if(!lastConversation||Date.now()-lastConversation.time>90000)return q;
+ if(lastConversation.topic==='auditório'||lastConversation.topic==='auditorio'){
+  if(/^(e )?(o )?pequeno( auditorio)?$/.test(n))return 'onde fica o pequeno auditorio';
+  if(/^(e )?(o )?grande( auditorio)?$/.test(n))return 'onde fica o grande auditorio';
+ }
+ if(lastConversation.topic==='banheiro'){
+  if(/^(e )?(o )?feminino$/.test(n))return 'onde fica o banheiro feminino';
+  if(/^(e )?(o )?masculino$/.test(n))return 'onde fica o banheiro masculino';
+ }
+ return q;
+}
+function specialCommand(q){
+ const n=cleanCommand(q);
+ if(pendingClarification==='auditorio' && /^(o )?(grande|pequeno)$/.test(n)){pendingClarification=null;return findAnswer('onde fica o '+n.replace(/^o /,'')+' auditorio')}
+ if(pendingClarification==='sala' && /^\d{3}$/.test(n)){pendingClarification=null;return findAnswer('onde fica a sala '+n)}
+ if(/^(repete|repita|repete a resposta|repita a resposta|fala de novo|fala novamente|repetir|pode repetir|repete isso|repita por favor|repete por favor|pode repetir a ultima resposta)$/.test(n)){
+  return {text:lastConversation?.text||lastSpokenAnswer||'Ainda não tenho uma resposta para repetir.',direction:lastConversation?.direction||null,kind:'repeat'};
+ }
+ if(/^(fala mais devagar|fale mais devagar|mais devagar|fala devagar)$/.test(n)){
+  speechRateOverride=.83;return {text:'Claro! Vou falar um pouco mais devagar.',direction:null,kind:'speed'};
+ }
+ if(/^(fale mais rapido|fala mais rapido|mais rapido)$/.test(n)){
+  speechRateOverride=1.04;return {text:'Certo! Vou falar um pouco mais rápido.',direction:null,kind:'speed'};
+ }
+ if(/^(nao entendi|nao entendi sua resposta|pode explicar melhor|explique melhor|como assim)$/.test(n)){
+  if(lastConversation?.text){return {text:'Vou explicar novamente. '+lastConversation.text,direction:lastConversation.direction,kind:'explain'}}
+  return {text:'Claro! Pode me dizer qual assunto gostaria que eu explicasse?',direction:null,kind:'explain'};
+ }
+ if(/^(onde fica o auditorio|onde e o auditorio|qual auditorio|auditorio)$/.test(n)){pendingClarification='auditorio';return {text:'Você procura o Grande Auditório ou o Pequeno Auditório?',direction:null,kind:'clarify'}}
+ if(/^(onde fica a sala|qual sala|onde e a sala)$/.test(n)){pendingClarification='sala';return {text:'Qual é o número ou o nome da sala que você procura?',direction:null,kind:'clarify'}}
+ return null;
+}
+
+function findAnswer(query){
+ const command=specialCommand(query);
+ if(command)return command;
+ const resolved=contextualQuestion(query);
+ let best={score:0,entry:null},second={score:0,entry:null};
+ for(const e of entries)for(const q of e.q){
+  const s=score(resolved,q);
+  if(s>best.score){if(e!==best.entry)second=best;best={score:s,entry:e}}
+  else if(e!==best.entry&&s>second.score)second={score:s,entry:e};
+ }
+ if(best.score<62||!best.entry)return null;
+ // Só solicitar esclarecimento quando as duas respostas forem distintas e próximas.
+ if(second.entry&&second.entry!==best.entry&&second.score>=69&&best.score-second.score<=3&&best.score<95){
+  const a=(best.entry.q||[]).join(' '),b=(second.entry.q||[]).join(' ');
+  if(/audit[oó]rio/i.test(a+b)){pendingClarification='auditorio';return {text:'Você procura o Grande Auditório ou o Pequeno Auditório?',direction:null,kind:'clarify'}}
+ }
+ const a=best.entry.a;
+ let chosen;
+ if(!Array.isArray(a))chosen=a;
+ else {
+  if(!a.length)return null;
+  let i=Math.floor(Math.random()*a.length);
+  const prev=lastResponseIndexByGroup.get(best.entry);
+  if(a.length>1&&prev===i)i=(i+1)%a.length;
+  lastResponseIndexByGroup.set(best.entry,i);
+  chosen=a[i];
+ }
+ const out={text:chosen,direction:best.entry.direcao||null,entry:best.entry};
+ rememberConversation(out.text,out.direction,best.entry);
+ return out;
+}
+
 async function loadKnowledge(){
  try{
   const response=await fetch('./respostas.json',{cache:'no-store'});
@@ -350,8 +423,8 @@ function say(text,direction=null){
   answerPending=false;show('idle','Resposta exibida',text);queueRestart();return;
  }
  speechSynthesis.cancel();
- const u=new SpeechSynthesisUtterance(text);utterance=u;
- u.lang='pt-BR';u.rate=.96;u.pitch=1.06;
+ const u=new SpeechSynthesisUtterance(textForSpeech(text));utterance=u;
+ u.lang='pt-BR';u.rate=speechRateOverride??.96;u.pitch=1.06;
  const voices=availablePtVoices();const preferred=localStorage.getItem('lia.voice');
  u.voice=voices.find(v=>v.voiceURI===preferred)||voices.sort((a,b)=>voiceScore(b)-voiceScore(a))[0]||null;
  u.onstart=()=>show('speaking','Respondendo...',text);
@@ -365,7 +438,7 @@ function say(text,direction=null){
  speechSynthesis.speak(u);
 }
 const UNKNOWN_KEY='lia.perguntasSemResposta.v1';
-const UNKNOWN_REPLY='Desculpe, eu ainda não aprendi sobre essa informação, mas a equipe da FAZESP vai me ensinar! Você pode tentar fazer outra pergunta.';
+const UNKNOWN_REPLY='Desculpe, ainda não aprendi sobre esse assunto, mas a equipe da FAZESP vai me ensinar. Você pode tentar perguntar de outro jeito?';
 function readUnknown(){try{const v=JSON.parse(localStorage.getItem(UNKNOWN_KEY)||'[]');return Array.isArray(v)?v:[]}catch{return []}}
 function updateUnknownInfo(){const el=$('unknownInfo');if(el){const a=readUnknown();el.textContent=a.length?`${a.length} pergunta(s) diferente(s) sem resposta, neste navegador.`:'Nenhuma pergunta sem resposta registrada neste navegador.'}}
 function trackUnknown(question){
@@ -387,7 +460,7 @@ function exportUnknown(){
 function processQuestion(q){
  q=q.trim();if(!q)return;show('idle','Pergunta recebida',q);
  const answer=findAnswer(q);
- if(answer===null){trackUnknown(q);say(UNKNOWN_REPLY)}else say(answer.text,answer.direction);
+ if(answer===null){trackUnknown(q);$('robot').classList.add('confused');setTimeout(()=>$('robot').classList.remove('confused'),2000);say(UNKNOWN_REPLY)}else {if(/bom dia|boa tarde|boa noite|obrigad|ol[aá]/i.test(q)){$('robot').classList.add('happy');setTimeout(()=>$('robot').classList.remove('happy'),1600)}say(answer.text,answer.direction);}
 }
 function startRecognition(){
  if(!recognition||!listening||recognitionActive||recognitionStarting||answerPending||utterance||(window.speechSynthesis?.speaking||false))return;

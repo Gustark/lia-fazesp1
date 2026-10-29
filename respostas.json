@@ -4,21 +4,33 @@
       "bom dia",
       "muito bom dia"
     ],
-    "a": "Bom dia! Seja muito bem-vindo à FAZESP!"
+    "a": [
+      "Bom dia! Seja muito bem-vindo à FAZESP! Como posso ajudar?",
+      "Bom dia! Que bom receber você na FAZESP!",
+      "Um ótimo dia para você! O que gostaria de saber?"
+    ]
   },
   {
     "q": [
       "boa tarde",
       "uma boa tarde"
     ],
-    "a": "Boa tarde! Que bom ter você por aqui!"
+    "a": [
+      "Boa tarde! Seja bem-vindo à FAZESP!",
+      "Boa tarde! É um prazer conversar com você.",
+      "Oi! Boa tarde! Em que posso ajudar?"
+    ]
   },
   {
     "q": [
       "boa noite",
       "uma boa noite"
     ],
-    "a": "Boa noite! É um prazer receber você!"
+    "a": [
+      "Boa noite! Seja bem-vindo à FAZESP!",
+      "Boa noite! Espero que sua visita seja agradável.",
+      "Boa noite! Como posso ajudar você?"
+    ]
   },
   {
     "q": [
@@ -252,7 +264,11 @@
       "boa tarde",
       "boa noite"
     ],
-    "a": "Olá! Eu sou a LIA, sua assistente virtual. Como posso ajudar?"
+    "a": [
+      "Bom dia! Seja muito bem-vindo à FAZESP! Como posso ajudar?",
+      "Bom dia! Que bom receber você na FAZESP!",
+      "Um ótimo dia para você! O que gostaria de saber?"
+    ]
   },
   {
     "q": [
@@ -284,7 +300,11 @@
       "obrigada",
       "muito obrigado"
     ],
-    "a": "Por nada! Estou aqui para ajudar."
+    "a": [
+      "Por nada! Foi um prazer ajudar!",
+      "Imagina! Se precisar, é só perguntar.",
+      "Eu que agradeço pela conversa!"
+    ]
   },
   {
     "q": [
@@ -294,7 +314,11 @@
       "e aí",
       "ei lia"
     ],
-    "a": "Olá! Que bom ter você por aqui! Como posso ajudar?"
+    "a": [
+      "Olá! Seja bem-vindo à FAZESP!",
+      "Oi! Que bom ter você por aqui!",
+      "Olá! Eu sou a LIA. Como posso ajudar?"
+    ]
   },
   {
     "q": [
@@ -2920,5 +2944,42 @@
         "turn-both"
       ]
     }
+  },
+  {
+    "q": [
+      "fala mais devagar",
+      "pode falar mais devagar",
+      "fala devagar",
+      "mais devagar por favor"
+    ],
+    "a": "Claro! Vou falar mais devagar."
+  },
+  {
+    "q": [
+      "fale mais rapido",
+      "fala mais rápido",
+      "pode falar mais rápido"
+    ],
+    "a": "Tudo bem! Vou falar um pouco mais rápido."
+  },
+  {
+    "q": [
+      "nao entendi",
+      "não entendi sua resposta",
+      "pode explicar melhor",
+      "explique melhor",
+      "como assim"
+    ],
+    "a": "Claro! Vou tentar explicar de outro jeito."
+  },
+  {
+    "q": [
+      "repete por favor",
+      "repita por favor",
+      "repete isso",
+      "fala novamente",
+      "pode repetir a ultima resposta"
+    ],
+    "a": "Claro, vou repetir."
   }
 ]
