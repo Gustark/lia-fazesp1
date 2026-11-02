@@ -600,6 +600,32 @@ body{overflow-x:hidden}
 
 /* Versão discreta junto aos créditos */
 .lia-version{white-space:nowrap;color:#f1ac75;font-weight:650;letter-spacing:.025em}
+
+/* 4.3: leitura acessível, cartões dentro da tela e responsividade */
+.lia-diagnostics{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.lia-diagnostics>div{background:rgba(18,20,30,.8);border:1px solid rgba(247,157,80,.24);border-radius:12px;padding:10px 12px;min-width:0}
+.lia-diagnostics span{display:block;color:#d9b397;font-size:11px;margin-bottom:5px}
+.lia-diagnostics strong{display:block;color:#fff0e4;font-size:12px;overflow-wrap:anywhere}
+.lia-diagnostics-help{font-size:11px!important}
+.stage{isolation:isolate}
+.stage>.question-suggestion{box-sizing:border-box;overflow-wrap:anywhere;white-space:normal;max-width:calc(100% - 28px)!important}
+.stage>.lia-direction{box-sizing:border-box;max-width:calc(100% - 28px)!important}
+.center .bottom .subtitle{overflow-wrap:anywhere;hyphens:auto;line-height:1.35}
+.center .bottom .lia-test-note{overflow-wrap:anywhere}
+@media(min-width:1000px){
+ .tv .stage>.question-suggestion{left:clamp(14px,2.3vw,42px)!important;right:auto!important;top:48%!important;bottom:auto!important;width:clamp(220px,23vw,365px)!important;transform:translateY(-50%)!important}
+ .tv .stage>.question-suggestion.visible{transform:translateY(-50%)!important}
+ .tv .stage>.lia-direction{right:clamp(14px,2.3vw,42px)!important;left:auto!important;top:48%!important;bottom:auto!important;width:clamp(150px,17vw,250px)!important;transform:translateY(-50%)!important}
+}
+@media(max-width:650px){
+ .center .bottom .subtitle{font-size:clamp(18px,4.5vw,27px);min-height:65px}
+ .lia-test-note{font-size:11px!important}
+ .lia-diagnostics{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+ body::before,body::after,.stage::before,.stage::after,.orbit,.halo,.face{animation:none!important}
+}
+
 </style>
 </head>
 <body>
@@ -607,7 +633,7 @@ body{overflow-x:hidden}
 <div class="shell">
 <main class="stage">
  <header class="top"><div class="identity"><div class="logo-card"><img src="data:image/png;base64,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" alt="FAZESP — Escola Fazendária do Estado de São Paulo"></div><div class="identity-copy"><div class="eyebrow">ASSISTENTE VIRTUAL DA FAZESP</div><div class="brand" id="brand">LIA<span class="brand-accent">.</span></div><div class="brand-sub" id="liaGreeting">Sua assistente virtual.</div></div></div></header>
- <section class="center"><div class="robot" id="robot"><div class="halo"></div><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="face"><div class="antenna"></div><div class="eyes"><div class="eye"></div><div class="eye"></div></div><div class="mouth"></div><div class="cheeks"><span></span><span></span></div></div></div><div class="hello-label">INTELIGÊNCIA QUE APROXIMA</div><div class="status" id="status">Aguardando sua pergunta</div><span class="tag" id="mode">Pronta para conversar</span><div class="bottom"><div class="subtitle" id="subtitle" aria-live="polite">Como posso ajudar você?</div><div class="lia-test-note">A LIA é uma estagiária novata da FAZESP e ainda está em fase de testes. Por isso, algumas informações podem estar em aprendizado.</div><div class="foot">FAZESP · Escola Fazendária</div><div class="lia-credits">Criado por Gustavo Hugo e Gladstom Alves <span class="lia-version" aria-label="Versão 4.2">· v4.2</span></div></div></section>
+ <section class="center"><div class="robot" id="robot"><div class="halo"></div><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="face"><div class="antenna"></div><div class="eyes"><div class="eye"></div><div class="eye"></div></div><div class="mouth"></div><div class="cheeks"><span></span><span></span></div></div></div><div class="hello-label">INTELIGÊNCIA QUE APROXIMA</div><div class="status" id="status">Aguardando sua pergunta</div><span class="tag" id="mode">Pronta para conversar</span><div class="bottom"><div class="subtitle" id="subtitle" aria-live="polite">Como posso ajudar você?</div><div class="lia-test-note">A LIA é uma estagiária novata da FAZESP e ainda está em fase de testes. Por isso, algumas informações podem estar em aprendizado.</div><div class="foot">FAZESP · Escola Fazendária</div><div class="lia-credits">Criado por Gustavo Hugo e Gladstom Alves <span class="lia-version" aria-label="Versão 4.3">· v4.3</span></div></div></section>
  <aside class="lia-direction" id="liaDirection" aria-live="polite" aria-label="Orientação de caminho"><div class="dir-heading">DIREÇÃO</div><div class="dir-icon" id="liaDirectionIcon">→</div><div class="dir-label" id="liaDirectionLabel"></div><div class="dir-step" id="liaDirectionStep"></div></aside>
  <aside class="question-suggestion" id="questionSuggestion" aria-label="Exemplo de pergunta"><button class="q-close" id="hideSuggestion" type="button" title="Ocultar sugestão" aria-label="Ocultar sugestão">×</button><div class="q-label">VOCÊ PODE PERGUNTAR</div><div class="q-text" id="questionSuggestionText"></div></aside>
  
@@ -617,6 +643,14 @@ body{overflow-x:hidden}
  <div class="message" id="msg"></div>
  <div class="actions"><button id="testVoice" class="secondary">Testar voz</button></div>
  <label class="field" for="voiceSelect">Voz da LIA (feminina · português do Brasil)</label><select id="voiceSelect" aria-label="Selecionar voz da LIA"><option value="">Buscando vozes do Windows...</option></select><p class="voice-tip" id="voiceNotice">A disponibilidade de vozes femininas depende das vozes instaladas no Windows e do navegador.</p>
+ <h3>Diagnóstico da LIA</h3>
+ <div class="lia-diagnostics" role="status" aria-live="off">
+ <div><span>Microfone</span><strong id="diagMic">Desativado</strong></div>
+ <div><span>Reconhecimento</span><strong id="diagSpeech">Aguardando</strong></div>
+ <div><span>Última pergunta</span><strong id="diagLast">Nenhuma nesta sessão</strong></div>
+ <div><span>Recuperações</span><strong id="diagRecover">0</strong></div>
+ </div>
+ <p class="lia-diagnostics-help">Indicadores visíveis apenas no painel do notebook, não na TV. Caso o Windows suspenda o computador, reative o navegador.</p>
  <h3>Base de conhecimento</h3><p>As perguntas e respostas são carregadas do arquivo <code>respostas.json</code> publicado junto com a página. Para atualizar o conteúdo, edite esse arquivo no GitHub.</p><div class="message" id="knowledgeStatus" role="status"></div><h3>Perguntas sem resposta</h3><p>Registradas temporariamente nesta página, sem gravar áudio. O histórico é apagado ao recarregar a página. Exporte antes de atualizar e depois inclua as novas respostas no arquivo <code>respostas.json</code>.</p>
  <div class="actions"><button type="button" id="exportUnknown" class="secondary">⬇ Exportar perguntas (.json)</button><button type="button" id="clearUnknown" class="secondary">Limpar histórico</button></div>
  <div class="message" id="unknownInfo" aria-live="polite">Nenhuma pergunta registrada.</div>
@@ -651,6 +685,8 @@ let lastRecognitionActivity=Date.now(), lastRecognitionReset=0;
 const IDLE_RECOGNITION_RESET_MS=8*60*1000;
 const RESET_COOLDOWN_MS=30*1000;
 function recycleRecognition(reason='inatividade'){
+ diagnosticState.recoveries++;
+ updateDiagnostics();
  if(tv||!listening||answerPending||utterance||window.speechSynthesis?.speaking)return;
  const now=Date.now();
  if(now-lastRecognitionReset<RESET_COOLDOWN_MS)return;
@@ -758,8 +794,8 @@ function contextualQuestion(q){
  const n=cleanCommand(q);
  if(!lastConversation||Date.now()-lastConversation.time>90000)return q;
  if(lastConversation.topic==='auditório'||lastConversation.topic==='auditorio'){
-  if(/^(e )?(o )?pequeno( auditorio)?$/.test(n))return 'onde fica o pequeno auditorio';
-  if(/^(e )?(o )?grande( auditorio)?$/.test(n))return 'onde fica o grande auditorio';
+  if(/^(e )?(o )?pequeno( auditorio)?$|^(e )?(o )?auditorio pequeno$/.test(n))return 'onde fica o pequeno auditorio';
+  if(/^(e )?(o )?grande( auditorio)?$|^(e )?(o )?auditorio grande$/.test(n))return 'onde fica o grande auditorio';
  }
  if(lastConversation.topic==='banheiro'){
   if(/^(e )?(o )?feminino$/.test(n))return 'onde fica o banheiro feminino';
@@ -873,7 +909,7 @@ function say(text,direction=null){
  lastSpokenAnswer=text;
  answerPending=true;
  clearTimeout(restartTimer);
- if(recognitionActive||recognitionStarting){try{recognition.stop()}catch{}}
+ if(recognitionActive||recognitionStarting){try{recognition.stop()}catch{try{recognition.abort()}catch{}}}
  if(!('speechSynthesis' in window)){
   answerPending=false;show('idle','Resposta exibida',text);queueRestart();return;
  }
@@ -908,7 +944,7 @@ function trackUnknown(question){
  if(found){found.vezes++;found.ultimaOcorrencia=new Date().toISOString();const idx=records.indexOf(found);records.splice(idx,1);records.push(found)}
  else{records.push({pergunta:cleaned,chave:key,vezes:1,primeiraOcorrencia:new Date().toISOString(),ultimaOcorrencia:new Date().toISOString()})}
  while(records.length>UNKNOWN_MAX)records.shift();
- updateUnknownInfo();
+ updateUnknownInfo();updateDiagnostics();
 }
 function exportUnknown(){
  const records=readUnknown();if(!records.length){$('unknownInfo').textContent='Não há perguntas sem resposta para exportar.';return}
@@ -916,8 +952,28 @@ function exportUnknown(){
  const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json;charset=utf-8'});
  const url=URL.createObjectURL(blob);const link=document.createElement('a');link.href=url;link.download='lia_perguntas_sem_resposta_'+new Date().toISOString().slice(0,10)+'.json';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)
 }
+
+// Monitoramento leve, somente na janela de operação do notebook.
+const diagnosticState={recoveries:0,lastQuestion:null};
+function updateDiagnostics(){
+ if(tv)return;
+ const write=(id,v)=>{const el=$(id);if(el&&el.textContent!==v)el.textContent=v};
+ write('diagMic',!listening?'Desativado':recognitionActive?'Ativo':recognitionStarting?'Inicializando':'Em recuperação');
+ write('diagSpeech',utterance?'Falando':answerPending?'Processando':recognitionActive?'Ouvindo':listening?'Reiniciando':'Parado');
+ write('diagLast',diagnosticState.lastQuestion?diagnosticState.lastQuestion.toLocaleTimeString('pt-BR'):'Nenhuma nesta sessão');
+ write('diagRecover',String(diagnosticState.recoveries));
+}
+if(!tv)setInterval(updateDiagnostics,3000);
+let lastAcceptedNormalized='',lastAcceptedAt=0;
+function duplicateRecentlyPreview(question){return !!(normalize(question)===lastAcceptedNormalized&&Date.now()-lastAcceptedAt<2600)}
+function duplicateRecently(question){
+ const normalized=normalize(question),now=Date.now();
+ if(normalized&&normalized===lastAcceptedNormalized&&now-lastAcceptedAt<2600)return true;
+ lastAcceptedNormalized=normalized;lastAcceptedAt=now;return false;
+}
+
 function processQuestion(q){
- q=q.trim();if(!q)return;show('idle','Pergunta recebida',q);
+ q=q.trim();if(!q||duplicateRecently(q))return;diagnosticState.lastQuestion=new Date();updateDiagnostics();show('idle','Pergunta recebida',q);
  const answer=findAnswer(q);
  if(answer===null){trackUnknown(q);$('robot').classList.add('confused');setTimeout(()=>$('robot').classList.remove('confused'),2000);say(UNKNOWN_REPLY)}else {if(/bom dia|boa tarde|boa noite|obrigad|ol[aá]/i.test(q)){$('robot').classList.add('happy');setTimeout(()=>$('robot').classList.remove('happy'),1600)}say(answer.text,answer.direction);}
 }
@@ -930,11 +986,11 @@ function startRecognition(){
 function setupRecognition(){
  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
  if(!SR){$('msg').textContent='Reconhecimento indisponível. Use Chrome ou Edge atualizado.';return false}
- recognition=new SR();recognition.lang='pt-BR';recognition.continuous=true;recognition.interimResults=true;
+ recognition=new SR();recognition.lang='pt-BR';recognition.continuous=true;recognition.interimResults=true;recognition.maxAlternatives=1;
  recognition.onstart=()=>{lastRecognitionActivity=Date.now();recognitionStarting=false;recognitionActive=true;recognitionStartAt=0;retryDelay=450;show('listening','Estou ouvindo...','Pode fazer sua pergunta')};
  recognition.onresult=e=>{
   lastRecognitionActivity=Date.now();
-  if(answerPending)return;
+  if(answerPending||utterance||window.speechSynthesis?.speaking)return;
   let preview='',latestFinal='';
   for(let i=e.resultIndex;i<e.results.length;i++){
    const transcript=e.results[i][0].transcript;
@@ -942,7 +998,7 @@ function setupRecognition(){
    else preview+=transcript+' ';
   }
   if(preview.trim())show('listening','Estou ouvindo...',preview.trim());
-  if(latestFinal.trim()){
+  if(latestFinal.trim()&&!duplicateRecentlyPreview(latestFinal)){
    answerPending=true;
    // Interrompe o reconhecimento enquanto a LIA fala para evitar eco.
    try{recognition.stop()}catch{}
@@ -957,7 +1013,7 @@ function setupRecognition(){
    listening=false;clearTimeout(restartTimer);
    $('msg').textContent='Microfone ou serviço bloqueado ('+e.error+'). Permita o microfone para este endereço HTTPS nas configurações do navegador.';
   }else if(e.error==='network'){
-   retryDelay=Math.min(retryDelay*2,12000);
+   retryDelay=Math.min(Math.max(1800,retryDelay*2),20000);
    $('msg').textContent='Falha de rede no reconhecimento de voz. Tentando recuperar automaticamente.';
   }
  };
