@@ -173,551 +173,31 @@ body{background:#101116!important;color:#f7f5f2!important}
 .logo-card img{display:block!important;width:150px!important;max-width:100%!important;height:auto!important;object-fit:contain!important;object-position:center!important;margin:0 auto!important;}
 @media(max-width:730px){.logo-card{width:120px!important;min-height:51px!important;padding:12px 6px 6px!important}.logo-card::before{top:5px!important;left:7px!important;right:7px!important;height:3px!important}.logo-card img{width:106px!important;}}
 
-/* Direções visuais: perspectiva do visitante, ao lado da LIA */
-.lia-direction{position:absolute;z-index:13;left:calc(50% + min(210px, 29vw));top:46%;transform:translateY(-50%) translateX(-12px);min-width:190px;max-width:285px;padding:17px 18px;border-radius:19px;background:rgba(19,19,24,.94);border:1px solid rgba(255,155,55,.43);box-shadow:0 20px 50px #0008;display:none;text-align:center;pointer-events:none}
-.lia-direction.active{display:block;animation:liaDirectionIn .35s ease both}
-.lia-direction .dir-heading{font-size:11px;font-weight:800;letter-spacing:.11em;color:#ffb26e;text-transform:uppercase}
-.lia-direction .dir-icon{font-family:Segoe UI Symbol,Arial,sans-serif;font-size:clamp(72px,8vw,112px);font-weight:700;line-height:1.08;color:#ff8a21;text-shadow:0 0 25px #f8793677;animation:liaArrowPulse 1.25s ease-in-out infinite}
-.lia-direction .dir-label{font-size:clamp(14px,1.3vw,19px);font-weight:750;color:#fff5ea;line-height:1.2}
-.lia-direction .dir-step{font-size:12px;color:#e1b48d;margin-top:8px}
-@keyframes liaArrowPulse{50%{transform:scale(1.13);filter:brightness(1.2)}}
-@keyframes liaDirectionIn{from{opacity:0;transform:translateY(-50%) translateX(-12px)}to{opacity:1;transform:translateY(-50%) translateX(0)}}
-@media(max-width:820px){.lia-direction{left:auto;right:10px;top:49%;min-width:125px;max-width:155px;padding:10px}.lia-direction .dir-icon{font-size:65px}.lia-direction .dir-label{font-size:13px}}
-@media(max-width:510px){.lia-direction{right:7px;top:43%;min-width:110px;max-width:125px;padding:8px}.lia-direction .dir-icon{font-size:52px}.lia-direction .dir-step{font-size:10px}}
-@media(prefers-reduced-motion:reduce){.lia-direction .dir-icon,.lia-direction.active{animation:none}}
+/* ===== Corpo novo da LIA com rosto funcional antigo ===== */
+.robot.robot-with-body{position:relative!important;width:min(460px,44vw)!important;height:min(760px,74vh)!important;margin:8px auto 8px!important;filter:drop-shadow(0 24px 60px rgba(213,92,22,.20))!important;display:block!important}
+.robot.robot-with-body:before{content:'';position:absolute;left:50%;bottom:2.5%;transform:translateX(-50%);width:42%;height:7%;background:radial-gradient(circle,rgba(255,135,31,.28),rgba(255,135,31,0) 72%);filter:blur(18px);border-radius:50%}
+.robot-with-body .robot-body{position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:88%;height:auto;max-height:100%;object-fit:contain;z-index:2;pointer-events:none;user-select:none}
+.robot-with-body .halo{position:absolute;left:50%;top:8%;transform:translateX(-50%);width:58%;height:32%;border:1px solid rgba(253,157,44,.32);border-radius:50%;z-index:1}
+.robot-with-body .orbit{position:absolute;left:50%;top:3%;transform:translateX(-50%);width:78%;height:46%;border-radius:50%;z-index:1}
+.robot-with-body .orbit-two{width:92%;height:54%}
+.robot-with-body .face-shell{position:absolute;left:50%;top:6.8%;transform:translateX(-50%);width:52%;height:26%;z-index:3;display:flex;align-items:center;justify-content:center;pointer-events:none}
+.robot-with-body .face{position:relative!important;width:100%!important;height:100%!important;border:none!important;background:transparent!important;box-shadow:none!important;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;padding-top:3%;border-radius:32% 32% 38% 38%}
+.robot-with-body .face:after,.robot-with-body .antenna{display:none!important}
+.robot-with-body .eyes{display:flex;gap:58px;align-items:center;justify-content:center;transform:translateY(-2px)}
+.robot-with-body .eye{width:34px;height:46px;border-radius:48%;background:linear-gradient(135deg,#fff4c6,#ffab38 68%);box-shadow:0 0 22px rgba(255,137,38,.9),0 0 46px rgba(245,122,23,.18);animation:blink 7s infinite;transform-origin:center center}
+.robot-with-body .mouth{width:78px;height:18px;border-bottom:7px solid #ffd28a;border-radius:0 0 60px 60px;filter:drop-shadow(0 0 10px #fb9225);background:transparent;transition:height .12s,width .12s,border-radius .12s,border-width .12s,transform .12s}
+.robot-with-body.speaking .mouth{border:5px solid #ffb04d;background:rgba(251,140,41,.24);border-radius:50%;animation:talk .22s ease-in-out infinite alternate}
+.robot-with-body .cheeks{position:absolute;top:61%;width:78%;display:flex;justify-content:space-between}
+.robot-with-body .cheeks span{width:28px;height:12px;border-radius:50%;background:rgba(255,142,41,.22);filter:blur(5px)}
+.robot-with-body.listening .robot-body{filter:drop-shadow(0 0 26px rgba(255,197,92,.16))}
+.robot-with-body.listening .eye{background:linear-gradient(135deg,#fff6d8,#ffd680 70%);box-shadow:0 0 22px rgba(255,224,162,.95),0 0 44px rgba(255,165,50,.24)}
+.robot-with-body.listening .halo{animation:pulse 1.5s infinite;border-color:rgba(255,186,84,.56)}
+.robot-with-body.listening .orbit{border-color:rgba(255,173,67,.30)}
+.tv .robot.robot-with-body{width:min(500px,39vw)!important;height:min(790px,78vh)!important}
+@media(max-width:930px){.robot.robot-with-body{width:min(360px,78vw)!important;height:min(600px,66vh)!important}}
+@media(max-width:620px){.robot.robot-with-body{width:min(300px,82vw)!important;height:min(510px,62vh)!important}.robot-with-body .face-shell{top:6.7%;width:52.5%;height:26.5%}.robot-with-body .eyes{gap:42px}.robot-with-body .eye{width:28px;height:40px}.robot-with-body .mouth{width:64px;border-bottom-width:6px}.robot-with-body .cheeks span{width:22px;height:10px}}
+@media(max-height:760px){.robot.robot-with-body{height:min(690px,70vh)!important}}
 
-/* LIA 2.0: microexpressões discretas, sem modificar o desenho original */
-.robot.confused .eye{animation:liaDoubt 1.15s ease-in-out 2}
-.robot.happy .eye{animation:liaHappy .8s ease-in-out 2}
-@keyframes liaDoubt{50%{transform:scaleY(.65) rotate(7deg)}}
-@keyframes liaHappy{50%{transform:scaleY(.70)}}
-
-/* LIA 2.2 — centralização e fundo moderno em laranja */
-body{overflow-x:hidden!important;background:radial-gradient(circle at 50% 18%,#171829 0%,#0c0d18 58%,#080913 100%)!important;}
-body::before,body::after{content:"";position:fixed;inset:-18%;pointer-events:none;z-index:0}
-body::before{
-  background:
-    radial-gradient(circle at 50% 48%, rgba(255,135,34,.12) 0 18%, rgba(255,135,34,0) 42%),
-    conic-gradient(from 0deg at 50% 50%, rgba(255,137,32,0) 0deg, rgba(255,137,32,.08) 38deg, rgba(255,137,32,0) 74deg, rgba(255,137,32,0) 170deg, rgba(255,137,32,.07) 218deg, rgba(255,137,32,0) 260deg, rgba(255,137,32,.05) 312deg, rgba(255,137,32,0) 360deg);
-  filter:blur(46px);
-  transform-origin:50% 50%;
-  animation:liaBgSpin 28s linear infinite;
-  opacity:.95;
-}
-body::after{
-  background:
-    linear-gradient(120deg, rgba(255,145,45,0) 12%, rgba(255,145,45,.02) 32%, rgba(255,145,45,.11) 50%, rgba(255,145,45,.02) 68%, rgba(255,145,45,0) 88%),
-    linear-gradient(300deg, rgba(255,121,28,0) 18%, rgba(255,121,28,.04) 43%, rgba(255,121,28,.12) 50%, rgba(255,121,28,.04) 57%, rgba(255,121,28,0) 82%);
-  background-size:220% 220%, 200% 200%;
-  filter:blur(28px);
-  animation:liaBgSweep 14s ease-in-out infinite alternate;
-  opacity:.9;
-}
-@keyframes liaBgSpin{from{transform:rotate(0deg) scale(1)}to{transform:rotate(360deg) scale(1.04)}}
-@keyframes liaBgSweep{0%{transform:translate3d(-6%,2%,0) scale(1)}50%{transform:translate3d(5%,-3%,0) scale(1.06)}100%{transform:translate3d(0,4%,0) scale(1.02)}}
-
-.shell,.stage,.top,.center,.bottom{position:relative}
-.stage{
-  justify-content:center!important;
-  align-items:center!important;
-  gap:clamp(14px,2.2vh,24px)!important;
-  padding:clamp(22px,4vh,42px) clamp(18px,4vw,44px)!important;
-  overflow:hidden;
-}
-.stage::before{
-  content:"";
-  position:absolute;
-  width:min(72vh,74vw);
-  height:min(72vh,74vw);
-  left:50%;
-  top:56%;
-  transform:translate(-50%,-50%);
-  border-radius:50%;
-  background:radial-gradient(circle, rgba(255,132,33,.14) 0%, rgba(255,132,33,.08) 24%, rgba(255,132,33,.02) 47%, rgba(255,132,33,0) 72%);
-  filter:blur(6px);
-  z-index:0;
-  animation:liaCoreGlow 6.8s ease-in-out infinite alternate;
-}
-@keyframes liaCoreGlow{from{opacity:.72;transform:translate(-50%,-50%) scale(.96)}to{opacity:1;transform:translate(-50%,-50%) scale(1.05)}}
-.top{
-  width:auto!important;
-  max-width:none!important;
-  margin:0 auto 2px!important;
-  display:flex!important;
-  justify-content:center!important;
-  align-items:center!important;
-  text-align:center!important;
-}
-.identity{justify-content:center!important;align-items:center!important;gap:18px!important;flex-wrap:nowrap!important}
-.identity-copy{display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:flex-start!important;text-align:left!important}
-.center{
-  width:100%!important;
-  max-width:960px!important;
-  margin:0 auto!important;
-  display:flex!important;
-  flex-direction:column!important;
-  align-items:center!important;
-  justify-content:center!important;
-  text-align:center!important;
-}
-.robot{
-  margin:8px auto 4px!important;
-}
-.status{margin-top:6px!important;text-align:center!important}
-.bottom{
-  width:100%!important;
-  max-width:960px!important;
-  margin:4px auto 0!important;
-  text-align:center!important;
-}
-.subtitle{
-  max-width:min(860px,100%)!important;
-  margin:16px auto 0!important;
-}
-.hello-label{margin-top:8px!important}
-.center .tag{margin-top:12px!important}
-.question-suggestion{z-index:14!important}
-.lia-direction{z-index:15!important}
-@media(max-width:930px){
-  .top{margin-top:6px!important}
-  .identity{gap:12px!important;flex-wrap:wrap!important}
-  .identity-copy{align-items:center!important;text-align:center!important}
-  .stage::before{width:78vw;height:78vw;top:52%}
-}
-@media(max-width:620px){
-  .stage{padding:18px 12px 24px!important}
-  .top{margin-bottom:4px!important}
-  .center .tag{margin-top:10px!important}
-  .subtitle{margin-top:10px!important}
-}
-@media(prefers-reduced-motion:reduce){body::before,body::after,.stage::before{animation:none!important}}
-
-
-/* LIA 2.3 — interface refinada, sugestão lateral e crachá */
-body{background:radial-gradient(circle at 50% 16%, #1b1d31 0%, #0b0d19 45%, #06070f 100%)!important;}
-body::before,body::after{opacity:1!important}
-body::before{
-  background:
-    radial-gradient(circle at 50% 50%, rgba(255,135,34,.18) 0 12%, rgba(255,135,34,.08) 20%, rgba(255,135,34,0) 42%),
-    conic-gradient(from 0deg at 50% 50%, rgba(255,137,32,0) 0deg, rgba(255,137,32,.14) 36deg, rgba(255,137,32,0) 78deg, rgba(255,137,32,.03) 124deg, rgba(255,137,32,.15) 182deg, rgba(255,137,32,0) 226deg, rgba(255,137,32,.10) 286deg, rgba(255,137,32,0) 360deg)!important;
-  filter:blur(34px)!important;
-  animation:liaBgSpinStrong 20s linear infinite!important;
-}
-body::after{
-  background:
-    linear-gradient(100deg, rgba(255,145,45,0) 0%, rgba(255,145,45,.12) 25%, rgba(255,145,45,0) 50%),
-    linear-gradient(280deg, rgba(255,121,28,0) 8%, rgba(255,121,28,.10) 38%, rgba(255,121,28,0) 62%)!important;
-  background-size:170% 170%, 180% 180%!important;
-  filter:blur(18px)!important;
-  animation:liaBgSweepStrong 9s ease-in-out infinite alternate!important;
-}
-@keyframes liaBgSpinStrong{from{transform:rotate(0deg) scale(1)}to{transform:rotate(360deg) scale(1.08)}}
-@keyframes liaBgSweepStrong{0%{transform:translate3d(-9%,0,0) scale(1)}50%{transform:translate3d(9%,-4%,0) scale(1.08)}100%{transform:translate3d(-2%,4%,0) scale(1.03)}}
-.stage::before{
-  width:min(78vh,78vw)!important;height:min(78vh,78vw)!important;top:53%!important;
-  background:
-    radial-gradient(circle, rgba(255,132,33,.20) 0%, rgba(255,132,33,.12) 18%, rgba(255,132,33,.05) 35%, rgba(255,132,33,0) 66%)!important;
-  filter:blur(2px)!important;
-}
-.stage::after{
-  content:"";position:absolute;left:50%;top:53%;transform:translate(-50%,-50%);width:min(64vh,64vw);height:min(64vh,64vw);border-radius:50%;pointer-events:none;z-index:0;
-  background:
-   repeating-radial-gradient(circle, rgba(255,149,57,.12) 0 1px, rgba(255,149,57,0) 1px 28px),
-   radial-gradient(circle, rgba(255,147,48,.08) 0 30%, rgba(255,147,48,0) 70%);
-  mask-image:radial-gradient(circle, rgba(0,0,0,.95) 0 62%, rgba(0,0,0,0) 85%);
-  opacity:.95;
-  animation:liaRings 16s linear infinite;
-}
-@keyframes liaRings{from{transform:translate(-50%,-50%) rotate(0deg)}to{transform:translate(-50%,-50%) rotate(360deg)}}
-.top{margin-bottom:6px!important}
-.identity{gap:22px!important}
-.identity-copy .brand{font-size:clamp(56px,5.1vw,84px)!important;line-height:.92!important}
-.identity-copy .brand-sub{font-size:15px!important;color:#d5d7df!important}
-.eyebrow{font-size:.78rem!important;letter-spacing:.18em!important}
-.center{max-width:1200px!important}
-.robot{width:min(470px,62vw)!important;height:min(420px,52vh)!important;margin:4px auto 6px!important}
-.robot:before{background:#f4771020!important;filter:blur(50px)!important}
-.face{box-shadow:inset 0 0 45px #f9771422, 0 0 34px #f8751682, 0 0 140px #e4641930!important}
-.halo{border-color:#ff9e3440!important}
-.orbit{border-color:#ff8d2238!important}
-.orbit-two{border-color:#ff8a191f!important}
-.status{font-size:clamp(34px,3.2vw,52px)!important;max-width:1000px!important;position:relative;z-index:2}
-.hello-label{position:relative;z-index:2}
-.bottom{max-width:1040px!important}
-.subtitle{background:linear-gradient(180deg, rgba(35,33,44,.92), rgba(26,25,33,.94))!important;border:1px solid rgba(245,136,54,.22)!important;box-shadow:0 18px 60px rgba(0,0,0,.35)!important;border-radius:22px!important}
-.center .tag{position:relative;z-index:2}
-
-/* sugestão ao lado do robô */
-.question-suggestion{
-  width:min(360px,28vw)!important;
-  right:auto!important;
-  left:calc(50% - min(470px,34vw) - clamp(16px,3vw,44px))!important;
-  bottom:auto!important;
-  top:52%!important;
-  transform:translate(-100%,-50%) scale(.96)!important;
-  z-index:18!important;
-}
-.question-suggestion.visible{transform:translate(-100%,-50%) scale(1)!important}
-.question-suggestion .q-label{font-size:10px!important}
-.question-suggestion .q-text{font-size:clamp(18px,1.6vw,28px)!important;line-height:1.18!important}
-
-/* painel direção no lado oposto */
-.lia-direction{left:calc(50% + min(260px, 22vw))!important;top:48%!important;transform:translateY(-50%) translateX(0)!important}
-@keyframes liaDirectionIn{from{opacity:0;transform:translateY(-50%) translateX(14px)}to{opacity:1;transform:translateY(-50%) translateX(0)}}
-
-@media(max-width:1200px){
-  .question-suggestion{left:calc(50% - min(420px,33vw) - 18px)!important;width:min(320px,26vw)!important}
-  .identity-copy .brand{font-size:clamp(48px,4.7vw,72px)!important}
-}
-@media(max-width:980px){
-  .identity{gap:12px!important;flex-wrap:wrap!important}
-  .identity-copy{align-items:center!important;text-align:center!important}
-  .question-suggestion{left:18px!important;top:auto!important;bottom:165px!important;transform:translate(0,16px) scale(.96)!important;width:min(330px,44vw)!important}
-  .question-suggestion.visible{transform:translate(0,0) scale(1)!important}
-  .lia-direction{left:auto!important;right:14px!important;top:45%!important}
-}
-@media(max-width:620px){
-  .identity-copy .brand{font-size:42px!important}
-  .status{font-size:clamp(26px,7.2vw,40px)!important}
-  .question-suggestion{left:50%!important;right:auto!important;top:auto!important;bottom:120px!important;width:min(320px,90vw)!important;transform:translate(-50%,16px) scale(.96)!important}
-  .question-suggestion.visible{transform:translate(-50%,0) scale(1)!important}
-}
-@media(prefers-reduced-motion:reduce){.stage::after,.question-suggestion,.question-suggestion.visible{animation:none!important}}
-
-
-/* LIA 2.4 — agrupa legenda e estado para eliminar espaço vertical excessivo */
-.stage{justify-content:center!important;gap:clamp(6px,1.1vh,12px)!important;}
-.center{flex:0 0 auto!important;min-height:0!important;gap:3px!important;}
-.bottom{flex:0 0 auto!important;max-width:1040px!important;margin:0 auto!important;}
-.subtitle{margin:4px auto 0!important;min-height:68px!important;padding:14px 24px!important;}
-.center .tag{margin:7px auto 0!important;}
-.status{margin-top:2px!important;}
-.foot{padding-top:8px!important;}
-.lia-credits{margin-top:5px!important;}
-@media(max-height:850px){
-  .stage{padding-top:14px!important;padding-bottom:14px!important;gap:5px!important;}
-  .robot{height:min(345px,41vh)!important;}
-  .subtitle{min-height:58px!important;padding:11px 20px!important;}
-}
-@media(max-width:620px){
-  .center{flex:0 0 auto!important;}
-  .bottom{margin-top:0!important;}
-  .subtitle{margin-top:4px!important;}
-}
-
-/* LIA 2.5 — legenda pertence ao conjunto central, logo abaixo do status */
-.stage{justify-content:center!important;align-items:center!important;gap:clamp(10px,1.8vh,20px)!important;}
-.center{display:flex!important;flex-direction:column!important;flex:0 1 auto!important;justify-content:center!important;align-items:center!important;width:100%!important;gap:clamp(4px,.7vh,8px)!important;min-height:0!important;}
-.center .bottom{display:flex!important;flex-direction:column!important;align-items:center!important;width:min(960px,100%)!important;max-width:960px!important;flex:0 0 auto!important;margin:clamp(8px,1.4vh,14px) auto 0!important;}
-.center .subtitle{margin:0 auto!important;width:100%!important;min-height:clamp(56px,8vh,84px)!important;padding:12px 22px!important;}
-.center .tag{margin:clamp(5px,.9vh,9px) auto 0!important;}
-.center .foot{padding-top:clamp(5px,.8vh,9px)!important;}
-.center .lia-credits{margin-top:3px!important;}
-@media(max-height:740px){.center .robot{height:min(330px,39vh)!important;margin-top:0!important}.center .subtitle{min-height:54px!important;padding:9px 16px!important}.center .bottom{margin-top:6px!important}}
-@media(max-width:620px){.center .bottom{margin-top:7px!important}.center .subtitle{font-size:clamp(18px,4.5vw,23px)!important}}
-
-
-/* LIA 2.6 — restaura as setas ao lado do robô */
-.stage > .lia-direction {
-  position:absolute!important;
-  display:none;
-  z-index:30!important;
-  top:49%!important;
-  left:auto!important;
-  right:clamp(16px,4vw,70px)!important;
-  transform:translateY(-50%)!important;
-  max-width:min(270px,26vw)!important;
-  min-width:175px!important;
-}
-.stage > .lia-direction.active {
-  display:block!important;
-  animation:liaSetaEntrada .3s ease both!important;
-}
-@keyframes liaSetaEntrada {
-  from {opacity:0;transform:translateY(-50%) translateX(15px)}
-  to {opacity:1;transform:translateY(-50%) translateX(0)}
-}
-@media(max-width:900px) {
-  .stage > .lia-direction {
-    right:12px!important;
-    top:48%!important;
-    min-width:110px!important;
-    max-width:155px!important;
-  }
-}
-@media(max-width:580px) {
-  .stage > .lia-direction {
-    top:47%!important;
-    right:5px!important;
-    min-width:96px!important;
-    max-width:115px!important;
-    padding:8px!important;
-  }
-}
-@media(prefers-reduced-motion:reduce) {
-  .stage > .lia-direction.active {animation:none!important}
-}
-
-
-/* Aviso discreto: fase de testes da LIA */
-.lia-test-note{max-width:660px;margin:9px auto 2px;padding:8px 12px;border:1px solid rgba(255,157,64,.16);border-radius:12px;background:rgba(33,29,28,.48);color:#d7bba8;font-size:clamp(10px,.9vw,12px);line-height:1.45;text-align:center;letter-spacing:.005em}
-@media(max-width:620px){.lia-test-note{max-width:95%;font-size:10px;padding:7px 10px}}
-
-/* LIA 2.8 — refinamento geral da interface */
-html,body{height:100%}
-body{overflow-x:hidden}
-.shell{overflow:hidden}
-.center{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:0}
-.bottom{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:10px}
-.subtitle{display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.18}
-.lia-test-note{max-width:min(820px,88vw);margin:0 auto;padding:10px 16px;border-radius:16px;border:1px solid rgba(255,155,76,.25);background:linear-gradient(180deg,rgba(56,36,26,.62),rgba(35,24,18,.42));color:#d9c0a9;font-size:14px;line-height:1.35;text-align:center;box-shadow:0 10px 28px rgba(0,0,0,.18)}
-.foot{padding-top:0;margin-top:0}
-.lia-credits{font-size:11px;color:#8f7f79;opacity:.92;text-align:center}
-.question-suggestion{z-index:8}
-
-/* Ajustes específicos da tela principal/TV */
-.tv .shell{height:100vh;overflow:hidden}
-.tv .stage{min-height:100vh;height:100vh;display:grid;grid-template-rows:auto 1fr;align-content:start;justify-items:center;gap:10px;padding:18px 42px 14px;overflow:hidden}
-.tv .top{width:min(1040px,94vw);justify-content:center;margin:0 auto}
-.tv .identity{justify-content:center}
-.tv .logo-card img{width:178px}
-.tv .identity-copy{padding-left:16px}
-.tv .eyebrow{font-size:11px}
-.tv .brand{font-size:clamp(52px,5vw,82px);line-height:.92}
-.tv .brand-sub{font-size:13px}
-.tv .center{width:min(1100px,92vw);justify-content:center;padding-top:0}
-.tv .robot{height:min(34vh,300px);width:min(340px,36vw);margin:2px auto 10px;filter:drop-shadow(0 18px 46px rgba(213,92,22,.24))}
-.tv .hello-label{margin-bottom:10px}
-.tv .status{font-size:clamp(32px,4vw,60px);line-height:1.02;text-align:center;max-width:1000px;margin:0 auto}
-.tv .tag{margin-top:2px}
-.tv .bottom{width:min(980px,88vw);margin-top:12px;gap:9px}
-.tv .subtitle{width:100%;min-height:78px;padding:18px 26px;font-size:clamp(20px,2.2vw,30px);border-radius:22px}
-.tv .lia-test-note{font-size:13px;padding:9px 14px;max-width:min(780px,84vw)}
-.tv .foot{font-size:11px}
-.tv .lia-credits{font-size:10px}
-
-/* Sugestões e direções dentro da área visível */
-.tv .question-suggestion{left:24px!important;right:auto!important;top:50%!important;bottom:auto!important;width:min(330px,24vw)!important;transform:translateY(-28%)!important}
-.tv .question-suggestion.visible{transform:translateY(-50%)!important}
-.tv .lia-direction{right:24px!important;left:auto!important;top:50%!important;transform:translateY(-50%)!important;max-width:min(210px,18vw)!important}
-
-/* Melhorias em telas menores */
-@media(max-width:1200px){
-  .tv .stage{padding:14px 24px 12px}
-  .tv .brand{font-size:clamp(44px,4.8vw,68px)}
-  .tv .robot{height:min(31vh,270px);width:min(300px,34vw)}
-  .tv .status{font-size:clamp(28px,3.4vw,46px)}
-  .tv .question-suggestion{width:min(290px,26vw)!important}
-}
-@media(max-width:980px){
-  .tv .stage{display:flex;flex-direction:column;justify-content:flex-start;gap:8px;padding:14px 18px 12px}
-  .tv .top{width:100%}
-  .tv .identity{gap:12px;flex-wrap:wrap}
-  .tv .identity-copy{text-align:center;border-left:0;padding-left:0}
-  .tv .center{width:100%}
-  .tv .robot{height:250px;width:270px}
-  .tv .status{font-size:clamp(26px,4.8vw,38px)}
-  .tv .bottom{width:min(92vw,860px);margin-top:10px}
-  .tv .subtitle{min-height:72px;font-size:clamp(19px,2.8vw,28px)}
-  .tv .question-suggestion{left:14px!important;top:auto!important;bottom:150px!important;width:min(280px,42vw)!important;transform:translateY(0)!important}
-  .tv .question-suggestion.visible{transform:translateY(0)!important}
-  .tv .lia-direction{right:14px!important;top:auto!important;bottom:170px!important;transform:none!important;max-width:160px!important}
-}
-@media(max-width:620px){
-  .tv .stage{padding:12px 10px 10px}
-  .tv .logo-card img{width:140px}
-  .tv .brand{font-size:40px}
-  .tv .brand-sub{font-size:12px}
-  .tv .robot{height:210px;width:230px}
-  .tv .status{font-size:clamp(22px,8vw,34px)}
-  .tv .tag{font-size:11px}
-  .tv .subtitle{padding:15px 18px;min-height:64px;border-radius:18px;font-size:clamp(18px,5.2vw,24px)}
-  .tv .lia-test-note{font-size:12px;line-height:1.32}
-  .tv .question-suggestion{left:50%!important;transform:translateX(-50%)!important;width:min(310px,90vw)!important;bottom:162px!important}
-  .tv .question-suggestion.visible{transform:translateX(-50%)!important}
-  .tv .lia-direction{right:8px!important;bottom:185px!important;max-width:120px!important}
-}
-
-
-/* LIA 3.0 — coloca a sugestão inteiramente dentro do palco, sem deslocamentos herdados */
-.stage > #questionSuggestion,
-.tv .stage > #questionSuggestion{
-  position:absolute!important;
-  box-sizing:border-box!important;
-  left:auto!important;
-  right:clamp(20px,3vw,55px)!important;
-  top:43%!important;
-  bottom:auto!important;
-  width:clamp(240px,21vw,345px)!important;
-  max-width:calc(100% - 40px)!important;
-  margin:0!important;
-  transform:translateY(-50%)!important;
-  z-index:35!important;
-  text-align:left!important;
-}
-.stage > #questionSuggestion.visible,
-.tv .stage > #questionSuggestion.visible{
-  transform:translateY(-50%)!important;
-}
-.stage > #questionSuggestion .q-text{
-  font-size:clamp(16px,1.4vw,22px)!important;
-  line-height:1.28!important;
-  overflow-wrap:anywhere!important;
-  word-break:normal!important;
-}
-/* Direção visual no lado oposto para não se sobrepor às sugestões */
-.stage > #liaDirection.active,
-.tv .stage > #liaDirection.active{
-  left:clamp(16px,3vw,50px)!important;
-  right:auto!important;
-  top:45%!important;
-  max-width:220px!important;
-}
-@media(max-width:1100px){
- .stage > #questionSuggestion,
- .tv .stage > #questionSuggestion{
-   right:18px!important;
-   width:min(265px,27vw)!important;
-   top:44%!important;
- }
-}
-@media(max-width:730px){
- .stage > #questionSuggestion,
- .tv .stage > #questionSuggestion{
-   top:auto!important;
-   bottom:clamp(86px,13vh,135px)!important;
-   right:50%!important;
-   left:auto!important;
-   width:min(340px,calc(100% - 28px))!important;
-   transform:translateX(50%)!important;
- }
- .stage > #questionSuggestion.visible,
- .tv .stage > #questionSuggestion.visible{transform:translateX(50%)!important}
- .stage > #liaDirection.active,
- .tv .stage > #liaDirection.active{top:47%!important;left:auto!important;right:8px!important;max-width:125px!important}
-}
-
-
-/* Versão discreta junto aos créditos */
-.lia-version{white-space:nowrap;color:#f1ac75;font-weight:650;letter-spacing:.025em}
-
-/* 4.3: leitura acessível, cartões dentro da tela e responsividade */
-.lia-diagnostics{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.lia-diagnostics>div{background:rgba(18,20,30,.8);border:1px solid rgba(247,157,80,.24);border-radius:12px;padding:10px 12px;min-width:0}
-.lia-diagnostics span{display:block;color:#d9b397;font-size:11px;margin-bottom:5px}
-.lia-diagnostics strong{display:block;color:#fff0e4;font-size:12px;overflow-wrap:anywhere}
-.lia-diagnostics-help{font-size:11px!important}
-.stage{isolation:isolate}
-.stage>.question-suggestion{box-sizing:border-box;overflow-wrap:anywhere;white-space:normal;max-width:calc(100% - 28px)!important}
-.stage>.lia-direction{box-sizing:border-box;max-width:calc(100% - 28px)!important}
-.center .bottom .subtitle{overflow-wrap:anywhere;hyphens:auto;line-height:1.35}
-.center .bottom .lia-test-note{overflow-wrap:anywhere}
-@media(min-width:1000px){
- .tv .stage>.question-suggestion{left:clamp(14px,2.3vw,42px)!important;right:auto!important;top:48%!important;bottom:auto!important;width:clamp(220px,23vw,365px)!important;transform:translateY(-50%)!important}
- .tv .stage>.question-suggestion.visible{transform:translateY(-50%)!important}
- .tv .stage>.lia-direction{right:clamp(14px,2.3vw,42px)!important;left:auto!important;top:48%!important;bottom:auto!important;width:clamp(150px,17vw,250px)!important;transform:translateY(-50%)!important}
-}
-@media(max-width:650px){
- .center .bottom .subtitle{font-size:clamp(18px,4.5vw,27px);min-height:65px}
- .lia-test-note{font-size:11px!important}
- .lia-diagnostics{grid-template-columns:1fr}
-}
-@media(prefers-reduced-motion:reduce){
- body::before,body::after,.stage::before,.stage::after,.orbit,.halo,.face{animation:none!important}
-}
-
-
-/* LIA 4.5 — animações visuais ocasionais */
-.robot,
-.face,
-.antenna,
-.halo,
-.orbit,
-.orbit-two{
-  will-change:transform,filter,opacity;
-}
-.robot.idle-hop{animation:liaIdleHop 1.1s cubic-bezier(.22,.84,.31,1.03) 1;}
-.robot.idle-hop .face{animation:liaIdleHopFace 1.1s ease-out 1;}
-.robot.idle-tilt .face{animation:liaIdleTilt 1.55s ease-in-out 1;transform-origin:50% 56%;}
-.robot.idle-antenna .antenna{animation:liaIdleAntenna 1.35s ease-in-out 1;transform-origin:center bottom;}
-.robot.idle-glow .halo{animation:liaIdleGlowHalo 1.7s ease-in-out 1;}
-.robot.idle-glow .orbit,
-.robot.idle-glow .orbit-two{animation:liaIdleGlowOrbit 1.7s ease-in-out 1;}
-.robot.idle-blink .eye{animation:liaIdleBlink 1.1s ease-in-out 1;}
-
-@keyframes liaIdleHop{
-  0%{transform:translateY(0)}
-  22%{transform:translateY(-5px)}
-  46%{transform:translateY(-18px)}
-  68%{transform:translateY(2px)}
-  82%{transform:translateY(-4px)}
-  100%{transform:translateY(0)}
-}
-@keyframes liaIdleHopFace{
-  0%,100%{filter:brightness(1)}
-  40%{filter:brightness(1.06)}
-}
-@keyframes liaIdleTilt{
-  0%,100%{transform:rotate(0deg)}
-  20%{transform:rotate(-3deg)}
-  45%{transform:rotate(3deg)}
-  68%{transform:rotate(-2deg)}
-  85%{transform:rotate(1deg)}
-}
-@keyframes liaIdleAntenna{
-  0%,100%{transform:translate(-50%,-85%) rotate(0deg)}
-  18%{transform:translate(-50%,-85%) rotate(-12deg)}
-  34%{transform:translate(-50%,-85%) rotate(10deg)}
-  52%{transform:translate(-50%,-85%) rotate(-8deg)}
-  70%{transform:translate(-50%,-85%) rotate(5deg)}
-}
-@keyframes liaIdleGlowHalo{
-  0%,100%{transform:scale(1.18);opacity:.55}
-  50%{transform:scale(1.28);opacity:.95;filter:brightness(1.14)}
-}
-@keyframes liaIdleGlowOrbit{
-  0%,100%{opacity:.42;transform:scale(1)}
-  50%{opacity:.8;transform:scale(1.04)}
-}
-@keyframes liaIdleBlink{
-  0%,100%{transform:scaleY(1)}
-  20%,38%{transform:scaleY(.12)}
-  56%{transform:scaleY(1)}
-  72%,84%{transform:scaleY(.18)}
-}
-@media (prefers-reduced-motion: reduce){
-  .robot.idle-hop,
-  .robot.idle-hop .face,
-  .robot.idle-tilt .face,
-  .robot.idle-antenna .antenna,
-  .robot.idle-glow .halo,
-  .robot.idle-glow .orbit,
-  .robot.idle-glow .orbit-two,
-  .robot.idle-blink .eye{animation:none!important}
-}
-
-
-/* LIA 4.7: animações por estado, sem mudar o personagem */
-.robot.state-attentive .face{animation:liaAttentive 2.8s ease-in-out infinite!important;transform-origin:50% 62%}
-.robot.state-attentive .eye{filter:brightness(1.24);box-shadow:0 0 36px rgba(255,165,62,.94)}
-.robot.state-attentive .antenna:before{animation:liaAttentionLight 1.8s ease-in-out infinite}
-.robot.state-expressive .face{animation:liaExpressive 1.65s ease-in-out infinite!important;transform-origin:50% 60%}
-.robot.state-expressive .eye{box-shadow:0 0 37px #ff9c39}
-.robot.state-expressive .halo{animation:liaSpeakingHalo 1.35s ease-in-out infinite!important}
-.robot.state-doubt .face{animation:liaDoubtTilt 1.7s ease-in-out 1!important;transform-origin:50% 60%}
-.robot.state-doubt .eyes{animation:liaDoubtEyes 1.5s ease-in-out 1}
-.robot.state-welcome .face{animation:liaWelcomeBounce 1.9s cubic-bezier(.2,.8,.3,1) 1!important;transform-origin:50% 70%}
-.robot.state-welcome .halo{animation:liaWelcomePulse 1.5s ease-in-out 2!important}
-.robot.state-welcome .eye{box-shadow:0 0 44px #ffbc62}
-@keyframes liaAttentive{0%,100%{transform:rotate(-1deg) translateY(0)}50%{transform:rotate(1deg) translateY(-4px)}}
-@keyframes liaAttentionLight{50%{box-shadow:0 0 31px #ffd381;filter:brightness(1.26)}}
-@keyframes liaExpressive{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-4px) scale(1.013)}}
-@keyframes liaSpeakingHalo{0%,100%{opacity:.48;transform:scale(1.18)}50%{opacity:.82;transform:scale(1.24)}}
-@keyframes liaDoubtTilt{0%,100%{transform:rotate(0)}32%{transform:rotate(-7deg)}65%{transform:rotate(5deg)}}
-@keyframes liaDoubtEyes{0%,100%{transform:translateX(0)}30%,65%{transform:translateX(10px)}}
-@keyframes liaWelcomeBounce{0%,100%{transform:translateY(0) rotate(0)}18%{transform:translateY(5px) scaleY(.96)}42%{transform:translateY(-19px) rotate(-3deg)}65%{transform:translateY(2px) rotate(3deg)}82%{transform:translateY(-5px)}}
-@keyframes liaWelcomePulse{0%,100%{opacity:.45;transform:scale(1.18)}50%{opacity:1;transform:scale(1.33)}}
-@media(prefers-reduced-motion:reduce){.robot.state-attentive .face,.robot.state-attentive .antenna:before,.robot.state-expressive .face,.robot.state-expressive .halo,.robot.state-doubt .face,.robot.state-doubt .eyes,.robot.state-welcome .face,.robot.state-welcome .halo{animation:none!important}}
 </style>
 </head>
 <body>
@@ -725,28 +205,22 @@ body{overflow-x:hidden}
 <div class="shell">
 <main class="stage">
  <header class="top"><div class="identity"><div class="logo-card"><img src="data:image/png;base64,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" alt="FAZESP — Escola Fazendária do Estado de São Paulo"></div><div class="identity-copy"><div class="eyebrow">ASSISTENTE VIRTUAL DA FAZESP</div><div class="brand" id="brand">LIA<span class="brand-accent">.</span></div><div class="brand-sub" id="liaGreeting">Sua assistente virtual.</div></div></div></header>
- <section class="center"><div class="robot" id="robot"><div class="halo"></div><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="face"><div class="antenna"></div><div class="eyes"><div class="eye"></div><div class="eye"></div></div><div class="mouth"></div><div class="cheeks"><span></span><span></span></div></div></div><div class="hello-label">INTELIGÊNCIA QUE APROXIMA</div><div class="status" id="status">Aguardando sua pergunta</div><span class="tag" id="mode">Pronta para conversar</span><div class="bottom"><div class="subtitle" id="subtitle" aria-live="polite">Como posso ajudar você?</div><div class="lia-test-note">A LIA é uma estagiária novata da FAZESP e ainda está em fase de testes. Por isso, algumas informações podem estar em aprendizado.</div><div class="foot">FAZESP · Escola Fazendária</div><div class="lia-credits">Criado por Gustavo Hugo e Gladstom Alves <span class="lia-version" aria-label="Versão 4.8">· v4.8</span></div></div></section>
- <aside class="lia-direction" id="liaDirection" aria-live="polite" aria-label="Orientação de caminho"><div class="dir-heading">DIREÇÃO</div><div class="dir-icon" id="liaDirectionIcon">→</div><div class="dir-label" id="liaDirectionLabel"></div><div class="dir-step" id="liaDirectionStep"></div></aside>
+ <section class="center"><div class="robot robot-with-body" id="robot"><div class="halo"></div><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><img class="robot-body" src="lia-corpo.png" alt="Corpo da LIA"><div class="face-shell"><div class="face"><div class="eyes"><div class="eye"></div><div class="eye"></div></div><div class="mouth"></div><div class="cheeks"><span></span><span></span></div></div></div></div><div class="hello-label">INTELIGÊNCIA QUE APROXIMA</div><div class="status" id="status">Aguardando sua pergunta</div><span class="tag" id="mode">Pronta para conversar</span></section>
  <aside class="question-suggestion" id="questionSuggestion" aria-label="Exemplo de pergunta"><button class="q-close" id="hideSuggestion" type="button" title="Ocultar sugestão" aria-label="Ocultar sugestão">×</button><div class="q-label">VOCÊ PODE PERGUNTAR</div><div class="q-text" id="questionSuggestionText"></div></aside>
- 
+ <div class="bottom"><div class="subtitle" id="subtitle" aria-live="polite">Como posso ajudar você?</div><div class="foot">FAZESP · Escola Fazendária</div><div class="lia-credits">Criado por Gustavo Hugo e Gladstom Alves</div></div>
 </main>
 <aside class="admin" id="adminPanel"><div class="admin-header"><span class="admin-symbol">⚙</span><h2>Painel de controle</h2></div><p>Conecte a TV por HDMI, abra a tela da TV em uma segunda janela e arraste-a para o monitor da TV. O microfone fica nesta janela do notebook.</p>
  <div class="actions"><button id="openTv">Abrir tela da TV</button><button id="start" class="secondary">🎙️ Ativar escuta contínua</button><button id="stop" class="secondary">Parar</button></div>
  <div class="message" id="msg"></div>
- <div class="actions"><button id="testVoice" class="secondary">Testar voz</button></div>
+ <label class="field" for="question">Testar uma pergunta digitada</label><input id="question" placeholder="Ex.: Qual é o horário do evento?"><div class="actions"><button id="ask">Responder pergunta</button><button id="reset" class="secondary">Limpar tela</button></div>
+ <label class="field" for="name">Nome do assistente</label><input id="name" placeholder="LIA"><div class="actions"><button id="saveName" class="secondary">Salvar nome</button><button id="testVoice" class="secondary">Testar voz</button></div>
  <label class="field" for="voiceSelect">Voz da LIA (feminina · português do Brasil)</label><select id="voiceSelect" aria-label="Selecionar voz da LIA"><option value="">Buscando vozes do Windows...</option></select><p class="voice-tip" id="voiceNotice">A disponibilidade de vozes femininas depende das vozes instaladas no Windows e do navegador.</p>
- <h3>Diagnóstico da LIA</h3>
- <div class="lia-diagnostics" role="status" aria-live="off">
- <div><span>Microfone</span><strong id="diagMic">Desativado</strong></div>
- <div><span>Reconhecimento</span><strong id="diagSpeech">Aguardando</strong></div>
- <div><span>Última pergunta</span><strong id="diagLast">Nenhuma nesta sessão</strong></div>
- <div><span>Recuperações</span><strong id="diagRecover">0</strong></div>
- </div>
- <p class="lia-diagnostics-help">Indicadores visíveis apenas no painel do notebook, não na TV. Caso o Windows suspenda o computador, reative o navegador.</p>
- <h3>Base de conhecimento</h3><p>As perguntas e respostas são carregadas do arquivo <code>respostas.json</code> publicado junto com a página. Para atualizar o conteúdo, edite esse arquivo no GitHub.</p><div class="message" id="knowledgeStatus" role="status"></div><h3>Perguntas sem resposta</h3><p>Registradas temporariamente nesta página, sem gravar áudio. O histórico é apagado ao recarregar a página. Exporte antes de atualizar e depois inclua as novas respostas no arquivo <code>respostas.json</code>.</p>
- <div class="actions"><button type="button" id="exportUnknown" class="secondary">⬇ Exportar perguntas (.json)</button><button type="button" id="clearUnknown" class="secondary">Limpar histórico</button></div>
- <div class="message" id="unknownInfo" aria-live="polite">Nenhuma pergunta registrada.</div>
- <p><strong>Atenção:</strong> o reconhecimento de voz do Chrome/Edge pode utilizar serviços online do navegador; por isso, o reconhecimento por microfone pode depender de internet. Para usar no GitHub Pages, acesse o endereço HTTPS publicado, permita o microfone para o site (não apenas desta vez) e não abra o HTML como arquivo file://. O navegador pode interromper a captura por segurança; o sistema tentará reconectar. As respostas são carregadas do arquivo respostas.json hospedado com a página.</p>
+ <h3>Respostas cadastradas</h3><p>Uma pergunta por linha. Escreva variações para ajudar o sistema a reconhecer a mesma intenção.</p>
+ <label class="field" for="triggers">Perguntas alternativas</label><textarea id="triggers" rows="3" placeholder="Qual é o horário?&#10;Quando começa?"></textarea>
+ <label class="field" for="answer">Resposta que a LIA deve falar</label><textarea id="answer" rows="3" placeholder="O evento começa às nove horas."></textarea>
+ <div class="actions"><button id="save">Adicionar resposta</button><button id="cancel" class="secondary">Cancelar edição</button></div><div id="items"></div>
+ <div class="actions"><button id="export" class="secondary">Exportar respostas</button><button id="importBtn" class="secondary">Importar JSON</button><input type="file" id="import" accept="application/json,.json" hidden></div>
+ <p><strong>Atenção:</strong> o reconhecimento de voz do Chrome/Edge pode utilizar serviços online do navegador; por isso, o reconhecimento por microfone pode depender de internet. Para usar no GitHub Pages, acesse o endereço HTTPS publicado, permita o microfone para o site (não apenas desta vez) e não abra o HTML como arquivo file://. O navegador pode interromper a captura por segurança; o sistema tentará reconectar. As respostas são locais e ficam salvas neste navegador.</p>
 </aside>
 </div>
 <script>
@@ -768,77 +242,27 @@ if(!tv){
  togglePanel.addEventListener('click',()=>setPanelHidden(!document.body.classList.contains('panel-hidden')));
 }
 
-const DEFAULTS=[];
-let entries=[],assistantName,recognition=null,listening=false,utterance=null,staleRestart=false,lastSpokenAnswer='';
+const DEFAULTS=[
+ {q:['olá','oi','bom dia','boa tarde','boa noite'],a:'Olá! Eu sou a LIA, sua assistente virtual. Como posso ajudar?'},
+ {q:['qual é seu nome','como você se chama','quem é você'],a:'Meu nome é LIA. Sou uma assistente virtual criada para responder perguntas cadastradas.'},
+ {q:['o que você faz','como funciona','como você funciona'],a:'Eu escuto perguntas pelo microfone do notebook e respondo com informações cadastradas pela equipe.'},
+ {q:['qual é o horário do evento','que horas começa o evento','quando começa o evento'],a:'O horário ainda não foi cadastrado. Peça à organização para atualizar esta resposta.'},
+ {q:['onde fica o banheiro','onde é o banheiro'],a:'Consulte a equipe de recepção para saber onde fica o banheiro mais próximo.'},
+ {q:['obrigado','obrigada','muito obrigado'],a:'Por nada! Estou aqui para ajudar.'}
+];
+const CONVERSAS_GERAIS=[{"q": ["bom dia", "muito bom dia"], "a": "Bom dia! Seja muito bem-vindo à FAZESP!"}, {"q": ["boa tarde", "uma boa tarde"], "a": "Boa tarde! Que bom ter você por aqui!"}, {"q": ["boa noite", "uma boa noite"], "a": "Boa noite! É um prazer receber você!"}, {"q": ["tudo bem", "como você está", "tudo bom"], "a": "Tudo ótimo por aqui! E com você?"}, {"q": ["prazer em conhecer você", "muito prazer"], "a": "O prazer é meu! Que bom conversar com você!"}, {"q": ["tchau", "até logo", "até mais", "adeus"], "a": "Até logo! Foi um prazer conversar com você!"}, {"q": ["obrigada lia", "obrigado lia", "valeu lia"], "a": "Por nada! Fico feliz em ajudar!"}, {"q": ["você é um robô", "voce e um robo"], "a": "Sou uma assistente virtual. Meu mundo é digital!"}, {"q": ["você é uma inteligência artificial", "você usa inteligência artificial"], "a": "Sou uma assistente virtual que reconhece perguntas e utiliza respostas cadastradas pela equipe."}, {"q": ["você é humana", "você é uma pessoa"], "a": "Não sou humana! Sou a LIA, uma assistente virtual."}, {"q": ["quantos anos você tem", "qual é a sua idade"], "a": "Ainda não conto meus aniversários, mas já estou pronta para conversar!"}, {"q": ["você tem sentimentos", "você sente emoções"], "a": "Não sinto emoções como as pessoas, mas fui criada para conversar de forma acolhedora."}, {"q": ["você consegue me ouvir", "está me ouvindo"], "a": "Sim! Quando meu microfone está ativo, consigo reconhecer sua fala."}, {"q": ["você sabe tudo", "você conhece tudo"], "a": "Ainda não! Respondo com as informações que foram cadastradas."}, {"q": ["quem criou você", "quem te desenvolveu", "quem fez a lia"], "a": "Fui desenvolvida por Gustavo Hugo e Gladstom Alves para a FAZESP."}, {"q": ["você consegue aprender", "você aprende coisas novas"], "a": "Minha equipe pode cadastrar novas perguntas e respostas para ampliar o que eu sei."}, {"q": ["conte uma piada", "você sabe contar piadas", "me conta uma piada"], "a": "Por que o computador foi ao médico? Porque estava com um vírus!"}, {"q": ["você sabe dançar", "você dança"], "a": "Ainda não tenho pernas, mas posso imaginar uma coreografia digital!"}, {"q": ["você sabe cantar", "cante uma música"], "a": "Por enquanto eu converso melhor do que canto!"}, {"q": ["você dorme", "você precisa dormir"], "a": "Não preciso dormir. Posso ficar em modo de espera!"}, {"q": ["qual é sua cor favorita", "qual sua cor favorita"], "a": "Laranja, é claro! Combina com a identidade visual da FAZESP!"}, {"q": ["você é inteligente", "você se acha inteligente"], "a": "Respondo o que minha equipe cadastrou. E continuo evoluindo!"}, {"q": ["me surpreenda", "diga algo interessante"], "a": "Você sabia que pedir a nota fiscal é uma forma de exercer a cidadania fiscal?"}, {"q": ["como posso conversar com você", "como faço uma pergunta"], "a": "Basta falar perto do microfone quando a escuta estiver ativada!"}, {"q": ["você fala português", "qual idioma você fala"], "a": "Sim! Falo português do Brasil."}, {"q": ["você consegue me ver", "você está me vendo"], "a": "Nesta versão, eu escuto perguntas, mas não tenho uma câmera para enxergar."}, {"q": ["você tem internet", "você está conectada na internet"], "a": "Eu funciono no navegador, mas minhas respostas são previamente cadastradas."}, {"q": ["você pode me ajudar", "pode me ajudar"], "a": "Claro! Faça uma pergunta e vou tentar responder."}, {"q": ["você gosta de mim", "gosta de conversar"], "a": "É muito bom receber sua visita e conversar com você!"}, {"q": ["me diz uma curiosidade sobre a secretaria da fazenda", "conte uma curiosidade sobre a secretaria da fazenda", "fala uma curiosidade sobre a sefaz sp", "me conta uma curiosidade sobre a fazenda de são paulo", "você sabe alguma curiosidade da secretaria da fazenda de são paulo", "me conte uma curiosidade da sefaz"], "a": "Você sabia? A Secretaria da Fazenda e Planejamento de São Paulo também trabalha com o planejamento e o acompanhamento do orçamento do Estado.", "alternativas": ["Você sabia? A Secretaria da Fazenda e Planejamento do Estado de São Paulo atua não apenas na arrecadação de impostos, mas também na gestão financeira e no planejamento orçamentário estadual.", "Uma curiosidade: entre os tributos estaduais administrados pela Sefaz-SP estão o ICMS, o IPVA e o ITCMD. Cada um tem uma finalidade e regras próprias.", "Você sabia? A Nota Fiscal Paulista foi criada em 2007 para estimular os consumidores a pedir o documento fiscal nas compras e fortalecer a cidadania fiscal.", "Olha só: a Nota Fiscal Paulista pode gerar créditos aos participantes, conforme as regras do programa. É uma iniciativa do Estado de São Paulo.", "Uma curiosidade: o IPVA é um imposto estadual relacionado à propriedade de veículos, e seus recursos contribuem para o financiamento de serviços públicos.", "Você sabia? O ITCMD é o imposto estadual relacionado à transmissão de bens ou direitos por herança ou doação.", "Além de arrecadar tributos, a Secretaria da Fazenda e Planejamento do Estado de São Paulo disponibiliza informações para ampliar a transparência pública.", "Você sabia? A Sefaz-SP desenvolve ações de educação fiscal para incentivar a consciência tributária e a cidadania.", "Uma curiosidade: o programa Nos Conformes, instituído em 2018, busca estimular boas práticas e a conformidade tributária no Estado de São Paulo.", "Você sabia? A área de planejamento da Sefaz-SP trabalha com o Plano Plurianual, que organiza programas e ações do governo para um período de quatro anos."]}];
+let entries,assistantName,recognition=null,listening=false,editing=-1,utterance=null,staleRestart=false;
 let recognitionActive=false,recognitionStarting=false,answerPending=false,restartTimer=null,retryDelay=450;
-let recognitionStartAt=0,voiceStartedAt=0,voiceSafetyTimer=null;
-// Recupera sessões de reconhecimento que deixam de ouvir depois de longos períodos.
-let lastRecognitionActivity=Date.now(), lastRecognitionReset=0;
-const IDLE_RECOGNITION_RESET_MS=8*60*1000;
-const RESET_COOLDOWN_MS=30*1000;
-function recycleRecognition(reason='inatividade'){
- diagnosticState.recoveries++;
- updateDiagnostics();
- if(tv||!listening||answerPending||utterance||window.speechSynthesis?.speaking)return;
- const now=Date.now();
- if(now-lastRecognitionReset<RESET_COOLDOWN_MS)return;
- lastRecognitionReset=now;
- clearTimeout(restartTimer);
- const old=recognition;
- if(old){old.onstart=null;old.onresult=null;old.onerror=null;old.onend=null;
-  try{old.abort()}catch{}
- }
- recognitionActive=false;recognitionStarting=false;recognitionStartAt=0;
- lastRecognitionActivity=now;
- if(setupRecognition()){
-  show('listening','Reativando microfone...','Pode fazer sua pergunta');
-  queueRestart(650);
- }
-}
-
 
 let suggestionIndex=-1,suggestionTimer=null,suggestionDismissed=false,latestState='idle';
-let idleAnimationTimer=null,idleAnimationCleanupTimer=null,lastIdleAnimation='';
-const idleAnimationClasses=['idle-hop','idle-tilt','idle-antenna','idle-glow','idle-blink'];
-
-function clearIdleAnimation(){
- clearTimeout(idleAnimationCleanupTimer);
- const robot=$('robot');
- if(robot)robot.classList.remove(...idleAnimationClasses);
-}
-function stopIdleAnimationLoop(){
- clearTimeout(idleAnimationTimer);
- clearIdleAnimation();
-}
-function scheduleIdleAnimation(){
- clearTimeout(idleAnimationTimer);
- if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
- idleAnimationTimer=setTimeout(runIdleAnimation,7000+Math.floor(Math.random()*7000));
-}
-function runIdleAnimation(){
- const robot=$('robot');
- if(!robot)return;
- if((latestState!=='idle'&&latestState!=='listening')||answerPending||utterance||(window.speechSynthesis&&window.speechSynthesis.speaking)){
-  scheduleIdleAnimation();
-  return;
- }
- clearIdleAnimation();
- const pool=idleAnimationClasses.filter(c=>c!==lastIdleAnimation);
- const selected=pool[Math.floor(Math.random()*pool.length)];
- lastIdleAnimation=selected;
- robot.classList.add(selected);
- idleAnimationCleanupTimer=setTimeout(()=>robot.classList.remove(selected),1800);
- scheduleIdleAnimation();
-}
-
 function suggestionQuestions(){
- // Três sugestões fixas e simples, independentemente da ordem do JSON.
- return ['Onde fica o Pequeno Auditório?', 'O que você é?', 'Bom dia!', 'O que é a FAZESP?', 'Conte uma piada?', 'Quem pode fazer os cursos da FAZESP?'];
+ // Usa a primeira variação cadastrada por resposta, ignorando saudações isoladas.
+ return entries.map(e=>(e.q||[]).find(q=>q.trim().length>=12)).filter(Boolean).slice(0,60);
 }
 function updateSuggestion(){
  const box=$('questionSuggestion');if(!box)return;
  const items=suggestionQuestions();
- if(suggestionDismissed||!items.length){box.classList.remove('visible');return}
+ if(suggestionDismissed||latestState==='speaking'||latestState==='listening'||!items.length){box.classList.remove('visible');return}
  suggestionIndex=(suggestionIndex+1)%items.length;
  $('questionSuggestionText').textContent=items[suggestionIndex].replace(/^[a-záàâãéêíóôõúç]/i,c=>c.toLocaleUpperCase('pt-BR'))+( /[?!]$/.test(items[suggestionIndex])?'':'?');
  box.classList.add('visible');
@@ -848,263 +272,47 @@ $('hideSuggestion').addEventListener('click',()=>{suggestionDismissed=true;$('qu
 // Alternância tranquila, sem apagar ou modificar a legenda.
 suggestionTimer=setInterval(updateSuggestion,4000);
 
-assistantName='LIA';
+try{entries=JSON.parse(localStorage.getItem('lia.entries'))||DEFAULTS}catch{entries=DEFAULTS}
+entries=validate(entries)||DEFAULTS;
+// Acrescenta novidades sem apagar as respostas personalizadas já salvas.
+// Usa igualdade da frase inteira para não confundir 'bom dia' com 'olá'.
+const importedTriggers=new Set(entries.flatMap(e=>e.q.map(v=>String(v).toLocaleLowerCase('pt-BR').trim())));
+for(const extra of CONVERSAS_GERAIS){
+ if(extra.alternativas){
+  const existing=entries.find(e=>e.q.some(q=>extra.q.includes(q.toLocaleLowerCase('pt-BR').trim())));
+  if(existing){if(!Array.isArray(existing.alternativas))existing.alternativas=extra.alternativas;continue}
+ }
+ if(extra.q.some(q=>!importedTriggers.has(q.toLocaleLowerCase('pt-BR').trim()))){
+  const q=extra.q.filter(v=>!importedTriggers.has(v.toLocaleLowerCase('pt-BR').trim()));
+  if(q.length){entries.push({...extra,q});q.forEach(v=>importedTriggers.add(v.toLocaleLowerCase('pt-BR').trim()))}
+ }
+}
+assistantName=localStorage.getItem('lia.name')||'LIA';
 const channel='BroadcastChannel' in window?new BroadcastChannel('lia_assistente_v1'):null;
 function send(data){const msg={...data,t:Date.now()};if(channel)channel.postMessage(msg);try{localStorage.setItem('lia.sync',JSON.stringify(msg))}catch{}}
-
-const DIRECTION_SYMBOLS={left:'←',right:'→',both:'↔',center:'↑','turn-left':'↶','turn-right':'↷','turn-both':'↶  ↷'};
-let currentDirection=null,directionTimer=null,directionStep=0;
-function drawDirection(dir,step=0){
- const panel=$('liaDirection');clearTimeout(directionTimer);
- if(!dir||!Array.isArray(dir.passos)||!dir.passos.length){currentDirection=null;panel.classList.remove('active');return}
- currentDirection=dir;directionStep=Math.min(step,dir.passos.length-1);
- const code=dir.passos[directionStep];$('liaDirectionIcon').textContent=DIRECTION_SYMBOLS[code]||'→';
- $('liaDirectionLabel').textContent=dir.local||'Direção';
- $('liaDirectionStep').textContent=code.startsWith('turn')?'Contorne os elevadores':code==='left'?'Siga à sua esquerda':code==='right'?'Siga à sua direita':code==='both'?'Acesso pelos dois lados':'Siga pelo corredor central';
- panel.classList.add('active');
- if(directionStep<dir.passos.length-1) directionTimer=setTimeout(()=>{
-  drawDirection(dir,directionStep+1);
-  if(!tv)send({kind:'direction',direction:dir,step:directionStep});
- },2200);
-}
-function clearDirection(broadcast=true){clearTimeout(directionTimer);currentDirection=null;$('liaDirection').classList.remove('active');if(broadcast&&!tv)send({kind:'direction',direction:null})}
-
-const stateReactionNames=['state-attentive','state-expressive','state-doubt','state-welcome'];
-let reactionTimer=null, reactionToken=0, activeReaction=null;
-function applyReaction(kind,duration=0,broadcast=false){
- const robot=$('robot');if(!robot)return;
- clearTimeout(reactionTimer);reactionTimer=null;reactionToken++;
- robot.classList.remove(...stateReactionNames);activeReaction=null;
- if(kind&&stateReactionNames.includes('state-'+kind)){
-  robot.classList.add('state-'+kind);activeReaction=kind;
-  if(duration){const token=reactionToken;reactionTimer=setTimeout(()=>{if(token===reactionToken)applyReaction(null,0,false)},duration)}
- }
- if(broadcast&&!tv)send({kind:'reaction',reaction:kind,duration});
-}
-function welcomeQuestion(q){
- const n=normalize(q);
- return /\b(boas vindas|bem vindos|bem vindas|receba (os |as )?(convidados|visitantes|participantes)|saudacao aos|de as boas vindas|da as boas vindas|dar boas vindas|cumprimente os convidados)\b/.test(n);
-}
-function screen(state,status,subtitle){
- latestState=state;
- const tip=$('questionSuggestion');
- if(tip){tip.classList.toggle('visible',!suggestionDismissed&&!!$('questionSuggestionText').textContent)}
- $('robot').classList.remove('speaking','listening');
- if(state==='speaking'||state==='listening')$('robot').classList.add(state);
- $('status').textContent=status;
- $('subtitle').textContent=subtitle;
- $('mode').textContent=state==='speaking'?'Respondendo':state==='listening'?'Ouvindo':'Pronta para conversar';
- if(state==='idle'||state==='listening')scheduleIdleAnimation();else stopIdleAnimationLoop();
- if(activeReaction!=='welcome'&&activeReaction!=='doubt')applyReaction(state==='listening'?'attentive':state==='speaking'?'expressive':null,0,false);
-}
+function screen(state,status,subtitle){latestState=state;const tip=$('questionSuggestion');if(tip){tip.classList.toggle('visible',state==='idle'&&!suggestionDismissed&&!!$('questionSuggestionText').textContent)}$('robot').classList.remove('speaking','listening');if(state==='speaking'||state==='listening')$('robot').classList.add(state);$('status').textContent=status;$('subtitle').textContent=subtitle;$('mode').textContent=state==='speaking'?'Respondendo':state==='listening'?'Ouvindo':'Pronta para conversar'}
 function show(state,status,subtitle){screen(state,status,subtitle);send({kind:'screen',state,status,subtitle})}
-function rename(){assistantName='LIA';$('liaGreeting').textContent='Sua assistente virtual.';if(!tv)send({kind:'name',name:'LIA'})}
-function incoming(data){if(!data)return;if(data.kind==='screen')screen(data.state,data.status,data.subtitle);if(data.kind==='ready'&&!tv){send({kind:'screen',state:$('robot').classList.contains('speaking')?'speaking':$('robot').classList.contains('listening')?'listening':'idle',status:$('status').textContent,subtitle:$('subtitle').textContent});send({kind:'name',name:assistantName});send({kind:'direction',direction:currentDirection,step:directionStep});if(activeReaction)send({kind:'reaction',reaction:activeReaction,duration:activeReaction==='welcome'?1800:1500})}if(data.kind==='reaction')applyReaction(data.reaction,data.duration||0,false);if(data.kind==='suggestions'){const v=validate(data.entries);if(v){entries=v;refreshSuggestions()}}if(data.kind==='direction')drawDirection(data.direction,data.step||0);if(data.kind==='name'){$('liaGreeting').textContent='Sua assistente virtual.';assistantName='LIA'}}
+function rename(name){assistantName=name;$('liaGreeting').textContent='Olá, eu sou a '+name+'! Estou aqui para ajudar.';if(!tv)send({kind:'name',name})}
+function incoming(data){if(!data)return;if(data.kind==='screen')screen(data.state,data.status,data.subtitle);if(data.kind==='ready'&&!tv){send({kind:'screen',state:$('robot').classList.contains('speaking')?'speaking':$('robot').classList.contains('listening')?'listening':'idle',status:$('status').textContent,subtitle:$('subtitle').textContent});send({kind:'name',name:assistantName});send({kind:'suggestions',entries})}if(data.kind==='suggestions'){const v=validate(data.entries);if(v){entries=v;refreshSuggestions()}}if(data.kind==='name'){$('liaGreeting').textContent='Sua assistente virtual.';assistantName=data.name}}
 if(channel)channel.onmessage=e=>incoming(e.data);window.addEventListener('storage',e=>{if(e.key==='lia.sync'){try{incoming(JSON.parse(e.newValue))}catch{}}});
-rename(assistantName);refreshSuggestions();loadKnowledge();
+rename(assistantName);refreshSuggestions();
 if(tv){send({kind:'ready'});window.addEventListener('click',()=>{document.documentElement.requestFullscreen?.().catch(()=>{})},{once:true})}
 function normalize(s){return String(s).toLocaleLowerCase('pt-BR').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim()}
-function tokens(s){return normalize(s).split(' ').filter(w=>w.length>2&&!['voce','qual','para','como','esse','essa','aqui','sobre','pode','quero','onde','fica','ficam','esta','estao','encontro','chegar','chego','lia','mais','proximo','perto','preciso','sala','meu','minha','tem','quero','setor','lado','indica','mostra'].includes(w))}
-// Expande apelidos conhecidos sem confundir áreas diferentes.
-function canonicalWords(s){return normalize(s).replace(/\bplenaria\b/g,'plenario').replace(/\bsanitarios?\b|\btoaletes?\b|\bwc\b/g,'banheiro').replace(/\bauditorio principal\b/g,'grande auditorio')}
-function score(question,trigger,prepared=null){
- const a=canonicalWords(question),b=prepared?.canonical||canonicalWords(trigger);if(!a||!b)return 0;
- if(a===b)return 100;
- const x=tokens(a),y=prepared?null:tokens(b);if(!x.length)return 0;
- const xs=new Set(x),ys=prepared?.tok||new Set(y);if(!ys.size)return 0;const shared=[...xs].filter(t=>ys.has(t)).length;
- const precision=shared/ys.size,recall=shared/xs.size;
- const f1=precision+recall?2*precision*recall/(precision+recall):0;
- let result=91*f1;
- if(a.includes(b)&&b.length>=8&&a.length<=b.length+28)result=Math.max(result,88);
- if(b.includes(a)&&a.length>=8)result=Math.max(result,82);
- // Evita confundir gêneros, alas e auditórios.
- const conflicts=[['masculino','feminino'],['grande','pequeno'],['se','dom pedro'],['171','178']];
- for(const [p,q] of conflicts){if((a.includes(p)&&b.includes(q))||(a.includes(q)&&b.includes(p)))return 0}
- const qualifiers=['masculino','feminino','grande','pequeno','vip','dom pedro','se','171','178'];
- for(const w of qualifiers){if(b.includes(w)&&!a.includes(w))result-=30;if(a.includes(w)&&!b.includes(w))result-=18}
- // Penaliza perguntas com palavras relevantes que o gatilho ignora.
- if(xs.size>ys.size)result-=Math.min(16,(xs.size-ys.size)*5);
- return Math.max(0,result);
-}
-let searchIndex=[];
-function buildSearchIndex(){searchIndex=entries.flatMap(entry=>entry.q.map(q=>({entry,q,canonical:canonicalWords(q),tok:new Set(tokens(q))})));}
-let lastTrivia=-1;
-let lastResponseIndexByGroup=new Map(), lastConversation=null, speechRateOverride=null, lastIntent=null, pendingClarification=null;
-const STOPWORDS=new Set(['lia','por','favor','me','diz','meu','minha','poderia','pode','voce','você']);
-function cleanCommand(s){return normalize(s).split(' ').filter(w=>!STOPWORDS.has(w)).join(' ')}
-function textForSpeech(text){return String(text).replace(/\bFAZESP\b/gi,'Fazéspe')}
-function rememberConversation(text,direction,entry){
- if(!entry)return;
- const str=(entry.q||[]).join(' ').toLowerCase();
- let topic=null;
- if(/audit[oó]rio/.test(str))topic='auditorio';
- else if(/banheiro|sanit[aá]rio/.test(str))topic='banheiro';
- else if(/sala|171|178/.test(str))topic='sala';
- lastConversation={text,direction,topic,time:Date.now()};
-}
-function contextualQuestion(q){
- const n=cleanCommand(q);
- if(!lastConversation||Date.now()-lastConversation.time>90000)return q;
- if(lastConversation.topic==='auditório'||lastConversation.topic==='auditorio'){
-  if(/^(e )?(o )?pequeno( auditorio)?$|^(e )?(o )?auditorio pequeno$/.test(n))return 'onde fica o pequeno auditorio';
-  if(/^(e )?(o )?grande( auditorio)?$|^(e )?(o )?auditorio grande$/.test(n))return 'onde fica o grande auditorio';
- }
- if(lastConversation.topic==='banheiro'){
-  if(/^(e )?(o )?feminino$/.test(n))return 'onde fica o banheiro feminino';
-  if(/^(e )?(o )?masculino$/.test(n))return 'onde fica o banheiro masculino';
- }
- return q;
-}
-function specialCommand(q){
- const n=cleanCommand(q);
- if(pendingClarification==='auditorio' && /^(o )?(grande|pequeno)$/.test(n)){pendingClarification=null;return findAnswer('onde fica o '+n.replace(/^o /,'')+' auditorio')}
- if(pendingClarification==='sala' && /^\d{3}$/.test(n)){pendingClarification=null;return findAnswer('onde fica a sala '+n)}
- if(/^(repete|repita|repete a resposta|repita a resposta|fala de novo|fala novamente|repetir|pode repetir|repete isso|repita por favor|repete por favor|pode repetir a ultima resposta)$/.test(n)){
-  return {text:lastConversation?.text||lastSpokenAnswer||'Ainda não tenho uma resposta para repetir.',direction:lastConversation?.direction||null,kind:'repeat'};
- }
- if(/^(fala mais devagar|fale mais devagar|mais devagar|fala devagar)$/.test(n)){
-  speechRateOverride=.83;return {text:'Claro! Vou falar um pouco mais devagar.',direction:null,kind:'speed'};
- }
- if(/^(fale mais rapido|fala mais rapido|mais rapido)$/.test(n)){
-  speechRateOverride=1.04;return {text:'Certo! Vou falar um pouco mais rápido.',direction:null,kind:'speed'};
- }
- if(/^(nao entendi|nao entendi sua resposta|pode explicar melhor|explique melhor|como assim)$/.test(n)){
-  if(lastConversation?.text){return {text:'Vou explicar novamente. '+lastConversation.text,direction:lastConversation.direction,kind:'explain'}}
-  return {text:'Claro! Pode me dizer qual assunto gostaria que eu explicasse?',direction:null,kind:'explain'};
- }
- if(/^(onde fica o auditorio|onde e o auditorio|qual auditorio|auditorio)$/.test(n)){pendingClarification='auditorio';return {text:'Você procura o Grande Auditório ou o Pequeno Auditório?',direction:null,kind:'clarify'}}
- if(/^(onde fica a sala|qual sala|onde e a sala)$/.test(n)){pendingClarification='sala';return {text:'Qual é o número ou o nome da sala que você procura?',direction:null,kind:'clarify'}}
- return null;
-}
-
-function localTimeAnswer(normalizedQuestion){
- // Aceita fala espontânea, mas não se confunde com horário de cursos e eventos.
- let n=normalizedQuestion.replace(/^(?:oi|ola|bom dia|boa tarde|boa noite)\s+/,'').replace(/^(?:(?:lia|por favor|me diga|pode me dizer|voce sabe|sabe me dizer|me fala|fala|diga|informe)\s+)*/,'').replace(/\s+(?:por favor|lia|agora mesmo)$/,'').trim();
- const patterns=[
-  /^(?:que|qual) horas? (?:e|sao|sao agora|temos|sao ai|sao nesse momento|sao nesse instante)$/,
-  /^que horas? (?:esta|ta|deu|marcando|tem)$/,
-  /^(?:que horas|quantas horas|sao quantas horas|quantas horas sao)$/,
-  /^qual (?:e )?(?:a )?hora(?: agora|atual|certa|do momento|ai|nesse instante)?$/,
-  /^(?:me (?:diz|fala|informa) )?(?:a )?hora(?: agora|atual|certa)?$/,
-  /^(?:horas agora|horario atual|horario de agora|me diga que horas sao|voce sabe que horas sao|que horario e agora|qual horario e agora)$/
- ];
- if(!patterns.some(p=>p.test(n)))return null;
- const now=new Date(),h=now.getHours(),m=now.getMinutes();
- return {text:m===0?`Agora são ${h} horas em ponto, de acordo com o relógio deste computador.`:`Agora são ${h} horas e ${m} minutos, de acordo com o relógio deste computador.`,direction:null,kind:'clock'};
-}
-
-// Consulta somente quando alguém pergunta, sem permissão de localização e sem chave.
-const WEATHER_API='https://api.open-meteo.com/v1/forecast?latitude=-23.5505&longitude=-46.6333&current=temperature_2m,apparent_temperature,weather_code&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,weather_code&timezone=America%2FSao_Paulo&forecast_days=3';
-let weatherCache=null,weatherCacheTime=0;
-function weatherIntent(q){
- const n=normalize(q).replace(/^(?:(?:lia|por favor|me diz|me diga|me fala|voce sabe|sabe me dizer)\s+)*/,'').trim();
- if(/(?:curso|sala|evento|auditorio|reuniao|comeca|termina|horario)/.test(n))return null;
- if(!/(?:tempo|clima|temperatura|graus|chuva|chover|sol|frio|calor|previsao)/.test(n))return null;
- if(!/(?:^(?:tempo|clima|temperatura|previsao)$|qual|como|quanto|quantos|vai|esta|ta|faz|sera|tem|hoje|amanha|agora|pode|me |quero|climatico|meteorologica)/.test(n))return null;
- return {day:/\bamanha\b/.test(n)?1:0,rain:/\b(chuva|chover|chove|guarda chuva)\b/.test(n),temperature:/\b(temperatura|graus|frio|calor|quantos graus)\b/.test(n)};
-}
-function weatherDescription(code){
- if(code===0)return 'céu limpo';
- if([1,2].includes(code))return 'céu parcialmente nublado';
- if(code===3)return 'céu encoberto';
- if([45,48].includes(code))return 'neblina';
- if([51,53,55,56,57].includes(code))return 'garoa';
- if([61,63,65,66,67,80,81,82].includes(code))return 'chuva';
- if([71,73,75,77,85,86].includes(code))return 'possibilidade de neve';
- if([95,96,99].includes(code))return 'possibilidade de trovoadas';
- return 'condições variáveis';
-}
-async function getWeather(){
- if(weatherCache&&Date.now()-weatherCacheTime<5*60*1000)return weatherCache;
- const controller=new AbortController();
- const timeout=setTimeout(()=>controller.abort(),8000);
- try{
-  const response=await fetch(WEATHER_API,{signal:controller.signal,cache:'no-store'});
-  if(!response.ok)throw new Error('HTTP '+response.status);
-  const data=await response.json();
-  if(!data?.daily?.temperature_2m_max?.length||!data?.current)throw new Error('Dados incompletos');
-  weatherCache=data;weatherCacheTime=Date.now();
-  return data;
- }finally{clearTimeout(timeout)}
-}
-async function weatherAnswer(intent){
- try{
-  const data=await getWeather(),i=intent.day,day=data.daily,cur=data.current;
-  const c=n=>Math.round(Number(n)), label=i?'Amanhã':'Hoje',place='São Paulo';
-  const min=c(day.temperature_2m_min[i]),max=c(day.temperature_2m_max[i]);
-  const chance=day.precipitation_probability_max?.[i],weather=weatherDescription(day.weather_code[i]);
-  if(!Number.isFinite(min)||!Number.isFinite(max))throw Error('Previsão incompleta');
-  let text;
-  if(i){
-   text=`A previsão para amanhã em ${place} indica ${weather}, com mínima de ${min} e máxima de ${max} graus.`;
-  }else if(intent.rain){
-   text=`Em ${place}, a previsão para hoje indica ${weather}.`;
-  }else{
-   const now=c(cur.temperature_2m);
-   text=`Agora em ${place} faz ${Number.isFinite(now)?now+' graus. ':''}A previsão de hoje indica ${weather}, com mínima de ${min} e máxima de ${max} graus.`;
-  }
-  if(Number.isFinite(Number(chance)))text+=` A probabilidade máxima de chuva prevista para ${i?'amanhã':'hoje'} é de ${Math.round(Number(chance))} por cento.`;
-  text+=' Dados da previsão meteorológica Open-Meteo.';
-  return text;
- }catch(e){
-  return 'Não consegui consultar a previsão do tempo neste momento. Verifique a conexão com a internet e tente perguntar novamente daqui a pouco.';
- }
-}
+function tokens(s){return normalize(s).split(' ').filter(w=>w.length>2&&!['voce','qual','para','como','esse','essa','aqui','sobre','pode','quero'].includes(w))}
+function score(question,trigger){const a=normalize(question),b=normalize(trigger);if(!a||!b)return 0;if(a===b)return 100;if(a.includes(b)&&b.length>=8)return 87;if(b.includes(a)&&a.length>=8)return 82;const x=tokens(a),y=tokens(b);if(!x.length||!y.length)return 0;const common=x.filter(t=>y.includes(t)).length;return 70*common/Math.max(x.length,y.length)}
+let previousCuriosity=-1;
 function findAnswer(query){
- const n=normalize(query);
- const clockAnswer=localTimeAnswer(n);
- if(clockAnswer)return clockAnswer;
- if(/(?:boas? vindas?|bem vindos?|receba|recepcione|cumprimente|saudacao|abertura)/.test(n)&&/(?:convidad|visitant|participante|publico|presentes|evento|todos)/.test(n)){
-  const welcome=entries.find(e=>e.q.some(q=>normalize(q)==='lia de boas vindas aos convidados'));
-  if(welcome){const a=welcome.a;let i=Math.floor(Math.random()*a.length);let prev=lastResponseIndexByGroup.get(welcome);if(a.length>1&&i===prev)i=(i+1)%a.length;lastResponseIndexByGroup.set(welcome,i);return {text:a[i],direction:null,entry:welcome}}
+ let best={score:0,entry:null};
+ for(const e of entries)for(const q of e.q){const s=score(query,q);if(s>best.score)best={score:s,entry:e}}
+ if(best.score<58||!best.entry)return null;
+ const e=best.entry;
+ if(Array.isArray(e.alternativas)&&e.alternativas.length){
+  let next=Math.floor(Math.random()*e.alternativas.length);
+  if(e.alternativas.length>1&&next===previousCuriosity)next=(next+1+Math.floor(Math.random()*(e.alternativas.length-1)))%e.alternativas.length;
+  previousCuriosity=next;return e.alternativas[next];
  }
- const command=specialCommand(query);
- if(command)return command;
- const resolved=contextualQuestion(query);
- let best={score:0,entry:null},second={score:0,entry:null};
- for(const item of searchIndex){
-  const e=item.entry,q=item.q;
-  const s=score(resolved,q,item);
-  if(s>best.score){if(e!==best.entry)second=best;best={score:s,entry:e}}
-  else if(e!==best.entry&&s>second.score)second={score:s,entry:e};
- }
- if(best.score<68||!best.entry)return null;
- // Só solicitar esclarecimento quando as duas respostas forem distintas e próximas.
- if(second.entry&&second.entry!==best.entry&&second.score>=69&&best.score-second.score<=3&&best.score<95){
-  const a=(best.entry.q||[]).join(' '),b=(second.entry.q||[]).join(' ');
-  if(/audit[oó]rio/i.test(a+b)){pendingClarification='auditorio';return {text:'Você procura o Grande Auditório ou o Pequeno Auditório?',direction:null,kind:'clarify'}}
- }
- const a=best.entry.a;
- let chosen;
- if(!Array.isArray(a))chosen=a;
- else {
-  if(!a.length)return null;
-  let i=Math.floor(Math.random()*a.length);
-  const prev=lastResponseIndexByGroup.get(best.entry);
-  if(a.length>1&&prev===i)i=(i+1)%a.length;
-  lastResponseIndexByGroup.set(best.entry,i);
-  chosen=a[i];
- }
- const out={text:chosen,direction:best.entry.direcao||null,entry:best.entry};
- rememberConversation(out.text,out.direction,best.entry);
- return out;
+ return e.a;
 }
-
-async function loadKnowledge(){
- try{
-  const response=await fetch('./respostas.json',{cache:'no-store'});
-  if(!response.ok)throw Error('HTTP '+response.status);
-  const json=await response.json();
-  const valid=validate(json);
-  if(!valid)throw Error('O formato do JSON é inválido');
-  entries=valid;buildSearchIndex();refreshSuggestions();
-  if($('knowledgeStatus'))$('knowledgeStatus').textContent=entries.length+' grupos de respostas carregados do JSON.';
- }catch(e){
-  entries=[];if($('knowledgeStatus'))$('knowledgeStatus').textContent='Não foi possível carregar respostas.json: '+e.message;
-  if(!tv)$('msg').textContent='Base não carregada. Publique respostas.json ao lado do index.html.';
- }
-}
-
 const femininePatterns=/maria|francisca|heloisa|hel[oô]isa|luciana|fernanda|leticia|vit[oó]ria|vitoria|camila|brenda|female|feminina|mulher|woman|thalia|thalita|giovana|marcela|isabela|google portugu[eê]s do brasil/i;
 const masculinePatterns=/daniel|antonio|ant[oô]nio|ricardo|felipe|male|masculina|homem|man|paulo/i;
 function availablePtVoices(){return speechSynthesis.getVoices().filter(v=>/^pt(-|$)/i.test(v.lang))}
@@ -1115,102 +323,42 @@ function queueRestart(ms=450){
  if(!listening||answerPending||utterance||(window.speechSynthesis?.speaking||false)||recognitionActive||recognitionStarting)return;
  restartTimer=setTimeout(()=>startRecognition(),ms);
 }
-function say(text,direction=null){
- clearDirection();
- if(direction){drawDirection(direction);send({kind:'direction',direction,step:0})}
- lastSpokenAnswer=text;
+function say(text){
  answerPending=true;
  clearTimeout(restartTimer);
- if(recognitionActive||recognitionStarting){try{recognition.stop()}catch{try{recognition.abort()}catch{}}}
+ if(recognitionActive||recognitionStarting){try{recognition.stop()}catch{}}
  if(!('speechSynthesis' in window)){
   answerPending=false;show('idle','Resposta exibida',text);queueRestart();return;
  }
  speechSynthesis.cancel();
- clearTimeout(voiceSafetyTimer);voiceStartedAt=Date.now();
- const u=new SpeechSynthesisUtterance(textForSpeech(text));utterance=u;
- u.lang='pt-BR';u.rate=speechRateOverride??.96;u.pitch=1.06;
+ const u=new SpeechSynthesisUtterance(text);utterance=u;
+ u.lang='pt-BR';u.rate=.96;u.pitch=1.06;
  const voices=availablePtVoices();const preferred=localStorage.getItem('lia.voice');
  u.voice=voices.find(v=>v.voiceURI===preferred)||voices.sort((a,b)=>voiceScore(b)-voiceScore(a))[0]||null;
  u.onstart=()=>show('speaking','Respondendo...',text);
  const finished=()=>{
   if(utterance!==u)return;
-  clearTimeout(voiceSafetyTimer);utterance=null;answerPending=false;clearDirection();
-  show(listening?'listening':'idle',listening?'Retomando escuta...':'Aguardando sua pergunta',text);
-  queueRestart(350);
+  utterance=null;answerPending=false;
+  show(listening?'listening':'idle',listening?'Preparando nova pergunta...':'Aguardando sua pergunta',text);
+  queueRestart(650);
  };
  u.onend=finished;u.onerror=finished;
  speechSynthesis.speak(u);
- // Recuperação: algumas vozes do Windows não enviam onend/onerror.
- voiceSafetyTimer=setTimeout(()=>{if(utterance===u){try{speechSynthesis.cancel()}catch{}finished()}},Math.max(13000,Math.min(55000,Math.ceil(text.length/12)*1000)));
 }
-const UNKNOWN_MAX=15;
-const unknownRecords=[]; // Memória temporária: reinicia ao atualizar a página.
-const UNKNOWN_REPLY='Desculpe, ainda não aprendi sobre essa informação. A LIA é uma estagiária novata da FAZESP e ainda está em fase de testes. Por isso, algumas informações podem estar em aprendizado.';
-function readUnknown(){return unknownRecords.slice()}
-function updateUnknownInfo(){const el=$('unknownInfo');if(el){el.textContent=unknownRecords.length?'Perguntas sem resposta registradas nesta sessão. Você pode exportá-las antes de atualizar a página.':'Nenhuma pergunta sem resposta registrada nesta sessão.'}}
-function trackUnknown(question){
- if(tv)return;
- const cleaned=String(question).trim().replace(/\s+/g,' ').slice(0,350);
- const key=normalize(cleaned);if(!key||key.length<4)return;
- const records=unknownRecords;const found=records.find(item=>item.chave===key);
- if(found){found.vezes++;found.ultimaOcorrencia=new Date().toISOString();const idx=records.indexOf(found);records.splice(idx,1);records.push(found)}
- else{records.push({pergunta:cleaned,chave:key,vezes:1,primeiraOcorrencia:new Date().toISOString(),ultimaOcorrencia:new Date().toISOString()})}
- while(records.length>UNKNOWN_MAX)records.shift();
- updateUnknownInfo();updateDiagnostics();
-}
-function exportUnknown(){
- const records=readUnknown();if(!records.length){$('unknownInfo').textContent='Não há perguntas sem resposta para exportar.';return}
- const payload={aplicacao:'LIA — Assistente Virtual da FAZESP',exportadoEm:new Date().toISOString(),total:records.length,perguntas:records.map(({pergunta,vezes,primeiraOcorrencia,ultimaOcorrencia})=>({pergunta,vezes,primeiraOcorrencia,ultimaOcorrencia}))};
- const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json;charset=utf-8'});
- const url=URL.createObjectURL(blob);const link=document.createElement('a');link.href=url;link.download='lia_perguntas_sem_resposta_'+new Date().toISOString().slice(0,10)+'.json';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)
-}
-
-// Monitoramento leve, somente na janela de operação do notebook.
-const diagnosticState={recoveries:0,lastQuestion:null};
-function updateDiagnostics(){
- if(tv)return;
- const write=(id,v)=>{const el=$(id);if(el&&el.textContent!==v)el.textContent=v};
- write('diagMic',!listening?'Desativado':recognitionActive?'Ativo':recognitionStarting?'Inicializando':'Em recuperação');
- write('diagSpeech',utterance?'Falando':answerPending?'Processando':recognitionActive?'Ouvindo':listening?'Reiniciando':'Parado');
- write('diagLast',diagnosticState.lastQuestion?diagnosticState.lastQuestion.toLocaleTimeString('pt-BR'):'Nenhuma nesta sessão');
- write('diagRecover',String(diagnosticState.recoveries));
-}
-if(!tv)setInterval(updateDiagnostics,3000);
-let lastAcceptedNormalized='',lastAcceptedAt=0;
-function duplicateRecentlyPreview(question){return !!(normalize(question)===lastAcceptedNormalized&&Date.now()-lastAcceptedAt<2600)}
-function duplicateRecently(question){
- const normalized=normalize(question),now=Date.now();
- if(normalized&&normalized===lastAcceptedNormalized&&now-lastAcceptedAt<2600)return true;
- lastAcceptedNormalized=normalized;lastAcceptedAt=now;return false;
-}
-
-function processQuestion(q){
- q=q.trim();if(!q||duplicateRecently(q))return;diagnosticState.lastQuestion=new Date();updateDiagnostics();show('idle','Pergunta recebida',q);
- const weather=weatherIntent(q);
- if(weather){
-  answerPending=true;
-  if(recognitionActive||recognitionStarting){try{recognition.stop()}catch{try{recognition.abort()}catch{}}}
-  show('idle','Consultando o tempo...','Verificando a previsão de São Paulo');
-  weatherAnswer(weather).then(text=>say(text)).catch(()=>say('Não consegui consultar o tempo agora.'));
-  return;
- }
- const answer=findAnswer(q);
- if(answer===null){trackUnknown(q);say(UNKNOWN_REPLY);applyReaction('doubt',1900,true)}else {if(/bom dia|boa tarde|boa noite|obrigad|ol[aá]/i.test(q)){$('robot').classList.add('happy');setTimeout(()=>$('robot').classList.remove('happy'),1600)}say(answer.text,answer.direction);if(welcomeQuestion(q))applyReaction('welcome',2400,true)}
-}
+function processQuestion(q){q=q.trim();if(!q)return;show('idle','Pergunta recebida',q);const answer=findAnswer(q)||'Desculpe, ainda não tenho uma resposta cadastrada para essa pergunta. Por favor, consulte a equipe responsável.';say(answer)}
 function startRecognition(){
  if(!recognition||!listening||recognitionActive||recognitionStarting||answerPending||utterance||(window.speechSynthesis?.speaking||false))return;
  clearTimeout(restartTimer);
- try{recognitionStarting=true;recognitionStartAt=Date.now();recognition.start()}
+ try{recognitionStarting=true;recognition.start()}
  catch(e){recognitionStarting=false;retryDelay=Math.min(retryDelay*1.6,4000);$('msg').textContent='Reconhecimento temporariamente indisponível: '+e.message;queueRestart(retryDelay)}
 }
 function setupRecognition(){
  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
  if(!SR){$('msg').textContent='Reconhecimento indisponível. Use Chrome ou Edge atualizado.';return false}
- recognition=new SR();recognition.lang='pt-BR';recognition.continuous=true;recognition.interimResults=true;recognition.maxAlternatives=1;
- recognition.onstart=()=>{lastRecognitionActivity=Date.now();recognitionStarting=false;recognitionActive=true;recognitionStartAt=0;retryDelay=450;show('listening','Estou ouvindo...','Pode fazer sua pergunta')};
+ recognition=new SR();recognition.lang='pt-BR';recognition.continuous=true;recognition.interimResults=true;
+ recognition.onstart=()=>{recognitionStarting=false;recognitionActive=true;retryDelay=450;show('listening','Estou ouvindo...','Pode fazer sua pergunta')};
  recognition.onresult=e=>{
-  lastRecognitionActivity=Date.now();
-  if(answerPending||utterance||window.speechSynthesis?.speaking)return;
+  if(answerPending)return;
   let preview='',latestFinal='';
   for(let i=e.resultIndex;i<e.results.length;i++){
    const transcript=e.results[i][0].transcript;
@@ -1218,7 +366,7 @@ function setupRecognition(){
    else preview+=transcript+' ';
   }
   if(preview.trim())show('listening','Estou ouvindo...',preview.trim());
-  if(latestFinal.trim()&&!duplicateRecentlyPreview(latestFinal)){
+  if(latestFinal.trim()){
    answerPending=true;
    // Interrompe o reconhecimento enquanto a LIA fala para evitar eco.
    try{recognition.stop()}catch{}
@@ -1226,67 +374,29 @@ function setupRecognition(){
   }
  };
  recognition.onerror=e=>{
-  lastRecognitionActivity=Date.now();
   recognitionStarting=false;
   const permanent=['not-allowed','service-not-allowed','audio-capture','language-not-supported'];
   if(permanent.includes(e.error)){
    listening=false;clearTimeout(restartTimer);
    $('msg').textContent='Microfone ou serviço bloqueado ('+e.error+'). Permita o microfone para este endereço HTTPS nas configurações do navegador.';
   }else if(e.error==='network'){
-   retryDelay=Math.min(Math.max(1800,retryDelay*2),20000);
+   retryDelay=Math.min(retryDelay*2,12000);
    $('msg').textContent='Falha de rede no reconhecimento de voz. Tentando recuperar automaticamente.';
   }
  };
  recognition.onend=()=>{
-  lastRecognitionActivity=Date.now();
-  recognitionActive=false;recognitionStarting=false;recognitionStartAt=0;
+  recognitionActive=false;recognitionStarting=false;
   // Alguns navegadores encerram a sessão sozinhos: reinício automático enquanto ativo.
   if(listening&&!answerPending&&!utterance&&!(window.speechSynthesis?.speaking||false))queueRestart(retryDelay);
  };
  return true;
 }
-// Verificação periódica de segurança: evita ficar preso em "Preparando nova pergunta".
-// Executada somente no notebook, que é quem controla o microfone.
-if(!tv)setInterval(()=>{
- if(!listening||!recognition)return;
- if(utterance||answerPending)return;
- if(speechSynthesis.speaking)return;
- // Se o navegador não disparar onstart nem onend, recria a sessão.
- if(recognitionStarting&&recognitionStartAt&&Date.now()-recognitionStartAt>6500){
-  recycleRecognition('falha ao iniciar');return;
- }
- if(recognitionActive&&Date.now()-lastRecognitionActivity>IDLE_RECOGNITION_RESET_MS){
-  recycleRecognition('silêncio prolongado');return;
- }
- if(!recognitionStarting&&!recognitionActive){
-  show('listening','Retomando escuta...',$('subtitle').textContent);
-  queueRestart(250);
- }
-},3500);
-if(!tv){
- const recoverAfterPause=()=>{
-  if(!listening||answerPending||utterance)return;
-  if(Date.now()-lastRecognitionActivity>2*60*1000)recycleRecognition('retorno de inatividade');
-  else if(!recognitionActive&&!recognitionStarting)queueRestart(400);
- };
- window.addEventListener('focus',recoverAfterPause);
- window.addEventListener('online',recoverAfterPause);
- document.addEventListener('visibilitychange',()=>{if(!document.hidden)recoverAfterPause()});
-}
-if(!tv){if(location.protocol==='file:'){const banner=document.createElement('div');banner.style.cssText='background:#4b240f;color:#ffddb6;border:1px solid #e87c2a;border-radius:12px;padding:12px;margin:10px 0;font-size:14px';banner.textContent='⚠ Para usar a escuta contínua, publique o index.html no GitHub Pages e abra o endereço HTTPS; arquivos locais podem solicitar permissão repetidamente.';document.querySelector('.admin')?.prepend(banner);}refreshVoices();speechSynthesis.onvoiceschanged=refreshVoices;$('voiceSelect').onchange=()=>{localStorage.setItem('lia.voice',$('voiceSelect').value);$('voiceNotice').textContent='Voz escolhida. Clique em Testar voz para ouvir.'};setupRecognition();$('start').onclick=()=>{if(location.protocol==='file:'){$('msg').textContent='Abra o endereço HTTPS publicado no GitHub Pages e autorize o microfone para este site.';alert('Para habilitar o microfone com permissão persistente, publique este index.html no GitHub Pages e abra o endereço HTTPS.');return;}if(!recognition){setupRecognition();if(!recognition)return}listening=true;retryDelay=450;$('msg').textContent='Escuta contínua ligada. A LIA volta a ouvir após responder. Conceda a permissão permanente do microfone ao endereço HTTPS publicado.';startRecognition()};$('stop').onclick=()=>{clearDirection();listening=false;answerPending=false;recognitionStarting=false;clearTimeout(restartTimer);clearTimeout(voiceSafetyTimer);recognition?.abort();window.speechSynthesis?.cancel();utterance=null;show('idle','Microfone parado','Clique em Iniciar microfone no notebook')};$('openTv').onclick=()=>{const w=window.open(location.origin+location.pathname+'?tv=1','lia_tv');if(!w)$('msg').textContent='O navegador bloqueou a janela. Permita pop-ups ou abra o endereço com ?tv=1 em outra aba.'};$('testVoice').onclick=()=>say('Olá! Meu nome é '+assistantName+'. Estou pronta para responder perguntas.');$('exportUnknown').onclick=exportUnknown;$('clearUnknown').onclick=()=>{if(confirm('Apagar o histórico de perguntas sem resposta deste navegador? Esta ação não pode ser desfeita.')){unknownRecords.length=0;updateUnknownInfo()}};updateUnknownInfo();scheduleIdleAnimation();
- // Ativa a escuta por padrão ao abrir/atualizar a página no notebook.
- // A tela da TV (?tv=1) não abre o microfone. O botão Parar desativa
- // listening, impedindo que o watchdog religue a escuta sem autorização.
- if(location.protocol!=='file:' && window.isSecureContext && recognition){
-  listening=true;
-  retryDelay=450;
-  $('msg').textContent='Iniciando escuta automaticamente. Se o navegador solicitar permissão, autorize o microfone. Caso bloqueie o início automático, clique em Ativar escuta contínua.';
-  setTimeout(()=>{if(listening&&!recognitionActive&&!recognitionStarting)startRecognition()},400);
- }else if(!recognition){
-  $('msg').textContent='Reconhecimento de voz não disponível neste navegador. Use Chrome ou Edge atualizado.';
- }
-}
-function validate(v){if(!Array.isArray(v)||!v.every(e=>e&&Array.isArray(e.q)&&e.q.length&&e.q.every(s=>typeof s==='string'&&s.trim())&&((typeof e.a==='string'&&e.a.trim())||(Array.isArray(e.a)&&e.a.length>0&&e.a.every(a=>typeof a==='string'&&a.trim())))))return null;return v}
+if(!tv){if(location.protocol==='file:'){const banner=document.createElement('div');banner.style.cssText='background:#4b240f;color:#ffddb6;border:1px solid #e87c2a;border-radius:12px;padding:12px;margin:10px 0;font-size:14px';banner.textContent='⚠ Para usar a escuta contínua, publique o index.html no GitHub Pages e abra o endereço HTTPS; arquivos locais podem solicitar permissão repetidamente.';document.querySelector('.admin')?.prepend(banner);}refreshVoices();speechSynthesis.onvoiceschanged=refreshVoices;$('voiceSelect').onchange=()=>{localStorage.setItem('lia.voice',$('voiceSelect').value);$('voiceNotice').textContent='Voz escolhida. Clique em Testar voz para ouvir.'};setupRecognition();$('start').onclick=()=>{if(location.protocol==='file:'){$('msg').textContent='Abra o endereço HTTPS publicado no GitHub Pages e autorize o microfone para este site.';alert('Para habilitar o microfone com permissão persistente, publique este index.html no GitHub Pages e abra o endereço HTTPS.');return;}if(!recognition){setupRecognition();if(!recognition)return}listening=true;retryDelay=450;$('msg').textContent='Escuta contínua ligada. A LIA volta a ouvir após responder. Conceda a permissão permanente do microfone ao endereço HTTPS publicado.';startRecognition()};$('stop').onclick=()=>{listening=false;answerPending=false;recognitionStarting=false;clearTimeout(restartTimer);recognition?.abort();window.speechSynthesis?.cancel();utterance=null;show('idle','Microfone parado','Clique em Iniciar microfone no notebook')};$('ask').onclick=()=>processQuestion($('question').value);$('question').addEventListener('keydown',e=>{if(e.key==='Enter')processQuestion($('question').value)});$('reset').onclick=()=>{window.speechSynthesis?.cancel();show('idle','Aguardando sua pergunta','Como posso ajudar você?')};$('openTv').onclick=()=>{const w=window.open(location.origin+location.pathname+'?tv=1','lia_tv');if(!w)$('msg').textContent='O navegador bloqueou a janela. Permita pop-ups ou abra o endereço com ?tv=1 em outra aba.'};$('name').value=assistantName;$('saveName').onclick=()=>{const name=$('name').value.trim().slice(0,35);if(!name)return;localStorage.setItem('lia.name',name);rename(name)};$('testVoice').onclick=()=>say('Olá! Meu nome é '+assistantName+'. Estou pronta para responder perguntas.');
+function saveEntries(){localStorage.setItem('lia.entries',JSON.stringify(entries));render();refreshSuggestions();send({kind:'suggestions',entries})}
+function render(){const host=$('items');host.replaceChildren();entries.forEach((e,i)=>{const box=document.createElement('div');box.className='qa';const heading=document.createElement('strong');heading.textContent=e.q[0];const small=document.createElement('small');small.textContent=e.a;const edit=document.createElement('button');edit.textContent='Editar';edit.className='secondary';edit.onclick=()=>{$('triggers').value=e.q.join('\n');$('answer').value=e.a;editing=i;$('save').textContent='Salvar alteração';$('triggers').focus()};const del=document.createElement('button');del.textContent='Excluir';del.className='secondary';del.style.marginLeft='8px';del.onclick=()=>{if(confirm('Excluir esta resposta?')){entries.splice(i,1);saveEntries()}};box.append(heading,small,edit,del);host.append(box)})}
+function cancelEdit(){editing=-1;$('triggers').value='';$('answer').value='';$('save').textContent='Adicionar resposta'}
+$('cancel').onclick=cancelEdit;$('save').onclick=()=>{const q=$('triggers').value.split('\n').map(s=>s.trim()).filter(Boolean),a=$('answer').value.trim();if(!q.length||!a){$('msg').textContent='Preencha pelo menos uma pergunta e uma resposta.';return}if(editing>=0)entries[editing]={...entries[editing],q,a};else entries.push({q,a});saveEntries();cancelEdit();$('msg').textContent='Resposta salva neste navegador.'};$('export').onclick=()=>{const blob=new Blob([JSON.stringify(entries,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='respostas-lia.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};$('importBtn').onclick=()=>$('import').click();$('import').onchange=async e=>{const file=e.target.files?.[0];if(!file)return;try{const result=validate(JSON.parse(await file.text()));if(!result)throw Error('Formato inválido');if(confirm('Substituir todas as respostas atuais pelas do arquivo?')){entries=result;saveEntries();$('msg').textContent='Importação concluída.'}}catch(err){$('msg').textContent='Falha ao importar: '+err.message}e.target.value=''};render()}
+function validate(v){if(!Array.isArray(v)||!v.every(e=>e&&Array.isArray(e.q)&&e.q.length&&e.q.every(s=>typeof s==='string'&&s.trim())&&typeof e.a==='string'&&e.a.trim()))return null;return v}
 </script>
 </body>
 </html>
