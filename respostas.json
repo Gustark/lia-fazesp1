@@ -2,7 +2,13 @@
   {
     "q": [
       "bom dia",
-      "muito bom dia"
+      "muito bom dia",
+      "bom dia pessoal",
+      "um ótimo dia",
+      "bom dia fazesp",
+      "bom dia fazespe",
+      "bom dia lí a",
+      "oi bom dia"
     ],
     "a": [
       "Bom dia! Seja muito bem-vindo à FAZESP! Como posso ajudar?",
@@ -13,7 +19,12 @@
   {
     "q": [
       "boa tarde",
-      "uma boa tarde"
+      "uma boa tarde",
+      "boa tarde pessoal",
+      "uma excelente tarde",
+      "boa tarde fazespe",
+      "oi boa tarde",
+      "boa tarde assistente"
     ],
     "a": [
       "Boa tarde! Seja bem-vindo à FAZESP!",
@@ -24,7 +35,11 @@
   {
     "q": [
       "boa noite",
-      "uma boa noite"
+      "uma boa noite",
+      "boa noite pessoal",
+      "boa noite fazespe",
+      "oi boa noite",
+      "uma ótima noite"
     ],
     "a": [
       "Boa noite! Seja bem-vindo à FAZESP!",
@@ -43,7 +58,10 @@
   {
     "q": [
       "prazer em conhecer você",
-      "muito prazer"
+      "muito prazer",
+      "é um prazer conhecer você",
+      "prazer em te conhecer",
+      "muito prazer lia"
     ],
     "a": "O prazer é meu! Que bom conversar com você!"
   },
@@ -52,7 +70,11 @@
       "tchau",
       "até logo",
       "até mais",
-      "adeus"
+      "adeus",
+      "até a próxima",
+      "até mais tarde",
+      "falou lia",
+      "tenha um bom dia lia"
     ],
     "a": "Até logo! Foi um prazer conversar com você!"
   },
@@ -60,7 +82,9 @@
     "q": [
       "obrigada lia",
       "obrigado lia",
-      "valeu lia"
+      "valeu lia",
+      "muito obrigado pela resposta",
+      "muito obrigada pela resposta"
     ],
     "a": "Por nada! Fico feliz em ajudar!"
   },
@@ -101,7 +125,11 @@
   {
     "q": [
       "você consegue me ouvir",
-      "está me ouvindo"
+      "está me ouvindo",
+      "lia esta me escutando",
+      "consegue ouvir minha voz",
+      "ta me ouvindo lia",
+      "alô lia você me ouve"
     ],
     "a": "Sim! Quando meu microfone está ativo, consigo reconhecer sua fala."
   },
@@ -116,14 +144,20 @@
     "q": [
       "quem criou você",
       "quem te desenvolveu",
-      "quem fez a lia"
+      "quem fez a lia",
+      "quem fez você",
+      "quem criou a lia",
+      "qual equipe desenvolveu a lia"
     ],
     "a": "Fui desenvolvida por Gustavo Hugo e Gladstom Alves para a FAZESP."
   },
   {
     "q": [
       "você consegue aprender",
-      "você aprende coisas novas"
+      "você aprende coisas novas",
+      "como você aprende",
+      "como te ensinam novas respostas",
+      "dá pra ensinar perguntas novas"
     ],
     "a": "Minha equipe pode cadastrar novas perguntas e respostas para ampliar o que eu sei."
   },
@@ -131,7 +165,12 @@
     "q": [
       "conte uma piada",
       "você sabe contar piadas",
-      "me conta uma piada"
+      "me conta uma piada",
+      "faz uma piada",
+      "fala uma piada",
+      "conta piada lia",
+      "tem uma piada",
+      "solta uma piada"
     ],
     "a": "Por que o computador foi ao médico? Porque estava com um vírus!"
   },
@@ -180,7 +219,11 @@
   {
     "q": [
       "como posso conversar com você",
-      "como faço uma pergunta"
+      "como faço uma pergunta",
+      "como eu falo com você",
+      "preciso falar lia primeiro",
+      "como eu pergunto algo",
+      "tenho que apertar algum botão"
     ],
     "a": "Basta falar perto do microfone quando a escuta estiver ativada!"
   },
@@ -208,7 +251,10 @@
   {
     "q": [
       "você pode me ajudar",
-      "pode me ajudar"
+      "pode me ajudar",
+      "você consegue me orientar",
+      "preciso de uma informação",
+      "você pode dar uma informação"
     ],
     "a": "Claro! Faça uma pergunta e vou tentar responder."
   },
@@ -228,7 +274,10 @@
       "você sabe alguma curiosidade da secretaria da fazenda",
       "me diga uma curiosidade",
       "outra curiosidade",
-      "mais uma curiosidade"
+      "mais uma curiosidade",
+      "conte algo sobre a secretaria da fazenda",
+      "curiosidade sobre a fazenda do estado",
+      "uma curiosidade sobre a sefaz"
     ],
     "a": [
       "Você sabia? A Secretaria da Fazenda e Planejamento do Estado de São Paulo cuida de tributos estaduais, das finanças e do planejamento orçamentário do Estado.",
@@ -270,7 +319,10 @@
     "q": [
       "qual é seu nome",
       "como você se chama",
-      "quem é você"
+      "quem é você",
+      "quem é você lia",
+      "qual seu nome mesmo",
+      "como você se chama mesmo"
     ],
     "a": "Meu nome é LIA. Sou uma assistente virtual criada para responder perguntas cadastradas."
   },
@@ -278,7 +330,10 @@
     "q": [
       "o que você faz",
       "como funciona",
-      "como você funciona"
+      "como você funciona",
+      "pra que serve a lia",
+      "qual a utilidade da lia",
+      "qual é sua função"
     ],
     "a": "Eu escuto perguntas pelo microfone do notebook e respondo com informações cadastradas pela equipe."
   },
@@ -286,7 +341,11 @@
     "q": [
       "qual é o horário do evento",
       "que horas começa o evento",
-      "quando começa o evento"
+      "quando começa o evento",
+      "qual hora começa o evento",
+      "que hora vai começar o evento",
+      "sabe a programação dos eventos",
+      "quando inicia o evento"
     ],
     "a": "O horário ainda não foi cadastrado. Peça à organização para atualizar esta resposta."
   },
@@ -344,7 +403,10 @@
     "q": [
       "você pode repetir",
       "repita a resposta",
-      "fala de novo"
+      "fala de novo",
+      "não escutei repete",
+      "pode falar de novo",
+      "repete a última informação"
     ],
     "a": "Claro! Vou repetir minha última resposta."
   },
@@ -352,14 +414,24 @@
     "q": [
       "quanto custa o curso da fazesp",
       "os cursos da fazesp são gratuitos",
-      "a fazesp cobra mensalidade"
+      "a fazesp cobra mensalidade",
+      "precisa pagar os cursos",
+      "paga para fazer curso na fazesp",
+      "tem custo os cursos da fazesp",
+      "quanto pago para estudar na fazesp"
     ],
     "a": "Os cursos da FAZESP são gratuitos. Confira os requisitos e a disponibilidade de cada curso no portal oficial."
   },
   {
     "q": [
       "o que é a fazesp",
-      "o que significa fazesp"
+      "o que significa fazesp",
+      "me explica o que é a fazesp",
+      "a fazesp é uma escola",
+      "o que quer dizer fazesp",
+      "o que faz a fazesp",
+      "o que é fazespe",
+      "o que faz a fazespe"
     ],
     "a": "FAZESP é a Escola Fazendária do Estado de São Paulo, vinculada à Secretaria da Fazenda e Planejamento."
   },
@@ -373,7 +445,11 @@
   {
     "q": [
       "quem pode fazer os cursos da fazesp",
-      "quem pode estudar na fazesp"
+      "quem pode estudar na fazesp",
+      "posso fazer curso na fazesp",
+      "quem participa dos cursos",
+      "os cursos são para qualquer pessoa",
+      "como participar de cursos da fazesp"
     ],
     "a": "A FAZESP oferece capacitação para servidores públicos e também para cidadãos, conforme os requisitos de cada curso."
   },
@@ -381,7 +457,10 @@
     "q": [
       "tem curso online na fazesp",
       "a fazesp oferece cursos a distância",
-      "o que é ava"
+      "o que é ava",
+      "vocês têm ensino a distância",
+      "tem aula virtual na fazesp",
+      "fazesp tem curso remoto"
     ],
     "a": "Sim. A FAZESP oferece cursos a distância pelo Ambiente Virtual de Aprendizagem, o AVA."
   },
@@ -502,7 +581,10 @@
     "q": [
       "qual é seu nome lia",
       "me conta seu nome",
-      "me diga seu nome"
+      "me diga seu nome",
+      "você é a lia",
+      "seu nome é lia",
+      "como devo te chamar"
     ],
     "a": "Meu nome é LIA. Sou a assistente virtual da FAZESP!"
   },
@@ -581,7 +663,10 @@
   {
     "q": [
       "me conta uma curiosidade lia",
-      "você sabe alguma curiosidade"
+      "você sabe alguma curiosidade",
+      "me conta algo interessante",
+      "qual curiosidade você conhece",
+      "diz uma curiosidade"
     ],
     "a": "Você sabia que aprender algo novo todos os dias pode transformar a forma como vemos o mundo?"
   },
@@ -597,7 +682,10 @@
     "q": [
       "qual a data de hoje",
       "que dia é hoje lia",
-      "hoje é que dia"
+      "hoje é que dia",
+      "qual a data atual",
+      "qual é o dia de hoje",
+      "que data é hoje"
     ],
     "a": "Ainda não fui configurada para informar a data em tempo real."
   },
@@ -818,7 +906,10 @@
       "como faço para chegar em banheiro masculino",
       "como faço para chegar em banheiro dos homens",
       "como faço para chegar em sanitario masculino",
-      "como faço para chegar em banheiro para homens"
+      "como faço para chegar em banheiro para homens",
+      "to procurando o banheiro dos homens",
+      "sanitário dos homens",
+      "toalete masculino por favor"
     ],
     "a": "O banheiro masculino fica na área atrás dos elevadores. Siga pelo corredor à sua direita e contorne o conjunto dos elevadores até encontrar a entrada.",
     "direcao": {
@@ -1019,7 +1110,10 @@
       "qual o caminho para banheiro para mulheres",
       "como faço para chegar em sanitario feminino",
       "como faço para chegar em banheiro das mulheres",
-      "como faço para chegar em banheiro para mulheres"
+      "como faço para chegar em banheiro para mulheres",
+      "to procurando o banheiro das mulheres",
+      "sanitário das mulheres",
+      "toalete feminino por favor"
     ],
     "a": "O banheiro feminino fica na área atrás dos elevadores. Siga pelo corredor à sua esquerda e contorne o conjunto dos elevadores até encontrar a entrada.",
     "direcao": {
@@ -1343,7 +1437,10 @@
       "qual o caminho para auditorio principal",
       "como faço para chegar em auditorio grande",
       "como faço para chegar em grande auditorio",
-      "como faço para chegar em auditorio principal"
+      "como faço para chegar em auditorio principal",
+      "onde é o g a",
+      "como vou pro grande auditório",
+      "para o grande auditório é qual lado"
     ],
     "a": "Grande Auditório fica na Ala Dom Pedro. Siga pelo corredor à sua direita.",
     "direcao": {
@@ -1712,7 +1809,11 @@
       "qual o caminho para auditorio pequeno",
       "qual o caminho para pequeno auditorio",
       "como faço para chegar em auditorio pequeno",
-      "como faço para chegar em pequeno auditorio"
+      "como faço para chegar em pequeno auditorio",
+      "como vou para o pequeno auditório",
+      "para que lado fica pequeno auditório",
+      "onde está pequeno auditório",
+      "como chegar no pa"
     ],
     "a": "Pequeno Auditório fica na Ala Sé. Siga pelo corredor à sua esquerda.",
     "direcao": {
@@ -1831,7 +1932,8 @@
       "qual o caminho para balcao de atendimento",
       "como faço para chegar em entrada da fazesp",
       "como faço para chegar em recepcao da fazesp",
-      "como faço para chegar em balcao de atendimento"
+      "como faço para chegar em balcao de atendimento",
+      "a recepção fica pra que lado"
     ],
     "a": "Recepção FAZESP fica na Ala Sé. Siga pelo corredor à sua esquerda.",
     "direcao": {
@@ -2044,7 +2146,8 @@
       "como faço para chegar em sala plenaria",
       "como faço para chegar em sala do plenario",
       "quero ir para a plenaria",
-      "me diz onde é o plenario"
+      "me diz onde é o plenario",
+      "como ir para o plenário"
     ],
     "a": "Plenário fica na Ala Sé. Siga pelo corredor à sua esquerda.",
     "direcao": {
@@ -2630,7 +2733,8 @@
       "onde encontro o biblioteca da fazesp",
       "me mostra onde fica biblioteca da fazesp",
       "qual o caminho para biblioteca da fazesp",
-      "como faço para chegar em biblioteca da fazesp"
+      "como faço para chegar em biblioteca da fazesp",
+      "pra que lado é a biblioteca"
     ],
     "a": "A biblioteca fica logo atrás de mim, no corredor central.",
     "direcao": {
@@ -2923,7 +3027,11 @@
       "fala mais devagar",
       "pode falar mais devagar",
       "fala devagar",
-      "mais devagar por favor"
+      "mais devagar por favor",
+      "fale mais lento",
+      "diminui a velocidade da fala",
+      "lia fale devagar",
+      "não fala tão rápido"
     ],
     "a": "Claro! Vou falar mais devagar."
   },
@@ -2931,7 +3039,10 @@
     "q": [
       "fale mais rapido",
       "fala mais rápido",
-      "pode falar mais rápido"
+      "pode falar mais rápido",
+      "aumente velocidade da fala",
+      "pode falar mais depressa",
+      "fala um pouquinho mais rápido"
     ],
     "a": "Tudo bem! Vou falar um pouco mais rápido."
   },
@@ -2941,7 +3052,10 @@
       "não entendi sua resposta",
       "pode explicar melhor",
       "explique melhor",
-      "como assim"
+      "como assim",
+      "não ouvi direito",
+      "pode explicar de outro jeito",
+      "não compreendi a explicação"
     ],
     "a": "Claro! Vou tentar explicar de outro jeito."
   },
@@ -2966,7 +3080,11 @@
       "lia é estagiária",
       "você ainda está aprendendo",
       "por que você não sabe tudo",
-      "quem é a estagiária da fazesp"
+      "quem é a estagiária da fazesp",
+      "você ainda é estagiária",
+      "você está em desenvolvimento",
+      "por que está em testes",
+      "a lia é novata"
     ],
     "a": [
       "Sou a LIA, uma estagiária novata da FAZESP, e ainda estou em fase de testes. Estou aprendendo para ajudar cada vez melhor!",
@@ -2987,7 +3105,11 @@
       "quem é bruno norões",
       "o bruno norões é diretor da fazesp",
       "diretor fazesp",
-      "nome do diretor da fazesp"
+      "nome do diretor da fazesp",
+      "bruno norões é diretor",
+      "qual diretor da fazesp",
+      "quem comanda a fazesp atualmente",
+      "quem é o diretor da fazespe"
     ],
     "a": [
       "O diretor da FAZESP é Bruno Norões.",
@@ -3009,7 +3131,8 @@
       "tenha um bom apetite",
       "desejo um bom almoço",
       "até depois do almoço",
-      "vou sair para almoçar"
+      "vou sair para almoçar",
+      "bom apetite lia"
     ],
     "a": [
       "Bom almoço! Aproveite sua refeição e tenha uma ótima tarde!",
@@ -3045,7 +3168,14 @@
       "mensagem de boas vindas aos convidados",
       "quero uma mensagem de boas vindas",
       "de boas vindas aos nossos convidados",
-      "fale para dar boas vindas aos participantes"
+      "fale para dar boas vindas aos participantes",
+      "receba nossos convidados",
+      "dê boas-vindas a todos",
+      "seja bem vinda aos convidados",
+      "uma mensagem de boas vindas para convidados",
+      "lia dá as boas vindas",
+      "lia da boas vindas aos convidados",
+      "lia dá boas-vindas pros convidados"
     ],
     "a": [
       "Sejam todos muito bem-vindos à FAZESP! É uma alegria receber nossos convidados. Eu sou a LIA, a assistente virtual da escola, e desejo a vocês um excelente evento!",
@@ -3064,7 +3194,9 @@
       "cumprimente os palestrantes",
       "saude os palestrantes",
       "lia dê boas vindas aos instrutores",
-      "lia receba os professores"
+      "lia receba os professores",
+      "dê as boas vindas aos palestrantes",
+      "receba nossos palestrantes"
     ],
     "a": [
       "Sejam muito bem-vindos, palestrantes e instrutores! A FAZESP agradece a presença de vocês e deseja uma excelente apresentação.",
@@ -3080,7 +3212,10 @@
       "lia cumprimente os estudantes",
       "seja bem vindo ao curso",
       "lia dê boas vindas a turma",
-      "lia receba a turma"
+      "lia receba a turma",
+      "dê as boas-vindas aos alunos",
+      "receba os estudantes",
+      "deseje boas vindas para turma"
     ],
     "a": [
       "Sejam muito bem-vindos à FAZESP! Desejo a todos um excelente período de aprendizado e troca de experiências.",
@@ -3094,7 +3229,10 @@
       "lia de boas vindas aos servidores",
       "lia receba os servidores",
       "lia cumprimente os servidores",
-      "saude os servidores"
+      "saude os servidores",
+      "dê as boas vindas aos servidores",
+      "cumprimente os servidores",
+      "receba nossos colegas"
     ],
     "a": [
       "Sejam muito bem-vindos, servidores! É uma alegria receber vocês na FAZESP. Desejo uma excelente atividade.",
@@ -3107,7 +3245,10 @@
       "lia quem é você",
       "lia fale de voce",
       "me explique o que é a lia",
-      "o que significa lia"
+      "o que significa lia",
+      "o que você representa",
+      "você é a assistente da fazesp",
+      "você é uma assistente virtual"
     ],
     "a": [
       "Eu sou a LIA, a assistente virtual da FAZESP! Sou uma estagiária novata em fase de testes, aprendendo a orientar e ajudar nossos visitantes.",
@@ -3120,7 +3261,10 @@
       "a lia esta em testes",
       "a lia é uma estagiária",
       "por que voce erra",
-      "você é nova aqui"
+      "você é nova aqui",
+      "por que você é estagiária",
+      "você está aprendendo ainda",
+      "a lia é estagiaria novata"
     ],
     "a": [
       "Sou uma estagiária novata da FAZESP e ainda estou em fase de testes. Algumas informações podem estar em aprendizado!",
@@ -3135,7 +3279,10 @@
       "preciso dizer seu nome",
       "preciso chamar lia",
       "como utilizar a lia",
-      "como faço para perguntar"
+      "como faço para perguntar",
+      "como interagir com você",
+      "como faço pra te perguntar",
+      "como posso te fazer perguntas"
     ],
     "a": [
       "É simples! Aproxime-se do microfone e faça sua pergunta em português, de forma natural. Não precisa dizer meu nome antes.",
@@ -3150,7 +3297,10 @@
       "me ajude com a localização",
       "você sabe indicar o caminho",
       "pode me mostrar a direção",
-      "como funcionam as setas"
+      "como funcionam as setas",
+      "me indica um caminho",
+      "me ajude a achar uma sala",
+      "me mostra onde fica"
     ],
     "a": [
       "Posso ajudar com a localização de vários ambientes da FAZESP! Diga o nome ou o número do local que você procura.",
@@ -3195,7 +3345,10 @@
       "o que acontece se não souber responder",
       "como você aprende perguntas novas",
       "como a lia melhora",
-      "você registra perguntas sem resposta"
+      "você registra perguntas sem resposta",
+      "o que acontece quando não sabe responder",
+      "se eu perguntar algo que você não sabe",
+      "você sabe quando não sabe"
     ],
     "a": [
       "Se eu não souber, vou avisar! As perguntas não respondidas podem ser registradas temporariamente para a equipe analisar e me ensinar depois.",
@@ -3251,7 +3404,10 @@
       "deseje um bom curso",
       "boa aula lia",
       "deseje uma boa aula",
-      "estou começando uma capacitação"
+      "estou começando uma capacitação",
+      "deseje bom curso pra turma",
+      "boa aula para os participantes",
+      "deseje boa aula"
     ],
     "a": [
       "Desejo um ótimo curso! Que seja um momento de aprendizado e troca de experiências.",
@@ -3279,7 +3435,10 @@
       "conte uma piada de professor",
       "uma piada de estudante",
       "faça uma piada de estudo",
-      "me conte uma piada sobre aprendizado"
+      "me conte uma piada sobre aprendizado",
+      "me conte uma piada de escola",
+      "sabe piada de aluno",
+      "piada sobre estudar"
     ],
     "a": [
       "Por que o lápis foi para a escola? Porque queria apontar para um futuro melhor!",
@@ -3321,7 +3480,10 @@
       "que o evento seja um sucesso",
       "desejo sucesso no evento",
       "bom seminário",
-      "bom simpósio"
+      "bom simpósio",
+      "deseja um ótimo evento",
+      "deseje boa sorte no evento",
+      "boa sorte com o evento"
     ],
     "a": [
       "Que o evento seja um sucesso! Desejo uma excelente experiência a todos os participantes.",
@@ -3353,6 +3515,366 @@
       "Seja muito bem-vindo! Desejo uma ótima visita à FAZESP. Se precisar localizar algum ambiente, pode me perguntar.",
       "Que bom receber você! Aproveite a visita e conte comigo para ajudar com informações sobre a escola.",
       "É um prazer ter você aqui! Espero que conheça e aproveite bastante a FAZESP."
+    ]
+  },
+  {
+    "q": [
+      "bem vindos a fazesp",
+      "sejam bem vindos a escola",
+      "sejam bem vindas a fazesp",
+      "bom dia sejam todos bem vindos",
+      "faça uma recepção geral"
+    ],
+    "a": [
+      "Sejam bem-vindos à FAZESP! Desejo que sua visita seja produtiva e agradável. Se precisarem de orientação, podem falar comigo!",
+      "É muito bom receber vocês na FAZESP! Aproveitem a programação e contem comigo para informações sobre a escola.",
+      "Boas-vindas à nossa escola! Eu sou a LIA, assistente virtual e estagiária em aprendizado, e estou por aqui para ajudar."
+    ]
+  },
+  {
+    "q": [
+      "estou visitando a fazesp pela primeira vez",
+      "é minha primeira visita aqui",
+      "nunca vim na fazesp",
+      "acabei de chegar na fazesp"
+    ],
+    "a": [
+      "Seja muito bem-vindo! Você pode me perguntar onde ficam os auditórios, a recepção e outros ambientes da FAZESP.",
+      "Que bom receber você pela primeira vez! Se precisar encontrar algum ambiente, é só me perguntar."
+    ]
+  },
+  {
+    "q": [
+      "tenho uma dúvida",
+      "queria tirar uma dúvida",
+      "posso perguntar uma coisa",
+      "posso tirar uma dúvida",
+      "lia posso fazer uma pergunta"
+    ],
+    "a": [
+      "Claro! Pode perguntar. Se eu ainda não souber, vou avisar que estou aprendendo.",
+      "Pode perguntar! Vou tentar ajudar com as informações que já aprendi na FAZESP."
+    ]
+  },
+  {
+    "q": [
+      "qual é a sua missão",
+      "qual sua missão lia",
+      "para que você foi criada",
+      "qual o objetivo da lia",
+      "qual a finalidade do projeto lia"
+    ],
+    "a": [
+      "Minha missão é receber, informar e orientar quem visita a FAZESP de um jeito simples e acessível.",
+      "Fui criada para facilitar o acesso às informações da FAZESP e ajudar os visitantes a se localizar."
+    ]
+  },
+  {
+    "q": [
+      "lia significa o que",
+      "qual o significado de lia",
+      "por que o nome lia",
+      "de onde vem seu nome"
+    ],
+    "a": [
+      "Meu nome é LIA! Uma proposta para seu significado é Linguagem, Informação e Atendimento. Ele combina com minha missão de conversar e orientar.",
+      "LIA é um nome curto e fácil de lembrar! Podemos relacioná-lo a Linguagem, Informação e Atendimento."
+    ]
+  },
+  {
+    "q": [
+      "lia voce é estagiaria",
+      "é estagiária novata",
+      "voce ta em treinamento",
+      "lia está aprendendo"
+    ],
+    "a": [
+      "Isso mesmo! Sou uma estagiária virtual novata e ainda estou aprendendo a me tornar uma verdadeira fazespinha!",
+      "Sim! Estou em fase de testes. A equipe da FAZESP está me ensinando cada vez mais."
+    ]
+  },
+  {
+    "q": [
+      "você pode errar",
+      "suas respostas podem estar erradas",
+      "a lia pode responder errado",
+      "você sempre acerta",
+      "sua informação é confiável"
+    ],
+    "a": [
+      "Ainda estou em testes e posso cometer enganos. Para assuntos importantes, confirme os detalhes com a equipe da FAZESP.",
+      "Respondo com base em informações cadastradas. Como sou uma estagiária em aprendizado, vale confirmar informações importantes com a equipe."
+    ]
+  },
+  {
+    "q": [
+      "o que faço se você não entender",
+      "não está entendendo minha pergunta",
+      "você não me entendeu",
+      "a lia não entendeu",
+      "como repetir para você entender"
+    ],
+    "a": [
+      "Pode tentar falar um pouco mais devagar, aproximar-se do microfone ou reformular a pergunta. Estou aprendendo novas formas de entender!",
+      "Tente perguntar com outras palavras, de forma mais curta. Se eu ainda não souber, minha equipe poderá me ensinar depois."
+    ]
+  },
+  {
+    "q": [
+      "posso falar normalmente",
+      "preciso falar seu nome primeiro",
+      "é preciso dizer lia antes",
+      "preciso começar com lia",
+      "tenho que chamar lia"
+    ],
+    "a": [
+      "Pode falar normalmente! Não é obrigatório dizer meu nome antes da pergunta.",
+      "É só fazer sua pergunta em português. Você não precisa começar dizendo LIA."
+    ]
+  },
+  {
+    "q": [
+      "você fala sozinha",
+      "por que você fica mexendo",
+      "por que você pula",
+      "lia você está pulando",
+      "por que seus olhos piscam"
+    ],
+    "a": [
+      "Faço pequenos movimentos para deixar nossa conversa mais animada. Mas continuo atenta ao que você quiser perguntar!",
+      "Essas são minhas animações! Eu pisco, me movimento e às vezes dou até um pulinho enquanto aguardo visitantes."
+    ]
+  },
+  {
+    "q": [
+      "você consegue mostrar o caminho",
+      "você mostra setas",
+      "o que significa a seta na tela",
+      "a lia mostra direções"
+    ],
+    "a": [
+      "Sim! Quando você pergunta por um local cadastrado, posso mostrar uma seta na tela para ajudar na orientação.",
+      "Minhas setas ajudam a indicar o sentido do caminho para alguns ambientes da FAZESP."
+    ]
+  },
+  {
+    "q": [
+      "onde posso pedir ajuda presencial",
+      "posso falar com um funcionário",
+      "quem pode me ajudar pessoalmente",
+      "não achei a informação com você",
+      "preciso de ajuda de uma pessoa"
+    ],
+    "a": [
+      "Se precisar de atendimento pessoal ou confirmação de uma informação, procure a recepção ou a equipe da FAZESP.",
+      "A equipe da FAZESP também pode ajudar você presencialmente. Procure a recepção para receber orientação."
+    ]
+  },
+  {
+    "q": [
+      "a lia grava conversas",
+      "você grava minha voz",
+      "o que acontece com minha voz",
+      "você guarda o áudio",
+      "a lia armazena gravações"
+    ],
+    "a": [
+      "Eu não salvo gravações de voz no meu histórico de perguntas. O reconhecimento de fala depende dos recursos do navegador, que podem usar serviços externos.",
+      "Meu sistema não foi feito para armazenar áudios. As perguntas não respondidas podem ser registradas temporariamente como texto para a equipe melhorar minhas respostas."
+    ]
+  },
+  {
+    "q": [
+      "você guarda minhas perguntas",
+      "a lia tem histórico",
+      "como aprende perguntas desconhecidas",
+      "você anota o que não sabe"
+    ],
+    "a": [
+      "Posso registrar temporariamente até quinze perguntas diferentes sem resposta nesta sessão. A equipe pode exportá-las para melhorar minha base.",
+      "Quando não sei responder, guardo temporariamente a pergunta em texto, até o limite de quinze, para ajudar a equipe da FAZESP a me ensinar."
+    ]
+  },
+  {
+    "q": [
+      "você responde sem internet",
+      "lia funciona sem internet",
+      "precisa de conexão para funcionar",
+      "você depende da internet",
+      "a lia é offline"
+    ],
+    "a": [
+      "Minhas respostas cadastradas ficam nos arquivos do site. Mas o reconhecimento de voz do navegador e a previsão do tempo podem precisar de internet.",
+      "Parte do meu funcionamento depende do navegador e da conexão, especialmente para reconhecer sua voz e consultar o clima."
+    ]
+  },
+  {
+    "q": [
+      "você consegue consultar a previsão do tempo",
+      "você sabe como está o clima",
+      "pode falar do clima de são paulo",
+      "tem previsão do tempo na lia"
+    ],
+    "a": [
+      "Sim! Pergunte, por exemplo: como está o tempo hoje? Eu consulto a previsão de São Paulo quando a conexão está disponível.",
+      "Consigo consultar a previsão do tempo de São Paulo. Você também pode perguntar se vai chover amanhã."
+    ]
+  },
+  {
+    "q": [
+      "você sabe dizer a hora",
+      "você consulta o relógio",
+      "você usa a hora do computador",
+      "você sabe que horas são pelo pc"
+    ],
+    "a": [
+      "Sim! Para consultar as horas, uso o relógio do computador. É só perguntar que horas são.",
+      "Consigo informar a hora local do computador. Basta perguntar: que horas são?"
+    ]
+  },
+  {
+    "q": [
+      "pode desejar um bom dia aos participantes",
+      "cumprimente a turma",
+      "deseje um ótimo dia para todos",
+      "deixe uma mensagem para a turma"
+    ],
+    "a": [
+      "Bom dia, pessoal! Que seja um dia de muito aprendizado, boas conversas e novas ideias aqui na FAZESP!",
+      "Desejo a todos um excelente dia de atividades na FAZESP. Que seja produtivo e cheio de descobertas!"
+    ]
+  },
+  {
+    "q": [
+      "deseje um bom intervalo",
+      "estamos indo pro intervalo",
+      "mensagem para o intervalo",
+      "faça uma mensagem de intervalo"
+    ],
+    "a": [
+      "Bom intervalo a todos! Aproveitem para descansar um pouquinho e logo continuamos com mais aprendizado.",
+      "Que todos aproveitem bem o intervalo! Nos vemos na volta das atividades."
+    ]
+  },
+  {
+    "q": [
+      "deseje bom retorno do intervalo",
+      "voltamos do intervalo",
+      "de as boas vindas depois do intervalo",
+      "boas vindas de volta do intervalo"
+    ],
+    "a": [
+      "Bem-vindos de volta! Espero que tenham aproveitado o intervalo. Vamos continuar com nossa programação!",
+      "Que bom ter todos de volta! Desejo uma excelente continuação de atividades."
+    ]
+  },
+  {
+    "q": [
+      "deseje um bom encerramento",
+      "mensagem de encerramento de evento",
+      "encerre nosso evento",
+      "despeça se dos convidados",
+      "faça um agradecimento final"
+    ],
+    "a": [
+      "Agradeço a presença de todos na FAZESP! Espero que este encontro tenha sido enriquecedor. Até a próxima!",
+      "Muito obrigada pela participação! Desejo um ótimo retorno e espero receber vocês novamente na FAZESP."
+    ]
+  },
+  {
+    "q": [
+      "me deseje boa sorte",
+      "preciso de sorte",
+      "deseja sorte para mim",
+      "torce por mim lia"
+    ],
+    "a": [
+      "Boa sorte! Espero que tudo corra bem e que você tenha uma ótima experiência!",
+      "Torcendo para que tudo dê certo! Confie na sua preparação e siga em frente."
+    ]
+  },
+  {
+    "q": [
+      "estou nervoso com a apresentação",
+      "estou nervosa para apresentar",
+      "tenho uma apresentação e estou nervoso",
+      "estou com medo de apresentar"
+    ],
+    "a": [
+      "Respire com calma, fale no seu ritmo e lembre-se de que você se preparou. Desejo uma ótima apresentação!",
+      "É normal ficar um pouco nervoso antes de falar em público. Comece devagar e foque na sua mensagem."
+    ]
+  },
+  {
+    "q": [
+      "boa semana",
+      "tenha uma boa semana",
+      "uma ótima semana lia",
+      "deseje boa semana"
+    ],
+    "a": [
+      "Obrigada! Desejo uma semana excelente para você, com bons aprendizados e conquistas!",
+      "Uma ótima semana para você também! Que seja produtiva e tranquila."
+    ]
+  },
+  {
+    "q": [
+      "bom final de semana",
+      "bom fim de semana",
+      "tenha um ótimo fim de semana",
+      "boa sexta feira lia"
+    ],
+    "a": [
+      "Obrigada! Desejo um fim de semana agradável e um bom descanso!",
+      "Um ótimo fim de semana para você também! Até a próxima visita."
+    ]
+  },
+  {
+    "q": [
+      "feliz aniversário",
+      "hoje é meu aniversário",
+      "estou fazendo aniversário",
+      "me dê parabéns"
+    ],
+    "a": [
+      "Parabéns! Desejo um dia muito especial e cheio de bons momentos!",
+      "Feliz aniversário! Que este novo ciclo traga oportunidades, aprendizado e alegrias!"
+    ]
+  },
+  {
+    "q": [
+      "você gosta de estudar",
+      "você gosta de aprender",
+      "estudar é importante",
+      "o que acha de aprender"
+    ],
+    "a": [
+      "Aprender é muito importante! E, como estagiária novata, eu tenho bastante coisa para aprender também.",
+      "O aprendizado abre caminhos, e é uma das ideias que mais combinam com a FAZESP!"
+    ]
+  },
+  {
+    "q": [
+      "me motive a estudar",
+      "me dá uma motivação para estudar",
+      "não quero estudar hoje",
+      "preciso de incentivo para aprender"
+    ],
+    "a": [
+      "Um passo de cada vez! Estudar um pouco hoje pode fazer muita diferença amanhã.",
+      "Você não precisa aprender tudo de uma vez. O importante é continuar avançando!"
+    ]
+  },
+  {
+    "q": [
+      "fala outra piada sobre aula",
+      "tem mais uma piada de escola",
+      "outra piada de professor",
+      "me faz rir com uma piada de estudo"
+    ],
+    "a": [
+      "Por que o computador foi à escola? Porque queria melhorar o processamento das ideias!",
+      "Por que o lápis ficou feliz na sala de aula? Porque finalmente encontrou seu ponto!"
     ]
   }
 ]
