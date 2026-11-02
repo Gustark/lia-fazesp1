@@ -730,10 +730,51 @@ body{overflow-x:hidden}
 .robot-with-body.expression-doubt:not(.speaking) .lia-mouth-motion{transform:translate(-50%,-50%) rotate(-7deg)}
 @media(min-width:900px){.tv .robot.robot-with-body{width:min(385px,31vw,39vh)!important}}
 @media(max-width:730px){.robot.robot-with-body,.tv .robot.robot-with-body{width:min(285px,74vw,38vh)!important}}
-@media(max-height:880px){.robot.robot-with-body,.tv .robot.robot-with-body{width:min(300px,32vh)!important}}
+@media(max-height:680px){.robot.robot-with-body,.tv .robot.robot-with-body{width:min(245px,34vh)!important}}
 @media(prefers-reduced-motion:reduce){
  .robot-with-body .eye,.robot-with-body .eyes,.robot-with-body .lia-mouth-motion{animation:none!important}
 }
+
+
+/* LIA 6.4 — cartão de informações que acompanha a resposta (clima e relógio) */
+.stage > .lia-info,.tv .stage > .lia-info{
+ position:absolute!important;left:clamp(16px,3vw,50px)!important;right:auto!important;
+ top:45%!important;bottom:auto!important;width:clamp(172px,19vw,235px)!important;
+ min-width:0!important;max-width:calc(100% - 32px)!important;
+ transform:translateY(-50%)!important;z-index:19!important;
+ box-sizing:border-box;display:none;flex-direction:column;align-items:center;
+ padding:16px 13px;border-radius:19px;
+ background:linear-gradient(145deg,rgba(31,27,29,.97),rgba(15,17,22,.97));
+ border:1px solid rgba(255,151,52,.52);box-shadow:0 18px 46px #0009,0 0 36px #f77f2512;
+ text-align:center;pointer-events:none;color:#fff7ee;overflow:hidden;
+}
+.stage > .lia-info.active,.tv .stage > .lia-info.active{display:flex!important;animation:liaInfoEnter .35s ease-out both}
+.lia-info-heading{font-size:10px;font-weight:850;letter-spacing:.15em;color:#ffb677;text-transform:uppercase}
+.lia-info-art{height:94px;width:110px;max-width:100%;margin:8px 0 4px;display:grid;place-items:center;color:#ffa632;filter:drop-shadow(0 0 11px #fa8b3655)}
+.lia-info-art svg{height:88px;width:98px;overflow:visible;stroke:currentColor;fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.lia-info-art .sun-core{fill:#ffbe58;stroke:#ff9c31}
+.lia-info-art .cloud-fill{fill:#282830;stroke:#ffd0a0}
+.lia-info-art .rain-drop{stroke:#69c9f8;animation:liaInfoRain 1.4s ease-in-out infinite alternate}
+.lia-info-art .rain-drop:nth-of-type(2){animation-delay:.3s}
+.lia-info-art .rain-drop:nth-of-type(3){animation-delay:.6s}
+.lia-info-art .sun-rays{transform-origin:50% 50%;animation:liaInfoGlow 3.5s ease-in-out infinite}
+.lia-info-art .clock-hand{stroke:#ffd698}
+.lia-info-primary{font-size:clamp(17px,1.5vw,23px);line-height:1.14;font-weight:800;color:#fff7ee;overflow-wrap:anywhere}
+.lia-info-detail{font-size:12px;font-weight:650;color:#ffd1a2;margin-top:7px;line-height:1.35}
+.lia-info-extra{font-size:11px;color:#cba88c;margin-top:5px;line-height:1.35}
+.stage > .lia-info[data-kind="clock"] .lia-info-primary{font-size:clamp(26px,2.7vw,40px);font-variant-numeric:tabular-nums;letter-spacing:.02em}
+@keyframes liaInfoEnter{from{opacity:0;transform:translateY(-46%) scale(.97)}to{opacity:1;transform:translateY(-50%) scale(1)}}
+@keyframes liaInfoRain{from{transform:translateY(-2px);opacity:.6}to{transform:translateY(5px);opacity:1}}
+@keyframes liaInfoGlow{50%{opacity:.65;transform:scale(1.08)}}
+@media(max-width:1100px){.stage > .lia-info,.tv .stage > .lia-info{left:12px!important;width:170px!important;padding:12px 9px}.lia-info-art{height:75px}.lia-info-art svg{height:70px}}
+@media(max-width:730px){
+ .stage > .lia-info,.tv .stage > .lia-info{top:42%!important;left:8px!important;width:130px!important;padding:9px 7px!important;border-radius:13px}
+ .lia-info-heading{font-size:8px;letter-spacing:.075em}.lia-info-art{height:51px;margin:4px 0}.lia-info-art svg{height:49px;width:59px}
+ .lia-info-primary{font-size:14px!important}.stage > .lia-info[data-kind="clock"] .lia-info-primary{font-size:23px!important}
+ .lia-info-detail,.lia-info-extra{font-size:10px;margin-top:3px}
+}
+@media(max-width:420px){.stage > .lia-info,.tv .stage > .lia-info{top:35%!important;width:112px!important}}
+@media(prefers-reduced-motion:reduce){.stage > .lia-info.active,.lia-info-art *{animation:none!important}}
 
 </style>
 </head>
@@ -749,7 +790,14 @@ body{overflow-x:hidden}
     <div class="mouth"><span class="lia-mouth-motion"></span></div>
     <div class="cheeks"><span></span><span></span></div>
   </div></div>
-</div><div class="hello-label">INTELIGÊNCIA QUE APROXIMA</div><div class="status" id="status">Aguardando sua pergunta</div><span class="tag" id="mode">Pronta para conversar</span><div class="bottom"><div class="subtitle" id="subtitle" aria-live="polite">Como posso ajudar você?</div><div class="lia-test-note">A LIA é uma estagiária novata da FAZESP e ainda está em fase de testes. Por isso, algumas informações podem estar em aprendizado.</div><div class="foot">FAZESP · Escola Fazendária</div><div class="lia-credits">Criado por Gustavo Hugo e Gladstom Alves <span class="lia-version" aria-label="Versão 6.2">· v6.2</span></div></div></section>
+</div><div class="hello-label">INTELIGÊNCIA QUE APROXIMA</div><div class="status" id="status">Aguardando sua pergunta</div><span class="tag" id="mode">Pronta para conversar</span><div class="bottom"><div class="subtitle" id="subtitle" aria-live="polite">Como posso ajudar você?</div><div class="lia-test-note">A LIA é uma estagiária novata da FAZESP e ainda está em fase de testes. Por isso, algumas informações podem estar em aprendizado.</div><div class="foot">FAZESP · Escola Fazendária</div><div class="lia-credits">Criado por Gustavo Hugo e Gladstom Alves <span class="lia-version" aria-label="Versão 6.4">· v6.4</span></div></div></section>
+ <aside class="lia-info" id="liaInfo" role="status" aria-live="polite" aria-label="Informação visual de clima ou horário">
+ <div class="lia-info-heading" id="liaInfoHeading">INFORMAÇÃO</div>
+ <div class="lia-info-art" id="liaInfoArt" aria-hidden="true"></div>
+ <div class="lia-info-primary" id="liaInfoPrimary"></div>
+ <div class="lia-info-detail" id="liaInfoDetail"></div>
+ <div class="lia-info-extra" id="liaInfoExtra"></div>
+</aside>
  <aside class="lia-direction" id="liaDirection" aria-live="polite" aria-label="Orientação de caminho"><div class="dir-heading">DIREÇÃO</div><div class="dir-icon" id="liaDirectionIcon">→</div><div class="dir-label" id="liaDirectionLabel"></div><div class="dir-step" id="liaDirectionStep"></div></aside>
  <aside class="question-suggestion" id="questionSuggestion" aria-label="Exemplo de pergunta"><button class="q-close" id="hideSuggestion" type="button" title="Ocultar sugestão" aria-label="Ocultar sugestão">×</button><div class="q-label">VOCÊ PODE PERGUNTAR</div><div class="q-text" id="questionSuggestionText"></div></aside>
  
@@ -844,6 +892,52 @@ const channel='BroadcastChannel' in window?new BroadcastChannel('lia_assistente_
 function send(data){const msg={...data,t:Date.now()};if(channel)channel.postMessage(msg);try{localStorage.setItem('lia.sync',JSON.stringify(msg))}catch{}}
 
 const DIRECTION_SYMBOLS={left:'←',right:'→',both:'↔',center:'↑','turn-left':'↶','turn-right':'↷','turn-both':'↶  ↷'};
+
+// Ícones vetoriais locais: independentes de API, fontes e imagens externas.
+const ICON_SVG={
+ sun:`<svg viewBox="0 0 100 100" aria-hidden="true"><g class="sun-rays"><path d="M50 6v13M50 81v13M6 50h13M81 50h13M19 19l9 9M72 72l9 9M81 19l-9 9M28 72l-9 9"/></g><circle class="sun-core" cx="50" cy="50" r="23"/></svg>`,
+ cloud:`<svg viewBox="0 0 100 100" aria-hidden="true"><path class="cloud-fill" d="M25 70c-11 0-18-7-18-17 0-10 8-18 18-18a27 27 0 0 1 51-2c11 1 18 10 18 19 0 11-8 18-20 18z"/></svg>`,
+ partly:`<svg viewBox="0 0 100 100" aria-hidden="true"><g class="sun-rays" stroke="#ffbb57"><path d="M62 5v10M62 57v10M26 35h10M88 35h10M43 16l7 7M74 47l7 7M81 16l-7 7"/></g><circle class="sun-core" cx="62" cy="35" r="19"/><path class="cloud-fill" d="M22 75c-10 0-16-7-16-15s7-16 17-16a25 25 0 0 1 45-3c11 1 21 10 21 19 0 9-8 15-19 15z"/></svg>`,
+ rain:`<svg viewBox="0 0 100 100" aria-hidden="true"><path class="cloud-fill" d="M25 59C15 59 9 52 9 43s7-16 17-16a26 26 0 0 1 48-2c12 1 19 9 19 18 0 9-7 16-18 16z"/><path class="rain-drop" d="M28 70l-5 13"/><path class="rain-drop" d="M51 70l-5 13"/><path class="rain-drop" d="M74 70l-5 13"/></svg>`,
+ storm:`<svg viewBox="0 0 100 100" aria-hidden="true"><path class="cloud-fill" d="M25 57C15 57 9 50 9 41s8-16 18-16a26 26 0 0 1 47-2c12 1 19 9 19 18 0 9-8 16-19 16z"/><path stroke="#ffbb54" fill="#ffae42" d="M52 57l-14 23h16l-7 17 26-31H56l8-9z"/></svg>`,
+ fog:`<svg viewBox="0 0 100 100" aria-hidden="true"><path class="cloud-fill" d="M25 52c-11 0-17-7-17-15s7-16 17-16a26 26 0 0 1 49-2c12 1 18 9 18 18 0 9-8 15-19 15z"/><path d="M18 67h64M26 80h50M17 92h36"/></svg>`,
+ snow:`<svg viewBox="0 0 100 100" aria-hidden="true"><path class="cloud-fill" d="M25 57C15 57 9 50 9 41s8-16 18-16a26 26 0 0 1 47-2c12 1 19 9 19 18 0 9-8 16-19 16z"/><path stroke="#a7e5ff" d="M30 69v20m-8-10h16M21 70l18 18m0-18L21 88M69 69v20m-8-10h16M60 70l18 18m0-18L60 88"/></svg>`,
+ clock:`<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="39" stroke="#ffb361"/><path d="M50 16v8M50 76v8M16 50h8M76 50h8" stroke="#f9a352"/><path class="clock-hand" d="M50 27v24l18 12"/></svg>`
+};
+let activeInfo=null,infoTimer=null;
+function clearInfo(broadcast=true){
+ clearTimeout(infoTimer);infoTimer=null;activeInfo=null;
+ const p=$('liaInfo');if(p)p.classList.remove('active');
+ if(broadcast&&!tv)send({kind:'info',info:null});
+}
+function drawInfo(info,broadcast=true){
+ clearTimeout(infoTimer);infoTimer=null;
+ const p=$('liaInfo');
+ if(!p)return;
+ if(!info||!['weather','clock'].includes(info.type)){clearInfo(broadcast);return;}
+ const icon=Object.prototype.hasOwnProperty.call(ICON_SVG,info.icon)?info.icon:'cloud';
+ activeInfo={type:info.type,icon,heading:String(info.heading||''),primary:String(info.primary||''),detail:String(info.detail||''),extra:String(info.extra||'')};
+ p.dataset.kind=info.type;
+ $('liaInfoHeading').textContent=activeInfo.heading;
+ $('liaInfoArt').innerHTML=ICON_SVG[icon];
+ $('liaInfoPrimary').textContent=activeInfo.primary;
+ $('liaInfoDetail').textContent=activeInfo.detail;
+ $('liaInfoExtra').textContent=activeInfo.extra;
+ p.classList.add('active');
+ if(broadcast&&!tv)send({kind:'info',info:activeInfo});
+}
+function scheduleInfoClear(){if(!activeInfo)return;clearTimeout(infoTimer);infoTimer=setTimeout(()=>clearInfo(),9500)}
+function weatherIcon(code){
+ if(code===0)return 'sun';
+ if([1,2].includes(code))return 'partly';
+ if(code===3)return 'cloud';
+ if([45,48].includes(code))return 'fog';
+ if([51,53,55,56,57,61,63,65,66,67,80,81,82].includes(code))return 'rain';
+ if([71,73,75,77,85,86].includes(code))return 'snow';
+ if([95,96,99].includes(code))return 'storm';
+ return 'cloud';
+}
+
 let currentDirection=null,directionTimer=null,directionStep=0;
 function drawDirection(dir,step=0){
  const panel=$('liaDirection');clearTimeout(directionTimer);
@@ -877,7 +971,7 @@ function screen(state,status,subtitle){
 }
 function show(state,status,subtitle){screen(state,status,subtitle);send({kind:'screen',state,status,subtitle})}
 function rename(){assistantName='LIA';$('liaGreeting').textContent='Sua assistente virtual.';if(!tv)send({kind:'name',name:'LIA'})}
-function incoming(data){if(!data)return;if(data.kind==='screen')screen(data.state,data.status,data.subtitle);if(data.kind==='ready'&&!tv){send({kind:'screen',state:$('robot').classList.contains('speaking')?'speaking':$('robot').classList.contains('listening')?'listening':'idle',status:$('status').textContent,subtitle:$('subtitle').textContent});send({kind:'name',name:assistantName});send({kind:'direction',direction:currentDirection,step:directionStep})}if(data.kind==='suggestions'){const v=validate(data.entries);if(v){entries=v;refreshSuggestions()}}if(data.kind==='direction')drawDirection(data.direction,data.step||0);if(data.kind==='name'){$('liaGreeting').textContent='Sua assistente virtual.';assistantName='LIA'}}
+function incoming(data){if(!data)return;if(data.kind==='screen')screen(data.state,data.status,data.subtitle);if(data.kind==='ready'&&!tv){send({kind:'screen',state:$('robot').classList.contains('speaking')?'speaking':$('robot').classList.contains('listening')?'listening':'idle',status:$('status').textContent,subtitle:$('subtitle').textContent});send({kind:'name',name:assistantName});send({kind:'direction',direction:currentDirection,step:directionStep});send({kind:'info',info:activeInfo})}if(data.kind==='suggestions'){const v=validate(data.entries);if(v){entries=v;refreshSuggestions()}}if(data.kind==='direction')drawDirection(data.direction,data.step||0);if(data.kind==='info')drawInfo(data.info,false);if(data.kind==='name'){$('liaGreeting').textContent='Sua assistente virtual.';assistantName='LIA'}}
 if(channel)channel.onmessage=e=>incoming(e.data);window.addEventListener('storage',e=>{if(e.key==='lia.sync'){try{incoming(JSON.parse(e.newValue))}catch{}}});
 rename(assistantName);refreshSuggestions();loadKnowledge();
 if(tv){send({kind:'ready'});window.addEventListener('click',()=>{document.documentElement.requestFullscreen?.().catch(()=>{})},{once:true})}
@@ -962,13 +1056,13 @@ function localTimeAnswer(normalizedQuestion){
   /^(?:que|qual) horas? (?:e|sao|sao agora|temos|sao ai|sao nesse momento|sao nesse instante)$/,
   /^que horas? (?:esta|ta|deu|marcando|tem)$/,
   /^(?:que horas|quantas horas|sao quantas horas|quantas horas sao)$/,
-  /^qual (?:e )?(?:a )?hora(?: agora|atual|certa|do momento|ai|nesse instante)?$/,
+  /^qual (?:e )?(?:a )?hora(?: (?:agora|atual|certa|do momento|ai|nesse instante))?$/,
   /^(?:me (?:diz|fala|informa) )?(?:a )?hora(?: agora|atual|certa)?$/,
   /^(?:horas agora|horario atual|horario de agora|me diga que horas sao|voce sabe que horas sao|que horario e agora|qual horario e agora)$/
  ];
  if(!patterns.some(p=>p.test(n)))return null;
  const now=new Date(),h=now.getHours(),m=now.getMinutes();
- return {text:m===0?`Agora são ${h} horas em ponto, de acordo com o relógio deste computador.`:`Agora são ${h} horas e ${m} minutos, de acordo com o relógio deste computador.`,direction:null,kind:'clock'};
+ return {text:m===0?`Agora são ${h} horas em ponto, de acordo com o relógio deste computador.`:`Agora são ${h} horas e ${m} minutos, de acordo com o relógio deste computador.`,direction:null,kind:'clock',visual:{type:'clock',icon:'clock',heading:'HORÁRIO ATUAL',primary:now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}),detail:'Relógio do computador',extra:'Horário local'}};
 }
 
 // Consulta somente quando alguém pergunta, sem permissão de localização e sem chave.
@@ -1023,9 +1117,11 @@ async function weatherAnswer(intent){
   }
   if(Number.isFinite(Number(chance)))text+=` A probabilidade máxima de chuva prevista para ${i?'amanhã':'hoje'} é de ${Math.round(Number(chance))} por cento.`;
   text+=' Dados da previsão meteorológica Open-Meteo.';
-  return text;
+  const currTemp=Math.round(Number(cur.temperature_2m));
+  const hasChance=Number.isFinite(Number(chance));
+  return {text,visual:{type:'weather',icon:weatherIcon(day.weather_code[i]),heading:i?'PREVISÃO PARA AMANHÃ':'TEMPO EM SÃO PAULO',primary:weather.charAt(0).toUpperCase()+weather.slice(1),detail:i?`Mín. ${min}° • Máx. ${max}°`:`${Number.isFinite(currTemp)?currTemp+' °C agora • ':''}Máx. ${max}°`,extra:hasChance?`Probabilidade máxima de chuva: ${Math.round(Number(chance))}%`:'São Paulo'}};
  }catch(e){
-  return 'Não consegui consultar a previsão do tempo neste momento. Verifique a conexão com a internet e tente perguntar novamente daqui a pouco.';
+  return {text:'Não consegui consultar a previsão do tempo neste momento. Verifique a conexão com a internet e tente perguntar novamente daqui a pouco.',visual:null};
  }
 }
 function findAnswer(query){
@@ -1093,8 +1189,9 @@ function queueRestart(ms=450){
  if(!listening||answerPending||utterance||(window.speechSynthesis?.speaking||false)||recognitionActive||recognitionStarting)return;
  restartTimer=setTimeout(()=>startRecognition(),ms);
 }
-function say(text,direction=null){
+function say(text,direction=null,visual=null){
  clearDirection();
+ if(visual)drawInfo(visual);else clearInfo();
  if(direction){drawDirection(direction);send({kind:'direction',direction,step:0})}
  lastSpokenAnswer=text;
  answerPending=true;
@@ -1114,6 +1211,7 @@ function say(text,direction=null){
   if(utterance!==u)return;
   clearTimeout(voiceSafetyTimer);utterance=null;answerPending=false;clearDirection();
   show(listening?'listening':'idle',listening?'Retomando escuta...':'Aguardando sua pergunta',text);
+  scheduleInfoClear();
   queueRestart(350);
  };
  u.onend=finished;u.onerror=finished;
@@ -1163,17 +1261,17 @@ function duplicateRecently(question){
 }
 
 function processQuestion(q){
- q=q.trim();if(!q||duplicateRecently(q))return;diagnosticState.lastQuestion=new Date();updateDiagnostics();show('idle','Pergunta recebida',q);
+ q=q.trim();if(!q||duplicateRecently(q))return;clearInfo();diagnosticState.lastQuestion=new Date();updateDiagnostics();show('idle','Pergunta recebida',q);
  const weather=weatherIntent(q);
  if(weather){
   answerPending=true;
   if(recognitionActive||recognitionStarting){try{recognition.stop()}catch{try{recognition.abort()}catch{}}}
   show('idle','Consultando o tempo...','Verificando a previsão de São Paulo');
-  weatherAnswer(weather).then(text=>say(text)).catch(()=>say('Não consegui consultar o tempo agora.'));
+  weatherAnswer(weather).then(result=>say(result.text,null,result.visual)).catch(()=>say('Não consegui consultar o tempo agora.'));
   return;
  }
  const answer=findAnswer(q);
- if(answer===null){trackUnknown(q);$('robot').classList.add('confused');setTimeout(()=>$('robot').classList.remove('confused'),2000);say(UNKNOWN_REPLY)}else {if(/bom dia|boa tarde|boa noite|obrigad|ol[aá]/i.test(q)){$('robot').classList.add('happy');setTimeout(()=>$('robot').classList.remove('happy'),1600)}say(answer.text,answer.direction);}
+ if(answer===null){trackUnknown(q);$('robot').classList.add('confused');setTimeout(()=>$('robot').classList.remove('confused'),2000);say(UNKNOWN_REPLY)}else {if(/bom dia|boa tarde|boa noite|obrigad|ol[aá]/i.test(q)){$('robot').classList.add('happy');setTimeout(()=>$('robot').classList.remove('happy'),1600)}say(answer.text,answer.direction,answer.visual||null);}
 }
 function startRecognition(){
  if(!recognition||!listening||recognitionActive||recognitionStarting||answerPending||utterance||(window.speechSynthesis?.speaking||false))return;
@@ -1251,7 +1349,12 @@ if(!tv){
  window.addEventListener('online',recoverAfterPause);
  document.addEventListener('visibilitychange',()=>{if(!document.hidden)recoverAfterPause()});
 }
-if(!tv){if(location.protocol==='file:'){const banner=document.createElement('div');banner.style.cssText='background:#4b240f;color:#ffddb6;border:1px solid #e87c2a;border-radius:12px;padding:12px;margin:10px 0;font-size:14px';banner.textContent='⚠ Para usar a escuta contínua, publique o index.html no GitHub Pages e abra o endereço HTTPS; arquivos locais podem solicitar permissão repetidamente.';document.querySelector('.admin')?.prepend(banner);}refreshVoices();speechSynthesis.onvoiceschanged=refreshVoices;$('voiceSelect').onchange=()=>{localStorage.setItem('lia.voice',$('voiceSelect').value);$('voiceNotice').textContent='Voz escolhida. Clique em Testar voz para ouvir.'};setupRecognition();$('start').onclick=()=>{if(location.protocol==='file:'){$('msg').textContent='Abra o endereço HTTPS publicado no GitHub Pages e autorize o microfone para este site.';alert('Para habilitar o microfone com permissão persistente, publique este index.html no GitHub Pages e abra o endereço HTTPS.');return;}if(!recognition){setupRecognition();if(!recognition)return}listening=true;retryDelay=450;$('msg').textContent='Escuta contínua ligada. A LIA volta a ouvir após responder. Conceda a permissão permanente do microfone ao endereço HTTPS publicado.';startRecognition()};$('stop').onclick=()=>{clearDirection();listening=false;answerPending=false;recognitionStarting=false;clearTimeout(restartTimer);clearTimeout(voiceSafetyTimer);recognition?.abort();window.speechSynthesis?.cancel();utterance=null;show('idle','Microfone parado','Clique em Iniciar microfone no notebook')};$('openTv').onclick=()=>{const w=window.open(location.origin+location.pathname+'?tv=1','lia_tv');if(!w)$('msg').textContent='O navegador bloqueou a janela. Permita pop-ups ou abra o endereço com ?tv=1 em outra aba.'};$('testVoice').onclick=()=>say('Olá! Meu nome é '+assistantName+'. Estou pronta para responder perguntas.');$('exportUnknown').onclick=exportUnknown;$('clearUnknown').onclick=()=>{if(confirm('Apagar o histórico de perguntas sem resposta deste navegador? Esta ação não pode ser desfeita.')){unknownRecords.length=0;updateUnknownInfo()}};updateUnknownInfo();
+if(!tv){if(location.protocol==='file:'){const banner=document.createElement('div');banner.style.cssText='background:#4b240f;color:#ffddb6;border:1px solid #e87c2a;border-radius:12px;padding:12px;margin:10px 0;font-size:14px';banner.textContent='⚠ Para usar a escuta contínua, publique o index.html no GitHub Pages e abra o endereço HTTPS; arquivos locais podem solicitar permissão repetidamente.';document.querySelector('.admin')?.prepend(banner);}refreshVoices();speechSynthesis.onvoiceschanged=refreshVoices;$('voiceSelect').onchange=()=>{localStorage.setItem('lia.voice',$('voiceSelect').value);$('voiceNotice').textContent='Voz escolhida. Clique em Testar voz para ouvir.'};setupRecognition();$('start').onclick=()=>{if(location.protocol==='file:'){$('msg').textContent='Abra o endereço HTTPS publicado no GitHub Pages e autorize o microfone para este site.';alert('Para habilitar o microfone com permissão persistente, publique este index.html no GitHub Pages e abra o endereço HTTPS.');return;}if(!recognition){setupRecognition();if(!recognition)return}listening=true;retryDelay=450;$('msg').textContent='Escuta contínua ligada. A LIA volta a ouvir após responder. Conceda a permissão permanente do microfone ao endereço HTTPS publicado.';startRecognition()};$('stop').onclick=()=>{clearDirection();clearInfo();listening=false;answerPending=false;recognitionStarting=false;clearTimeout(restartTimer);clearTimeout(voiceSafetyTimer);recognition?.abort();window.speechSynthesis?.cancel();utterance=null;show('idle','Microfone parado','Clique em Iniciar microfone no notebook')};$('openTv').onclick=()=>{const w=window.open(location.origin+location.pathname+'?tv=1','lia_tv');if(!w)$('msg').textContent='O navegador bloqueou a janela. Permita pop-ups ou abra o endereço com ?tv=1 em outra aba.'};$('testVoice').onclick=()=>say('Olá! Meu nome é '+assistantName+'. Estou pronta para responder perguntas.');$('exportUnknown').onclick=exportUnknown;$('clearUnknown').onclick=()=>{if(confirm('Apagar o histórico de perguntas sem resposta deste navegador? Esta ação não pode ser desfeita.')){unknownRecords.length=0;updateUnknownInfo()}};updateUnknownInfo();
+ // Tenta iniciar o microfone no notebook por padrão após carregar o site HTTPS.
+ // O navegador pode exigir autorização prévia ou interação do visitante.
+ if(location.protocol==='https:'||location.hostname==='localhost'){
+  setTimeout(()=>{if(!tv&&!listening){$('msg').textContent='Ativando escuta automaticamente...';$('start').click()}},700);
+ }
 }
 function validate(v){if(!Array.isArray(v)||!v.every(e=>e&&Array.isArray(e.q)&&e.q.length&&e.q.every(s=>typeof s==='string'&&s.trim())&&((typeof e.a==='string'&&e.a.trim())||(Array.isArray(e.a)&&e.a.length>0&&e.a.every(a=>typeof a==='string'&&a.trim())))))return null;return v}
 </script>
