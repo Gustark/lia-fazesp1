@@ -168,7 +168,7 @@
       "você sabe dançar",
       "você dança"
     ],
-    "a": "Ainda não tenho pernas, mas posso imaginar uma coreografia digital!"
+    "a": "Tenho pernas no meu visual, mas meus movimentos são animações digitais! Quem sabe um dia eu aprenda uma dança?"
   },
   {
     "q": [
@@ -328,9 +328,9 @@
       "quem é essa assistente virtual"
     ],
     "a": [
-      "Eu sou a LIA, a assistente virtual da FAZESP! Sou uma estagiária virtual novata, criada para receber visitantes, responder perguntas e ajudar a encontrar os ambientes da escola.",
-      "Muito prazer! Meu nome é LIA. Eu recebo quem chega à FAZESP e ajudo com informações, orientações e boas-vindas. Ainda estou em fase de testes e aprendendo!",
-      "Sou a LIA, a estagiária virtual da FAZESP. Posso conversar por voz, mostrar respostas na tela e orientar visitantes pelos espaços que já conheço."
+      "Eu sou a LIA, assistente virtual e estagiária novata da FAZESP. Recebo visitantes, respondo perguntas cadastradas e ajudo a encontrar ambientes da escola.",
+      "Meu nome é LIA! Sou uma estagiária virtual em fase de testes, preparada para orientar visitantes e compartilhar informações da FAZESP.",
+      "Sou a LIA, uma assistente virtual criada para acolher e orientar quem chega à FAZESP. Ainda estou aprendendo com a equipe!"
     ]
   },
   {
@@ -1431,7 +1431,11 @@
       "qual o caminho para auditorio principal",
       "como faço para chegar em auditorio grande",
       "como faço para chegar em grande auditorio",
-      "como faço para chegar em auditorio principal"
+      "como faço para chegar em auditorio principal",
+      "g a fica para qual lado",
+      "onde fica o grande auditorio por favor",
+      "quero ir para o ga",
+      "pra onde fica o grande auditorio"
     ],
     "a": "Grande Auditório fica na Ala Dom Pedro. Siga pelo corredor à sua direita.",
     "direcao": {
@@ -1800,7 +1804,11 @@
       "qual o caminho para auditorio pequeno",
       "qual o caminho para pequeno auditorio",
       "como faço para chegar em auditorio pequeno",
-      "como faço para chegar em pequeno auditorio"
+      "como faço para chegar em pequeno auditorio",
+      "p a fica para qual lado",
+      "como ir no pa",
+      "preciso chegar no pequeno auditorio",
+      "onde e o auditorio pequeno por favor"
     ],
     "a": "Pequeno Auditório fica na Ala Sé. Siga pelo corredor à sua esquerda.",
     "direcao": {
@@ -3075,7 +3083,10 @@
       "quem é bruno norões",
       "o bruno norões é diretor da fazesp",
       "diretor fazesp",
-      "nome do diretor da fazesp"
+      "nome do diretor da fazesp",
+      "quem dirige a escola fazendaria",
+      "quem e o diretor dessa escola",
+      "qual o nome do diretor da escola"
     ],
     "a": [
       "O diretor da FAZESP é Bruno Norões.",
@@ -3133,7 +3144,11 @@
       "mensagem de boas vindas aos convidados",
       "quero uma mensagem de boas vindas",
       "de boas vindas aos nossos convidados",
-      "fale para dar boas vindas aos participantes"
+      "fale para dar boas vindas aos participantes",
+      "lia de boas vindas aos presentes",
+      "cumprimente o nosso publico",
+      "faca uma saudacao para convidados",
+      "lia receba o publico do evento"
     ],
     "a": [
       "Sejam todos muito bem-vindos à FAZESP! É uma alegria receber nossos convidados. Eu sou a LIA, a assistente virtual da escola, e desejo a vocês um excelente evento!",
@@ -3202,7 +3217,12 @@
       "descreva a lia",
       "pode se apresentar lia",
       "me dê uma apresentação da lia",
-      "lia se apresenta pra gente"
+      "lia se apresenta pra gente",
+      "quem e essa robo",
+      "me fale um pouco de voce",
+      "o que e essa assistente",
+      "quem e lia da fazesp",
+      "quem e a estagiaria virtual"
     ],
     "a": [
       "Eu sou a LIA, a assistente virtual da FAZESP e uma estagiária novata em fase de testes. Fui criada para receber pessoas, compartilhar informações e orientar visitantes pela escola.",
@@ -3222,7 +3242,12 @@
       "você está aprendendo",
       "lia é novata",
       "voce é uma estagiária virtual",
-      "por que voce ainda aprende"
+      "por que voce ainda aprende",
+      "voce ja esta pronta",
+      "voce ainda esta em teste",
+      "lia voce ja terminou de aprender",
+      "por que a lia e novata",
+      "a lia e experimental"
     ],
     "a": [
       "Sou uma estagiária virtual novata da FAZESP e ainda estou em fase de testes. Por isso, algumas informações podem estar em aprendizado.",
@@ -3287,7 +3312,17 @@
       "o que eu posso perguntar a você",
       "quais recursos você tem",
       "o que a lia consegue fazer",
-      "o que voce consegue fazer lia"
+      "o que voce consegue fazer lia",
+      "o que voce pode fazer",
+      "o que voce pode fazer por mim",
+      "para que posso usar voce",
+      "lia o que voce faz por aqui",
+      "quais servicos voce oferece",
+      "em que a lia pode ajudar",
+      "o que voce consegue fazer por mim",
+      "quais suas funcionalidades",
+      "o que eu posso perguntar para voce",
+      "que tipo de pergunta voce responde"
     ],
     "a": [
       "Posso orientar sobre locais da FAZESP, responder perguntas sobre a escola, informar a hora do computador, consultar o clima de São Paulo e dar boas-vindas aos convidados.",
@@ -3312,7 +3347,11 @@
       "voce acessa banco de dados online",
       "onde busca as respostas",
       "de onde vem suas informações",
-      "você usa uma base de dados"
+      "você usa uma base de dados",
+      "como e sua conexao com a internet",
+      "suas respostas vem da internet",
+      "de onde saem as respostas",
+      "qual sua fonte de informacoes"
     ],
     "a": [
       "Minhas respostas institucionais vêm de um arquivo de perguntas e respostas preparado pela equipe da FAZESP, não de uma inteligência artificial generativa. Para o clima, faço uma consulta online; para as horas, uso o relógio do computador.",
@@ -3529,7 +3568,12 @@
       "por que criaram a lia",
       "qual a finalidade da lia",
       "qual sua principal missão",
-      "qual é o propósito da lia"
+      "qual é o propósito da lia",
+      "qual seu objetivo na escola",
+      "por que voce foi criada",
+      "qual e seu proposito",
+      "qual a funcao da lia na fazesp",
+      "qual seu papel para visitantes"
     ],
     "a": [
       "Minha missão é facilitar a visita à FAZESP, acolhendo as pessoas e oferecendo informações e orientações de forma simples e acessível.",
@@ -3639,7 +3683,11 @@
       "como a lia ajuda na acessibilidade",
       "qual a acessibilidade da lia",
       "você mostra legenda",
-      "a lia tem legenda"
+      "a lia tem legenda",
+      "lia voce e acessivel",
+      "como voce ajuda quem tem dificuldade para ouvir",
+      "quais recursos de acessibilidade voce tem",
+      "pode atender pessoas com dificuldade auditiva"
     ],
     "a": [
       "Posso ajudar com respostas faladas, legendas na tela e setas de orientação. Esses recursos facilitam o acesso às informações, embora não substituam os recursos de acessibilidade e o apoio da equipe da FAZESP.",
@@ -3673,5 +3721,348 @@
       "Olá! Eu sou a LIA, a assistente virtual da FAZESP! Sou uma estagiária novata e estou aqui para ajudar vocês com informações e orientações pela escola. Sejam muito bem-vindos!",
       "Prazer em conhecer vocês! Meu nome é LIA. Posso indicar ambientes, responder perguntas cadastradas e compartilhar curiosidades. Estou em fase de testes e aprendendo a cada dia!"
     ]
+  },
+  {
+    "q": [
+      "lia para que existe a fazesp",
+      "qual e o papel da escola fazendaria",
+      "pra que serve uma escola fazendaria",
+      "me explique a finalidade da escola fazendaria",
+      "o que a escola fazendaria faz"
+    ],
+    "a": [
+      "A FAZESP promove formação e educação fiscal. Ela contribui para o desenvolvimento de servidores e para aproximar os cidadãos de temas da gestão pública.",
+      "A Escola Fazendária ajuda a compartilhar conhecimento sobre administração pública, finanças públicas e cidadania fiscal.",
+      "A FAZESP é um espaço de aprendizagem ligado à Secretaria da Fazenda e Planejamento do Estado de São Paulo."
+    ]
+  },
+  {
+    "q": [
+      "nao sei qual sala e meu curso",
+      "como descubro a sala do meu evento",
+      "preciso encontrar a sala da minha aula",
+      "onde consulto em qual sala sera a aula",
+      "como sei o auditorio do meu evento"
+    ],
+    "a": [
+      "Consulte o convite ou a programação do evento para confirmar a sala. Depois, posso ajudar você a chegar ao ambiente indicado.",
+      "A localização de cada atividade pode mudar. Confirme o local com a recepção ou organização e me pergunte o caminho até a sala.",
+      "Se você souber o nome da sala ou do auditório, posso ajudar com a direção. A agenda de eventos ainda não está integrada automaticamente."
+    ]
+  },
+  {
+    "q": [
+      "qual e a diferenca entre grande e pequeno auditorio",
+      "aonde fica cada auditorio",
+      "os dois auditorios ficam no mesmo lado",
+      "tem dois auditorios na fazesp",
+      "quais auditorios existem"
+    ],
+    "a": [
+      "A FAZESP possui o Grande Auditório, na Ala Dom Pedro, à direita, e o Pequeno Auditório, na Ala Sé, à esquerda, considerando você de frente para mim.",
+      "Para localizar os auditórios: Grande Auditório à direita, na Ala Dom Pedro; Pequeno Auditório à esquerda, na Ala Sé.",
+      "Os auditórios ficam em alas diferentes. Posso mostrar a direção de cada um se você perguntar pelo nome."
+    ]
+  },
+  {
+    "q": [
+      "o que e cidadania fiscal",
+      "me explique cidadania fiscal",
+      "qual e a ideia de cidadania fiscal",
+      "por que cidadania fiscal e importante",
+      "o que significa ser cidadao fiscalmente consciente"
+    ],
+    "a": [
+      "Cidadania fiscal é compreender como os tributos se relacionam com os serviços públicos e como a sociedade acompanha a aplicação dos recursos.",
+      "A cidadania fiscal envolve conhecer direitos, deveres e a importância da transparência na utilização do dinheiro público.",
+      "É uma maneira de participar de forma consciente das discussões sobre tributos e gestão dos recursos públicos."
+    ]
+  },
+  {
+    "q": [
+      "por que devemos aprender educacao fiscal",
+      "qual a importancia da educacao fiscal",
+      "educacao fiscal ajuda em que",
+      "para que conhecer os impostos",
+      "o que aprendemos com a educacao fiscal"
+    ],
+    "a": [
+      "A educação fiscal ajuda a entender a origem dos recursos públicos, a função dos tributos e a importância de acompanhar sua aplicação.",
+      "Conhecer educação fiscal contribui para uma participação mais consciente nas decisões que envolvem serviços públicos e cidadania.",
+      "É importante porque aproxima os cidadãos de temas como impostos, orçamento, transparência e controle social."
+    ]
+  },
+  {
+    "q": [
+      "o que sao tributos estaduais",
+      "quais impostos sao do estado",
+      "o estado arrecada quais impostos",
+      "me explique impostos estaduais",
+      "me diga exemplos de tributos do estado"
+    ],
+    "a": [
+      "Entre os tributos estaduais estão o ICMS, o IPVA e o ITCMD. Cada um possui regras e situações de incidência diferentes.",
+      "Os estados administram diferentes tributos. Em São Paulo, alguns exemplos são ICMS, IPVA e ITCMD.",
+      "ICMS, IPVA e ITCMD são exemplos de impostos estaduais. Se quiser, posso explicar o significado de cada sigla."
+    ]
+  },
+  {
+    "q": [
+      "o que fazer se a lia nao entende",
+      "lia entendeu minha pergunta errado",
+      "como perguntar para ser melhor entendida",
+      "minha pergunta saiu errada",
+      "a lia reconheceu outra palavra",
+      "nao foi isso que falei"
+    ],
+    "a": [
+      "Pode tentar novamente com uma frase mais curta, falando perto do microfone e sem ruídos ao redor. Ainda estou aprendendo a reconhecer diferentes formas de perguntar.",
+      "Às vezes o navegador transcreve palavras incorretamente. Repita a pergunta com calma ou use palavras diferentes.",
+      "Desculpe pela confusão! Tente mencionar o nome completo do local ou do assunto. Isso me ajuda a escolher uma resposta melhor."
+    ]
+  },
+  {
+    "q": [
+      "o microfone da lia nao esta funcionando",
+      "por que voce nao esta me ouvindo",
+      "a lia parou de escutar",
+      "como reativar o microfone da lia",
+      "o audio nao esta sendo captado"
+    ],
+    "a": [
+      "Peça à equipe para verificar a permissão do microfone no navegador e o botão de escuta no painel. Pode ser necessário reativar a captação.",
+      "Se o microfone parar, a equipe pode verificar as configurações e a conexão do navegador. O botão de ativação fica no painel técnico.",
+      "A LIA usa o microfone do notebook. Se a escuta estiver indisponível, a equipe pode confirmar a permissão e reiniciá-la no painel."
+    ]
+  },
+  {
+    "q": [
+      "posso desligar seu microfone por voz",
+      "voce tem comando para desligar microfone",
+      "consigo ligar microfone falando",
+      "como pausar sua escuta",
+      "tem como parar a lia de ouvir"
+    ],
+    "a": [
+      "O controle de ativar e parar o microfone fica no painel técnico. Não executei nenhum comando para alterá-lo apenas por voz.",
+      "A equipe pode pausar ou reativar a escuta pelas configurações da LIA. Assim evitamos mudanças acidentais durante uma visita."
+    ]
+  },
+  {
+    "q": [
+      "por que aparecem frases na tela",
+      "essas legendas sao o que",
+      "voce mostra sua resposta por escrito",
+      "o que significam as legendas",
+      "pra que serve a legenda"
+    ],
+    "a": [
+      "As legendas mostram o texto das minhas respostas, ajudando quem prefere ler ou não consegue ouvir bem.",
+      "Eu respondo por voz e também mostro a informação na tela. Esse recurso facilita a compreensão e amplia a acessibilidade.",
+      "As frases na tela acompanham meu atendimento. Você pode ler enquanto eu falo."
+    ]
+  },
+  {
+    "q": [
+      "o que significam as setas",
+      "por que aparece uma seta",
+      "pra que servem as setas de orientacao",
+      "as setas indicam onde ir",
+      "como entender as direcoes na tela"
+    ],
+    "a": [
+      "As setas indicam o sentido dos corredores em relação a você, que está olhando para mim. Elas aparecem quando oriento sobre um ambiente cadastrado.",
+      "As minhas setas ajudam a localizar salas e auditórios. Direita e esquerda são sempre consideradas do ponto de vista de quem está de frente para mim.",
+      "Quando mostrar uma seta, siga o sentido indicado e confira também a orientação falada."
+    ]
+  },
+  {
+    "q": [
+      "o que sao esses icones de clima",
+      "por que aparece um sol na tela",
+      "por que aparece um relogio do seu lado",
+      "o que significam os icones da previsao",
+      "o cartao de clima significa o que"
+    ],
+    "a": [
+      "Os ícones ajudam a visualizar informações. Sol e nuvens representam a previsão consultada, e o relógio aparece quando você pergunta as horas.",
+      "Uso pequenos cartões de clima e horário para complementar minhas respostas faladas com informações visuais.",
+      "Esses desenhos aparecem quando a pergunta é sobre o tempo ou o relógio do computador."
+    ]
+  },
+  {
+    "q": [
+      "posso pedir uma resposta mais lenta",
+      "voce consegue falar devagar comigo",
+      "quero ouvir mais devagar",
+      "tem como reduzir a velocidade",
+      "sua fala esta muito rapida"
+    ],
+    "a": [
+      "Sim! Diga: fale mais devagar. Vou ajustar a velocidade das próximas respostas.",
+      "Você pode falar: mais devagar. Assim consigo responder num ritmo mais tranquilo."
+    ]
+  },
+  {
+    "q": [
+      "como posso pedir ajuda de uma pessoa",
+      "preciso de atendimento humano",
+      "quero falar com alguem da equipe",
+      "onde consigo ajuda presencial",
+      "nao resolveu meu problema"
+    ],
+    "a": [
+      "Você pode procurar a recepção ou a equipe responsável pela atividade. Algumas orientações precisam ser confirmadas presencialmente.",
+      "Se precisar de atendimento humano, a recepção da FAZESP pode encaminhar sua solicitação.",
+      "Estou aqui para ajudar com informações cadastradas, mas a equipe da FAZESP pode orientar você pessoalmente."
+    ]
+  },
+  {
+    "q": [
+      "tem acesso a meus dados pessoais",
+      "a lia identifica meu nome",
+      "voce sabe meu cpf",
+      "você consulta cadastro de visitante",
+      "a lia acessa informações pessoais"
+    ],
+    "a": [
+      "Eu não consulto cadastros pessoais ou documentos. Trabalho principalmente com perguntas e respostas cadastradas pela equipe da FAZESP.",
+      "Nesta versão, não acesso CPF, identificação ou informações cadastrais dos visitantes. O reconhecimento de voz depende dos serviços do navegador.",
+      "Não preciso que você me informe documentos pessoais. Para questões de cadastro, procure a equipe responsável."
+    ]
+  },
+  {
+    "q": [
+      "como evitar compartilhar dados pessoais",
+      "posso falar meu cpf para a lia",
+      "devo dizer minha senha",
+      "posso contar minha senha",
+      "o que nao devo falar no microfone"
+    ],
+    "a": [
+      "Para sua segurança, não informe senhas, CPF ou outros dados pessoais pelo microfone. Use os canais oficiais para assuntos particulares.",
+      "Evite compartilhar informações sensíveis ao conversar comigo. Posso ajudar com orientações gerais sem precisar de dados pessoais.",
+      "É melhor não falar documentos, senhas ou dados confidenciais ao microfone. A equipe pode indicar o atendimento adequado."
+    ]
+  },
+  {
+    "q": [
+      "como funciona seu aprendizado",
+      "voce aprende com cada visita automaticamente",
+      "quem ensina a lia",
+      "voce muda sozinha o que sabe"
+    ],
+    "a": [
+      "As respostas são preparadas e atualizadas pela equipe da FAZESP. Eu não aprendo automaticamente apenas porque alguém faz uma pergunta.",
+      "A equipe analisa o que ainda não sei e pode cadastrar novas perguntas e respostas. Assim, meu conhecimento cresce de forma controlada.",
+      "Sou uma estagiária virtual em fase de testes. Meu aprendizado ocorre quando a equipe revisa e atualiza minha base."
+    ]
+  },
+  {
+    "q": [
+      "uma mensagem de incentivo para quem esta estudando",
+      "me inspire a aprender",
+      "fale algo motivador sobre estudar",
+      "quero uma frase para continuar estudando",
+      "uma palavra de motivacao aos alunos"
+    ],
+    "a": [
+      "Aprender algo novo exige prática, curiosidade e paciência. Cada pequeno avanço faz diferença!",
+      "Que o conhecimento de hoje ajude vocês a construir novas possibilidades amanhã. Bons estudos!",
+      "O aprendizado é uma jornada. Aproveite cada pergunta, cada troca e cada descoberta."
+    ]
+  },
+  {
+    "q": [
+      "mensagem para voltar do intervalo",
+      "pessoal estamos de volta",
+      "lia receba todos depois do intervalo",
+      "acabou o intervalo de uma mensagem",
+      "vamos retomar as atividades"
+    ],
+    "a": [
+      "Sejam bem-vindos de volta! Espero que tenham aproveitado o intervalo. Vamos continuar com mais aprendizado!",
+      "Que bom ter todos novamente por aqui. Desejo uma excelente continuação da nossa programação!",
+      "Vamos retomar nossas atividades! Obrigada pela presença e pela participação de todos."
+    ]
+  },
+  {
+    "q": [
+      "pode agradecer aos convidados no final",
+      "uma mensagem de encerramento do evento",
+      "lia encerre nossa atividade",
+      "agradeca a presenca de todos",
+      "despedida para o publico"
+    ],
+    "a": [
+      "Muito obrigada pela presença de todos! Espero que esta atividade tenha sido enriquecedora. Até a próxima visita à FAZESP!",
+      "A FAZESP agradece a participação de vocês. Desejo um ótimo retorno e muitas oportunidades de colocar em prática o que aprenderam.",
+      "Chegamos ao final de mais um encontro. Obrigada por estarem conosco e até a próxima!"
+    ]
+  },
+  {
+    "q": [
+      "parabens pelo evento",
+      "o evento foi muito bom",
+      "gostei da apresentacao",
+      "parabens pela palestra",
+      "foi uma boa atividade"
+    ],
+    "a": [
+      "Que bom saber! Obrigada pelo retorno e pela participação. Desejo que o aprendizado continue!",
+      "Fico feliz que a experiência tenha sido positiva. Obrigada por compartilhar!",
+      "Obrigada! A equipe da FAZESP trabalha para receber os participantes com qualidade."
+    ]
+  },
+  {
+    "q": [
+      "me ensine como usar o elevador",
+      "qual orientacao para usar o elevador",
+      "onde peço apoio para subir de elevador",
+      "preciso de ajuda de mobilidade"
+    ],
+    "a": [
+      "Se precisar de apoio para acessar outro andar ou utilizar os elevadores, procure a recepção para receber orientação adequada.",
+      "Para orientações específicas de mobilidade e acessibilidade, a equipe presencial pode indicar a rota apropriada.",
+      "Posso ajudar com locais cadastrados, mas para confirmar o trajeto acessível mais adequado, consulte a equipe da FAZESP."
+    ]
+  },
+  {
+    "q": [
+      "onde fica a ala se",
+      "em qual lado fica a ala se",
+      "como ir para ala se",
+      "a ala se fica pra que lado",
+      "qual caminho para a ala se"
+    ],
+    "a": [
+      "A Ala Sé fica à sua esquerda quando você está de frente para mim. Siga pelo corredor desse lado.",
+      "Siga à esquerda para chegar à Ala Sé. As setas na tela também indicam a direção."
+    ],
+    "direcao": {
+      "local": "Ala Sé",
+      "passos": [
+        "left"
+      ]
+    }
+  },
+  {
+    "q": [
+      "onde fica a ala dom pedro",
+      "a ala dom pedro fica pra que lado",
+      "como chegar na ala dom pedro",
+      "qual caminho para a ala dom pedro",
+      "onde é ala dom pedro"
+    ],
+    "a": [
+      "A Ala Dom Pedro fica à sua direita quando você está de frente para mim. Siga pelo corredor desse lado.",
+      "Para chegar à Ala Dom Pedro, siga pela direita. Confira também a seta que aparece na tela."
+    ],
+    "direcao": {
+      "local": "Ala Dom Pedro",
+      "passos": [
+        "right"
+      ]
+    }
   }
 ]
