@@ -643,6 +643,28 @@ const DEFAULTS=[];
 let entries=[],assistantName,recognition=null,listening=false,utterance=null,staleRestart=false,lastSpokenAnswer='';
 let recognitionActive=false,recognitionStarting=false,answerPending=false,restartTimer=null,retryDelay=450;
 let recognitionStartAt=0,voiceStartedAt=0,voiceSafetyTimer=null;
+// Recupera sessões de reconhecimento que deixam de ouvir depois de longos períodos.
+let lastRecognitionActivity=Date.now(), lastRecognitionReset=0;
+const IDLE_RECOGNITION_RESET_MS=8*60*1000;
+const RESET_COOLDOWN_MS=30*1000;
+function recycleRecognition(reason='inatividade'){
+ if(tv||!listening||answerPending||utterance||window.speechSynthesis?.speaking)return;
+ const now=Date.now();
+ if(now-lastRecognitionReset<RESET_COOLDOWN_MS)return;
+ lastRecognitionReset=now;
+ clearTimeout(restartTimer);
+ const old=recognition;
+ if(old){old.onstart=null;old.onresult=null;old.onerror=null;old.onend=null;
+  try{old.abort()}catch{}
+ }
+ recognitionActive=false;recognitionStarting=false;recognitionStartAt=0;
+ lastRecognitionActivity=now;
+ if(setupRecognition()){
+  show('listening','Reativando microfone...','Pode fazer sua pergunta');
+  queueRestart(650);
+ }
+}
+
 
 let suggestionIndex=-1,suggestionTimer=null,suggestionDismissed=false,latestState='idle';
 function suggestionQuestions(){
@@ -686,7 +708,7 @@ function clearDirection(broadcast=true){clearTimeout(directionTimer);currentDire
 function screen(state,status,subtitle){latestState=state;const tip=$('questionSuggestion');if(tip){tip.classList.toggle('visible',!suggestionDismissed&&!!$('questionSuggestionText').textContent)}$('robot').classList.remove('speaking','listening');if(state==='speaking'||state==='listening')$('robot').classList.add(state);$('status').textContent=status;$('subtitle').textContent=subtitle;$('mode').textContent=state==='speaking'?'Respondendo':state==='listening'?'Ouvindo':'Pronta para conversar'}
 function show(state,status,subtitle){screen(state,status,subtitle);send({kind:'screen',state,status,subtitle})}
 function rename(){assistantName='LIA';$('liaGreeting').textContent='Sua assistente virtual.';if(!tv)send({kind:'name',name:'LIA'})}
-function incoming(data){if(!data)return;if(data.kind==='screen')screen(data.state,data.status,data.subtitle);if(data.kind==='ready'&&!tv){send({kind:'screen',state:$('robot').classList.contains('speaking')?'speaking':$('robot').classList.contains('listening')?'listening':'idle',status:$('status').textContent,subtitle:$('subtitle').textContent});send({kind:'name',name:assistantName});send({kind:'suggestions',entries});send({kind:'direction',direction:currentDirection,step:directionStep})}if(data.kind==='suggestions'){const v=validate(data.entries);if(v){entries=v;refreshSuggestions()}}if(data.kind==='direction')drawDirection(data.direction,data.step||0);if(data.kind==='name'){$('liaGreeting').textContent='Sua assistente virtual.';assistantName='LIA'}}
+function incoming(data){if(!data)return;if(data.kind==='screen')screen(data.state,data.status,data.subtitle);if(data.kind==='ready'&&!tv){send({kind:'screen',state:$('robot').classList.contains('speaking')?'speaking':$('robot').classList.contains('listening')?'listening':'idle',status:$('status').textContent,subtitle:$('subtitle').textContent});send({kind:'name',name:assistantName});send({kind:'direction',direction:currentDirection,step:directionStep})}if(data.kind==='suggestions'){const v=validate(data.entries);if(v){entries=v;refreshSuggestions()}}if(data.kind==='direction')drawDirection(data.direction,data.step||0);if(data.kind==='name'){$('liaGreeting').textContent='Sua assistente virtual.';assistantName='LIA'}}
 if(channel)channel.onmessage=e=>incoming(e.data);window.addEventListener('storage',e=>{if(e.key==='lia.sync'){try{incoming(JSON.parse(e.newValue))}catch{}}});
 rename(assistantName);refreshSuggestions();loadKnowledge();
 if(tv){send({kind:'ready'});window.addEventListener('click',()=>{document.documentElement.requestFullscreen?.().catch(()=>{})},{once:true})}
@@ -694,15 +716,15 @@ function normalize(s){return String(s).toLocaleLowerCase('pt-BR').normalize('NFD
 function tokens(s){return normalize(s).split(' ').filter(w=>w.length>2&&!['voce','qual','para','como','esse','essa','aqui','sobre','pode','quero','onde','fica','ficam','esta','estao','encontro','chegar','chego','lia','mais','proximo','perto','preciso','sala','meu','minha','tem','quero','setor','lado','indica','mostra'].includes(w))}
 // Expande apelidos conhecidos sem confundir áreas diferentes.
 function canonicalWords(s){return normalize(s).replace(/\bplenaria\b/g,'plenario').replace(/\bsanitarios?\b|\btoaletes?\b|\bwc\b/g,'banheiro').replace(/\bauditorio principal\b/g,'grande auditorio')}
-function score(question,trigger){
- const a=canonicalWords(question),b=canonicalWords(trigger);if(!a||!b)return 0;
+function score(question,trigger,prepared=null){
+ const a=canonicalWords(question),b=prepared?.canonical||canonicalWords(trigger);if(!a||!b)return 0;
  if(a===b)return 100;
- const x=tokens(a),y=tokens(b);if(!x.length||!y.length)return 0;
- const xs=new Set(x),ys=new Set(y),shared=[...xs].filter(t=>ys.has(t)).length;
+ const x=tokens(a),y=prepared?null:tokens(b);if(!x.length)return 0;
+ const xs=new Set(x),ys=prepared?.tok||new Set(y);if(!ys.size)return 0;const shared=[...xs].filter(t=>ys.has(t)).length;
  const precision=shared/ys.size,recall=shared/xs.size;
  const f1=precision+recall?2*precision*recall/(precision+recall):0;
  let result=91*f1;
- if(a.includes(b)&&b.length>=8)result=Math.max(result,88);
+ if(a.includes(b)&&b.length>=8&&a.length<=b.length+28)result=Math.max(result,88);
  if(b.includes(a)&&a.length>=8)result=Math.max(result,82);
  // Evita confundir gêneros, alas e auditórios.
  const conflicts=[['masculino','feminino'],['grande','pequeno'],['se','dom pedro'],['171','178']];
@@ -713,6 +735,8 @@ function score(question,trigger){
  if(xs.size>ys.size)result-=Math.min(16,(xs.size-ys.size)*5);
  return Math.max(0,result);
 }
+let searchIndex=[];
+function buildSearchIndex(){searchIndex=entries.flatMap(entry=>entry.q.map(q=>({entry,q,canonical:canonicalWords(q),tok:new Set(tokens(q))})));}
 let lastTrivia=-1;
 let lastResponseIndexByGroup=new Map(), lastConversation=null, speechRateOverride=null, lastIntent=null, pendingClarification=null;
 const STOPWORDS=new Set(['lia','por','favor','me','diz','meu','minha','poderia','pode','voce','você']);
@@ -763,16 +787,22 @@ function specialCommand(q){
 }
 
 function findAnswer(query){
+ const n=normalize(query);
+ if(/(?:boas? vindas?|bem vindos?|receba|recepcione|cumprimente|saudacao|abertura)/.test(n)&&/(?:convidad|visitant|participante|publico|presentes|evento|todos)/.test(n)){
+  const welcome=entries.find(e=>e.q.some(q=>normalize(q)==='lia de boas vindas aos convidados'));
+  if(welcome){const a=welcome.a;let i=Math.floor(Math.random()*a.length);let prev=lastResponseIndexByGroup.get(welcome);if(a.length>1&&i===prev)i=(i+1)%a.length;lastResponseIndexByGroup.set(welcome,i);return {text:a[i],direction:null,entry:welcome}}
+ }
  const command=specialCommand(query);
  if(command)return command;
  const resolved=contextualQuestion(query);
  let best={score:0,entry:null},second={score:0,entry:null};
- for(const e of entries)for(const q of e.q){
-  const s=score(resolved,q);
+ for(const item of searchIndex){
+  const e=item.entry,q=item.q;
+  const s=score(resolved,q,item);
   if(s>best.score){if(e!==best.entry)second=best;best={score:s,entry:e}}
   else if(e!==best.entry&&s>second.score)second={score:s,entry:e};
  }
- if(best.score<62||!best.entry)return null;
+ if(best.score<68||!best.entry)return null;
  // Só solicitar esclarecimento quando as duas respostas forem distintas e próximas.
  if(second.entry&&second.entry!==best.entry&&second.score>=69&&best.score-second.score<=3&&best.score<95){
   const a=(best.entry.q||[]).join(' '),b=(second.entry.q||[]).join(' ');
@@ -801,7 +831,7 @@ async function loadKnowledge(){
   const json=await response.json();
   const valid=validate(json);
   if(!valid)throw Error('O formato do JSON é inválido');
-  entries=valid;refreshSuggestions();send({kind:'suggestions',entries});
+  entries=valid;buildSearchIndex();refreshSuggestions();
   if($('knowledgeStatus'))$('knowledgeStatus').textContent=entries.length+' grupos de respostas carregados do JSON.';
  }catch(e){
   entries=[];if($('knowledgeStatus'))$('knowledgeStatus').textContent='Não foi possível carregar respostas.json: '+e.message;
@@ -883,8 +913,9 @@ function setupRecognition(){
  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
  if(!SR){$('msg').textContent='Reconhecimento indisponível. Use Chrome ou Edge atualizado.';return false}
  recognition=new SR();recognition.lang='pt-BR';recognition.continuous=true;recognition.interimResults=true;
- recognition.onstart=()=>{recognitionStarting=false;recognitionActive=true;recognitionStartAt=0;retryDelay=450;show('listening','Estou ouvindo...','Pode fazer sua pergunta')};
+ recognition.onstart=()=>{lastRecognitionActivity=Date.now();recognitionStarting=false;recognitionActive=true;recognitionStartAt=0;retryDelay=450;show('listening','Estou ouvindo...','Pode fazer sua pergunta')};
  recognition.onresult=e=>{
+  lastRecognitionActivity=Date.now();
   if(answerPending)return;
   let preview='',latestFinal='';
   for(let i=e.resultIndex;i<e.results.length;i++){
@@ -901,6 +932,7 @@ function setupRecognition(){
   }
  };
  recognition.onerror=e=>{
+  lastRecognitionActivity=Date.now();
   recognitionStarting=false;
   const permanent=['not-allowed','service-not-allowed','audio-capture','language-not-supported'];
   if(permanent.includes(e.error)){
@@ -912,6 +944,7 @@ function setupRecognition(){
   }
  };
  recognition.onend=()=>{
+  lastRecognitionActivity=Date.now();
   recognitionActive=false;recognitionStarting=false;recognitionStartAt=0;
   // Alguns navegadores encerram a sessão sozinhos: reinício automático enquanto ativo.
   if(listening&&!answerPending&&!utterance&&!(window.speechSynthesis?.speaking||false))queueRestart(retryDelay);
@@ -926,15 +959,26 @@ if(!tv)setInterval(()=>{
  if(speechSynthesis.speaking)return;
  // Se o navegador não disparar onstart nem onend, recria a sessão.
  if(recognitionStarting&&recognitionStartAt&&Date.now()-recognitionStartAt>6500){
-  try{recognition.abort()}catch{}
-  recognitionStarting=false;recognitionActive=false;recognitionStartAt=0;
-  setupRecognition();queueRestart(600);return;
+  recycleRecognition('falha ao iniciar');return;
+ }
+ if(recognitionActive&&Date.now()-lastRecognitionActivity>IDLE_RECOGNITION_RESET_MS){
+  recycleRecognition('silêncio prolongado');return;
  }
  if(!recognitionStarting&&!recognitionActive){
   show('listening','Retomando escuta...',$('subtitle').textContent);
   queueRestart(250);
  }
-},1800);
+},3500);
+if(!tv){
+ const recoverAfterPause=()=>{
+  if(!listening||answerPending||utterance)return;
+  if(Date.now()-lastRecognitionActivity>2*60*1000)recycleRecognition('retorno de inatividade');
+  else if(!recognitionActive&&!recognitionStarting)queueRestart(400);
+ };
+ window.addEventListener('focus',recoverAfterPause);
+ window.addEventListener('online',recoverAfterPause);
+ document.addEventListener('visibilitychange',()=>{if(!document.hidden)recoverAfterPause()});
+}
 if(!tv){if(location.protocol==='file:'){const banner=document.createElement('div');banner.style.cssText='background:#4b240f;color:#ffddb6;border:1px solid #e87c2a;border-radius:12px;padding:12px;margin:10px 0;font-size:14px';banner.textContent='⚠ Para usar a escuta contínua, publique o index.html no GitHub Pages e abra o endereço HTTPS; arquivos locais podem solicitar permissão repetidamente.';document.querySelector('.admin')?.prepend(banner);}refreshVoices();speechSynthesis.onvoiceschanged=refreshVoices;$('voiceSelect').onchange=()=>{localStorage.setItem('lia.voice',$('voiceSelect').value);$('voiceNotice').textContent='Voz escolhida. Clique em Testar voz para ouvir.'};setupRecognition();$('start').onclick=()=>{if(location.protocol==='file:'){$('msg').textContent='Abra o endereço HTTPS publicado no GitHub Pages e autorize o microfone para este site.';alert('Para habilitar o microfone com permissão persistente, publique este index.html no GitHub Pages e abra o endereço HTTPS.');return;}if(!recognition){setupRecognition();if(!recognition)return}listening=true;retryDelay=450;$('msg').textContent='Escuta contínua ligada. A LIA volta a ouvir após responder. Conceda a permissão permanente do microfone ao endereço HTTPS publicado.';startRecognition()};$('stop').onclick=()=>{clearDirection();listening=false;answerPending=false;recognitionStarting=false;clearTimeout(restartTimer);clearTimeout(voiceSafetyTimer);recognition?.abort();window.speechSynthesis?.cancel();utterance=null;show('idle','Microfone parado','Clique em Iniciar microfone no notebook')};$('openTv').onclick=()=>{const w=window.open(location.origin+location.pathname+'?tv=1','lia_tv');if(!w)$('msg').textContent='O navegador bloqueou a janela. Permita pop-ups ou abra o endereço com ?tv=1 em outra aba.'};$('testVoice').onclick=()=>say('Olá! Meu nome é '+assistantName+'. Estou pronta para responder perguntas.');$('exportUnknown').onclick=exportUnknown;$('clearUnknown').onclick=()=>{if(confirm('Apagar o histórico de perguntas sem resposta deste navegador? Esta ação não pode ser desfeita.')){unknownRecords.length=0;updateUnknownInfo()}};updateUnknownInfo();
 }
 function validate(v){if(!Array.isArray(v)||!v.every(e=>e&&Array.isArray(e.q)&&e.q.length&&e.q.every(s=>typeof s==='string'&&s.trim())&&((typeof e.a==='string'&&e.a.trim())||(Array.isArray(e.a)&&e.a.length>0&&e.a.every(a=>typeof a==='string'&&a.trim())))))return null;return v}
