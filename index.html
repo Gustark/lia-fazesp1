@@ -741,7 +741,7 @@ let lastTrivia=-1;
 let lastResponseIndexByGroup=new Map(), lastConversation=null, speechRateOverride=null, lastIntent=null, pendingClarification=null;
 const STOPWORDS=new Set(['lia','por','favor','me','diz','meu','minha','poderia','pode','voce','você']);
 function cleanCommand(s){return normalize(s).split(' ').filter(w=>!STOPWORDS.has(w)).join(' ')}
-function textForSpeech(text){return String(text).replace(/\bFAZESP\b/gi,'FÁZÉSPE')}
+function textForSpeech(text){return String(text).replace(/\bFAZESP\b/gi,'Fazéspe')}
 function rememberConversation(text,direction,entry){
  if(!entry)return;
  const str=(entry.q||[]).join(' ').toLowerCase();
