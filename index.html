@@ -273,6 +273,53 @@ body{background:#101116!important;color:#f7f5f2!important}
 .robot-with-body.expression-welcome .eye{filter:brightness(1.3)!important}
 @media(prefers-reduced-motion:reduce){.robot-with-body .mouth,.robot-with-body .eye,.robot-with-body .eyes{animation:none!important}}
 
+
+/* LIA 5.9: correção definitiva da boca — prioridade de transform removida.
+   A animação deve atuar no elemento DOM existente, independente do tamanho do personagem. */
+.robot.robot-with-body .mouth {
+  position:relative!important;
+  display:block!important;
+  align-self:center!important;
+  box-sizing:border-box!important;
+  flex-shrink:0!important;
+  width:31%!important;
+  height:10%!important;
+  min-height:9px!important;
+  margin:0!important;
+  border:0!important;
+  border-bottom:6px solid #ffcf83!important;
+  border-radius:0 0 90% 90%!important;
+  background:transparent!important;
+  opacity:1!important;
+  transform-origin:50% 45%!important;
+  transform:scale(1);
+  filter:drop-shadow(0 0 8px rgba(255,157,52,.8))!important;
+  animation:none!important;
+  will-change:transform!important;
+}
+.robot.robot-with-body.speaking .mouth,
+.robot.robot-with-body.state-expressive .mouth {
+  border:4px solid #ffd385!important;
+  border-radius:50%!important;
+  background:radial-gradient(ellipse at center,#52231a 0%,#26110f 82%)!important;
+  box-shadow:inset 0 -3px 0 rgba(255,131,76,.34), 0 0 15px rgba(255,160,50,.23)!important;
+  animation:lia59Talk .38s ease-in-out infinite!important;
+}
+@keyframes lia59Talk {
+  0%   {transform:translateY(0) scale(.74,.28)}
+  18%  {transform:translateY(1px) scale(.85,1.35)}
+  39%  {transform:translateY(-1px) scale(1.07,.63)}
+  63%  {transform:translateY(1px) scale(.91,1.63)}
+  85%  {transform:translateY(0) scale(1.02,.54)}
+  100% {transform:translateY(0) scale(.74,.28)}
+}
+/* Uma expressão de dúvida só vale quando ela não estiver falando. */
+.robot.robot-with-body.expression-doubt:not(.speaking) .mouth {transform:rotate(-8deg);}
+@media (prefers-reduced-motion:reduce){
+ .robot.robot-with-body.speaking .mouth,
+ .robot.robot-with-body.state-expressive .mouth{animation:none!important;transform:scale(1,.8)!important}
+}
+
 </style>
 </head>
 <body>
