@@ -806,7 +806,7 @@ body{overflow-x:hidden}
     <div class="mouth"><span class="lia-mouth-motion"></span></div>
     <div class="cheeks"><span></span><span></span></div>
   </div></div>
-</div><div class="hello-label">INTELIGÊNCIA QUE APROXIMA</div><div class="status" id="status">Aguardando sua pergunta</div><span class="tag" id="mode">Pronta para conversar</span><div class="bottom"><div class="subtitle" id="subtitle" aria-live="polite">Como posso ajudar você?</div><div class="lia-test-note">A LIA é uma estagiária novata da FAZESP e ainda está em fase de testes. Por isso, algumas informações podem estar em aprendizado.</div><div class="foot">FAZESP · Escola Fazendária</div><div class="lia-credits">Criado por Gustavo Hugo e Gladstom Alves <span class="lia-version" aria-label="Versão 6.9">· v6.9</span></div></div></section>
+</div><div class="hello-label">INTELIGÊNCIA QUE APROXIMA</div><div class="status" id="status">Aguardando sua pergunta</div><span class="tag" id="mode">Pronta para conversar</span><div class="bottom"><div class="subtitle" id="subtitle" aria-live="polite">Como posso ajudar você?</div><div class="lia-test-note">A LIA é uma estagiária novata da FAZESP e ainda está em fase de testes. Por isso, algumas informações podem estar em aprendizado.</div><div class="foot">FAZESP · Escola Fazendária</div><div class="lia-credits">Criado por Gustavo Hugo e Gladstom Alves <span class="lia-version" aria-label="Versão 7.0">· v7.0</span></div></div></section>
  <aside class="lia-info" id="liaInfo" role="status" aria-live="polite" aria-label="Informação visual de clima ou horário">
  <div class="lia-info-heading" id="liaInfoHeading">INFORMAÇÃO</div>
  <div class="lia-info-art" id="liaInfoArt" aria-hidden="true"></div>
@@ -1073,30 +1073,41 @@ function specialCommand(q){
 }
 
 function localTimeAnswer(normalizedQuestion){
- // Aceita fala espontânea, mas não se confunde com horário de cursos e eventos.
- let n=normalizedQuestion.replace(/^(?:oi|ola|bom dia|boa tarde|boa noite)\s+/,'').replace(/^(?:(?:lia|por favor|me diga|pode me dizer|voce sabe|sabe me dizer|me fala|fala|diga|informe)\s+)*/,'').replace(/\s+(?:por favor|lia|agora mesmo)$/,'').trim();
+ // Respostas dinâmicas para perguntas espontâneas sobre a hora atual.
+ // O relógio é lido no momento da pergunta, sem depender do JSON.
+ let n=normalize(normalizedQuestion);
+ n=n.replace(/^(?:(?:oi|ola|bom dia|boa tarde|boa noite|lia|ei lia|por favor|me diz|me diga|me fala|me informe|pode me dizer|poderia me dizer|voce sabe|sabe me dizer|gostaria de saber|me conta|diga|informe)\s+)*/,'')
+  .replace(/\s+(?:(?:por favor|lia|agora mesmo|pra mim|para mim))$/,'').trim();
+ // Não confundir com horário de aulas, reuniões, eventos ou funcionamento.
+ if(/\b(curso|cursos|aula|aulas|evento|eventos|palestra|palestras|reuniao|reunioes|audit[oó]rio|atendimento|abre|fecha|comeca|termina|duracao)\b/.test(n))return null;
  const patterns=[
-  /^(?:que|qual) horas? (?:e|sao|sao agora|temos|sao ai|sao nesse momento|sao nesse instante)$/,
-  /^que horas? (?:esta|ta|deu|marcando|tem)$/,
-  /^(?:que horas|quantas horas|sao quantas horas|quantas horas sao)$/,
-  /^qual (?:e )?(?:a )?hora(?: (?:agora|atual|certa|do momento|ai|nesse instante))?$/,
-  /^(?:me (?:diz|fala|informa) )?(?:a )?hora(?: agora|atual|certa)?$/,
-  /^(?:horas agora|horario atual|horario de agora|me diga que horas sao|voce sabe que horas sao|que horario e agora|qual horario e agora)$/
+  /\bque horas?\b/, /\bquantas horas\b/, /\bhoras sao\b/,
+  /\b(?:qual|quais|quanto|quanto e) (?:e\s+|sao\s+)?(?:a\s+|o\s+)?(?:hora|horario)\b/,
+  /\b(?:me diz|me fala|diga|informe|sabe|mostrar|mostra) (?:a |o )?(?:hora|horario)\b/,
+  /^(?:a |o )?(?:hora|horas|horario|horario atual|hora certa|hora atual|relogio)(?: (?:agora|atual|certa|do momento|de agora))?$/,
+  /\b(?:sabe|mostra|mostre|diz|diga) (?:que |qual )?(?:horas?|horario)\b/,
+  /\b(?:horario|hora) (?:de agora|neste momento|nesse momento|exato|atual)\b/
  ];
  if(!patterns.some(p=>p.test(n)))return null;
  const now=new Date(),h=now.getHours(),m=now.getMinutes();
- return {text:m===0?`Agora são ${h} horas em ponto, de acordo com o relógio deste computador.`:`Agora são ${h} horas e ${m} minutos, de acordo com o relógio deste computador.`,direction:null,kind:'clock',visual:{type:'clock',icon:'clock',heading:'HORÁRIO ATUAL',primary:now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}),detail:'Relógio do computador',extra:'Horário local'}};
+ const text=m===0?`Agora são ${h} horas em ponto, de acordo com o relógio deste computador.`:`Agora são ${h} horas e ${m} minutos, de acordo com o relógio deste computador.`;
+ return {text,direction:null,kind:'clock',visual:{type:'clock',icon:'clock',heading:'HORÁRIO ATUAL',primary:now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}),detail:'Relógio do computador',extra:'Horário local'}};
 }
 
 // Consulta somente quando alguém pergunta, sem permissão de localização e sem chave.
 const WEATHER_API='https://api.open-meteo.com/v1/forecast?latitude=-23.5505&longitude=-46.6333&current=temperature_2m,apparent_temperature,weather_code&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,weather_code&timezone=America%2FSao_Paulo&forecast_days=3';
 let weatherCache=null,weatherCacheTime=0;
 function weatherIntent(q){
- const n=normalize(q).replace(/^(?:(?:lia|por favor|me diz|me diga|me fala|voce sabe|sabe me dizer)\s+)*/,'').trim();
- if(/(?:curso|sala|evento|auditorio|reuniao|comeca|termina|horario)/.test(n))return null;
- if(!/(?:tempo|clima|temperatura|graus|chuva|chover|sol|frio|calor|previsao)/.test(n))return null;
- if(!/(?:^(?:tempo|clima|temperatura|previsao)$|qual|como|quanto|quantos|vai|esta|ta|faz|sera|tem|hoje|amanha|agora|pode|me |quero|climatico|meteorologica)/.test(n))return null;
- return {day:/\bamanha\b/.test(n)?1:0,rain:/\b(chuva|chover|chove|guarda chuva)\b/.test(n),temperature:/\b(temperatura|graus|frio|calor|quantos graus)\b/.test(n)};
+ let n=normalize(q);
+ n=n.replace(/^(?:(?:oi|ola|lia|por favor|me diz|me diga|me fala|pode me dizer|poderia me dizer|voce sabe|sabe me dizer|gostaria de saber|quero saber)\s+)*/,'').trim();
+ // Evita confundir previsão meteorológica com cursos e programação da escola.
+ if(/\b(curso|cursos|sala|salas|evento|eventos|auditorio|reuniao|reunioes|aula|aulas|comeca|termina|horario|certificado|inscricao)\b/.test(n))return null;
+ const weatherTerms= /\b(tempo|clima|temperatura|graus|chuva|chuvas|chover|chove|chovendo|ensolarado|ensolarada|sol|nublado|nublada|frio|calor|quente|previsao|meteorologia|meteorologica|meteorologico|garoa|trovoada|tempestade)\b/;
+ if(!weatherTerms.test(n))return null;
+ // Aceita inclusive frases curtas como "clima", "vai chover?", "tempo hoje".
+ return {day:/\bamanha\b/.test(n)?1:0,
+  rain:/\b(chuva|chuvas|chover|chove|chovendo|guarda chuva|trovoada|tempestade)\b/.test(n),
+  temperature:/\b(temperatura|graus|frio|calor|quente)\b/.test(n)};
 }
 function weatherDescription(code){
  if(code===0)return 'céu limpo';
@@ -1144,7 +1155,9 @@ async function weatherAnswer(intent){
   const hasChance=Number.isFinite(Number(chance));
   return {text,visual:{type:'weather',icon:weatherIcon(day.weather_code[i]),heading:i?'PREVISÃO PARA AMANHÃ':'TEMPO EM SÃO PAULO',primary:weather.charAt(0).toUpperCase()+weather.slice(1),detail:i?`Mín. ${min}° • Máx. ${max}°`:`${Number.isFinite(currTemp)?currTemp+' °C agora • ':''}Máx. ${max}°`,extra:hasChance?`Probabilidade máxima de chuva: ${Math.round(Number(chance))}%`:'São Paulo'}};
  }catch(e){
-  return {text:'Não consegui consultar a previsão do tempo neste momento. Verifique a conexão com a internet e tente perguntar novamente daqui a pouco.',visual:null};
+  console.warn('[LIA] Falha ao obter previsão meteorológica:',e);
+  if(!tv&&$('msg'))$('msg').textContent='Consulta de clima indisponível: '+(e?.message||'falha de rede')+'. Confira a conexão com api.open-meteo.com.';
+  return {text:'Não consegui consultar a previsão do tempo neste momento. Minha consulta meteorológica depende de uma conexão com a internet. Tente novamente daqui a pouco.',visual:null};
  }
 }
 function findAnswer(query){
