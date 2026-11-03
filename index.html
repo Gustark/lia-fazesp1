@@ -806,7 +806,7 @@ body{overflow-x:hidden}
     <div class="mouth"><span class="lia-mouth-motion"></span></div>
     <div class="cheeks"><span></span><span></span></div>
   </div></div>
-</div><div class="hello-label">INTELIGÊNCIA QUE APROXIMA</div><div class="status" id="status">Aguardando sua pergunta</div><span class="tag" id="mode">Pronta para conversar</span><div class="bottom"><div class="subtitle" id="subtitle" aria-live="polite">Como posso ajudar você?</div><div class="lia-test-note">A LIA é uma estagiária novata da FAZESP e ainda está em fase de testes. Por isso, algumas informações podem estar em aprendizado.</div><div class="foot">FAZESP · Escola Fazendária</div><div class="lia-credits">Criado por Gustavo Hugo e Gladstom Alves <span class="lia-version" aria-label="Versão 6.8">· v6.8</span></div></div></section>
+</div><div class="hello-label">INTELIGÊNCIA QUE APROXIMA</div><div class="status" id="status">Aguardando sua pergunta</div><span class="tag" id="mode">Pronta para conversar</span><div class="bottom"><div class="subtitle" id="subtitle" aria-live="polite">Como posso ajudar você?</div><div class="lia-test-note">A LIA é uma estagiária novata da FAZESP e ainda está em fase de testes. Por isso, algumas informações podem estar em aprendizado.</div><div class="foot">FAZESP · Escola Fazendária</div><div class="lia-credits">Criado por Gustavo Hugo e Gladstom Alves <span class="lia-version" aria-label="Versão 6.9">· v6.9</span></div></div></section>
  <aside class="lia-info" id="liaInfo" role="status" aria-live="polite" aria-label="Informação visual de clima ou horário">
  <div class="lia-info-heading" id="liaInfoHeading">INFORMAÇÃO</div>
  <div class="lia-info-art" id="liaInfoArt" aria-hidden="true"></div>
@@ -863,14 +863,19 @@ let recognitionStartAt=0,voiceStartedAt=0,voiceSafetyTimer=null;
 // Recupera sessões de reconhecimento que deixam de ouvir depois de longos períodos.
 let lastRecognitionActivity=Date.now(), lastRecognitionReset=0;
 const IDLE_RECOGNITION_RESET_MS=8*60*1000;
+const MICROPHONE_REFRESH_MS=60*1000;
+let nextMicrophoneRefreshAt=Date.now()+MICROPHONE_REFRESH_MS;
 const RESET_COOLDOWN_MS=30*1000;
 function recycleRecognition(reason='inatividade'){
+ // A escuta é renovada apenas quando a LIA não está ouvindo uma pergunta
+ // em processamento nem falando; respeita o botão "Parar".
+ if(tv||!listening||answerPending||utterance||window.speechSynthesis?.speaking)return false;
+ const now=Date.now();
+ if(now-lastRecognitionReset<RESET_COOLDOWN_MS)return false;
+ lastRecognitionReset=now;
+ nextMicrophoneRefreshAt=now+MICROPHONE_REFRESH_MS;
  diagnosticState.recoveries++;
  updateDiagnostics();
- if(tv||!listening||answerPending||utterance||window.speechSynthesis?.speaking)return;
- const now=Date.now();
- if(now-lastRecognitionReset<RESET_COOLDOWN_MS)return;
- lastRecognitionReset=now;
  clearTimeout(restartTimer);
  const old=recognition;
  if(old){old.onstart=null;old.onresult=null;old.onerror=null;old.onend=null;
@@ -881,7 +886,9 @@ function recycleRecognition(reason='inatividade'){
  if(setupRecognition()){
   show('listening','Reativando microfone...','Pode fazer sua pergunta');
   queueRestart(650);
+  return true;
  }
+ return false;
 }
 
 
@@ -1343,6 +1350,12 @@ if(!tv)setInterval(()=>{
  if(!listening||!recognition)return;
  if(utterance||answerPending)return;
  if(speechSynthesis.speaking)return;
+ // Recria a sessão a cada minuto para evitar falhas após longos períodos
+ // de silêncio. Se uma pergunta ou resposta estiver em andamento, adia.
+ if(Date.now()>=nextMicrophoneRefreshAt){
+  recycleRecognition('renovação periódica de 1 minuto');
+  return;
+ }
  // Se o navegador não disparar onstart nem onend, recria a sessão.
  if(recognitionStarting&&recognitionStartAt&&Date.now()-recognitionStartAt>6500){
   recycleRecognition('falha ao iniciar');return;
@@ -1365,7 +1378,7 @@ if(!tv){
  window.addEventListener('online',recoverAfterPause);
  document.addEventListener('visibilitychange',()=>{if(!document.hidden)recoverAfterPause()});
 }
-if(!tv){if(location.protocol==='file:'){const banner=document.createElement('div');banner.style.cssText='background:#4b240f;color:#ffddb6;border:1px solid #e87c2a;border-radius:12px;padding:12px;margin:10px 0;font-size:14px';banner.textContent='⚠ Para usar a escuta contínua, publique o index.html no GitHub Pages e abra o endereço HTTPS; arquivos locais podem solicitar permissão repetidamente.';document.querySelector('.admin')?.prepend(banner);}refreshVoices();speechSynthesis.onvoiceschanged=refreshVoices;$('voiceSelect').onchange=()=>{localStorage.setItem('lia.voice',$('voiceSelect').value);$('voiceNotice').textContent='Voz escolhida. Clique em Testar voz para ouvir.'};setupRecognition();$('start').onclick=()=>{if(location.protocol==='file:'){$('msg').textContent='Abra o endereço HTTPS publicado no GitHub Pages e autorize o microfone para este site.';alert('Para habilitar o microfone com permissão persistente, publique este index.html no GitHub Pages e abra o endereço HTTPS.');return;}if(!recognition){setupRecognition();if(!recognition)return}listening=true;retryDelay=450;$('msg').textContent='Escuta contínua ligada. A LIA volta a ouvir após responder. Conceda a permissão permanente do microfone ao endereço HTTPS publicado.';startRecognition()};$('stop').onclick=()=>{clearDirection();clearInfo();listening=false;answerPending=false;recognitionStarting=false;clearTimeout(restartTimer);clearTimeout(voiceSafetyTimer);recognition?.abort();window.speechSynthesis?.cancel();utterance=null;show('idle','Microfone parado','Clique em Iniciar microfone no notebook')};$('openTv').onclick=()=>{const w=window.open(location.origin+location.pathname+'?tv=1','lia_tv');if(!w)$('msg').textContent='O navegador bloqueou a janela. Permita pop-ups ou abra o endereço com ?tv=1 em outra aba.'};$('testVoice').onclick=()=>say('Olá! Meu nome é '+assistantName+'. Estou pronta para responder perguntas.');$('exportUnknown').onclick=exportUnknown;$('clearUnknown').onclick=()=>{if(confirm('Apagar o histórico de perguntas sem resposta deste navegador? Esta ação não pode ser desfeita.')){unknownRecords.length=0;updateUnknownInfo()}};updateUnknownInfo();
+if(!tv){if(location.protocol==='file:'){const banner=document.createElement('div');banner.style.cssText='background:#4b240f;color:#ffddb6;border:1px solid #e87c2a;border-radius:12px;padding:12px;margin:10px 0;font-size:14px';banner.textContent='⚠ Para usar a escuta contínua, publique o index.html no GitHub Pages e abra o endereço HTTPS; arquivos locais podem solicitar permissão repetidamente.';document.querySelector('.admin')?.prepend(banner);}refreshVoices();speechSynthesis.onvoiceschanged=refreshVoices;$('voiceSelect').onchange=()=>{localStorage.setItem('lia.voice',$('voiceSelect').value);$('voiceNotice').textContent='Voz escolhida. Clique em Testar voz para ouvir.'};setupRecognition();$('start').onclick=()=>{if(location.protocol==='file:'){$('msg').textContent='Abra o endereço HTTPS publicado no GitHub Pages e autorize o microfone para este site.';alert('Para habilitar o microfone com permissão persistente, publique este index.html no GitHub Pages e abra o endereço HTTPS.');return;}if(!recognition){setupRecognition();if(!recognition)return}listening=true;nextMicrophoneRefreshAt=Date.now()+MICROPHONE_REFRESH_MS;retryDelay=450;$('msg').textContent='Escuta contínua ligada. A LIA volta a ouvir após responder. Conceda a permissão permanente do microfone ao endereço HTTPS publicado.';startRecognition()};$('stop').onclick=()=>{clearDirection();clearInfo();listening=false;answerPending=false;recognitionStarting=false;clearTimeout(restartTimer);clearTimeout(voiceSafetyTimer);recognition?.abort();window.speechSynthesis?.cancel();utterance=null;show('idle','Microfone parado','Clique em Iniciar microfone no notebook')};$('openTv').onclick=()=>{const w=window.open(location.origin+location.pathname+'?tv=1','lia_tv');if(!w)$('msg').textContent='O navegador bloqueou a janela. Permita pop-ups ou abra o endereço com ?tv=1 em outra aba.'};$('testVoice').onclick=()=>say('Olá! Meu nome é '+assistantName+'. Estou pronta para responder perguntas.');$('exportUnknown').onclick=exportUnknown;$('clearUnknown').onclick=()=>{if(confirm('Apagar o histórico de perguntas sem resposta deste navegador? Esta ação não pode ser desfeita.')){unknownRecords.length=0;updateUnknownInfo()}};updateUnknownInfo();
  // Tenta iniciar o microfone no notebook por padrão após carregar o site HTTPS.
  // O navegador pode exigir autorização prévia ou interação do visitante.
  if(location.protocol==='https:'||location.hostname==='localhost'){
