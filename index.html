@@ -914,8 +914,8 @@ body{overflow-x:hidden}
  32%{transform:scaleY(.28) translateY(-5%)}
  62%{transform:scaleY(.43) translateY(-2%)}
 }
-.robot-with-body.expression-welcome .lia-mouth-motion,
-.robot-with-body.expression-thanks .lia-mouth-motion{
+.robot-with-body.expression-welcome:not(.speaking) .lia-mouth-motion,
+.robot-with-body.expression-thanks:not(.speaking) .lia-mouth-motion{
  border-bottom-width:6px!important;width:90%!important;height:54%!important;
  border-radius:0 0 95% 95%!important;
 }
@@ -925,14 +925,14 @@ body{overflow-x:hidden}
 /* Dúvida: manter o rosto alinhado, sem inclinar a boca. */
 .robot-with-body.expression-doubt .eye:first-child{transform:scaleY(.9) translateY(3%)!important;filter:brightness(.96)!important;animation:none!important}
 .robot-with-body.expression-doubt .eye:last-child{transform:scaleY(1.02) translateY(-1%)!important;animation:none!important}
-.robot-with-body.expression-doubt .lia-mouth-motion{
+.robot-with-body.expression-doubt:not(.speaking) .lia-mouth-motion{
  transform:translate(-50%,-50%)!important;width:58%!important;height:18%!important;
  border-bottom-width:4px!important;border-bottom-style:solid!important;border-bottom-color:#ffd28a!important;
  border-radius:0 0 999px 999px!important;background:transparent!important;box-shadow:0 4px 10px rgba(255,138,40,.16)!important;
 }
 /* Boca mais fluida durante a fala, centralizada e sem distorção. */
 .robot-with-body.speaking .lia-mouth-motion{
- animation:lia73NaturalTalk 1.28s ease-in-out infinite!important;
+ animation:lia752Talk 1.05s ease-in-out infinite!important;
 }
 @keyframes lia73NaturalTalk{
  0%,100%{width:70%;height:18%;border-radius:999px;transform:translate(-50%,-50%) scale(1)}
@@ -1096,6 +1096,31 @@ body::before,body::after{display:none!important}
  .lia-right-pane>.lia-test-note{margin-top:0!important}
 }
 @media(prefers-reduced-motion:reduce){.lia-waveform span{animation:none!important}}
+
+/* Espaço fixo para a boca: permite abertura vertical perceptível sem deslocar o rosto. */
+.robot-with-body .mouth{width:38%!important;height:24%!important;min-height:19px!important;}
+/* LIA 7.5.2 - boca animada sem inclinação em todos os tipos de resposta.
+   A animação controla somente width/height; a posição central é fixa. */
+.robot-with-body.speaking .lia-mouth-motion,
+.robot-with-body.speaking.expression-doubt .lia-mouth-motion,
+.robot-with-body.speaking.expression-welcome .lia-mouth-motion,
+.robot-with-body.speaking.expression-thanks .lia-mouth-motion,
+.robot-with-body.speaking.expression-humor .lia-mouth-motion {
+  left:50%!important;top:50%!important;
+  transform:translate(-50%,-50%)!important;
+  border:3px solid #ffcf83!important;
+  border-radius:48%!important;
+  background:radial-gradient(ellipse at 50% 65%,#8d462d,#321721 70%,#170c12)!important;
+  animation:lia752Talk 1.05s ease-in-out infinite!important;
+}
+@keyframes lia752Talk {
+  0%,100% {width:72%;height:20%;}
+  18% {width:66%;height:67%;}
+  36% {width:88%;height:34%;}
+  53% {width:72%;height:84%;}
+  70% {width:76%;height:44%;}
+  85% {width:64%;height:59%;}
+}
 </style></head>
 <body>
 <button aria-controls="adminPanel" aria-expanded="false" aria-label="Abrir configurações" class="panel-toggle" id="togglePanel" title="Abrir configurações" type="button"><span aria-hidden="true">⚙</span><span class="visually-hidden" id="togglePanelText">Mostrar painel</span></button>
@@ -1113,7 +1138,7 @@ body::before,body::after{display:none!important}
 <div class="lia-info-primary" id="liaInfoPrimary"></div>
 <div class="lia-info-detail" id="liaInfoDetail"></div>
 <div class="lia-info-extra" id="liaInfoExtra"></div>
-</aside><aside aria-label="Cartão de orientação, exibido quando solicitado" aria-live="polite" class="lia-direction" id="liaDirection"><div class="dir-heading">DIREÇÃO</div><div class="dir-icon" id="liaDirectionIcon">→</div><div class="dir-label" id="liaDirectionLabel"></div><div class="dir-step" id="liaDirectionStep"></div></aside><div class="lia-school-id"><div class="lia-school-symbol"><svg aria-hidden="true" fill="none" viewbox="0 0 64 64"><path d="M7 56V24l17-8v40M24 56V8l26-4v52M50 56V24l8-3v35M3 57h58" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path><path d="M13 30v5m0 7v5m18-30v5m8-5v5m-8 8v5m8-5v5m-8 8v5m8-5v5m14-14v5" stroke="currentColor" stroke-linecap="round" stroke-width="3"></path></svg></div><div class="lia-school-copy"><strong>FAZESP</strong><span>Escola Fazendária do Estado de São Paulo</span></div></div></div><div class="lia-test-note">A LIA é uma estagiária novata da FAZESP e ainda está em fase de testes. Por isso, algumas informações podem estar em aprendizado.</div><div class="lia-credits-row"><div class="foot">FAZESP · Escola Fazendária</div><div class="lia-credits">Criado por Gustavo Hugo e Gladstom Alves <span aria-label="Versão 7.5" class="lia-version">· v7.5</span></div></div></section></div><aside aria-label="Exemplo de pergunta" class="question-suggestion" id="questionSuggestion"><button aria-label="Ocultar sugestão" class="q-close" id="hideSuggestion" title="Ocultar sugestão" type="button">×</button><div class="q-label">VOCÊ PODE PERGUNTAR</div><div class="q-text" id="questionSuggestionText"></div></aside></main>
+</aside><aside aria-label="Cartão de orientação, exibido quando solicitado" aria-live="polite" class="lia-direction" id="liaDirection"><div class="dir-heading">DIREÇÃO</div><div class="dir-icon" id="liaDirectionIcon">→</div><div class="dir-label" id="liaDirectionLabel"></div><div class="dir-step" id="liaDirectionStep"></div></aside><div class="lia-school-id"><div class="lia-school-symbol"><svg aria-hidden="true" fill="none" viewbox="0 0 64 64"><path d="M7 56V24l17-8v40M24 56V8l26-4v52M50 56V24l8-3v35M3 57h58" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path><path d="M13 30v5m0 7v5m18-30v5m8-5v5m-8 8v5m8-5v5m-8 8v5m8-5v5m14-14v5" stroke="currentColor" stroke-linecap="round" stroke-width="3"></path></svg></div><div class="lia-school-copy"><strong>FAZESP</strong><span>Escola Fazendária do Estado de São Paulo</span></div></div></div><div class="lia-test-note">A LIA é uma estagiária novata da FAZESP e ainda está em fase de testes. Por isso, algumas informações podem estar em aprendizado.</div><div class="lia-credits-row"><div class="foot">FAZESP · Escola Fazendária</div><div class="lia-credits">Criado por Gustavo Hugo e Gladstom Alves <span aria-label="Versão 7.5.2" class="lia-version">· v7.5.2</span></div></div></section></div><aside aria-label="Exemplo de pergunta" class="question-suggestion" id="questionSuggestion"><button aria-label="Ocultar sugestão" class="q-close" id="hideSuggestion" title="Ocultar sugestão" type="button">×</button><div class="q-label">VOCÊ PODE PERGUNTAR</div><div class="q-text" id="questionSuggestionText"></div></aside></main>
 <aside class="admin" id="adminPanel"><div class="admin-header"><span class="admin-symbol">⚙</span><h2>Painel de controle</h2></div><p>Conecte a TV por HDMI, abra a tela da TV em uma segunda janela e arraste-a para o monitor da TV. O microfone fica nesta janela do notebook.</p>
 <div class="actions"><button id="openTv">Abrir tela da TV</button><button class="secondary" id="start">🎙️ Ativar escuta contínua</button><button class="secondary" id="stop">Parar</button></div>
 <div class="message" id="msg"></div>
