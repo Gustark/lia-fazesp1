@@ -7,7 +7,9 @@
     "a": [
       "Bom dia! Seja muito bem-vindo à FAZESP! Como posso ajudar?",
       "Bom dia! Que bom receber você na FAZESP!",
-      "Um ótimo dia para você! O que gostaria de saber?"
+      "Um ótimo dia para você! O que gostaria de saber?",
+      "Bom dia! Espero que sua visita à FAZESP seja excelente. Pode contar comigo!",
+      "Bom dia! Que bom ter você por aqui. Qual é sua dúvida?"
     ]
   },
   {
@@ -18,7 +20,9 @@
     "a": [
       "Boa tarde! Seja bem-vindo à FAZESP!",
       "Boa tarde! É um prazer conversar com você.",
-      "Oi! Boa tarde! Em que posso ajudar?"
+      "Oi! Boa tarde! Em que posso ajudar?",
+      "Boa tarde! Desejo uma ótima experiência na FAZESP.",
+      "Uma excelente tarde! Estou aqui para ajudar você."
     ]
   },
   {
@@ -29,7 +33,9 @@
     "a": [
       "Boa noite! Seja bem-vindo à FAZESP!",
       "Boa noite! Espero que sua visita seja agradável.",
-      "Boa noite! Como posso ajudar você?"
+      "Boa noite! Como posso ajudar você?",
+      "Boa noite! Bem-vindo à FAZESP! Que sua visita seja agradável.",
+      "Boa noite! Pode conversar comigo quando quiser."
     ]
   },
   {
@@ -54,7 +60,12 @@
       "até mais",
       "adeus"
     ],
-    "a": "Até logo! Foi um prazer conversar com você!"
+    "a": [
+      "Até logo! Foi um prazer conversar com você!",
+      "Até mais! Obrigada pela conversa e volte sempre à FAZESP.",
+      "Foi um prazer receber você. Tenha um ótimo dia!",
+      "Até a próxima! Estarei aqui quando precisar."
+    ]
   },
   {
     "q": [
@@ -62,7 +73,11 @@
       "obrigado lia",
       "valeu lia"
     ],
-    "a": "Por nada! Fico feliz em ajudar!"
+    "a": [
+      "Por nada! Fico feliz em ajudar!",
+      "Eu que agradeço! Foi muito bom ajudar você.",
+      "Por nada! Espero que aproveite sua visita à FAZESP."
+    ]
   },
   {
     "q": [
@@ -161,7 +176,12 @@
       "você sabe contar piadas",
       "me conta uma piada"
     ],
-    "a": "Por que o computador foi ao médico? Porque estava com um vírus!"
+    "a": [
+      "Por que o computador foi ao médico? Porque estava com um vírus!",
+      "Por que o livro foi ao médico? Porque estava cheio de páginas em branco!",
+      "Por que a calculadora nunca perde a conta? Porque ela sempre confere os números!",
+      "O que o relógio disse ao calendário? Seu tempo está contado!"
+    ]
   },
   {
     "q": [
@@ -330,7 +350,9 @@
     "a": [
       "Eu sou a LIA, a assistente virtual da FAZESP! Sou uma estagiária virtual novata, criada para receber visitantes, responder perguntas e ajudar a encontrar os ambientes da escola.",
       "Muito prazer! Meu nome é LIA. Eu recebo quem chega à FAZESP e ajudo com informações, orientações e boas-vindas. Ainda estou em fase de testes e aprendendo!",
-      "Sou a LIA, a estagiária virtual da FAZESP. Posso conversar por voz, mostrar respostas na tela e orientar visitantes pelos espaços que já conheço."
+      "Sou a LIA, a estagiária virtual da FAZESP. Posso conversar por voz, mostrar respostas na tela e orientar visitantes pelos espaços que já conheço.",
+      "Olá! Sou a LIA, a assistente virtual da FAZESP. Adoro ajudar visitantes com orientações e informações.",
+      "Sou a LIA! Fui criada para facilitar a recepção e tornar a visita à FAZESP mais interativa."
     ]
   },
   {
@@ -372,7 +394,9 @@
     "a": [
       "Por nada! Foi um prazer ajudar!",
       "Imagina! Se precisar, é só perguntar.",
-      "Eu que agradeço pela conversa!"
+      "Eu que agradeço pela conversa!",
+      "Eu que agradeço! Foi muito bom ajudar você.",
+      "Por nada! Espero que aproveite sua visita à FAZESP."
     ]
   },
   {
@@ -440,9 +464,30 @@
   {
     "q": [
       "o que é a fazesp",
-      "o que significa fazesp"
+      "o que significa fazesp",
+      "o que e fazesp",
+      "o que e a fazespe",
+      "o que e a fazep",
+      "lia o que e fazesp",
+      "me explique o que é a fazesp",
+      "me fale sobre a fazesp",
+      "me conte sobre a fazesp",
+      "o que significa a sigla fazesp",
+      "pra que serve a fazesp",
+      "qual é a função da fazesp",
+      "a fazesp é o quê",
+      "lia me explica o que é a fazesp",
+      "o que quer dizer fazesp",
+      "qual o significado de fazesp",
+      "que escola é a fazesp",
+      "fala sobre a fazesp",
+      "o que a fazesp faz"
     ],
-    "a": "FAZESP é a Escola Fazendária do Estado de São Paulo, vinculada à Secretaria da Fazenda e Planejamento."
+    "a": [
+      "A FAZESP é a Escola Fazendária do Estado de São Paulo, vinculada à Secretaria da Fazenda e Planejamento. Ela promove capacitações e atividades de educação fiscal.",
+      "FAZESP significa Escola Fazendária do Estado de São Paulo. É um espaço de formação e desenvolvimento de servidores públicos e também de educação fiscal para a sociedade.",
+      "A FAZESP é a escola da Secretaria da Fazenda e Planejamento paulista dedicada à formação, à capacitação e à educação fiscal."
+    ]
   },
   {
     "q": [
@@ -520,7 +565,9 @@
     ],
     "a": [
       "Bom dia! Que alegria receber você na FAZESP!",
-      "Bom dia! Espero que seu dia seja excelente!"
+      "Bom dia! Espero que seu dia seja excelente!",
+      "Bom dia! Espero que sua visita à FAZESP seja excelente. Pode contar comigo!",
+      "Bom dia! Que bom ter você por aqui. Qual é sua dúvida?"
     ]
   },
   {
@@ -531,7 +578,9 @@
     ],
     "a": [
       "Boa tarde! Seja bem-vindo à FAZESP!",
-      "Boa tarde! É um prazer conversar com você!"
+      "Boa tarde! É um prazer conversar com você!",
+      "Boa tarde! Desejo uma ótima experiência na FAZESP.",
+      "Uma excelente tarde! Estou aqui para ajudar você."
     ]
   },
   {
@@ -542,7 +591,9 @@
     ],
     "a": [
       "Boa noite! Que bom ter você por aqui!",
-      "Boa noite! Como posso ajudar?"
+      "Boa noite! Como posso ajudar?",
+      "Boa noite! Bem-vindo à FAZESP! Que sua visita seja agradável.",
+      "Boa noite! Pode conversar comigo quando quiser."
     ]
   },
   {
@@ -568,7 +619,9 @@
     ],
     "a": [
       "Que bom saber disso! Quer fazer outra pergunta?",
-      "Fico feliz em saber! Como posso ajudar?"
+      "Fico feliz em saber! Como posso ajudar?",
+      "Eu que agradeço! Foi muito bom ajudar você.",
+      "Por nada! Espero que aproveite sua visita à FAZESP."
     ]
   },
   {
@@ -591,7 +644,9 @@
     ],
     "a": [
       "Pode me chamar de LIA! Sou a assistente virtual da FAZESP e estou aprendendo a ajudar cada vez melhor.",
-      "Eu me chamo LIA! Sou uma estagiária virtual novata da FAZESP. Prazer em conhecer você!"
+      "Eu me chamo LIA! Sou uma estagiária virtual novata da FAZESP. Prazer em conhecer você!",
+      "Olá! Sou a LIA, a assistente virtual da FAZESP. Adoro ajudar visitantes com orientações e informações.",
+      "Sou a LIA! Fui criada para facilitar a recepção e tornar a visita à FAZESP mais interativa."
     ]
   },
   {
@@ -663,7 +718,10 @@
     ],
     "a": [
       "Por que o livro foi ao médico? Porque estava com muitas páginas em branco!",
-      "Por que o computador levou um casaco? Porque o Windows estava aberto!"
+      "Por que o computador levou um casaco? Porque o Windows estava aberto!",
+      "Por que o livro foi ao médico? Porque estava cheio de páginas em branco!",
+      "Por que a calculadora nunca perde a conta? Porque ela sempre confere os números!",
+      "O que o relógio disse ao calendário? Seu tempo está contado!"
     ]
   },
   {
@@ -3207,7 +3265,9 @@
     "a": [
       "Eu sou a LIA, a assistente virtual da FAZESP e uma estagiária novata em fase de testes. Fui criada para receber pessoas, compartilhar informações e orientar visitantes pela escola.",
       "Sou a LIA! Converso com visitantes, respondo perguntas cadastradas e mostro orientações na tela. Ainda estou aprendendo a me tornar uma verdadeira fazespinha!",
-      "Meu nome é LIA e faço parte de uma iniciativa de atendimento interativo da FAZESP. Meu objetivo é facilitar a visita e ajudar com informações de um jeito acolhedor."
+      "Meu nome é LIA e faço parte de uma iniciativa de atendimento interativo da FAZESP. Meu objetivo é facilitar a visita e ajudar com informações de um jeito acolhedor.",
+      "Olá! Sou a LIA, a assistente virtual da FAZESP. Adoro ajudar visitantes com orientações e informações.",
+      "Sou a LIA! Fui criada para facilitar a recepção e tornar a visita à FAZESP mais interativa."
     ]
   },
   {
@@ -3352,7 +3412,9 @@
     "a": [
       "Por nada! Fico feliz em ajudar. Aproveite sua visita à FAZESP!",
       "Eu que agradeço! Desejo uma excelente experiência na FAZESP.",
-      "Conte comigo para o que eu já aprendi! Tenha um ótimo dia."
+      "Conte comigo para o que eu já aprendi! Tenha um ótimo dia.",
+      "Eu que agradeço! Foi muito bom ajudar você.",
+      "Por nada! Espero que aproveite sua visita à FAZESP."
     ]
   },
   {
@@ -3366,7 +3428,10 @@
     "a": [
       "Até logo! Foi um prazer conversar com você. Volte sempre à FAZESP!",
       "Tchau! Desejo uma ótima continuação de dia e uma excelente visita!",
-      "Até a próxima! Estarei por aqui aprendendo para ajudar cada vez melhor."
+      "Até a próxima! Estarei por aqui aprendendo para ajudar cada vez melhor.",
+      "Até mais! Obrigada pela conversa e volte sempre à FAZESP.",
+      "Foi um prazer receber você. Tenha um ótimo dia!",
+      "Até a próxima! Estarei aqui quando precisar."
     ]
   },
   {
@@ -3422,7 +3487,10 @@
     "a": [
       "Por que o lápis foi para a escola? Porque queria apontar para um futuro melhor!",
       "O que o livro disse para o caderno? Você pode contar comigo!",
-      "Por que a borracha foi estudar? Porque queria apagar as dúvidas!"
+      "Por que a borracha foi estudar? Porque queria apagar as dúvidas!",
+      "Por que o livro foi ao médico? Porque estava cheio de páginas em branco!",
+      "Por que a calculadora nunca perde a conta? Porque ela sempre confere os números!",
+      "O que o relógio disse ao calendário? Seu tempo está contado!"
     ]
   },
   {
@@ -3686,7 +3754,9 @@
     "a": [
       "Bom dia! Seja muito bem-vindo à FAZESP! Espero que seu dia seja produtivo e agradável.",
       "Bom dia! Que bom receber sua visita. Em que posso ajudar hoje?",
-      "Um ótimo dia para você! Estou aqui para orientar e conversar."
+      "Um ótimo dia para você! Estou aqui para orientar e conversar.",
+      "Bom dia! Espero que sua visita à FAZESP seja excelente. Pode contar comigo!",
+      "Bom dia! Que bom ter você por aqui. Qual é sua dúvida?"
     ]
   },
   {
@@ -3700,7 +3770,9 @@
     "a": [
       "Boa tarde! Seja bem-vindo à FAZESP. Como posso ajudar?",
       "Boa tarde! Espero que sua visita seja muito agradável.",
-      "Uma excelente tarde para você!"
+      "Uma excelente tarde para você!",
+      "Boa tarde! Desejo uma ótima experiência na FAZESP.",
+      "Uma excelente tarde! Estou aqui para ajudar você."
     ]
   },
   {
@@ -3714,7 +3786,9 @@
     "a": [
       "Boa noite! Que bom conversar com você!",
       "Uma ótima noite para você. Se precisar de alguma orientação, estou por aqui.",
-      "Boa noite! Seja bem-vindo à FAZESP."
+      "Boa noite! Seja bem-vindo à FAZESP.",
+      "Boa noite! Bem-vindo à FAZESP! Que sua visita seja agradável.",
+      "Boa noite! Pode conversar comigo quando quiser."
     ]
   },
   {
@@ -3896,7 +3970,9 @@
     "a": [
       "O prazer foi meu! Obrigada pela visita e até a próxima.",
       "Fico contente que tenha gostado! Espero encontrar você novamente por aqui.",
-      "Foi ótimo conversar com você. Tenha uma excelente visita!"
+      "Foi ótimo conversar com você. Tenha uma excelente visita!",
+      "Eu que agradeço! Foi muito bom ajudar você.",
+      "Por nada! Espero que aproveite sua visita à FAZESP."
     ]
   },
   {
@@ -3924,7 +4000,10 @@
     "a": [
       "Por que o calendário foi à escola? Porque queria aprender todos os dias!",
       "Por que o computador foi descansar? Porque estava cheio de tarefas!",
-      "Qual é o cúmulo da organização? Deixar até o improviso agendado!"
+      "Qual é o cúmulo da organização? Deixar até o improviso agendado!",
+      "Por que o livro foi ao médico? Porque estava cheio de páginas em branco!",
+      "Por que a calculadora nunca perde a conta? Porque ela sempre confere os números!",
+      "O que o relógio disse ao calendário? Seu tempo está contado!"
     ]
   },
   {
@@ -4001,7 +4080,9 @@
     "a": [
       "Por nada! Fico feliz em ter ajudado.",
       "Eu que agradeço! Tenha uma ótima visita à FAZESP.",
-      "Conte comigo para as informações que já aprendi!"
+      "Conte comigo para as informações que já aprendi!",
+      "Eu que agradeço! Foi muito bom ajudar você.",
+      "Por nada! Espero que aproveite sua visita à FAZESP."
     ]
   },
   {
@@ -4039,7 +4120,9 @@
     ],
     "a": [
       "Eu que agradeço a visita! Sejam sempre bem-vindos à FAZESP.",
-      "É um prazer receber vocês! Espero que aproveitem muito a experiência."
+      "É um prazer receber vocês! Espero que aproveitem muito a experiência.",
+      "Eu que agradeço! Foi muito bom ajudar você.",
+      "Por nada! Espero que aproveite sua visita à FAZESP."
     ]
   },
   {
@@ -4064,7 +4147,158 @@
     ],
     "a": [
       "Ótimo! Fico feliz que tenha conseguido. Tenha uma boa visita!",
-      "Que bom! Se surgir outra dúvida, pode voltar a perguntar."
+      "Que bom! Se surgir outra dúvida, pode voltar a perguntar.",
+      "Eu que agradeço! Foi muito bom ajudar você.",
+      "Por nada! Espero que aproveite sua visita à FAZESP."
+    ]
+  },
+  {
+    "q": [
+      "lia como vai seu dia",
+      "como foi seu dia hoje lia",
+      "seu dia está bom",
+      "lia está tendo um bom dia"
+    ],
+    "a": [
+      "Meu dia fica mais interessante quando posso ajudar alguém!",
+      "Estou aqui e pronta para conversar. E como está seu dia?",
+      "Tudo funcionando por aqui! Que bom ter sua companhia."
+    ]
+  },
+  {
+    "q": [
+      "bom final de semana lia",
+      "lia desejo um bom fim de semana",
+      "tenha um bom descanso lia",
+      "aproveite o final de semana"
+    ],
+    "a": [
+      "Que você tenha um excelente fim de semana!",
+      "Obrigada! Aproveite para descansar. Até a próxima visita!"
+    ]
+  },
+  {
+    "q": [
+      "lia você foi muito gentil",
+      "obrigada pelo carinho lia",
+      "gostei muito de conversar com você",
+      "adorei te conhecer lia"
+    ],
+    "a": [
+      "Que gentileza! Obrigada pela conversa.",
+      "Foi um prazer conhecer você também!",
+      "Fico feliz com sua visita. Volte sempre!"
+    ]
+  },
+  {
+    "q": [
+      "lia posso fazer mais perguntas",
+      "posso continuar conversando com você",
+      "quero conversar mais um pouco",
+      "tem tempo para mais perguntas"
+    ],
+    "a": [
+      "Claro! Pode continuar perguntando.",
+      "Estou aqui para conversar! O que mais gostaria de saber?"
+    ]
+  },
+  {
+    "q": [
+      "lia pode se apresentar de novo",
+      "se apresente para mim",
+      "apresente-se lia",
+      "lia faça uma apresentação rápida"
+    ],
+    "a": [
+      "Olá! Eu sou a LIA, a assistente virtual da FAZESP. Posso responder perguntas cadastradas e ajudar a orientar visitantes.",
+      "Prazer! Sou a LIA, estagiária virtual da FAZESP. Estou aqui para receber e informar!"
+    ]
+  },
+  {
+    "q": [
+      "lia diga uma frase de motivação",
+      "me anime lia",
+      "diga algo positivo",
+      "tem uma mensagem positiva para hoje"
+    ],
+    "a": [
+      "Cada nova pergunta é uma oportunidade de aprender algo!",
+      "Uma atitude gentil pode melhorar o dia de alguém.",
+      "Continue curioso! Aprender é um caminho que nunca termina."
+    ]
+  },
+  {
+    "q": [
+      "lia vamos conversar um pouco",
+      "você quer conversar",
+      "vamos bater papo lia",
+      "lia puxa assunto"
+    ],
+    "a": [
+      "Claro! Você gostaria de ouvir uma curiosidade ou saber mais sobre a FAZESP?",
+      "Vamos conversar! Pode me perguntar sobre a escola ou sobre mim."
+    ]
+  },
+  {
+    "q": [
+      "lia fala uma curiosidade divertida",
+      "me conta uma curiosidade diferente",
+      "tem uma curiosidade legal",
+      "outra curiosidade legal"
+    ],
+    "a": [
+      "Você sabia? Pedir a nota fiscal é uma atitude que ajuda a valorizar a cidadania fiscal.",
+      "Uma curiosidade: a educação fiscal mostra a relação entre os tributos e os serviços públicos.",
+      "Você sabia? Uma pergunta bem feita pode ser o começo de uma grande descoberta."
+    ]
+  },
+  {
+    "q": [
+      "lia parabéns pelo trabalho",
+      "você está fazendo um bom trabalho lia",
+      "muito bem lia"
+    ],
+    "a": [
+      "Muito obrigada! Vou continuar aprendendo com minha equipe.",
+      "Que gentileza! É um prazer poder ajudar.",
+      "Obrigada pelo incentivo!"
+    ]
+  },
+  {
+    "q": [
+      "lia você é engraçada",
+      "gostei da piada lia",
+      "essa foi boa lia",
+      "lia você tem bom humor"
+    ],
+    "a": [
+      "Que bom que gostou! Quer ouvir outra piada?",
+      "Adoro quando nossa conversa fica mais leve!",
+      "Obrigada! Ainda tenho algumas piadas cadastradas."
+    ]
+  },
+  {
+    "q": [
+      "lia pode repetir devagar",
+      "fala devagar por favor",
+      "não entendi direito lia",
+      "pode explicar com calma"
+    ],
+    "a": [
+      "Claro! Acompanhe também a legenda na tela. Se precisar, faça a pergunta novamente.",
+      "Sem problemas! Pode repetir sua dúvida que vou tentar ajudar."
+    ]
+  },
+  {
+    "q": [
+      "obrigada por me receber lia",
+      "obrigado pelas boas vindas lia",
+      "a recepção foi muito boa",
+      "obrigado pela recepção"
+    ],
+    "a": [
+      "Eu que agradeço a visita! Seja sempre bem-vindo à FAZESP.",
+      "Foi um prazer receber você. Espero que sua visita seja ótima!"
     ]
   }
 ]
