@@ -690,8 +690,8 @@ body{overflow-x:hidden}
   animation:none!important;transform:none!important;overflow:visible!important;
 }
 .robot-with-body .lia-mouth-motion{
-  position:absolute!important;display:block!important;left:50%!important;top:49%!important;
-  box-sizing:border-box!important;width:84%;height:38%;
+  position:absolute!important;display:block!important;left:50%!important;top:50%!important;
+  box-sizing:border-box!important;width:78%;height:34%;
   border:0;border-bottom:5px solid #ffcf83;border-radius:0 0 80% 80%;
   background:transparent;box-shadow:0 5px 12px rgba(255,138,40,.2);
   transform:translate(-50%,-50%);transform-origin:center center;
@@ -922,23 +922,25 @@ body{overflow-x:hidden}
 .robot-with-body.expression-humor .eye{
  animation:lia73HappyEyes 1.3s ease-in-out infinite!important;
 }
-/* Dúvida: assimetria sutil nos olhos e boca inclinada. */
-.robot-with-body.expression-doubt .eye:first-child{transform:scaleY(.84) rotate(-12deg)!important;filter:brightness(.9)!important;animation:none!important}
-.robot-with-body.expression-doubt .eye:last-child{transform:scaleY(1.08) rotate(8deg)!important;animation:none!important}
+/* Dúvida: manter o rosto alinhado, sem inclinar a boca. */
+.robot-with-body.expression-doubt .eye:first-child{transform:scaleY(.9) translateY(3%)!important;filter:brightness(.96)!important;animation:none!important}
+.robot-with-body.expression-doubt .eye:last-child{transform:scaleY(1.02) translateY(-1%)!important;animation:none!important}
 .robot-with-body.expression-doubt .lia-mouth-motion{
- transform:translate(-50%,-50%) rotate(-13deg)!important;width:63%!important;
- border-bottom-style:dashed!important;
+ transform:translate(-50%,-50%)!important;width:58%!important;height:18%!important;
+ border-bottom-width:4px!important;border-bottom-style:solid!important;border-bottom-color:#ffd28a!important;
+ border-radius:0 0 999px 999px!important;background:transparent!important;box-shadow:0 4px 10px rgba(255,138,40,.16)!important;
 }
-/* Boca mais fluida durante a fala, sem saltos de quadros. */
-.robot-with-body.speaking:not(.expression-doubt) .lia-mouth-motion{
- animation:lia73NaturalTalk 1.15s ease-in-out infinite!important;
+/* Boca mais fluida durante a fala, centralizada e sem distorção. */
+.robot-with-body.speaking .lia-mouth-motion{
+ animation:lia73NaturalTalk 1.28s ease-in-out infinite!important;
 }
 @keyframes lia73NaturalTalk{
- 0%,100%{width:76%;height:28%;border-radius:45%}
- 20%{width:69%;height:61%;border-radius:49%}
- 43%{width:90%;height:37%;border-radius:43%}
- 62%{width:79%;height:86%;border-radius:48%}
- 82%{width:72%;height:43%;border-radius:46%}
+ 0%,100%{width:70%;height:18%;border-radius:999px;transform:translate(-50%,-50%) scale(1)}
+ 18%{width:60%;height:52%;border-radius:46%;transform:translate(-50%,-50%) scale(1)}
+ 36%{width:84%;height:30%;border-radius:40%;transform:translate(-50%,-50%) scale(1)}
+ 54%{width:67%;height:74%;border-radius:48%;transform:translate(-50%,-50%) scale(1)}
+ 72%{width:76%;height:42%;border-radius:44%;transform:translate(-50%,-50%) scale(1)}
+ 88%{width:62%;height:24%;border-radius:999px;transform:translate(-50%,-50%) scale(1)}
 }
 @media(prefers-reduced-motion:reduce){
  .robot-with-body.speaking .lia-mouth-motion,
@@ -1094,19 +1096,6 @@ body::before,body::after{display:none!important}
  .lia-right-pane>.lia-test-note{margin-top:0!important}
 }
 @media(prefers-reduced-motion:reduce){.lia-waveform span{animation:none!important}}
-
-/* Ordem vertical correta em celulares: marca, personagem, diálogo e rodapé. */
-@media(max-width:670px){
- .lia-hero-layout{display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-template-rows:auto auto auto auto auto auto!important;gap:12px!important;height:auto!important;align-items:stretch!important}
- .lia-right-pane{display:contents!important}
- .lia-right-pane .top,.tv .lia-right-pane .top{position:relative!important;grid-row:1!important;grid-column:1!important;top:auto!important;right:auto!important;left:auto!important;bottom:auto!important;width:100%!important;max-width:100%!important;justify-content:center!important;min-height:78px!important}
- .lia-right-pane .identity{justify-content:center!important}
- .lia-portrait{grid-row:2!important;grid-column:1!important;height:clamp(250px,37vh,340px)!important;margin:0!important}
- .lia-dialogue{grid-row:3!important;grid-column:1!important}
- .lia-context-row{grid-row:4!important;grid-column:1!important}
- .lia-right-pane>.lia-test-note{grid-row:5!important;grid-column:1!important}
- .lia-credits-row{grid-row:6!important;grid-column:1!important}
-}
 </style></head>
 <body>
 <button aria-controls="adminPanel" aria-expanded="false" aria-label="Abrir configurações" class="panel-toggle" id="togglePanel" title="Abrir configurações" type="button"><span aria-hidden="true">⚙</span><span class="visually-hidden" id="togglePanelText">Mostrar painel</span></button>
@@ -1124,7 +1113,7 @@ body::before,body::after{display:none!important}
 <div class="lia-info-primary" id="liaInfoPrimary"></div>
 <div class="lia-info-detail" id="liaInfoDetail"></div>
 <div class="lia-info-extra" id="liaInfoExtra"></div>
-</aside><aside aria-label="Cartão de orientação, exibido quando solicitado" aria-live="polite" class="lia-direction" id="liaDirection"><div class="dir-heading">DIREÇÃO</div><div class="dir-icon" id="liaDirectionIcon">→</div><div class="dir-label" id="liaDirectionLabel"></div><div class="dir-step" id="liaDirectionStep"></div></aside><div class="lia-school-id"><div class="lia-school-symbol"><svg aria-hidden="true" fill="none" viewbox="0 0 64 64"><path d="M7 56V24l17-8v40M24 56V8l26-4v52M50 56V24l8-3v35M3 57h58" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path><path d="M13 30v5m0 7v5m18-30v5m8-5v5m-8 8v5m8-5v5m-8 8v5m8-5v5m14-14v5" stroke="currentColor" stroke-linecap="round" stroke-width="3"></path></svg></div><div class="lia-school-copy"><strong>FAZESP</strong><span>Escola Fazendária do Estado de São Paulo</span></div></div></div><div class="lia-test-note">A LIA é uma estagiária novata da FAZESP e ainda está em fase de testes. Por isso, algumas informações podem estar em aprendizado.</div><div class="lia-credits-row"><div class="foot">FAZESP · Escola Fazendária</div><div class="lia-credits">Criado por Gustavo Hugo e Gladstom Alves <span aria-label="Versão 7.4" class="lia-version">· v7.4</span></div></div></section></div><aside aria-label="Exemplo de pergunta" class="question-suggestion" id="questionSuggestion"><button aria-label="Ocultar sugestão" class="q-close" id="hideSuggestion" title="Ocultar sugestão" type="button">×</button><div class="q-label">VOCÊ PODE PERGUNTAR</div><div class="q-text" id="questionSuggestionText"></div></aside></main>
+</aside><aside aria-label="Cartão de orientação, exibido quando solicitado" aria-live="polite" class="lia-direction" id="liaDirection"><div class="dir-heading">DIREÇÃO</div><div class="dir-icon" id="liaDirectionIcon">→</div><div class="dir-label" id="liaDirectionLabel"></div><div class="dir-step" id="liaDirectionStep"></div></aside><div class="lia-school-id"><div class="lia-school-symbol"><svg aria-hidden="true" fill="none" viewbox="0 0 64 64"><path d="M7 56V24l17-8v40M24 56V8l26-4v52M50 56V24l8-3v35M3 57h58" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path><path d="M13 30v5m0 7v5m18-30v5m8-5v5m-8 8v5m8-5v5m-8 8v5m8-5v5m14-14v5" stroke="currentColor" stroke-linecap="round" stroke-width="3"></path></svg></div><div class="lia-school-copy"><strong>FAZESP</strong><span>Escola Fazendária do Estado de São Paulo</span></div></div></div><div class="lia-test-note">A LIA é uma estagiária novata da FAZESP e ainda está em fase de testes. Por isso, algumas informações podem estar em aprendizado.</div><div class="lia-credits-row"><div class="foot">FAZESP · Escola Fazendária</div><div class="lia-credits">Criado por Gustavo Hugo e Gladstom Alves <span aria-label="Versão 7.5" class="lia-version">· v7.5</span></div></div></section></div><aside aria-label="Exemplo de pergunta" class="question-suggestion" id="questionSuggestion"><button aria-label="Ocultar sugestão" class="q-close" id="hideSuggestion" title="Ocultar sugestão" type="button">×</button><div class="q-label">VOCÊ PODE PERGUNTAR</div><div class="q-text" id="questionSuggestionText"></div></aside></main>
 <aside class="admin" id="adminPanel"><div class="admin-header"><span class="admin-symbol">⚙</span><h2>Painel de controle</h2></div><p>Conecte a TV por HDMI, abra a tela da TV em uma segunda janela e arraste-a para o monitor da TV. O microfone fica nesta janela do notebook.</p>
 <div class="actions"><button id="openTv">Abrir tela da TV</button><button class="secondary" id="start">🎙️ Ativar escuta contínua</button><button class="secondary" id="stop">Parar</button></div>
 <div class="message" id="msg"></div>
@@ -1311,7 +1300,16 @@ if(tv){send({kind:'ready'});window.addEventListener('click',()=>{document.docume
 function normalize(s){return String(s).toLocaleLowerCase('pt-BR').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim()}
 function tokens(s){return normalize(s).split(' ').filter(w=>w.length>2&&!['voce','qual','para','como','esse','essa','aqui','sobre','pode','quero','onde','fica','ficam','esta','estao','encontro','chegar','chego','lia','mais','proximo','perto','preciso','sala','meu','minha','tem','quero','setor','lado','indica','mostra'].includes(w))}
 // Expande apelidos conhecidos sem confundir áreas diferentes.
-function canonicalWords(s){return normalize(s).replace(/\b(?:fazespe|fazesp|fazespinha|fazep|fazespi)\b/g,'fazesp').replace(/\bplenaria\b/g,'plenario').replace(/\bsanitarios?\b|\btoaletes?\b|\bwc\b/g,'banheiro').replace(/\bauditorio principal\b/g,'grande auditorio')}
+// Variações fonéticas que o Chrome/Edge pode transcrever para FAZESP.
+// Normalizamos apenas a comparação; a legenda exibe o que o visitante falou.
+function canonicalWords(s){
+ return normalize(s)
+  .replace(/\b(?:faz|fase|fazes)\s+(?:espe|espi|esp|sp|es\s+pe|es\s+p)\b/g,'fazesp')
+  .replace(/\b(?:fasesp|fasespe|fasespi|fasep|fasepe|fazesp|fazespe|fazespi|fazespinha|fazep|fazepe|fazepse|fazepesp)\b/g,'fazesp')
+  .replace(/\bplenaria\b/g,'plenario')
+  .replace(/\bsanitarios?\b|\btoaletes?\b|\bwc\b/g,'banheiro')
+  .replace(/\bauditorio principal\b/g,'grande auditorio');
+}
 function score(question,trigger,prepared=null){
  const a=canonicalWords(question),b=prepared?.canonical||canonicalWords(trigger);if(!a||!b)return 0;
  if(a===b)return 100;
@@ -1332,7 +1330,7 @@ function score(question,trigger,prepared=null){
  return Math.max(0,result);
 }
 let searchIndex=[];
-function buildSearchIndex(){searchIndex=entries.flatMap(entry=>entry.q.map(q=>({entry,q,canonical:canonicalWords(q),tok:new Set(tokens(q))})));}
+function buildSearchIndex(){searchIndex=entries.flatMap(entry=>entry.q.map(q=>({entry,q,canonical:canonicalWords(q),tok:new Set(tokens(canonicalWords(q)))})));}
 let lastTrivia=-1;
 let lastResponseIndexByGroup=new Map(), lastConversation=null, speechRateOverride=null, lastIntent=null, pendingClarification=null;
 const STOPWORDS=new Set(['lia','por','favor','me','diz','meu','minha','poderia','pode','voce','você']);
