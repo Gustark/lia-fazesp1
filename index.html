@@ -1037,6 +1037,25 @@ body{overflow-x:hidden}
 @media(prefers-reduced-motion:reduce){
  .stage .lia-right-pane #questionSuggestion{transition:none!important}
 }
+
+/* LIA 7.8.1 — card único dinâmico para sugestões e informações */
+.question-suggestion{display:none!important}
+.lia-context-row{justify-content:flex-start!important}
+.lia-context-row .lia-school-id{display:none!important}
+.lia-context-row .lia-welcome-copy{flex:1 1 100%!important;max-width:none!important;width:100%!important;min-width:0!important}
+.lia-context-row .lia-welcome-copy strong{display:block!important}
+.lia-context-row .lia-welcome-copy span:not(.lia-welcome-indicator){display:block!important;font-size:clamp(18px,1.65vw,29px)!important;line-height:1.24!important;color:#fff7ee!important;font-weight:780!important;overflow-wrap:anywhere}
+.lia-context-row .lia-welcome-copy .lia-welcome-indicator{align-self:flex-start!important}
+.lia-context-row #liaInfo.active,.lia-context-row #liaDirection.active{flex:1 1 100%!important;width:100%!important;max-width:100%!important;padding-right:0!important;border-right:none!important}
+.lia-context-row #liaInfo.active .lia-info-primary{max-width:calc(100% - 72px)!important}
+.lia-context-row #liaInfo.active .lia-info-detail,.lia-context-row #liaInfo.active .lia-info-extra{max-width:calc(100% - 72px)!important}
+.lia-context-row #liaDirection.active .dir-label,.lia-context-row #liaDirection.active .dir-step{max-width:calc(100% - 78px)!important}
+@media(max-width:700px){
+ .lia-context-row .lia-welcome-copy span:not(.lia-welcome-indicator){font-size:clamp(15px,4.1vw,22px)!important}
+ .lia-context-row #liaInfo.active .lia-info-primary{max-width:100%!important}
+ .lia-context-row #liaInfo.active .lia-info-detail,.lia-context-row #liaInfo.active .lia-info-extra{max-width:100%!important}
+}
+
 </style>
 <style>
 /* LIA 7.4 — layout lateral contextual, inspirado na referência fornecida.
@@ -1222,6 +1241,341 @@ body::before,body::after{display:none!important}
 .lia-dialogue .lia-mic-recover[hidden]{display:none!important}
 .lia-dialogue .lia-mic-recover:focus-visible{outline:3px solid white;outline-offset:3px}
 .tv .lia-dialogue .lia-mic-recover{display:none!important}
+</style><style>
+/* ══════════════════════════════════════════════════════════════════
+   LIA 7.8 • Aperfeiçoamento visual institucional
+   Mantém toda a lógica de microfone, resposta, clima, horário, setas
+   e as sugestões da versão 7.7. É uma camada visual isolada.
+   ══════════════════════════════════════════════════════════════════ */
+:root{
+ --lia78-orange:#ff952c;
+ --lia78-gold:#ffc47e;
+ --lia78-border:rgba(247,151,61,.34);
+ --lia78-surface:rgba(32,24,27,.85);
+}
+.stage,.tv .stage,.panel-hidden .stage {
+ background:
+  radial-gradient(ellipse at 10% 56%,rgba(207,78,13,.32),transparent 32%),
+  radial-gradient(ellipse at 91% 69%,rgba(187,78,22,.10),transparent 39%),
+  radial-gradient(ellipse at 54% 0,rgba(120,63,44,.18),transparent 45%),
+  linear-gradient(116deg,#170e11 0%,#1a1219 51%,#101015 100%)!important;
+}
+.stage::before,.tv .stage::before{
+ opacity:.68!important;
+ background:
+  radial-gradient(ellipse at 13% 46%,transparent 0 22%,rgba(255,132,31,.10) 22.12% 22.2%,transparent 22.3% 30%,rgba(255,132,31,.07) 30.1% 30.2%,transparent 30.3%),
+  radial-gradient(ellipse at 92% 39%,transparent 0 24%,rgba(255,132,31,.06) 24.1% 24.2%,transparent 24.3%)!important;
+}
+.stage::after,.tv .stage::after{
+ opacity:.39!important;height:20%!important;
+ background:repeating-radial-gradient(ellipse at 45% 110%,transparent 0 100px,rgba(255,135,41,.22) 101px 102px,transparent 103px 178px)!important;
+}
+.lia-hero-layout{
+ grid-template-columns:minmax(250px,34%) minmax(0,1fr)!important;
+ gap:clamp(17px,2.3vw,48px)!important;
+ max-width:1800px!important;
+}
+.lia-portrait{justify-content:center!important}
+.lia-portrait-glow{
+ inset:10% -7% 0!important;
+ background:radial-gradient(ellipse at 50% 52%,rgba(241,116,23,.24) 0%,rgba(245,92,16,.09) 48%,transparent 70%)!important;
+ filter:blur(34px)!important;
+}
+.lia-portrait #robot.robot.robot-with-body,
+.tv .lia-portrait #robot.robot.robot-with-body{
+ width:min(100%,33.3vw,calc((100vh - 74px)*.667))!important;
+ filter:drop-shadow(0 22px 32px rgba(0,0,0,.49)) drop-shadow(0 0 35px rgba(255,141,35,.20))!important;
+}
+.lia-portrait .lia-light-platform{
+ left:5%!important;right:5%!important;bottom:2.5%!important;
+ height:6%!important;border-width:2px!important;
+ border-color:rgba(255,165,75,.83)!important;
+ background:linear-gradient(180deg,rgba(44,28,21,.34),rgba(25,17,21,.85))!important;
+ box-shadow:0 0 12px rgba(255,129,23,.37),0 0 34px rgba(245,110,15,.28),inset 0 0 14px rgba(255,139,26,.19)!important;
+}
+.lia-portrait-caption{
+ bottom:4.1%!important;
+ border:1px solid rgba(255,181,89,.4)!important;
+ background:rgba(24,20,22,.82)!important;
+ padding:8px 18px!important;
+ box-shadow:0 9px 20px rgba(0,0,0,.28)!important;
+ letter-spacing:.14em!important;
+}
+.lia-right-pane{
+ gap:clamp(8px,1.42vh,15px)!important;
+}
+.lia-right-pane .top,.tv .lia-right-pane .top{
+ min-height:clamp(83px,12vh,113px)!important;
+ justify-content:flex-start!important;
+ padding:0 8px 0 clamp(4px,1.7vw,30px)!important;
+}
+.lia-right-pane .identity{
+ justify-content:flex-start!important;
+ gap:clamp(16px,2.5vw,34px)!important;
+}
+.lia-right-pane .logo-card{
+ width:clamp(133px,12vw,200px)!important;
+ min-height:clamp(57px,7vh,82px)!important;
+ padding:12px 13px 9px!important;
+ border-radius:18px!important;
+ box-shadow:0 16px 35px rgba(0,0,0,.26),0 0 0 1px rgba(255,255,255,.16)!important;
+}
+.lia-right-pane .identity-copy{
+ padding-left:clamp(17px,2.3vw,34px)!important;
+ border-left:1px solid rgba(250,155,72,.6)!important;
+}
+.lia-right-pane .identity-copy .eyebrow{
+ font-size:clamp(10px,.92vw,15px)!important;
+ letter-spacing:.14em!important;
+ color:#ffc58c!important;
+}
+.lia-right-pane .identity-copy .brand,
+.tv .lia-right-pane .identity-copy .brand{
+ font-size:clamp(62px,5.1vw,95px)!important;
+ letter-spacing:-.075em!important;
+ margin:8px 0 0!important;
+}
+.lia-dialogue{
+ min-height:225px!important;
+ max-height:none!important;
+ flex:1 1 auto!important;
+ gap:clamp(11px,1.75vh,19px)!important;
+ padding:clamp(30px,4vh,44px) clamp(22px,4vw,68px) clamp(18px,3vh,33px)!important;
+ border:1px solid rgba(255,160,75,.65)!important;
+ border-radius:clamp(25px,2.55vw,39px)!important;
+ background:
+  radial-gradient(ellipse at 50% 26%,rgba(220,112,28,.13),transparent 38%),
+  linear-gradient(143deg,rgba(43,30,31,.95),rgba(28,23,29,.95) 60%,rgba(35,24,29,.96))!important;
+ box-shadow:
+  0 16px 53px rgba(0,0,0,.29),
+  0 0 34px rgba(234,119,25,.10),
+  inset 0 1px 0 rgba(255,201,137,.11),
+  inset 0 -2px 30px rgba(0,0,0,.09)!important;
+}
+.lia-dialogue::before{
+ content:'CONVERSA EM TEMPO REAL'!important;
+ position:absolute!important;
+ inset:18px auto auto 25px!important;
+ background:none!important;
+ width:auto!important;
+ color:rgba(255,190,119,.84)!important;
+ font-size:clamp(9px,.74vw,12px)!important;
+ letter-spacing:.18em!important;
+ font-weight:800!important;
+ line-height:1!important;
+}
+.lia-dialogue::after{
+ content:'';
+ position:absolute;top:0;left:clamp(22px,4vw,68px);
+ width:min(220px,32%);height:2px;border-radius:999px;
+ background:linear-gradient(90deg,rgba(255,175,77,.95),rgba(255,151,42,.18),transparent);
+ pointer-events:none;
+}
+.lia-dialogue-rings{
+ top:31%!important;width:48%!important;
+ border-color:rgba(255,151,48,.18)!important;
+ filter:drop-shadow(0 0 8px rgba(255,114,22,.18));
+}
+.lia-waveform{
+ width:min(47%,280px)!important;
+ height:clamp(72px,12vh,112px)!important;
+ filter:drop-shadow(0 0 12px rgba(255,127,20,.32))!important;
+}
+.lia-waveform span{
+ max-width:11px!important;
+ border-radius:100px!important;
+ background:linear-gradient(180deg,#ffc36e 0%,#ff9a2e 36%,#f6780f 100%)!important;
+ box-shadow:0 0 6px rgba(255,135,25,.21);
+}
+.lia-dialogue .status,.tv .lia-dialogue .status{
+ font-size:clamp(31px,2.75vw,52px)!important;
+ font-weight:800!important;
+ line-height:1.14!important;
+ letter-spacing:-.04em!important;
+ text-wrap:balance!important;
+ text-shadow:0 8px 30px rgba(0,0,0,.24)!important;
+}
+.lia-dialogue .subtitle,.tv .lia-dialogue .subtitle{
+ width:min(94%,810px)!important;
+ max-height:clamp(70px,24vh,155px)!important;
+ min-height:55px!important;
+ padding:12px 18px!important;
+ border:1px solid rgba(255,188,119,.15)!important;
+ border-radius:16px!important;
+ background:rgba(12,12,16,.24)!important;
+ box-shadow:inset 0 1px 0 rgba(255,255,255,.025)!important;
+ color:#fff5ec!important;
+ font-size:clamp(18px,1.74vw,29px)!important;
+ font-weight:480!important;
+ line-height:1.36!important;
+ scrollbar-color:rgba(255,158,60,.46) transparent;
+}
+.lia-dialogue .tag,.tv .lia-dialogue .tag{
+ background:rgba(255,141,31,.09)!important;
+ border:1px solid rgba(255,166,73,.31)!important;
+ color:#ffe2c3!important;
+ font-size:clamp(11px,.78vw,13px)!important;
+ font-weight:650!important;
+ padding:8px 17px!important;
+ letter-spacing:.025em!important;
+}
+.lia-dialogue[data-state='listening']{
+ border-color:rgba(255,164,65,.92)!important;
+ box-shadow:0 18px 53px rgba(0,0,0,.27),0 0 38px rgba(242,131,30,.16),inset 0 1px 0 rgba(255,214,137,.14)!important;
+}
+.lia-dialogue[data-state='listening']::before{content:'MICROFONE ATIVO'!important;color:#ffd09a!important}
+.lia-dialogue[data-state='speaking']::before{content:'LIA RESPONDENDO'!important;color:#ffe0b5!important}
+.lia-dialogue[data-state='speaking'] .lia-waveform span{background:linear-gradient(180deg,#ffe0a0,#ff9e3c 63%,#e56a12)!important}
+.stage .lia-right-pane #questionSuggestion,
+.tv .stage .lia-right-pane #questionSuggestion{
+ min-height:clamp(60px,8vh,78px)!important;
+ padding:11px 48px 11px 22px!important;
+ gap:clamp(14px,2vw,28px)!important;
+ border-radius:19px!important;
+ border:1px solid rgba(255,157,62,.28)!important;
+ background:linear-gradient(105deg,rgba(63,37,32,.73),rgba(35,28,32,.86))!important;
+ box-shadow:0 7px 19px rgba(0,0,0,.16),inset 0 1px rgba(255,207,152,.05)!important;
+}
+.lia-right-pane #questionSuggestion .q-label{
+ max-width:134px!important;
+ color:#ffb269!important;
+ font-size:clamp(10px,.73vw,12px)!important;
+ letter-spacing:.11em!important;
+}
+.lia-right-pane #questionSuggestion .q-label::before{
+ content:'✦';display:inline-block;margin-right:7px;
+ color:#ffb557;font-size:14px;vertical-align:-1px;
+}
+.lia-right-pane #questionSuggestion .q-text{
+ font-size:clamp(17px,1.32vw,22px)!important;
+ line-height:1.25!important;
+ color:#fff6ec!important;
+}
+.lia-right-pane #questionSuggestion .q-close{
+ right:15px!important;
+ background:rgba(255,153,51,.08)!important;
+ border-color:rgba(255,179,97,.19)!important;
+ color:#ffe0bd!important;
+}
+.lia-context-row{
+ justify-content:space-between!important;
+ gap:clamp(10px,1.2vw,18px)!important;
+ min-height:clamp(86px,11vh,112px)!important;
+ padding:clamp(12px,1.6vh,21px) clamp(16px,2vw,29px)!important;
+ border:1px solid rgba(255,160,68,.29)!important;
+ border-radius:clamp(17px,1.7vw,25px)!important;
+ background:linear-gradient(115deg,rgba(66,38,33,.62),rgba(31,26,31,.82))!important;
+ box-shadow:0 9px 24px rgba(0,0,0,.18),inset 0 1px rgba(255,198,130,.035)!important;
+}
+.lia-welcome-copy{
+ display:flex;align-items:center;gap:14px;
+ min-width:0;max-width:52%;flex:1 1 auto;
+ color:#fff3e7;
+}
+.lia-welcome-indicator{
+ width:50px;height:50px;flex:0 0 50px;display:grid;place-items:center;
+ font-size:23px;color:#ffae56;border-radius:16px;
+ background:rgba(255,139,28,.095);border:1px solid rgba(255,154,58,.20);
+}
+.lia-welcome-copy>div{display:flex;flex-direction:column;gap:5px;min-width:0}
+.lia-welcome-copy strong{font-size:clamp(12px,1.15vw,18px);font-weight:800;letter-spacing:.13em;color:#ffd9b1;line-height:1.25}
+.lia-welcome-copy span:not(.lia-welcome-indicator){font-size:clamp(10px,.89vw,14px);line-height:1.32;color:#d9bcad}
+.lia-context-row:has(#liaInfo.active,#liaDirection.active) .lia-welcome-copy{display:none!important}
+.lia-context-row .lia-school-id{
+ flex:0 1 auto!important;
+ min-width:155px!important;
+ max-width:44%!important;
+ margin-left:auto!important;
+}
+.lia-context-row:has(#liaInfo.active,#liaDirection.active) .lia-school-id{max-width:40%!important}
+.lia-school-id .lia-school-symbol{flex-basis:clamp(40px,4vw,56px)!important;width:clamp(40px,4vw,56px)!important}
+.lia-school-copy strong{font-size:clamp(18px,1.45vw,24px)!important}
+.lia-school-copy span{color:#d7c0b3!important;font-size:clamp(10px,.83vw,13px)!important}
+.lia-right-pane>.lia-test-note{
+ color:rgba(245,210,184,.66)!important;
+ font-size:clamp(10px,.75vw,12px)!important;
+ margin:0!important;
+}
+.lia-credits-row{opacity:.72!important}
+.lia-credits-row .foot,.lia-credits-row .lia-credits{font-size:10px!important;color:rgba(225,180,151,.82)!important}
+/* Compactação cuidadosa para notebook 1280x720 e telas menos altas. */
+@media(max-height:800px) and (min-width:951px){
+ .lia-right-pane{gap:8px!important}
+ .lia-right-pane .top,.tv .lia-right-pane .top{min-height:clamp(77px,12vh,91px)!important}
+ .lia-dialogue{padding:23px 25px 18px!important;gap:12px!important}
+ .lia-dialogue::before{top:12px!important;left:19px!important}
+ .lia-waveform{height:clamp(55px,10vh,79px)!important}
+ .lia-dialogue .subtitle,.tv .lia-dialogue .subtitle{min-height:40px!important;padding:10px 15px!important;font-size:clamp(17px,1.65vw,24px)!important}
+ .stage .lia-right-pane #questionSuggestion,.tv .stage .lia-right-pane #questionSuggestion{min-height:54px!important;padding:9px 43px 9px 14px!important}
+ .lia-context-row{min-height:82px!important;padding:10px 14px!important}
+ .lia-welcome-indicator{width:40px;height:40px;flex-basis:40px;font-size:18px}
+}
+@media(max-width:1100px){
+ .lia-hero-layout{grid-template-columns:30% minmax(0,1fr)!important;gap:14px!important}
+ .lia-right-pane .top,.tv .lia-right-pane .top{padding:0 2px!important}
+ .lia-right-pane .logo-card{width:clamp(105px,12vw,140px)!important;min-height:54px!important}
+ .lia-right-pane .identity-copy .brand,.tv .lia-right-pane .identity-copy .brand{font-size:clamp(45px,5.2vw,68px)!important}
+ .lia-dialogue .status,.tv .lia-dialogue .status{font-size:clamp(27px,3.6vw,45px)!important}
+ .lia-dialogue .subtitle,.tv .lia-dialogue .subtitle{width:100%!important;font-size:clamp(17px,2.1vw,25px)!important}
+ .stage .lia-right-pane #questionSuggestion,.tv .stage .lia-right-pane #questionSuggestion{gap:12px!important;padding:9px 38px 9px 12px!important}
+ .lia-right-pane #questionSuggestion .q-label{max-width:96px!important;font-size:9px!important}
+ .lia-right-pane #questionSuggestion .q-text{font-size:clamp(14px,1.6vw,19px)!important}
+ .lia-welcome-copy{gap:9px}
+ .lia-welcome-indicator{width:40px;height:40px;flex-basis:40px}
+ .lia-welcome-copy strong{font-size:12px}
+ .lia-welcome-copy span:not(.lia-welcome-indicator){font-size:10px}
+}
+@media(max-width:950px){
+ .stage,.tv .stage{height:auto!important;min-height:100vh!important;overflow:visible!important}
+ .lia-hero-layout{grid-template-columns:30% minmax(0,1fr)!important;gap:14px!important}
+ .lia-right-pane{gap:12px!important}
+ .lia-dialogue{min-height:310px!important;padding:29px 20px 20px!important}
+ .lia-dialogue .subtitle,.tv .lia-dialogue .subtitle{min-height:56px!important}
+ .lia-context-row{min-height:93px!important}
+ .lia-welcome-copy{max-width:55%}
+ .lia-school-id{max-width:48%!important;min-width:128px!important}
+}
+@media(max-width:670px){
+ .shell,.tv .shell{height:auto!important;min-height:100vh!important;overflow:visible!important}
+ .stage,.tv .stage{height:auto!important;min-height:100vh!important;padding:14px 13px 22px!important;overflow:visible!important}
+ .lia-hero-layout{display:flex!important;flex-direction:column!important;gap:10px!important;min-height:auto!important}
+ /* O cabeçalho flutua no topo da versão mobile; manter a cabeça da LIA abaixo dele. */
+ .lia-portrait{height:clamp(355px,48vh,445px)!important;padding-top:74px!important}
+ .lia-portrait #robot.robot.robot-with-body,.tv .lia-portrait #robot.robot.robot-with-body{width:min(225px,44vw,34vh)!important}
+ .lia-portrait-caption{display:none!important}
+ .lia-right-pane .top,.tv .lia-right-pane .top{position:absolute!important;top:3px!important;right:0!important;width:66%!important;min-height:75px!important;justify-content:flex-end!important}
+ .lia-right-pane .logo-card{width:88px!important;min-height:43px!important;border-radius:12px!important;padding:8px 6px!important}
+ .lia-right-pane .identity{gap:9px!important}
+ .lia-right-pane .identity-copy{padding-left:9px!important}
+ .lia-right-pane .identity-copy .eyebrow{font-size:8px!important;letter-spacing:.06em!important}
+ .lia-right-pane .identity-copy .brand,.tv .lia-right-pane .identity-copy .brand{font-size:36px!important;margin:3px 0 0!important}
+ .lia-dialogue{min-height:300px!important;padding:32px 17px 20px!important;gap:12px!important;border-radius:25px!important}
+ .lia-dialogue::before{left:18px!important;top:12px!important;font-size:9px!important}
+ .lia-waveform{height:67px!important;width:54%!important}
+ .lia-dialogue .status,.tv .lia-dialogue .status{font-size:clamp(27px,7vw,37px)!important}
+ .lia-dialogue .subtitle,.tv .lia-dialogue .subtitle{width:100%!important;font-size:clamp(18px,4.7vw,23px)!important;max-height:160px!important}
+ .stage .lia-right-pane #questionSuggestion,.tv .stage .lia-right-pane #questionSuggestion{min-height:62px!important;padding:11px 39px 11px 13px!important}
+ .lia-context-row{flex-wrap:wrap!important;min-height:88px!important;padding:14px!important;gap:12px!important}
+ .lia-welcome-copy{max-width:55%!important;gap:9px!important}
+ .lia-welcome-indicator{width:38px!important;height:38px!important;flex-basis:38px!important}
+ .lia-welcome-copy strong{font-size:10px!important;letter-spacing:.07em!important}
+ .lia-welcome-copy span:not(.lia-welcome-indicator){font-size:10px!important}
+ .lia-context-row .lia-school-id{min-width:115px!important;max-width:45%!important;gap:6px!important}
+ .lia-school-id .lia-school-symbol{width:33px!important;flex-basis:33px!important}
+ .lia-school-copy strong{font-size:14px!important}
+ .lia-school-copy span{font-size:10px!important}
+ .lia-context-row:has(#liaInfo.active,#liaDirection.active) .lia-school-id{max-width:100%!important;width:100%;justify-content:flex-start!important}
+ .lia-context-row #liaInfo.active,.lia-context-row #liaDirection.active{max-width:100%!important}
+ .lia-right-pane>.lia-test-note{font-size:10px!important}
+}
+@media(max-width:390px){
+ .lia-welcome-copy{max-width:50%!important}
+ .lia-welcome-indicator{display:none!important}
+ .lia-context-row .lia-school-id{max-width:50%!important}
+}
+@media(prefers-reduced-motion:reduce){
+ .lia-dialogue::after{transition:none!important}
+}
 </style></head>
 <body>
 <button aria-controls="adminPanel" aria-expanded="false" aria-label="Abrir configurações" class="panel-toggle" id="togglePanel" title="Abrir configurações" type="button"><span aria-hidden="true">⚙</span><span class="visually-hidden" id="togglePanelText">Mostrar painel</span></button>
@@ -1239,7 +1593,7 @@ body::before,body::after{display:none!important}
 <div class="lia-info-primary" id="liaInfoPrimary"></div>
 <div class="lia-info-detail" id="liaInfoDetail"></div>
 <div class="lia-info-extra" id="liaInfoExtra"></div>
-</aside><aside aria-label="Cartão de orientação, exibido quando solicitado" aria-live="polite" class="lia-direction" id="liaDirection"><div class="dir-heading">DIREÇÃO</div><div class="dir-icon" id="liaDirectionIcon">→</div><div class="dir-label" id="liaDirectionLabel"></div><div class="dir-step" id="liaDirectionStep"></div></aside><div class="lia-school-id"><div class="lia-school-symbol"><svg aria-hidden="true" fill="none" viewbox="0 0 64 64"><path d="M7 56V24l17-8v40M24 56V8l26-4v52M50 56V24l8-3v35M3 57h58" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path><path d="M13 30v5m0 7v5m18-30v5m8-5v5m-8 8v5m8-5v5m-8 8v5m8-5v5m14-14v5" stroke="currentColor" stroke-linecap="round" stroke-width="3"></path></svg></div><div class="lia-school-copy"><strong>FAZESP</strong><span>Escola Fazendária do Estado de São Paulo</span></div></div></div><div class="lia-test-note">A LIA é uma estagiária novata da FAZESP e ainda está em fase de testes. Por isso, algumas informações podem estar em aprendizado.</div><div class="lia-credits-row"><div class="foot">FAZESP · Escola Fazendária</div><div class="lia-credits">Criado por Gustavo Hugo e Gladstom Alves <span aria-label="Versão 7.7" class="lia-version">· v7.7</span></div></div></section></div></main>
+</aside><aside aria-label="Cartão de orientação, exibido quando solicitado" aria-live="polite" class="lia-direction" id="liaDirection"><div class="dir-heading">DIREÇÃO</div><div class="dir-icon" id="liaDirectionIcon">→</div><div class="dir-label" id="liaDirectionLabel"></div><div class="dir-step" id="liaDirectionStep"></div></aside><div class="lia-welcome-copy" aria-label="Recepção digital FAZESP"><span class="lia-welcome-indicator" aria-hidden="true">✦</span><div><strong id="liaContextLabel">VOCÊ PODE PERGUNTAR</strong><span id="liaContextSuggestion">Bom dia!</span></div></div><div class="lia-school-id"><div class="lia-school-symbol"><svg aria-hidden="true" fill="none" viewbox="0 0 64 64"><path d="M7 56V24l17-8v40M24 56V8l26-4v52M50 56V24l8-3v35M3 57h58" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path><path d="M13 30v5m0 7v5m18-30v5m8-5v5m-8 8v5m8-5v5m-8 8v5m8-5v5m14-14v5" stroke="currentColor" stroke-linecap="round" stroke-width="3"></path></svg></div><div class="lia-school-copy"><strong>FAZESP</strong><span>Escola Fazendária do Estado de São Paulo</span></div></div></div><div class="lia-test-note">A LIA é uma estagiária novata da FAZESP e ainda está em fase de testes. Por isso, algumas informações podem estar em aprendizado.</div><div class="lia-credits-row"><div class="foot">FAZESP · Escola Fazendária</div><div class="lia-credits">Criado por Gustavo Hugo e Gladstom Alves <span aria-label="Versão 7.8" class="lia-version">· v7.8.1</span></div></div></section></div></main>
 <aside class="admin" id="adminPanel"><div class="admin-header"><span class="admin-symbol">⚙</span><h2>Painel de controle</h2></div><p>Conecte a TV por HDMI, abra a tela da TV em uma segunda janela e arraste-a para o monitor da TV. O microfone fica nesta janela do notebook.</p>
 <div class="actions"><button id="openTv">Abrir tela da TV</button><button class="secondary" id="start">🎙️ Ativar escuta contínua</button><button class="secondary" id="stop">Parar</button></div>
 <div class="message" id="msg"></div>
@@ -1326,19 +1680,25 @@ function recycleRecognition(reason='inatividade'){
 
 let suggestionIndex=-1,suggestionTimer=null,suggestionDismissed=false,latestState='idle';
 function suggestionQuestions(){
- // Três sugestões fixas e simples, independentemente da ordem do JSON.
+ // Sugestões rotativas exibidas no card único inferior.
  return ['Onde fica o Pequeno Auditório?', 'O que você é?', 'Bom dia!', 'O que é a FAZESP?', 'Conte uma piada?', 'Quem pode fazer os cursos da FAZESP?'];
 }
+function renderSuggestionCard(text){
+ const label=$('liaContextLabel');
+ const suggestion=$('liaContextSuggestion');
+ if(label)label.textContent='VOCÊ PODE PERGUNTAR';
+ if(suggestion)suggestion.textContent=text||'Bom dia!';
+}
 function updateSuggestion(){
- const box=$('questionSuggestion');if(!box)return;
  const items=suggestionQuestions();
- if(suggestionDismissed||!items.length){box.classList.remove('visible');return}
+ if(suggestionDismissed||!items.length)return;
  suggestionIndex=(suggestionIndex+1)%items.length;
- $('questionSuggestionText').textContent=items[suggestionIndex].replace(/^[a-záàâãéêíóôõúç]/i,c=>c.toLocaleUpperCase('pt-BR'))+( /[?!]$/.test(items[suggestionIndex])?'':'?');
- box.classList.add('visible');
+ const current=items[suggestionIndex].replace(/^[a-záàâãéêíóôõúç]/i,c=>c.toLocaleUpperCase('pt-BR'))+( /[?!]$/.test(items[suggestionIndex])?'':'?');
+ renderSuggestionCard(current);
 }
 function refreshSuggestions(){suggestionIndex=-1;suggestionDismissed=false;updateSuggestion()}
-$('hideSuggestion').addEventListener('click',()=>{suggestionDismissed=true;$('questionSuggestion').classList.remove('visible')});
+const hideBtn=$('hideSuggestion');
+if(hideBtn)hideBtn.addEventListener('click',()=>{suggestionDismissed=true});
 // Alternância tranquila, sem apagar ou modificar a legenda.
 suggestionTimer=setInterval(updateSuggestion,4000);
 
@@ -1364,7 +1724,9 @@ function clearInfo(broadcast=true){
  clearTimeout(infoTimer);infoTimer=null;activeInfo=null;
  const p=$('liaInfo');if(p)p.classList.remove('active');
  if(broadcast&&!tv)send({kind:'info',info:null});
+ renderSuggestionCard($('liaContextSuggestion')?.textContent||'Bom dia!');
 }
+
 function drawInfo(info,broadcast=true){
  clearTimeout(infoTimer);infoTimer=null;
  const p=$('liaInfo');
@@ -1407,7 +1769,7 @@ function drawDirection(dir,step=0){
   if(!tv)send({kind:'direction',direction:dir,step:directionStep});
  },2200);
 }
-function clearDirection(broadcast=true){clearTimeout(directionTimer);currentDirection=null;$('liaDirection').classList.remove('active');if(broadcast&&!tv)send({kind:'direction',direction:null})}
+function clearDirection(broadcast=true){clearTimeout(directionTimer);currentDirection=null;$('liaDirection').classList.remove('active');if(broadcast&&!tv)send({kind:'direction',direction:null});renderSuggestionCard($('liaContextSuggestion')?.textContent||'Bom dia!')}
 
 function screen(state,status,subtitle){
  latestState=state;
@@ -1422,8 +1784,6 @@ function screen(state,status,subtitle){
   else if(/obrigad|por nada|eu que agradeco|fico feliz/.test(phrase))robot.classList.add('expression-thanks');
   else if(/piada|por que o|qual e o cumulo|haha|engracad/.test(phrase))robot.classList.add('expression-humor');
  }
- const tip=$('questionSuggestion');
- if(tip)tip.classList.toggle('visible',!suggestionDismissed&&!!$('questionSuggestionText').textContent);
  $('status').textContent=status;$('subtitle').textContent=subtitle;
  $('mode').textContent=state==='speaking'?'Respondendo':state==='listening'?'Ouvindo':'Pronta para conversar';
 }
