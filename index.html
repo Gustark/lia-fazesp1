@@ -1338,6 +1338,7 @@ function canonicalWords(s){
 function score(question,trigger,prepared=null){
  const a=canonicalWords(question),b=prepared?.canonical||canonicalWords(trigger);if(!a||!b)return 0;
  if(a===b)return 100;
+ const has=(t,w)=>(' '+t+' ').includes(' '+w+' ');
  const x=tokens(a),y=prepared?null:tokens(b);if(!x.length)return 0;
  const xs=new Set(x),ys=prepared?.tok||new Set(y);if(!ys.size)return 0;const shared=[...xs].filter(t=>ys.has(t)).length;
  const precision=shared/ys.size,recall=shared/xs.size;
@@ -1347,9 +1348,9 @@ function score(question,trigger,prepared=null){
  if(b.includes(a)&&a.length>=8)result=Math.max(result,82);
  // Evita confundir gêneros, alas e auditórios.
  const conflicts=[['masculino','feminino'],['grande','pequeno'],['se','dom pedro'],['171','178']];
- for(const [p,q] of conflicts){if((a.includes(p)&&b.includes(q))||(a.includes(q)&&b.includes(p)))return 0}
+ for(const [p,q] of conflicts){if((has(a,p)&&has(b,q))||(has(a,q)&&has(b,p)))return 0}
  const qualifiers=['masculino','feminino','grande','pequeno','vip','dom pedro','se','171','178'];
- for(const w of qualifiers){if(b.includes(w)&&!a.includes(w))result-=30;if(a.includes(w)&&!b.includes(w))result-=18}
+ for(const w of qualifiers){if(has(b,w)&&!has(a,w))result-=30;if(has(a,w)&&!has(b,w))result-=18}
  // Penaliza perguntas com palavras relevantes que o gatilho ignora.
  if(xs.size>ys.size)result-=Math.min(16,(xs.size-ys.size)*5);
  return Math.max(0,result);
@@ -1501,6 +1502,8 @@ function findAnswer(query){
  const institutionIntent= /\bfazesp\b/.test(n) &&
    ( /\b(?:o que e|que e|o que significa|qual e|me explica|explique|fale sobre|me fale sobre|conte sobre|me conte sobre|apresente|conhecer|significa)\b/.test(n) || /^(?:fazesp|lia o que e a fazesp)$/.test(n)) &&
    !/\b(?:curso|banheiro|audit[oó]rio|sala|horario|inscri|certific|nome da lia|a lia)\b/.test(n);
+ const reservaIntent=/\b(?:reserva|reservar|reservo|agendar|agendamento|alugar|locacao|emprestar|emprestimo)\b/.test(n)&&/\b(?:espaco|sala|auditorio|coworking|estudio|plenario|biblioteca|local|ambiente|evento)\b/.test(n);
+ if(reservaIntent){const e=entries.find(item=>item.q.some(q=>normalize(q)==='reserva de espaco'));if(e){const t=Array.isArray(e.a)?e.a:[e.a];let i=Math.floor(Math.random()*t.length),p=lastResponseIndexByGroup.get(e);if(t.length>1&&i===p)i=(i+1)%t.length;lastResponseIndexByGroup.set(e,i);const out={text:t[i],direction:e.direcao||null,entry:e};rememberConversation(out.text,out.direction,e);return out}}
  if(institutionIntent){
    const e=entries.find(item=>item.q.some(q=>normalize(q)==='o que e a fazesp'));
    if(e){const a=e.a; const texts=Array.isArray(a)?a:[a];
@@ -1603,7 +1606,8 @@ function say(text,direction=null,visual=null){
 }
 const UNKNOWN_MAX=15;
 const unknownRecords=[]; // Memória temporária: reinicia ao atualizar a página.
-const UNKNOWN_REPLY='Desculpe, ainda não aprendi sobre essa informação. A LIA é uma estagiária novata da FAZESP e ainda está em fase de testes. Por isso, algumas informações podem estar em aprendizado.';
+const UNKNOWN_REPLIES=['Essa eu ainda não sei, sou estagiária novata! Pode perguntar de outro jeito?','Ainda não aprendi isso, mas anotei para a equipe me ensinar. Outra pergunta?','Hmm, essa me pegou! Sou novata na FAZESP. Quer tentar outra pergunta?'];
+const UNKNOWN_REPLY=UNKNOWN_REPLIES[0];
 function readUnknown(){return unknownRecords.slice()}
 function updateUnknownInfo(){const el=$('unknownInfo');if(el){el.textContent=unknownRecords.length?'Perguntas sem resposta registradas nesta sessão. Você pode exportá-las antes de atualizar a página.':'Nenhuma pergunta sem resposta registrada nesta sessão.'}}
 function trackUnknown(question){
@@ -1653,7 +1657,7 @@ function processQuestion(q){
   return;
  }
  const answer=findAnswer(q);
- if(answer===null){trackUnknown(q);$('robot').classList.add('confused');setTimeout(()=>$('robot').classList.remove('confused'),2000);say(UNKNOWN_REPLY)}else {if(/bom dia|boa tarde|boa noite|obrigad|ol[aá]/i.test(q)){$('robot').classList.add('happy');setTimeout(()=>$('robot').classList.remove('happy'),1600)}say(answer.text,answer.direction,answer.visual||null);}
+ if(answer===null){trackUnknown(q);$('robot').classList.add('confused');setTimeout(()=>$('robot').classList.remove('confused'),2000);say(UNKNOWN_REPLIES[Math.floor(Math.random()*UNKNOWN_REPLIES.length)])}else {if(/bom dia|boa tarde|boa noite|obrigad|ol[aá]/i.test(q)){$('robot').classList.add('happy');setTimeout(()=>$('robot').classList.remove('happy'),1600)}say(answer.text,answer.direction,answer.visual||null);}
 }
 function startRecognition(){
  if(!recognition||!listening||recognitionActive||recognitionStarting||answerPending||utterance||(window.speechSynthesis?.speaking||false))return;
