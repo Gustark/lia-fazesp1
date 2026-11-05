@@ -1593,7 +1593,7 @@ body::before,body::after{display:none!important}
 <div class="lia-info-primary" id="liaInfoPrimary"></div>
 <div class="lia-info-detail" id="liaInfoDetail"></div>
 <div class="lia-info-extra" id="liaInfoExtra"></div>
-</aside><aside aria-label="Cartão de orientação, exibido quando solicitado" aria-live="polite" class="lia-direction" id="liaDirection"><div class="dir-heading">DIREÇÃO</div><div class="dir-icon" id="liaDirectionIcon">→</div><div class="dir-label" id="liaDirectionLabel"></div><div class="dir-step" id="liaDirectionStep"></div></aside><div class="lia-welcome-copy" aria-label="Recepção digital FAZESP"><span class="lia-welcome-indicator" aria-hidden="true">✦</span><div><strong id="liaContextLabel">VOCÊ PODE PERGUNTAR</strong><span id="liaContextSuggestion">Bom dia!</span></div></div><div class="lia-school-id"><div class="lia-school-symbol"><svg aria-hidden="true" fill="none" viewbox="0 0 64 64"><path d="M7 56V24l17-8v40M24 56V8l26-4v52M50 56V24l8-3v35M3 57h58" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path><path d="M13 30v5m0 7v5m18-30v5m8-5v5m-8 8v5m8-5v5m-8 8v5m8-5v5m14-14v5" stroke="currentColor" stroke-linecap="round" stroke-width="3"></path></svg></div><div class="lia-school-copy"><strong>FAZESP</strong><span>Escola Fazendária do Estado de São Paulo</span></div></div></div><div class="lia-test-note">A LIA é uma estagiária novata da FAZESP e ainda está em fase de testes. Por isso, algumas informações podem estar em aprendizado.</div><div class="lia-credits-row"><div class="foot">FAZESP · Escola Fazendária</div><div class="lia-credits">Criado por Gustavo Hugo e Gladstom Alves <span aria-label="Versão 7.8" class="lia-version">· v7.8.1</span></div></div></section></div></main>
+</aside><aside aria-label="Cartão de orientação, exibido quando solicitado" aria-live="polite" class="lia-direction" id="liaDirection"><div class="dir-heading">DIREÇÃO</div><div class="dir-icon" id="liaDirectionIcon">→</div><div class="dir-label" id="liaDirectionLabel"></div><div class="dir-step" id="liaDirectionStep"></div></aside><div class="lia-welcome-copy" aria-label="Recepção digital FAZESP"><span class="lia-welcome-indicator" aria-hidden="true">✦</span><div><strong id="liaContextLabel">VOCÊ PODE PERGUNTAR</strong><span id="liaContextSuggestion">Bom dia!</span></div></div><div class="lia-school-id"><div class="lia-school-symbol"><svg aria-hidden="true" fill="none" viewbox="0 0 64 64"><path d="M7 56V24l17-8v40M24 56V8l26-4v52M50 56V24l8-3v35M3 57h58" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path><path d="M13 30v5m0 7v5m18-30v5m8-5v5m-8 8v5m8-5v5m-8 8v5m8-5v5m14-14v5" stroke="currentColor" stroke-linecap="round" stroke-width="3"></path></svg></div><div class="lia-school-copy"><strong>FAZESP</strong><span>Escola Fazendária do Estado de São Paulo</span></div></div></div><div class="lia-test-note">A LIA é uma estagiária novata da FAZESP e ainda está em fase de testes. Por isso, algumas informações podem estar em aprendizado.</div><div class="lia-credits-row"><div class="foot">FAZESP · Escola Fazendária</div><div class="lia-credits">Criado por Gustavo Hugo e Gladstom Alves <span aria-label="Versão 7.8.2" class="lia-version">· v7.8.2</span></div></div></section></div></main>
 <aside class="admin" id="adminPanel"><div class="admin-header"><span class="admin-symbol">⚙</span><h2>Painel de controle</h2></div><p>Conecte a TV por HDMI, abra a tela da TV em uma segunda janela e arraste-a para o monitor da TV. O microfone fica nesta janela do notebook.</p>
 <div class="actions"><button id="openTv">Abrir tela da TV</button><button class="secondary" id="start">🎙️ Ativar escuta contínua</button><button class="secondary" id="stop">Parar</button></div>
 <div class="message" id="msg"></div>
@@ -2023,7 +2023,7 @@ function findAnswer(query){
 let knowledgeRetryCount=0;
 async function loadKnowledge(){
  try{
-  const response=await fetch('./respostas.json',{cache:'no-store'});
+  const response=await fetch(new URL('respostas.json',document.baseURI),{cache:'no-store'});
   if(!response.ok)throw Error('HTTP '+response.status);
   const json=await response.json();
   const valid=validate(json);
@@ -2033,10 +2033,12 @@ async function loadKnowledge(){
  }catch(e){
   entries=[];if($('knowledgeStatus'))$('knowledgeStatus').textContent='Não foi possível carregar respostas.json: '+e.message;
   if(!tv){
-   $('msg').textContent='Base não carregada. O arquivo respostas.json precisa estar ao lado do index.html no GitHub Pages.';
-   if(!answerPending)show('idle','Respostas indisponíveis','Verifique se respostas.json foi publicado com este nome, ao lado do index.html.');
+   $('msg').textContent='Aguardando o banco de respostas. Confira o arquivo respostas.json junto do index.html no GitHub Pages. Detalhes: '+e.message;
+   if(!answerPending)show('idle','Respostas indisponíveis','Verifique se respostas.json foi publicado ao lado do index.html. Tentarei novamente automaticamente.');
   }
-  if(++knowledgeRetryCount<=3)setTimeout(loadKnowledge,4000*knowledgeRetryCount);
+  // Recuperação automática também após uma publicação temporariamente indisponível.
+  knowledgeRetryCount=Math.min(knowledgeRetryCount+1,8);
+  setTimeout(loadKnowledge,Math.min(knowledgeRetryCount*4000,30000));
  }
 }
 
